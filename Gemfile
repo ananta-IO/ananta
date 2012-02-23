@@ -25,18 +25,16 @@ group :development, :test, :sandbox do
   gem 'faker'
 end
 
-
-group :development, :test do
-  # Delvelopment
+group :development do
   gem 'pry'
-  
-  # Test
+  # gem 'ruby-debug19', :require => 'ruby-debug'
+end
+
+group :test do
   gem 'rspec-rails', '~> 2.6'
   gem 'capybara'
   gem 'capybara-webkit'
-
-  # Debug
-  # gem 'ruby-debug19', :require => 'ruby-debug'
+  gem 'rake' 
 end
 
 

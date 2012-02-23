@@ -180,6 +180,7 @@ DEPENDENCIES
   pg
   pry
   rails (= 3.2.1)
+  rake
   rspec-rails (~> 2.6)
   sass-rails (~> 3.2.3)
   therubyracer
