@@ -6,8 +6,8 @@ A place for people and their projects. [About Ananta](http://ananta.io/about)
 DOODLY DOO... This is just a weekend hack right now. Don't expect it to do anything... yet
 ************************
 
-[![Build Status](https://secure.travis-ci.org/ananta/ananta.png)](http://travis-ci.org/ananta/ananta)
-[![Dependency Status](https://gemnasium.com/ananta/ananta.png?travis)](https://gemnasium.com/ananta/ananta)
+[![Build Status](https://secure.travis-ci.org/ananta-IO/ananta.png)](http://travis-ci.org/ananta-IO/ananta)
+[![Dependency Status](https://gemnasium.com/ananta-IO/ananta.png?travis)](https://gemnasium.com/ananta-IO/ananta)
 
 ## Are you a user?
 Sorry, there is nothing for you yet. How did you even get here?
