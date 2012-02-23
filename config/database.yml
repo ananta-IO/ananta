@@ -23,3 +23,18 @@ production:
   database: db/production.sqlite3
   pool: 5
   timeout: 5000
+
+# travis-ci - http://about.travis-ci.org/docs/user/database-setup/
+sqlite:
+  adapter: sqlite3
+  database: ":memory:"
+  timeout: 500
+mysql:
+  adapter: mysql2
+  database: myapp_test
+  username: 
+  encoding: utf8
+postgres:
+  adapter: postgresql
+  database: myapp_test
+  username: postgres

@@ -1,11 +1,9 @@
 # ananta.io
 
-DOODLY DOO... This is just a weekend hack right now. Don't expect it to do anything... yet
-
-************************
-
 A place for people and their projects. [About Ananta](http://ananta.io/about)
 
+************************
+DOODLY DOO... This is just a weekend hack right now. Don't expect it to do anything... yet
 ************************
 
 [![Build Status](https://secure.travis-ci.org/ananta/ananta.png)](http://travis-ci.org/ananta/ananta)
