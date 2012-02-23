@@ -53,3 +53,9 @@ production:
   pool: 5
   username: ananta
   password:
+
+# Travis CI 
+postgres:
+  adapter: postgresql
+  database: myapp_test
+  username: postgres
