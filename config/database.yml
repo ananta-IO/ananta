@@ -41,10 +41,9 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: ananta_test
+  database: myapp_test
   pool: 5
-  username: ananta
-  password:
+  username: postgres
 
 production:
   adapter: postgresql
@@ -53,9 +52,3 @@ production:
   pool: 5
   username: ananta
   password:
-
-# Travis CI 
-postgres:
-  adapter: postgresql
-  database: myapp_test
-  username: postgres
