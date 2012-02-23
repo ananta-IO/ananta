@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.1'
 
+gem 'pg'
 
 gem 'jbuilder' # Templates for JSON
 gem 'jquery-rails'
@@ -28,7 +29,6 @@ end
 group :development, :test do
   # Delvelopment
   gem 'pry'
-  gem 'sqlite3' # TODO: Switch to pg on dev and test
   
   # Test
   gem 'rspec-rails', '~> 2.6'
@@ -39,9 +39,5 @@ group :development, :test do
   # gem 'ruby-debug19', :require => 'ruby-debug'
 end
 
-
-group :staging, :production, :sandbox do
-  gem 'pg'
-end
 
 

@@ -1,20 +1,14 @@
-language: ruby
 before_script:
-  # - "mysql -e 'create database myapp_test;'"
-  - "psql -c 'create database myapp_test;' -U postgres"
-env:
-  # - DB=sqlite
-  # - DB=mysql
-  - DB=postgres
+  - "psql -c 'create database ananta_test;' -U ananta"
+language: ruby
 rvm:
-  - 1.8.7
-  - 1.9.2
   - 1.9.3
-  
-# TODO: setup ci@ananta.io and uncomment these lines
-# notifications:
-#   email:
-#     - ci@ananta.io
-  # TODO: setup irc
-  # irc:
-  #   - "irc.freenode.org#ananta"
+bundler_args: "--without development production staging sandbox"
+notifications:
+  email: false
+  # TODO: Setup ananta-dev
+  # irc:	
+  #   on_success: change
+  #   on_failure: always
+  #   channels:
+  #     - "irc.freenode.org#ananta-dev"

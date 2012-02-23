@@ -21,9 +21,11 @@ Great! This page is for you. Read on.
 
 1. [Install RVM](http://beginrescueend.com/rvm/)
 
-2. fork and ``clone`` and ``cd`` into repo
+2. [Install & Config PostgeSQL](http://blog.willj.net/2011/05/31/setting-up-postgresql-for-ruby-on-rails-development-on-os-x/)
 
-3. run ``bundle``
+3. fork and ``clone`` and ``cd`` into repo
 
-4. [Install PostgreSQL](http://www.youtube.com/watch?v=pf5jPUJAeU4)
+4. run ``bundle``
+
+5. start the server ``rails s`` and or run the tests ``rake spec``
 
