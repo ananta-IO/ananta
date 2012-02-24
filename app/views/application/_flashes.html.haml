@@ -1,0 +1,8 @@
+#flash
+  - flash.each do |key, value|
+    .wrapper
+      %div{ title: key.to_s.humanize, class: key }
+        -if %w[notice error].include? key
+          %p= value
+        -else
+          = raw(value)

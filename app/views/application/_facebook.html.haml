@@ -1,0 +1,58 @@
+#fb-root
+:javascript
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '#{Facebook::APP_ID}', // App ID
+      status     : true,                  // check login status
+      cookie     : true,                  // enable cookies to allow the server to access the session
+      oauth      : true,                  // enable OAuth 2.0
+      frictionlessRequests : true,        // don't ask for permission to send apprequests to the same user twice 
+      xfbml      : true                   // parse XFBML
+    });
+
+    // Additional initialization code here
+  };
+
+  // Load the SDK Asynchronously
+  (function(d){
+     var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+     js = d.createElement('script'); js.id = id; js.async = true;
+     js.src = "//connect.facebook.net/en_US/all.js";
+     d.getElementsByTagName('head')[0].appendChild(js);
+   }(document));
+
+  // Login function
+  function fbLogin(callback) {
+    // Is user logged into FB
+    FB.getLoginStatus(function(response) {
+      // User has authorized ananta app
+      if (response.status === 'connected') {
+        login(response);
+      // User needs to authorize ananta app
+      } else {
+        FB.login(function(response) {
+          // User authorizes app
+          if (response.authResponse) {
+            login(response);
+          }
+        }, { scope: '#{Facebook::SCOPE}' });
+      }
+    });
+
+    function login(response) {
+      if (callback) {
+        callback(response);
+      } else {
+        $('.facebook-button a').prepend('<img src="/assets/ajax-loader-white.gif" class="loader" />&nbsp;')
+        $.ajax({
+          url: "#{user_omniauth_callback_path(:facebook)}",
+          success: function(){
+            window.location.replace("#{root_url}");
+          },
+          error: function(){
+            $('.facebook-button img').remove();
+          }
+        });
+      }
+    }
+  }

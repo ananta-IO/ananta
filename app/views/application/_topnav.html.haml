@@ -1,0 +1,4 @@
+%nav
+  - if !user_signed_in?
+    %ul
+      %li#login= link_to "Sign In &rsaquo;".html_safe, "/users/sign_in"

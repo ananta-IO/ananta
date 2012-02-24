@@ -12,4 +12,27 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui-1.8.16
+//= require underscore
+//= require sugar-1.1.3.min.js
+//= require backbone
+//= require backbone_rails_sync
+//= require backbone_datalink
+//= require jquery.tokeninput
+//= require hamlcoffee
+//= require backbone/ananta
+//= require jquery.isotope.min
+//= require jquery.uniform
+
+// Jquery FileUpload
+//= require 'jQUpload/tmpl.js'
+//= require 'jQUpload/load-image.js'
+//= require 'jQUpload/vendor/jquery.ui.widget.js'
+//= require 'jQUpload/jquery.iframe-transport.js'
+//= require 'jQUpload/jquery.fileupload.js'
+//= require 'jQUpload/jquery.fileupload-ui.js'
+
+//= require wait
+//= require date
+
 //= require_tree .

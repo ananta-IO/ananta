@@ -1,0 +1,50 @@
+// Font Sizes ---------------------------------------------------------
+
+$base-font-size     : 12px;
+$base-line-height   : 18px;
+
+// Colors -------------------------------------------------------------
+
+$color-base: #000;
+$color-highlight: #F6264E;
+
+// Reset --------------------------------------------------------------
+
+@import "h5bp";
+
+@include h5bp-display;
+@include h5bp-base;
+@include h5bp-links;
+@include h5bp-typography;
+@include h5bp-lists;
+@include h5bp-embeds;
+@include h5bp-figures;
+@include h5bp-forms;
+@include h5bp-tables;
+
+
+// Compass -------------------------------------------------------------
+
+@import "compass/css3";
+@import "compass/utilities";
+@import "compass/reset/utilities";
+@import "compass/layout/sticky-footer";
+
+
+// Mixins --------------------------------------------------------------
+
+@mixin sans-family {
+  font-family: Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: 300;
+}
+
+@mixin serif-family {
+  font-family: Georgia, Times, "Times New Roman", serif;
+  font-style: normal;
+  font-weight: 300;
+}
+
+.clearfix{
+  @include clearfix;
+}

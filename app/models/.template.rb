@@ -4,7 +4,7 @@
 class MyModel < ActiveRecord::Base
 
   #########################
-  # Misc method calls (e.g. devise for, acts_as_whatever )
+  # Callbacks & Misc method calls (e.g. devise for, acts_as_whatever )
   #########################
   #acts_as_...
 

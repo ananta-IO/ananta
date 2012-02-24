@@ -4,7 +4,22 @@ gem 'rails', '3.2.1'
 
 gem 'pg'
 
-gem 'jbuilder' # Templates for JSON
+# Authentications & Permissions
+gem 'devise'
+gem 'omniauth-facebook'
+gem 'omniauth-openid'
+gem 'cancan'
+
+# Slugging
+gem "friendly_id", ">= 4.0.0.beta14"
+
+# Third-party APIs and services
+gem 'koala'
+gem 'geocoder'
+gem 'ask_geo'
+
+# Misc
+gem 'jbuilder'
 gem 'jquery-rails'
 gem 'haml-rails'
 
@@ -13,6 +28,10 @@ gem 'haml-rails'
 # in production environments by default.
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'
+  gem 'compass-rails'
+  gem 'compass-h5bp'
+  gem 'haml_coffee_assets'
+  gem 'rails-backbone'
   gem 'sass-rails',   '~> 3.2.3'
   gem 'therubyracer'
   gem 'uglifier', '>= 1.0.3'
@@ -25,10 +44,12 @@ group :development, :test, :sandbox do
   gem 'faker'
 end
 
+
 group :development do
   gem 'pry'
   # gem 'ruby-debug19', :require => 'ruby-debug'
 end
+
 
 group :test do
   gem 'rspec-rails', '~> 2.6'

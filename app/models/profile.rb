@@ -1,4 +1,8 @@
-class Project < ActiveRecord::Base
+# One or two line description of what the model represents
+#
+#
+class Profile < ActiveRecord::Base
+
   #########################
   # Callbacks & Misc method calls (e.g. devise for, acts_as_whatever )
   #########################
@@ -9,23 +13,23 @@ class Project < ActiveRecord::Base
   # Setup attributes (reader, accessible, protected)
   #########################
   #attr_reader
-  attr_accessible :name, :description, :state
+  #attr_accessible
   #attr_protected
 
 
   #########################
   # Associations
   #########################
-  #belongs_to
-  #has_one
-  #has_many
+  belongs_to :user
+  extend FriendlyId
+  friendly_id :username
 
 
   #########################
   # Validations
   #########################
-  #validates :attribute  # use validates syntax instead of validates_uniqueness_of...
-
+  validates :name, :presence => true
+  
 
   #########################
   # Scopes
@@ -48,11 +52,9 @@ class Project < ActiveRecord::Base
   # Public Instance Methods ( def method_name )
   #########################
 
-  ## One line description
-  ## maybe two
-  #def my_method
-  #
-  #end
+  def username
+    user.username
+  end
 
 
   #########################
@@ -69,4 +71,6 @@ class Project < ActiveRecord::Base
   private
 
   # Same as Public Instance Methods
+
+
 end
