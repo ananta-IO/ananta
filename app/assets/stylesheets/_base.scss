@@ -5,22 +5,26 @@ $base-line-height   : 18px;
 
 // Colors -------------------------------------------------------------
 
-$color-base: #000;
-$color-highlight: #F6264E;
+$color-base:            	#333;
+$color-background:      	#FFF;
+$color-background-hover:	#EEE;
+$color-highlight:       	#0CD; //#08C;
+$color-highlight2:      	#F27;
+
 
 // Reset --------------------------------------------------------------
 
-@import "h5bp";
+// @import "h5bp";
 
-@include h5bp-display;
-@include h5bp-base;
-@include h5bp-links;
-@include h5bp-typography;
-@include h5bp-lists;
-@include h5bp-embeds;
-@include h5bp-figures;
-@include h5bp-forms;
-@include h5bp-tables;
+// @include h5bp-display;
+// @include h5bp-base;
+// @include h5bp-links;
+// @include h5bp-typography;
+// @include h5bp-lists;
+// @include h5bp-embeds;
+// @include h5bp-figures;
+// @include h5bp-forms;
+// @include h5bp-tables;
 
 
 // Compass -------------------------------------------------------------
@@ -34,7 +38,7 @@ $color-highlight: #F6264E;
 // Mixins --------------------------------------------------------------
 
 @mixin sans-family {
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-style: normal;
   font-weight: 300;
 }

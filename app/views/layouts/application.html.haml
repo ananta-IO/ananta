@@ -6,18 +6,21 @@
   
   %body{ class: "#{ controller.controller_name }" }
     = render "facebook"
-    #wrapper
-      %header#header
-        .inner
-          = render "header"
-      
-      #main.clearfix{ role: "main" }
-        = render "flashes"
-        = yield
-      #layout_footer
+
+    %header#header
+      = render "header"
+
+    #main{ role: "main" }
+      .container
+        .content
+          = render "flashes"
+          = yield
+          
     %footer#footer
-      .inner
-        = render "footer"
-        
+      = render "footer"
+
+
+
+
     -# Javascript at the bottom for fast page loading
     = render "javascripts"

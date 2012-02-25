@@ -1,8 +1,13 @@
+-# Options
+-# warning = yellow, error = red, notice (and) success = green, info = blue
 #flash
-  - flash.each do |key, value|
-    .wrapper
-      %div{ title: key.to_s.humanize, class: key }
-        -if %w[notice error].include? key
-          %p= value
-        -else
-          = raw(value)
+  -flash.each do |name, msg|
+    -if msg.kind_of?(Array)
+      -msg.each do |msg|
+        %div{ title: name.to_s.humanize, class: "alert-message #{tb_alert_name name}", "data-alert" => "alert" }
+          <a class="close" href="#">×</a>
+          = raw msg
+    -else
+      %div{ title: name.to_s.humanize, class: "alert-message #{tb_alert_name name}", "data-alert" => "alert" }
+        <a class="close" href="#">×</a>
+        = raw msg

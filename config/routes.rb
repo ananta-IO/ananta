@@ -1,14 +1,19 @@
 Ananta::Application.routes.draw do
-  resources :projects
+	
+	resources :profiles do
+		get :user
+	end
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
-  devise_scope :user do
-    get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
-    get '/login' => 'devise/sessions#new'
-    get '/logout' => 'devise/sessions#destroy'
-  end
+	resources :projects
 
-  root :to => 'projects#index'
+	devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+	devise_scope :user do
+		get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
+		get '/login' => 'devise/sessions#new'
+		get '/logout' => 'devise/sessions#destroy'
+	end
 
-  # See how all your routes lay out with "rake routes"
+	root :to => 'pages#home'
+
+	# See how all your routes lay out with "rake routes"
 end

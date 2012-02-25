@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
 
   # New method, sets the name based on the email address
   def self.new attr = {}
-    attr[:username] ||= "IHATEUSERNAMES"+rand(1000000000)
+    attr[:username] ||= "IHATEUSERNAMES#{rand(1000000000).to_s}"
     u = super attr
 
     # derives a default name from the user's email if no name is passed

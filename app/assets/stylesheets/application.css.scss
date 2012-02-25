@@ -9,5 +9,60 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree .
 */
+
+ @import "base";
+ @import "bootstrap";
+ @import "bootstrap-responsive";
+ @import "token-input-facebook"; // TODO: merge into application css and restyle
+
+ body{
+	background: white;
+	@include sans-family;
+	font-size: $base-font-size;
+	line-height: $base-line-height;
+}
+
+a{
+	&:hover{
+		text-decoration: none;
+	}
+}
+
+.navbar{
+	.navbar-inner{
+		@include border-radius(0);
+		@include box-shadow(white 0 0 0);
+		background: white;
+	}
+	.brand{
+		@include transition-property(all);
+		@include transition-duration(0.5s);
+		@include transition-timing-function(ease-in);
+		letter-spacing: 0.05em;
+		color: $color-base;
+		&:hover{
+			color: $color-highlight2;
+		}
+	}
+	.nav{
+		&>li{
+			&>a{
+				@include transition-property(all);
+				@include transition-duration(0.5s);
+				@include transition-timing-function(ease-in);
+				letter-spacing: 0.2em;
+				@include text-shadow(0 0 0 white);
+				&:hover{
+					color: $color-base;
+					background-color: $color-background-hover;
+				}
+			}
+		}
+	}
+	.dropdown-menu{
+		a:hover{
+		 	background-color: $color-background-hover;
+		}	
+	} 
+}

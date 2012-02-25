@@ -34,6 +34,7 @@ GEM
       json
     bcrypt-ruby (3.0.1)
     blankslate (2.1.2.4)
+    bootstrap-sass (2.0.1)
     builder (3.0.0)
     cancan (1.6.7)
     capybara (1.1.2)
@@ -216,6 +217,9 @@ GEM
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
+    twitter_bootstrap_form_for (1.0.5)
+      actionpack (~> 3)
+      railties (~> 3)
     tzinfo (0.3.31)
     uglifier (1.2.3)
       execjs (>= 0.3.0)
@@ -230,6 +234,7 @@ PLATFORMS
 
 DEPENDENCIES
   ask_geo
+  bootstrap-sass (~> 2.0.1)
   cancan
   capybara
   capybara-webkit
@@ -257,4 +262,5 @@ DEPENDENCIES
   rspec-rails (~> 2.6)
   sass-rails (~> 3.2.3)
   therubyracer
+  twitter_bootstrap_form_for
   uglifier (>= 1.0.3)

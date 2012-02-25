@@ -13,7 +13,7 @@ class Profile < ActiveRecord::Base
   # Setup attributes (reader, accessible, protected)
   #########################
   #attr_reader
-  #attr_accessible
+  attr_accessible :name
   #attr_protected
 
 

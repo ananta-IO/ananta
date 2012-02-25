@@ -18,6 +18,7 @@
 //= require backbone
 //= require backbone_rails_sync
 //= require backbone_datalink
+//= require bootstrap
 //= require jquery.tokeninput
 //= require hamlcoffee
 //= require backbone/ananta
