@@ -36,6 +36,9 @@ a{
 		@include border-radius(0);
 		@include box-shadow(white 0 0 0);
 		background: white;
+		.container{
+			position: relative;
+		}
 	}
 	.brand{
 		@include transition-property(all);
@@ -44,7 +47,7 @@ a{
 		letter-spacing: 0.05em;
 		color: $color-base;
 		&:hover{
-			color: $color-highlight2;
+			color: $color-highlight;
 		}
 	}
 	.nav{
@@ -59,6 +62,23 @@ a{
 					color: $color-base;
 					background-color: $color-background-hover;
 				}
+			}
+		}
+		&.center{
+			float: none;
+			margin: 0 auto;
+			width: 3em;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			&>li{
+				width: 100%;
+				float: none;
+				text-align: center;
+			}
+			@media(max-width: 979px){
+				margin: 5px auto 0;
 			}
 		}
 	}
