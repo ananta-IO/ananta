@@ -1,8 +1,8 @@
 
 # Define a module that can be referenced with FB data
 module Facebook 
-  APP_ID = (["development","test"].include?(Rails.env)) ? "dev-id" : ENV['FACEBOOK_ID']
-  SECRET = (["development","test"].include?(Rails.env)) ? "dev-secret" : ENV['FACEBOOK_SECRET']
+  APP_ID = (["development","test"].include?(Rails.env)) ? "180550335371692" : ENV['FACEBOOK_ID']
+  SECRET = (["development","test"].include?(Rails.env)) ? "e5c7bf2c7b076038a554166f217a99fa" : ENV['FACEBOOK_SECRET']
 
   CALLBACK_URL = (["development","test"].include?(Rails.env))? "http://localhost:3000" : ENV['ROOT_URL']
   

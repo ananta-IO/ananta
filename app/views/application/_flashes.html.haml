@@ -4,10 +4,10 @@
   -flash.each do |name, msg|
     -if msg.kind_of?(Array)
       -msg.each do |msg|
-        %div{ title: name.to_s.humanize, class: "alert-message #{tb_alert_name name}", "data-alert" => "alert" }
-          <a class="close" href="#">×</a>
+        %div{ title: name.to_s.humanize, class: "alert #{tb_alert_name name}" }
+          <a class="close" data-dismiss="alert" href="#">&times;</a>
           = raw msg
     -else
-      %div{ title: name.to_s.humanize, class: "alert-message #{tb_alert_name name}", "data-alert" => "alert" }
-        <a class="close" href="#">×</a>
+      %div{ title: name.to_s.humanize, class: "alert #{tb_alert_name name}" }
+        <a class="close" data-dismiss="alert" href="#">&times;</a>
         = raw msg

@@ -52,3 +52,7 @@ $color-highlight2:      	#F27;
 .clearfix{
   @include clearfix;
 }
+
+.center{
+  text-align: center;
+}

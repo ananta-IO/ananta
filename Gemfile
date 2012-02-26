@@ -22,7 +22,7 @@ gem 'ask_geo'
 gem 'jbuilder'
 gem 'jquery-rails'
 gem 'haml-rails'
-gem 'twitter_bootstrap_form_for'
+gem "simple_form"
 
 
 # Gems used only for assets and not required

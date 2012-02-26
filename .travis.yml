@@ -1,6 +1,7 @@
 before_script:
   - "psql -c 'create database myapp_test;' -U postgres"
-  - "bundle exec rake db:test:prepare db:migrate" 
+  - "bundle exec rake db:migrate"
+  - "bundle exec rake db:test:prepare" 
 language: ruby
 rvm:
   - 1.9.3

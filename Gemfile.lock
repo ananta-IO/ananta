@@ -205,6 +205,9 @@ GEM
       ffi (~> 1.0.9)
       json_pure
       rubyzip
+    simple_form (2.0.0)
+      actionpack (~> 3.0)
+      activemodel (~> 3.0)
     slop (2.4.4)
     sprockets (2.1.2)
       hike (~> 1.2)
@@ -217,9 +220,6 @@ GEM
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
-    twitter_bootstrap_form_for (1.0.5)
-      actionpack (~> 3)
-      railties (~> 3)
     tzinfo (0.3.31)
     uglifier (1.2.3)
       execjs (>= 0.3.0)
@@ -261,6 +261,6 @@ DEPENDENCIES
   rake
   rspec-rails (~> 2.6)
   sass-rails (~> 3.2.3)
+  simple_form
   therubyracer
-  twitter_bootstrap_form_for
   uglifier (>= 1.0.3)
