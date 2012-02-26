@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
 				 :token_authenticatable,
 				 :lockable, :timeoutable, :omniauthable
 
+
 	#########################
 	# Setup attributes (reader, accessible, protected)
 	#########################
@@ -30,16 +31,16 @@ class User < ActiveRecord::Base
 	extend FriendlyId
 	friendly_id		:username
 	has_one    		:profile, :dependent => :destroy
-	has_many   		:projects
+	# has_many 		:projects
 
 
 	#########################
 	# Validations
 	#########################
-	validates :profile, :presence => true
 	validates :username, :uniqueness => true, :length => 3..63 #, :allow_blank => true
 	validate  :valid_username_format
 	# TODO: a user should not be able to register without a project
+
 
 	#########################
 	# Scopes
@@ -50,6 +51,7 @@ class User < ActiveRecord::Base
 	#########################
 	# Public Class Methods ( def self.method_name )
 	#########################
+
 
 	# Given facebook authentication data, find the user record
 	def self.find_for_facebook(fb_user, current_user=nil)
@@ -68,7 +70,6 @@ class User < ActiveRecord::Base
 			user.profile.images.new({ remote_image_url: "https://graph.facebook.com/#{fb_user.id}/picture?type=large", image_type: 'avatar' })
 			user
 		end
-
 	end
 
 
@@ -126,8 +127,8 @@ class User < ActiveRecord::Base
 	# Build a profile for the new user
 	def before_create
 		# derives a default name from the user's email if no name is passed
-		name = email.split("@").first.split(/[\_\.]/).reduce{ |full_name, name| full_name = "#{full_name} #{name}" }.titleize if attr[:name].nil? rescue ""
-		build_profile(:name => name)	
+		name = email.split("@").first.split(/[\-\_\.]/).reduce{ |full_name, name| full_name = "#{full_name} #{name}" }.titleize rescue ""
+		build_profile(:name => name)
 	end
 
 	# Sets the default permission level for a new user

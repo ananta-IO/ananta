@@ -11,12 +11,14 @@
  *= require_self
 */
 
- @import "base";
- @import "bootstrap";
- @import "bootstrap-responsive";
- @import "token-input-facebook"; // TODO: merge into application css and restyle
+@import "base";
+@import "bootstrap";
+@import "bootstrap-responsive";
+@import "token-input-facebook"; // TODO: merge into application css and restyle
 
- body{
+@include sticky-footer(50px, "#wrapper", "#layout_footer", "#footer");
+
+body{
 	background: white;
 	@include sans-family;
 	font-size: $base-font-size;

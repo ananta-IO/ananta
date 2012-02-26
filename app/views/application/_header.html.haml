@@ -9,12 +9,12 @@
 			.nav-collapse
 				-if current_user
 					%ul.nav.pull-right
-						= link_to "logout", "/logout"
+						%li
+							= link_to "logout", "/logout"
 
 				-else
 					%ul.nav.pull-right
 						%li
 							= link_to "login", "/login"
 							
-				
 				
