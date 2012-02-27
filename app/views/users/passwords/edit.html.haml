@@ -1,15 +1,12 @@
 .page-header
   %h1 Change your password?
 .row
-  .span10
-    = twitter_bootstrap_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put, :class => "form-stacked" }) do |f|
-      = f.inputs do
-        = f.hidden_field :reset_password_token
-
-        = f.password_field :password, "New password"
-
-        = f.password_field :password_confirmation, "Confirm new password"
-      = f.actions do
-        = f.submit "Change my password"
+  .span8
+    = simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put, :class => "form-horizontal" }) do |f| 
+      = f.input :reset_password_token, as: :hidden
+      = f.input :password, label: "New password"
+      = f.input :password_confirmation, label: "Confirm new password"
+      .form-actions
+        = f.button :submit, :value => I18n.t('helpers.submit.user.password.update'), :class => 'btn-inverse'
   .span4
     = render :partial => "devise/shared/links"

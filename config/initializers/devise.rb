@@ -41,7 +41,7 @@ Devise.setup do |config|
   # session. If you need permissions, you should implement that in a before filter.
   # You can also supply a hash where the value is a boolean determining whether
   # or not authentication should be aborted when the value is not present.
-  # config.authentication_keys = [ :email ]
+  config.authentication_keys = [ :login ]
 
   # Configure parameters from the request object used for authentication. Each entry
   # given should be a request method and it will automatically be passed to the
@@ -53,12 +53,12 @@ Devise.setup do |config|
   # Configure which authentication keys should be case-insensitive.
   # These keys will be downcased upon creating or modifying a user and when used
   # to authenticate or find a user. Default is :email.
-  config.case_insensitive_keys = [ :email ]
+  config.case_insensitive_keys = [ :email, :username, :login ]
 
   # Configure which authentication keys should have whitespace stripped.
   # These keys will have whitespace before and after removed upon creating or
   # modifying a user and when used to authenticate or find a user. Default is :email.
-  config.strip_whitespace_keys = [ :email ]
+  config.strip_whitespace_keys = [ :email, :username, :login ]
 
   # Tell if authentication through request.params is enabled. True by default.
   # config.params_authenticatable = true
@@ -102,7 +102,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :rememberable
   # The time the user will be remembered without asking for credentials again.
-  config.remember_for = 3.months
+  config.remember_for = 6.months
 
   # If true, a valid remember token can be re-used between multiple browsers.
   # config.remember_across_browsers = true
@@ -215,6 +215,11 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
+  if Rails.env == "development"
+    config.omniauth :facebook, Facebook::APP_ID, Facebook::SECRET, {:scope => Facebook::SCOPE, :client_options => {:ssl => {:verify => false}} }
+  else
+    config.omniauth :facebook, Facebook::APP_ID, Facebook::SECRET, {:scope => Facebook::SCOPE, :client_options => {:ssl => {:ca_file => '/usr/lib/ssl/certs/ca-certificates.crt'}}} # :client_options => {:ssl => {:verify => false}} }
+  end
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
@@ -226,24 +231,18 @@ Devise.setup do |config|
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
 
-  if Rails.env == "development"
-    config.omniauth :facebook, Facebook::APP_ID, Facebook::SECRET, {:scope => Facebook::SCOPE, :client_options => {:ssl => {:verify => false}} }
-  else
-    config.omniauth :facebook, Facebook::APP_ID, Facebook::SECRET, {:scope => Facebook::SCOPE, :client_options => {:ssl => {:ca_file => '/usr/lib/ssl/certs/ca-certificates.crt'}}} # :client_options => {:ssl => {:verify => false}} }
-  end
-
 end
 
 ## Koala
 Koala::Facebook::OAuth.class_eval do
   def initialize_with_default_settings(*args)
-  case args.size
-  when 0, 1
-  raise "application id and/or secret are not specified in the config" unless Facebook::APP_ID && Facebook::SECRET
-  initialize_without_default_settings(Facebook::APP_ID, Facebook::SECRET, Facebook::CALLBACK_URL)
-  when 2, 3
-  initialize_without_default_settings(*args)
-  end
+    case args.size
+      when 0, 1
+        raise "application id and/or secret are not specified in the config" unless Facebook::APP_ID && Facebook::SECRET
+        initialize_without_default_settings(Facebook::APP_ID, Facebook::SECRET, Facebook::CALLBACK_URL)
+      when 2, 3
+        initialize_without_default_settings(*args)
+    end
   end
 
   alias_method_chain :initialize, :default_settings

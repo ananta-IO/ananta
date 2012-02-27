@@ -19,7 +19,7 @@
 @include sticky-footer(50px, "#wrapper", "#layout_footer", "#footer");
 
 body{
-	background: white;
+	background: $color-background;
 	@include sans-family;
 	font-size: $base-font-size;
 	line-height: $base-line-height;
@@ -34,8 +34,8 @@ a{
 .navbar{
 	.navbar-inner{
 		@include border-radius(0);
-		@include box-shadow(white 0 0 0);
-		background: white;
+		@include box-shadow($color-background 0 0 0);
+		background: $color-background;
 		.container{
 			position: relative;
 		}
@@ -51,13 +51,23 @@ a{
 		}
 	}
 	.nav{
+		.dropdown{
+			.caret{
+				border-top-color: $color-base;
+			}
+			&.open{
+				.caret{
+				border-top-color: $color-base;
+				}	
+			}
+		}
 		&>li{
 			&>a{
 				@include transition-property(all);
 				@include transition-duration(0.5s);
 				@include transition-timing-function(ease-in);
 				letter-spacing: 0.2em;
-				@include text-shadow(0 0 0 white);
+				@include text-shadow(0 0 0 $color-background);
 				&:hover{
 					color: $color-base;
 					background-color: $color-background-hover;
@@ -84,7 +94,7 @@ a{
 	}
 	.dropdown-menu{
 		a:hover{
-		 	background-color: $color-background-hover;
+		 	// background-color: $color-background-hover;
 		}	
 	} 
 }

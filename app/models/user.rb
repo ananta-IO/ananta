@@ -20,8 +20,9 @@ class User < ActiveRecord::Base
 	# Setup attributes (reader, accessible, protected)
 	#########################
 	#attr_reader
-	attr_accessible :password, :password_confirmation, :remember_me, :facebook_id
+	attr_accessible :login, :password, :password_confirmation, :remember_me, :facebook_id
 	attr_accessible :username, :email, :on => :create
+	attr_accessor :login
 	#attr_protected
 
 
@@ -52,6 +53,12 @@ class User < ActiveRecord::Base
 	# Public Class Methods ( def self.method_name )
 	#########################
 
+	# Authenticate with email or username
+	def self.find_for_database_authentication(warden_conditions)
+		conditions = warden_conditions.dup
+		login = conditions.delete(:login)
+		where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.strip.downcase }]).first
+	end
 
 	# Given facebook authentication data, find the user record
 	def self.find_for_facebook(fb_user, current_user=nil)

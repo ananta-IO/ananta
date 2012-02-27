@@ -3,10 +3,10 @@
 .row
   .span8
     = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-horizontal'}) do |f|
-      = f.input :email
+      = f.input :login
       = f.input :password
       = f.input :remember_me, as: :boolean
       .form-actions
-        = f.button :submit, :value => I18n.t('helpers.submit.user.session.create'), :class => 'btn-inverse'
+        = f.button :submit, :value => I18n.t('helpers.submit.user.session.create'), :class => 'btn-info'
   .span4
     = render :partial => "users/shared/links"

@@ -37,3 +37,8 @@
 //= require date
 
 //= require_tree .
+
+$(window).load(function() {
+	$('#flash .alert').show('fade', {}, 1000).delay(10000).slideUp(1000);
+});
+

@@ -2,4 +2,10 @@ en:
   ##################################
   # Misc
   ##################################
+  cancel: 'Cancel'
+  
+  activerecord:
+    attributes:
+      user:  
+        login: "Username or email"
 

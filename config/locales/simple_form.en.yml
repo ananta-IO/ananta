@@ -31,3 +31,8 @@ en:
         update: "Save Changes"
         session:
           create: 'Login'  
+        password:
+          create: "Send me reset password instructions"
+          update: 'Change my password'
+        unlock:
+          create: "Resend unlock instructions"

@@ -1,0 +1,96 @@
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+%br
+.row
+	.span2
+		%br
+		%br
+
+		This is the home page
+
+		%br
+		%br
+
+		%a.tooltip{"data-placement" => "right", :href => "#", :title => "Some title text"} ToolTip
+
+		%br
+		%br
+
+		%a.btn{"data-toggle" => "modal", :href => "#myModal"} Launch Modal
+
+		#myModal.modal.fade
+			.modal-header
+				%a.close{"data-dismiss" => "modal"} ×
+				%h3
+					Modal Heading     
+			.modal-body
+				%p One fine body…
+			.modal-footer
+				%a.btn-primary.btn{:href => "#"} Primary
+				%a.btn{:href => "#"} Secondary
+			
+		%br
+		%br
+
+	.span4
+		%ul.nav.nav-pills
+			%li.active
+				%a{:href => "#"} Regular link
+			%li#menu1.dropdown
+				%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#menu1"}
+					Dropdown
+					%b.caret
+				%ul.dropdown-menu
+					%li
+						%a{:href => "#"} Action
+					%li
+						%a{:href => "#"} Another action
+					%li
+						%a{:href => "#"} Something else here
+					%li.divider
+					%li
+						%a{:href => "#"} Separated link
+
+	.span3
+		.btn-group
+			%a.btn{:href => "#"} Action
+			%a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+				%span.caret
+			%ul.dropdown-menu
+				%li
+					%a{:href => "#"} Action
+				%li
+					%a{:href => "#"} Another action
+				%li
+					%a{:href => "#"} Something else here
+				%li.divider
+				%li
+					%a{:href => "#"} Separated link
+			
+		%br
+		%br
+
+	.span3
+		- if !user_signed_in?
+			= link_to "Sign up", "/users/sign_up", :class => "btn success large", "data-loading-text" => "loading..."
+			%br
+			%br
+			= link_to "Connect with Facebook", user_omniauth_authorize_path(:facebook), :class => "btn-auth btn-facebook"
+
+		%br
+		%br
+		%br
+		%br
+
+

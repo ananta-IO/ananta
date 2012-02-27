@@ -13,6 +13,9 @@ Ananta::Application.routes.draw do
 		get '/logout' => 'devise/sessions#destroy'
 	end
 
+	# TODO: remove before golive
+	match '/tb' => 'pages#tb'
+
 	root :to => 'pages#home'
 
 	# See how all your routes lay out with "rake routes"
