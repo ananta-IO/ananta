@@ -1,3 +1,5 @@
+# Store registration information here
+# All other info should be in linked models
 class User < ActiveRecord::Base
 
 	#########################
@@ -142,7 +144,7 @@ class User < ActiveRecord::Base
 	def after_create
 		# set the permissions of a newly confirmed user
 		permissions = 2 # ability model will not work if this is set in new()
-		save
+		save!
 	end
 
 	# Sync profile slug with user slug

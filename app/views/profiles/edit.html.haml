@@ -1,0 +1,33 @@
+=content_for :javascripts do
+  :javascript
+    window.bio_tags = #{raw  @bio_tags.to_json}
+    window.skills = #{raw  @skills.to_json}
+    window.needs = #{raw  @needs.to_json}
+
+    window.selected_bio_tags = #{raw @selected_bio_tags.to_json}
+    window.selected_skills = #{raw @selected_skills.to_json}
+    window.selected_needs = #{raw @selected_needs.to_json}
+
+    $(document).ready(function() {
+      $('#profile_bio_tokens').tokenInput(window.bio_tags, { theme : 'facebook', preventDuplicates: true, tokenLimit: 100, prePopulate: window.selected_bio_tags, createTokenFromQuery: true } );
+      $('#profile_skill_tokens').tokenInput(window.skills, { theme : 'facebook', preventDuplicates: true, tokenLimit: 100, prePopulate: window.selected_skills, createTokenFromQuery: true } );
+      $('#profile_need_tokens').tokenInput(window.needs, { theme : 'facebook', preventDuplicates: true, tokenLimit: 100, prePopulate: window.selected_needs, createTokenFromQuery: true } );
+    });
+
+.page-header
+  %h1 Editing Profile
+.row
+  .span12
+    = simple_form_for @profile, :html => {:class => "form-horizontal"} do |f|
+
+      = f.input :name
+      %br
+      = f.input :bio_tokens, label: "Bio Tags"
+      %br
+      = f.input :skill_tokens, label: "Skills"
+      %br
+      = f.input :need_tokens, label: "Needs"
+      %br
+      .form-actions
+        = f.button :submit, :class => "btn-primary"
+        = link_to 'Cancel', @profile, :class => "btn btn-danger"

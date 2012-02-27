@@ -1,0 +1,25 @@
+%h1 Listing profiles
+
+%table.zebra-striped
+  %tr
+    %th #
+    %th Name
+    %th Bio Tags
+    %th Skill Tags
+    %th Food Tags
+    %th System Tags
+    %th
+    %th
+    %th
+
+  - @profiles.each do |profile|
+    %tr
+      %td= profile.id
+      %td= profile.name
+      %td= profile.bio_tag_list
+      %td= profile.skill_tag_list
+      %td= profile.food_tag_list
+      %td= profile.system_tag_list
+      %td= link_to 'Show', profile
+      %td= link_to 'Edit', edit_profile_path(profile)
+      %td= link_to 'Destroy', profile, :confirm => 'Are you sure?', :method => :delete

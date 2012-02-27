@@ -1,19 +1,18 @@
-# One or two line description of what the model represents
-#
-#
+# Every user has a profile
+# Store personal data here
 class Profile < ActiveRecord::Base
 
   #########################
   # Callbacks & Misc method calls (e.g. devise for, acts_as_whatever )
   #########################
-  #acts_as_...
+  acts_as_taggable_on :bio_tags, :skills, :needs
 
 
   #########################
   # Setup attributes (reader, accessible, protected)
   #########################
   #attr_reader
-  attr_accessible :name
+  attr_accessible :name, :bio_tokens, :skill_tokens, :need_tokens
   #attr_protected
 
 
@@ -23,6 +22,10 @@ class Profile < ActiveRecord::Base
   belongs_to :user
   extend FriendlyId
   friendly_id :username
+
+  attr_reader :bio_tokens
+  attr_reader :skill_tokens
+  attr_reader :need_tokens
 
 
   #########################
@@ -54,6 +57,18 @@ class Profile < ActiveRecord::Base
 
   def username
     user.username
+  end
+
+  def bio_tokens= ids
+    self.bio_tag_list = ids
+  end
+
+  def skill_tokens= ids
+    self.skill_list = ids
+  end
+
+  def need_tokens= ids
+    self.need_list = ids
   end
 
 

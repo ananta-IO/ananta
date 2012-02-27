@@ -1,0 +1,18 @@
+-content_for :title do "#{@profile.name}'s profile" end
+
+%p
+  %b Name:
+  = @profile.name
+%p
+  %b Bio Tags:
+  = @profile.bio_tag_list
+%p
+  %b Skills:
+  = @profile.skill_list
+%p
+  %b Needs:
+  = @profile.need_list
+
+= link_to 'Edit', edit_profile_path(@profile)
+\|
+= link_to 'Back', profiles_path

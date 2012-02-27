@@ -13,6 +13,9 @@ gem 'cancan'
 # Slugging
 gem "friendly_id", ">= 4.0.0.beta14"
 
+# Tagging
+gem 'acts-as-taggable-on'
+
 # Third-party APIs and services
 gem 'koala'
 gem 'geocoder'
@@ -22,7 +25,7 @@ gem 'ask_geo'
 gem 'jbuilder'
 gem 'jquery-rails'
 gem 'haml-rails'
-gem "simple_form"
+gem 'simple_form'
 
 
 # Gems used only for assets and not required
