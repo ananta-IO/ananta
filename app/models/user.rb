@@ -22,8 +22,7 @@ class User < ActiveRecord::Base
 	# Setup attributes (reader, accessible, protected)
 	#########################
 	#attr_reader
-	attr_accessible :login, :password, :password_confirmation, :remember_me, :facebook_id
-	attr_accessible :username, :email, :on => :create
+	attr_accessible :username, :login, :email, :password, :password_confirmation, :remember_me, :facebook_id
 	attr_accessor :login
 	#attr_protected
 
@@ -34,6 +33,7 @@ class User < ActiveRecord::Base
 	extend FriendlyId
 	friendly_id		:username
 	has_one    		:profile, :dependent => :destroy
+	# has_many 		:accounts	
 	# has_many 		:projects
 
 
@@ -153,7 +153,6 @@ class User < ActiveRecord::Base
 		p.slug = slug
 		p.save
 	end
-
 
 	# Validations
 

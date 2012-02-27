@@ -13,6 +13,9 @@ gem 'cancan'
 # Slugging
 gem "friendly_id", ">= 4.0.0.beta14"
 
+# Clean RESTful controlers 
+gem 'inherited_resources'
+
 # Tagging
 gem 'acts-as-taggable-on'
 
@@ -26,6 +29,7 @@ gem 'jbuilder'
 gem 'jquery-rails'
 gem 'haml-rails'
 gem 'simple_form'
+gem "possessive" 
 
 
 # Gems used only for assets and not required

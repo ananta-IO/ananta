@@ -15,12 +15,15 @@ en:
       password: 'Password'
       email: 'E-mail'
       remember_me: 'Remember me'
+      user:
+        update:
+          password: 'New password'
 
     # hints:
     #   username: 'User name to sign in.'
     #   password: 'No special characters, please.'
 
-    placeholder:
+    placeholders:
       password: 'Password'
       email: 'E-mail'
 

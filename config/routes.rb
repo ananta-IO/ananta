@@ -1,10 +1,4 @@
 Ananta::Application.routes.draw do
-	
-	resources :profiles do
-		get :user
-	end
-
-	resources :projects
 
 	devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 	devise_scope :user do
@@ -17,6 +11,11 @@ Ananta::Application.routes.draw do
 	match '/tb' => 'pages#tb'
 
 	root :to => 'pages#home'
+
+	resources :profiles, :path => ''
+	resources :profiles, :path => '', :only => [] do
+		resources :projects, :path => '', :except => [:index]
+	end
 
 	# See how all your routes lay out with "rake routes"
 end

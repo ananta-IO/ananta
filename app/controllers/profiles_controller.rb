@@ -2,17 +2,6 @@ class ProfilesController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
 
-  # GET /profiles
-  # GET /profiles.json
-  def index
-    @profiles = Profile.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @profiles }
-    end
-  end
-
   # GET /profiles/1
   # GET /profiles/1.json
   def show
