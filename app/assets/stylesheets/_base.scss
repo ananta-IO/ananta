@@ -38,21 +38,25 @@ $color-highlight2:      	#F27;
 // Mixins --------------------------------------------------------------
 
 @mixin sans-family {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-style: normal;
-  font-weight: 300;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-style: normal;
+	font-weight: 300;
 }
 
 @mixin serif-family {
-  font-family: Georgia, Times, "Times New Roman", serif;
-  font-style: normal;
-  font-weight: 300;
+	font-family: Georgia, Times, "Times New Roman", serif;
+	font-style: normal;
+	font-weight: 300;
 }
 
 .clearfix{
-  @include clearfix;
+	@include clearfix;
 }
 
 .center{
-  text-align: center;
+	text-align: center;
+}
+
+.inline{
+	display: inline;	
 }
