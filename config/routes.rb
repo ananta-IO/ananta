@@ -13,7 +13,7 @@ Ananta::Application.routes.draw do
 	root :to => 'pages#home'
 
 	resources :profiles, :path => ''
-	resources :profiles, :path => '', :only => [] do
+	resources :users, :path => '', :only => [] do
 		resources :projects, :path => '', :except => [:index]
 	end
 

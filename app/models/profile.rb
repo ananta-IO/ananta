@@ -14,18 +14,17 @@ class Profile < ActiveRecord::Base
   #attr_reader
   attr_accessible :name, :bio_tokens, :skill_tokens, :need_tokens
   #attr_protected
+  attr_reader :bio_tokens
+  attr_reader :skill_tokens
+  attr_reader :need_tokens
 
 
   #########################
   # Associations
   #########################
-  belongs_to :user
   extend FriendlyId
   friendly_id :username
-
-  attr_reader :bio_tokens
-  attr_reader :skill_tokens
-  attr_reader :need_tokens
+  belongs_to :user
 
 
   #########################

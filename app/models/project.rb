@@ -9,22 +9,22 @@ class Project < ActiveRecord::Base
   # Setup attributes (reader, accessible, protected)
   #########################
   #attr_reader
-  attr_accessible :name, :description, :state
+  attr_accessible :name, :description, :state_action
   #attr_protected
 
 
   #########################
   # Associations
   #########################
-  #belongs_to
-  #has_one
-  #has_many
+  extend FriendlyId
+  friendly_id :name
+  belongs_to :user
 
 
   #########################
   # Validations
   #########################
-  #validates :attribute  # use validates syntax instead of validates_uniqueness_of...
+  validates :name, :presence => true
 
 
   #########################

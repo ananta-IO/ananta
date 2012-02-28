@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui-1.8.16
+//= require jquery-ui-1.8.16.custom.min.js
 //= require underscore
 //= require sugar-1.1.3.min.js
 //= require backbone

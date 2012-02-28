@@ -33,8 +33,20 @@ class User < ActiveRecord::Base
 	extend FriendlyId
 	friendly_id		:username
 	has_one    		:profile, :dependent => :destroy
-	# has_many 		:accounts	
-	# has_many 		:projects
+	# has_one  		:account, :dependent => :destroy				# TODO: ?
+	has_many   		:projects
+	# has_many 		:watches, :class_name => 'Watch'
+	# has_many 		:watching, :class_name => 'Project', :through => :watches
+	# has_many 		:project_memberships
+	# has_many 		:joined_projects, :class_name => 'Project', :through => :project_memberships
+	# has_many 		:team_memberships                         		# TODO: ?
+	# has_many 		:teams, :through => :team_memberships     		# TODO: ?
+	# has_many 		:user_follows                             		# TODO: ?
+	# has_many 		:followed_users, :through => :user_follows		# TODO: ?
+	# has_many 		:team_follows                             		# TODO: ?
+	# has_many 		:followed_teams, :through => :team_follows		# TODO: ?
+
+	accepts_nested_attributes_for :projects, :allow_destroy => true
 
 
 	#########################
@@ -143,8 +155,8 @@ class User < ActiveRecord::Base
 	# Sets the default permission level for a new user
 	def after_create
 		# set the permissions of a newly confirmed user
-		permissions = 2 # ability model will not work if this is set in new()
-		save!
+		self.permissions = 2 # ability model will not work if this is set in new()
+		self.save
 	end
 
 	# Sync profile slug with user slug

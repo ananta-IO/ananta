@@ -1,12 +1,12 @@
 =content_for :javascripts do
   :javascript
-    window.bio_tags = #{raw  @bio_tags.to_json}
-    window.skills = #{raw  @skills.to_json}
-    window.needs = #{raw  @needs.to_json}
+    window.bio_tags = #{raw  @tags['bio_tags'].to_json}
+    window.skills = #{raw  @tags['skills'].to_json}
+    window.needs = #{raw  @tags['needs'].to_json}
 
-    window.selected_bio_tags = #{raw @selected_bio_tags.to_json}
-    window.selected_skills = #{raw @selected_skills.to_json}
-    window.selected_needs = #{raw @selected_needs.to_json}
+    window.selected_bio_tags = #{raw @selected_tags['bio_tags'].to_json}
+    window.selected_skills = #{raw @selected_tags['skills'].to_json}
+    window.selected_needs = #{raw @selected_tags['needs'].to_json}
 
     $(document).ready(function() {
       $('#profile_bio_tokens').tokenInput(window.bio_tags, { theme : 'facebook', preventDuplicates: true, tokenLimit: 100, prePopulate: window.selected_bio_tags, createTokenFromQuery: true } );

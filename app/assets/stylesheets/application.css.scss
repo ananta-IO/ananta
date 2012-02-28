@@ -12,6 +12,8 @@
 */
 
 @import "base";
+@import "jquery-ui/jquery-ui-1.8.16.ie.css";
+@import "jquery-ui/jquery-ui-1.8.16.custom.css";
 @import "bootstrap";
 @import "bootstrap-responsive";
 @import "token-input-facebook"; // TODO: merge into application css and restyle

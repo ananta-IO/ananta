@@ -29,6 +29,13 @@ class Ability
 			can [:update], Profile do |profile|
 				profile.user == user
 			end
+
+
+			# Projects
+			can [:create], Project
+			can [:update], Project do |project|
+				project.user == user
+			end
 		end
 
 
@@ -37,6 +44,7 @@ class Ability
 		######################################################
 		if user.permissions >= 0
 			can :read, Profile
+			can :read, Project
 		end
 
 		cannot :destroy, User

@@ -36,7 +36,9 @@ Ananta::Application.configure do
   config.assets.debug = true
 end
 
-silence_warnings do
-  require "pry"
-  IRB = Pry
-end
+# TODO: reload! is broken with rails 3.2
+#       use pry at own risk
+# silence_warnings do
+#   require "pry"
+#   IRB = Pry
+# end
