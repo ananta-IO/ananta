@@ -62,6 +62,7 @@ FriendlyId.defaults do |config|
 		plans
 		popular
 		privacy
+		profiles
 		projects
 		q
 		questions
@@ -93,6 +94,7 @@ FriendlyId.defaults do |config|
 		unsubscribe
 		url
 		user
+		users
 		widget
 		widgets
 		wiki

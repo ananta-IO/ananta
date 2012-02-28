@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
 	# has_many 		:team_follows                             		# TODO: ?
 	# has_many 		:followed_teams, :through => :team_follows		# TODO: ?
 
-	accepts_nested_attributes_for :projects, :allow_destroy => true
+	accepts_nested_attributes_for :profile
 
 
 	#########################
@@ -140,7 +140,7 @@ class User < ActiveRecord::Base
 	# Check if username is a reserved word
 	def validate_reserved
 		if errors[:friendly_id].present?
-			errors[:username] = "is reserved. Please choose something else"
+			errors[:username] = "is reserved. Please choose something else."
 			errors.messages.delete(:friendly_id)
 		end
 	end
@@ -170,8 +170,8 @@ class User < ActiveRecord::Base
 
 	# Check the username format
 	def valid_username_format
-		unless username =~ /^[A-Za-z-]*$/i or username == id.to_s
-			errors.add(:username, "only letters and hyphens allowed.")
+		unless username =~ /^[a-z-]*$/i or username == id.to_s
+			errors.add(:username, "only lowercase letters and hyphens allowed")
 		end
 	end
 

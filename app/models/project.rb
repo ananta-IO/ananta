@@ -2,7 +2,7 @@ class Project < ActiveRecord::Base
   #########################
   # Callbacks & Misc method calls (e.g. devise for, acts_as_whatever )
   #########################
-  #acts_as_...
+  acts_as_taggable_on :tags
 
 
   #########################
@@ -11,13 +11,14 @@ class Project < ActiveRecord::Base
   #attr_reader
   attr_accessible :name, :description, :state_action
   #attr_protected
+  attr_reader :tag_tokens
 
 
   #########################
   # Associations
   #########################
   extend FriendlyId
-  friendly_id :name
+  friendly_id :name, :use => :slugged
   belongs_to :user
 
 
@@ -48,11 +49,10 @@ class Project < ActiveRecord::Base
   # Public Instance Methods ( def method_name )
   #########################
 
-  ## One line description
-  ## maybe two
-  #def my_method
-  #
-  #end
+  # Helper for token_autocomplete
+  def tag_tokens= ids
+    self.tag_list = ids
+  end
 
 
   #########################

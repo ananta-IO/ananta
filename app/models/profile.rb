@@ -23,7 +23,7 @@ class Profile < ActiveRecord::Base
   # Associations
   #########################
   extend FriendlyId
-  friendly_id :username
+  friendly_id :username, :use => :slugged
   belongs_to :user
 
 
@@ -54,18 +54,22 @@ class Profile < ActiveRecord::Base
   # Public Instance Methods ( def method_name )
   #########################
 
+  # Steal username from user
   def username
     user.username
   end
 
+  # Helper for token_autocomplete
   def bio_tokens= ids
     self.bio_tag_list = ids
   end
 
+  # Helper for token_autocomplete
   def skill_tokens= ids
     self.skill_list = ids
   end
 
+  # Helper for token_autocomplete
   def need_tokens= ids
     self.need_list = ids
   end

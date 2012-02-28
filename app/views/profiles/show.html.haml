@@ -6,15 +6,18 @@
 	%p.pull-right
 		= link_to 'Edit', edit_profile_path(@profile)
 .row
-	.span12
+	.span6
+		%h3 Bio Tags
 		%p
-			%b Bio Tags:
 			= @profile.bio_tag_list
+		%h3 Skills
 		%p
-			%b Skills:
 			= @profile.skill_list
+		%h3 Needs
 		%p
-			%b Needs:
 			= @profile.need_list
-
-		
+	.span6
+		%h3 Projects
+		- @profile.user.projects.each do |project|
+			%h3
+				= link_to project.name, user_project_path(@profile.user, project)

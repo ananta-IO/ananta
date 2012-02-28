@@ -1,15 +1,20 @@
-%p#notice= notice
+-content_for :title do "#{@project.name}" end
 
-%p
-  %b Name:
-  = @project.name
-%p
-  %b Description:
-  = @project.description
-%p
-  %b State:
-  = @project.state
-
-= link_to 'Edit', edit_project_path(@project)
-\|
-= link_to 'Back', projects_path
+.page-header
+	%h1 
+		= link_to @user.username, profile_path(@user.profile)
+		\/
+		= link_to @project.name, user_project_path(@user, @project)
+	%p.pull-right
+		= link_to 'Edit', edit_user_project_path(@user, @project)
+.row
+	.span12
+		%p
+			%b Name:
+			= @project.name
+		%p
+			%b Description:
+			= @project.description
+		%p
+			%b State:
+			= @project.state

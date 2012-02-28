@@ -1,5 +1,6 @@
 class ProfilesController < InheritedResources::Base
   respond_to :html, :json
+  defaults :route_prefix => ''
   actions :show, :edit, :update
   before_filter :populate_tags, :only => [:edit, :update]
 

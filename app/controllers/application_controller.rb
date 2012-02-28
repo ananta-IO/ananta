@@ -9,6 +9,11 @@ class ApplicationController < ActionController::Base
     @current_ability ||= Ability.new(current_user, params)
   end
 
+  # Devise after sign in hack     # TODO: make less hacky, maybe update the /users route?
+  def after_sign_in_path_for(resource)
+    request.referer == "/users" ? redirect_to(root_url) : super
+  end
+
   # Helper method for picking allowed keys from a hash of params
   # http://www.quora.com/Backbone-js-1/How-well-does-backbone-js-work-with-rails
   def pick(hash, *keys)
