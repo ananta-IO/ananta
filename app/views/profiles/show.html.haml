@@ -4,21 +4,31 @@
 	%h1 
 		= @profile.name
 .row
-	.span6
+	.span4
 		.sub-header 
 			%h2.inline 
 				Profile
 			= link_to 'Edit', edit_profile_path(@profile)
-		%h3 Bio Tags
-		%p
-			= @profile.bio_tag_list
-		%h3 Skills
-		%p
-			= @profile.skill_list
-		%h3 Needs
-		%p
-			= @profile.need_list
-	.span6
+		%br
+		.row
+			.span1
+				%h4 Bio Tags
+			.span3
+				%p
+					= @profile.bio_tag_list
+		.row
+			.span1
+				%h4 Skills
+			.span3
+				%p
+					= @profile.skill_list
+		.row
+			.span1
+				%h4 Needs
+			.span3
+				%p
+					= @profile.need_list
+	.span8
 		.sub-header 
 			%h2 
 				Projects

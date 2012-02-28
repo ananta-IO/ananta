@@ -115,5 +115,31 @@ a{
 }
 
 .sub-header{
-	border-bottom: 1px solid #EEE;
+	border-bottom: 1px solid $color-border;
+}
+
+.tabs-left{
+	.nav-tabs{
+		margin-right: 0;
+		border-right: 0px solid $color-background;
+	}
+	.tab-content{
+		border-left: 1px solid $color-border;
+		form{
+			margin-bottom: 0;
+			.control-group{
+				margin-left: 18px;
+				@media (max-width: 480px){
+					margin-left: 10px;
+				}
+			}
+			.form-actions{
+				padding-left: 160+18px;
+				margin-bottom: 0;
+				@media (max-width: 480px){
+					padding-left: 10px;
+				}
+			}
+		}
+	}
 }

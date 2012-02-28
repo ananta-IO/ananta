@@ -18,16 +18,23 @@
   %h1 Editing Profile
 .row
   .span12
-    = simple_form_for @profile, :html => {:class => "form-horizontal"} do |f|
+    .tabbable.tabs-left
+      %ul.nav.nav-tabs
+        %li.active
+          = link_to "Edit Profile", edit_profile_path(@profile)
+        %li
+          = link_to "Edit Account", "/users/edit"
+      .tab-content
+        = simple_form_for @profile, :html => {:class => "form-horizontal"} do |f|
 
-      = f.input :name
-      %br
-      = f.input :bio_tokens, label: "Bio Tags"
-      %br
-      = f.input :skill_tokens, label: "Skills"
-      %br
-      = f.input :need_tokens, label: "Needs"
-      %br
-      .form-actions
-        = f.button :submit, :class => "btn-primary"
-        = link_to 'Cancel', @profile, :class => "btn btn-danger"
+          = f.input :name
+          %br
+          = f.input :bio_tokens, label: "Bio Tags"
+          %br
+          = f.input :skill_tokens, label: "Skills"
+          %br
+          = f.input :need_tokens, label: "Needs"
+          %br
+          .form-actions
+            = f.button :submit, :class => "btn-primary"
+            = link_to 'Cancel', @profile, :class => "btn btn-danger"
