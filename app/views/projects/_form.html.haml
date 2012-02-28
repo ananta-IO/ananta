@@ -1,5 +1,8 @@
-= simple_form_for [@user, @project] do |f|
-  = f.input :name
-  = f.input :description
-  .form-actions
-    = f.button :submit
+.row
+	.span12
+		= simple_form_for [@user, @project], :html => {:class => "form-horizontal"} do |f|
+			= f.input :name
+			= f.input :description
+			.form-actions
+				= f.button :submit, :class => 'btn-primary'
+				= link_to I18n.t('cancel'), :back, :class => 'btn btn-danger'

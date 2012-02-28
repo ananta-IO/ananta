@@ -19,6 +19,9 @@ gem 'inherited_resources'
 # Tagging
 gem 'acts-as-taggable-on'
 
+# State Machine
+gem 'state_machine'
+
 # Third-party APIs and services
 gem 'koala'
 gem 'geocoder'

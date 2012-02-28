@@ -4,12 +4,39 @@ class Project < ActiveRecord::Base
   #########################
   acts_as_taggable_on :tags
 
+  # Project state machine
+  state_machine :initial => :brainstoming do
+    event :plan do
+      transition :brainstoming => :planning
+    end
+
+    event :work do
+      transition :planning => :working
+    end
+
+    event :check_done do
+      transition :working => :completing
+    end
+
+    event :not_done do
+      transition :completing => :working
+    end
+
+    event :done do
+      transition :completing => :complete
+    end
+
+    event :kill do
+      transition [:brainstoming, :planning, :working, :completing] => :killed
+    end
+  end
+
 
   #########################
   # Setup attributes (reader, accessible, protected)
   #########################
   #attr_reader
-  attr_accessible :name, :description, :state_action
+  attr_accessible :name, :description, :state_action, :tag_tokens
   #attr_protected
   attr_reader :tag_tokens
 
