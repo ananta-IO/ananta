@@ -40,5 +40,7 @@
 					%td
 						%h3
 							= link_to project.name, [@profile.user, project]
+							.pull-right
+								= project.plusminus
 						%p
-							= project.state.titleize rescue ''
+							= project.state.titleize

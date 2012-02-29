@@ -17,6 +17,10 @@ class User < ActiveRecord::Base
 				 :token_authenticatable,
 				 :lockable, :timeoutable, :omniauthable
 
+	# Voting
+	acts_as_voter
+	has_karma(:projects, :as => :user, :weight => 1.0) # votable, foreign_key, weight
+
 
 	#########################
 	# Setup attributes (reader, accessible, protected)
@@ -35,16 +39,10 @@ class User < ActiveRecord::Base
 	has_one    		:profile, :dependent => :destroy
 	# has_one  		:account, :dependent => :destroy				# TODO: ?
 	has_many   		:projects
-	# has_many 		:watches, :class_name => 'Watch'
-	# has_many 		:watching, :class_name => 'Project', :through => :watches
 	# has_many 		:project_memberships
 	# has_many 		:joined_projects, :class_name => 'Project', :through => :project_memberships
-	# has_many 		:team_memberships                         		# TODO: ?
-	# has_many 		:teams, :through => :team_memberships     		# TODO: ?
-	# has_many 		:user_follows                             		# TODO: ?
-	# has_many 		:followed_users, :through => :user_follows		# TODO: ?
-	# has_many 		:team_follows                             		# TODO: ?
-	# has_many 		:followed_teams, :through => :team_follows		# TODO: ?
+	# has_many 		:team_memberships                    		# TODO: ?
+	# has_many 		:teams, :through => :team_memberships		# TODO: ?
 
 	accepts_nested_attributes_for :profile
 

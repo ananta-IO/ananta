@@ -1,5 +1,5 @@
 class ProjectsController < InheritedResources::Base
-  respond_to :html, :json
+  respond_to :js, :html, :json
   belongs_to :user
   defaults :route_prefix => ''
 

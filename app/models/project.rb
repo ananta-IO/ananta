@@ -3,6 +3,7 @@ class Project < ActiveRecord::Base
   # Callbacks & Misc method calls (e.g. devise for, acts_as_whatever )
   #########################
   acts_as_taggable_on :tags
+  acts_as_voteable
 
   # Project state machine
   state_machine :initial => :brainstoming do
@@ -36,9 +37,9 @@ class Project < ActiveRecord::Base
   # Setup attributes (reader, accessible, protected)
   #########################
   #attr_reader
-  attr_accessible :name, :description, :state_action, :tag_tokens
+  attr_accessible :name, :description, :state_action, :tag_tokens, :vote
   #attr_protected
-  attr_reader :tag_tokens
+  attr_reader :tag_tokens, :vote
 
 
   #########################
@@ -81,6 +82,14 @@ class Project < ActiveRecord::Base
     self.tag_list = ids
   end
 
+  def update_attributes opts={}
+    if opts['vote']
+      User.first.send("#{opts['vote']}_for", self) rescue nil
+      opts.delete 'vote'
+    end
+    logger.debug opts.inspect
+    super opts
+  end
 
   #########################
   # Protected Methods

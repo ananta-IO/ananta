@@ -5,10 +5,24 @@
 		= link_to @user.username, profile_path(@user.profile)
 		\/
 		= link_to @project.name, user_project_path(@user, @project)
-	%p.pull-right
-		= link_to 'Edit', edit_user_project_path(@user, @project)
+		.pull-right
+			.btn-group
+				- if current_user
+					- unless current_user.voted_on? @project
+						.btn
+							= pluralize(@project.plusminus, 'Energizer')
+						= link_to "Energize", user_project_url(@user, @project, project: {vote: :vote}), method: :put, remote: :true, class: 'btn btn-info'
+					- else
+						.btn.btn-success
+							= pluralize(@project.plusminus, 'Energizer')
+						= link_to "Stop Energizing", user_project_url(@user, @project, project: {vote: :unvote}), method: :put, remote: :true, class: 'btn'
+				- else
+					.btn
+						= pluralize(@project.plusminus, 'Energizer')
 .row
 	.span12
+		%p
+		= link_to 'Edit', edit_user_project_path(@user, @project)
 		%p
 			%b Name:
 			= @project.name

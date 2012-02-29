@@ -22,6 +22,9 @@ gem 'acts-as-taggable-on'
 # State Machine
 gem 'state_machine'
 
+# Voting
+gem 'thumbs_up'
+
 # Third-party APIs and services
 gem 'koala'
 gem 'geocoder'
