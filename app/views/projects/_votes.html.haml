@@ -1,0 +1,25 @@
+#votes
+    .btn-toolbar
+        - if current_user
+            .btn-group            
+                - if current_user.voted_for? @project
+                    .btn.btn-success
+                        = pluralize(@project.votes_for, 'Lover')
+                    = link_to user_project_url(@user, @project, project: {vote: :cancel}), method: :put, remote: :true, class: 'btn', rel: 'tooltip', title: 'unlove', 'data-placement' => 'bottom' do
+                        %i.icon-star
+                - else
+                    .btn
+                        = pluralize(@project.votes_for, 'Lover')
+                    = link_to user_project_url(@user, @project, project: {vote: :for}), method: :put, remote: :true, class: 'btn', rel: 'tooltip', title: 'love', 'data-placement' => 'bottom' do
+                        %i.icon-star-empty
+            .btn-group
+                - if current_user.voted_against? @project            
+                    = link_to user_project_url(@user, @project, project: {vote: :cancel}), method: :put, remote: :true, class: 'btn btn-danger', rel: 'tooltip', title: 'unflag', 'data-placement' => 'bottom' do
+                        %i.icon-flag
+                - else
+                    = link_to user_project_url(@user, @project, project: {vote: :against}), method: :put, remote: :true, class: 'btn', rel: 'tooltip', title: 'flag', 'data-placement' => 'bottom' do
+                        %i.icon-flag
+        - else
+            .btn-group 
+                .btn
+                    = pluralize(@project.votes_for, 'Lover')

@@ -39,6 +39,6 @@
 //= require_tree .
 
 $(window).load(function() {
-	$('#flash .alert').show('fade', {}, 1000).delay(10000).slideUp(500);
+	$('#flash .alert').show('fade', {}, 1000).delay(8000).slideUp(500);
 });
 

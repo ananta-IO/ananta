@@ -11,12 +11,11 @@ class Profile < ActiveRecord::Base
   #########################
   # Setup attributes (reader, accessible, protected)
   #########################
-  #attr_reader
-  attr_accessible :name, :bio_tokens, :skill_tokens, :need_tokens
-  #attr_protected
   attr_reader :bio_tokens
   attr_reader :skill_tokens
   attr_reader :need_tokens
+  attr_accessible :name, :bio_tokens, :skill_tokens, :need_tokens
+  #attr_protected
 
 
   #########################
@@ -56,7 +55,7 @@ class Profile < ActiveRecord::Base
 
   # Steal username from user
   def username
-    user.username
+    self.user.username
   end
 
   # Helper for token_autocomplete

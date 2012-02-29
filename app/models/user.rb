@@ -7,7 +7,6 @@ class User < ActiveRecord::Base
 	#########################
 	after_validation	:validate_reserved
 	before_create   	:before_create
-	after_create    	:after_create
 	after_save      	:sync_slug, :if => Proc.new { |user| user.slug != user.profile.slug }
 	
 	# Include default devise modules. Others available are:
@@ -145,16 +144,12 @@ class User < ActiveRecord::Base
 
 	# Build a profile for the new user
 	def before_create
-		# derives a default name from the user's email if no name is passed
+		# Derives a default name from the user's email if no name is passed
 		name = email.split("@").first.split(/[\-\_\.]/).reduce{ |full_name, name| full_name = "#{full_name} #{name}" }.titleize rescue ""
 		build_profile(:name => name)
-	end
 
-	# Sets the default permission level for a new user
-	def after_create
-		# set the permissions of a newly confirmed user
-		self.permissions = 2 # ability model will not work if this is set in new()
-		self.save
+		# Set the permissions for a new user
+		self.permissions = 2 
 	end
 
 	# Sync profile slug with user slug

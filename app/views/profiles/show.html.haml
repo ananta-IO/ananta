@@ -33,7 +33,7 @@
 			%h2 
 				Projects
 				.pull-right 
-					= link_to "New", new_user_project_path(@profile.user)
+					= link_to "New Project", new_user_project_path(@profile.user)
 		%table.table
 			- @profile.user.projects.each do |project|
 				%tr
@@ -41,6 +41,7 @@
 						%h3
 							= link_to project.name, [@profile.user, project]
 							.pull-right
-								= project.plusminus
+								= project.votes_for
+								%i.icon-heart
 						%p
 							= project.state.titleize

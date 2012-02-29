@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
   # Devise after sign in hack     # TODO: make less hacky, maybe update the /users route?
   def after_sign_in_path_for(resource)
-    request.referer == "/users" ? redirect_to(root_url) : super
+    request.referer =~ /\/users/ ? root_url : super
   end
 
   # Helper method for picking allowed keys from a hash of params

@@ -72,6 +72,3 @@ group :test do
   gem 'capybara-webkit'
   gem 'rake' 
 end
-
-
-

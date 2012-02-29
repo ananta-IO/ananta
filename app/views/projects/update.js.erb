@@ -1,1 +1,3 @@
-$('#yield').replaceWith('<%= escape_javascript render("show") %>');
+$('#votes [rel*=tooltip]').tooltip('hide');
+$('#votes').replaceWith('<%= escape_javascript render("votes") %>');
+$('#votes [rel*=tooltip]').tooltip();
