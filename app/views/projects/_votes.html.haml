@@ -6,12 +6,12 @@
                     .btn.btn-success
                         = pluralize(@project.votes_for, 'Lover')
                     = link_to user_project_url(@user, @project, project: {vote: :cancel}), method: :put, remote: :true, class: 'btn', rel: 'tooltip', title: 'unlove', 'data-placement' => 'bottom' do
-                        %i.icon-star
+                        %i.icon-heart
                 - else
                     .btn
                         = pluralize(@project.votes_for, 'Lover')
                     = link_to user_project_url(@user, @project, project: {vote: :for}), method: :put, remote: :true, class: 'btn', rel: 'tooltip', title: 'love', 'data-placement' => 'bottom' do
-                        %i.icon-star-empty
+                        %i.icon-heart.opacity4
             .btn-group
                 - if current_user.voted_against? @project            
                     = link_to user_project_url(@user, @project, project: {vote: :cancel}), method: :put, remote: :true, class: 'btn btn-danger', rel: 'tooltip', title: 'unflag', 'data-placement' => 'bottom' do

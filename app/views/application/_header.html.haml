@@ -22,8 +22,8 @@
 								%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
 									%i.icon-chevron-down
 								%ul.dropdown-menu
-									%li.center
-										= current_user.first_name.possessive
+									%li.nav-header
+										= current_user.username
 									%li
 										= link_to "/users/edit" do
 											%i.icon-cog
