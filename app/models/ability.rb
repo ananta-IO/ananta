@@ -34,7 +34,7 @@ class Ability
 			# Projects
 			can [:create], Project
 			can [:update], Project do |project|
-				project.user == user
+				project.user == user or (params[:project] ? (params[:project][:vote] && params[:project][:current_user_id] && params[:project].size == 2) : false)
 			end
 		end
 
