@@ -23,7 +23,7 @@
 									%i.icon-chevron-down
 								%ul.dropdown-menu
 									%li.nav-header
-										= current_user.username
+										= current_user.username.possessive
 									%li
 										= link_to "/users/edit" do
 											%i.icon-cog
