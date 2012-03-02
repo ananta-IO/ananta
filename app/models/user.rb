@@ -119,6 +119,12 @@ class User < ActiveRecord::Base
 		results = super(default_opts)
 		results
 	end
+
+	# The users who may modify this model
+	def editors
+		editors = [self]
+		editors
+	end
 	
 
 	#########################
@@ -163,8 +169,8 @@ class User < ActiveRecord::Base
 
 	# Check the username format
 	def valid_username_format
-		unless username =~ /^[a-z-]*$/i or username == id.to_s
-			errors.add(:username, "only lowercase letters and hyphens allowed")
+		unless username =~ /^[A-Za-z-]*$/i or username == id.to_s
+			errors.add(:username, "only letters and hyphens allowed")
 		end
 	end
 

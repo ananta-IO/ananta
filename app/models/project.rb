@@ -36,10 +36,9 @@ class Project < ActiveRecord::Base
   #########################
   # Setup attributes (reader, accessible, protected)
   #########################
-  #attr_reader
+  attr_reader :tag_tokens, :vote
   attr_accessible :name, :description, :state_action, :tag_tokens, :vote
   #attr_protected
-  attr_reader :tag_tokens, :vote
 
 
   #########################
@@ -93,6 +92,12 @@ class Project < ActiveRecord::Base
 
     # Super
     super opts
+  end
+
+  # The users who may modify this model
+  def editors
+    editors = [self.user]
+    editors
   end
 
   #########################

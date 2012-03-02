@@ -1,12 +1,19 @@
 # Every user has a profile
 # Store personal data here
 class Profile < ActiveRecord::Base
+  include Gravtastic
 
   #########################
   # Callbacks & Misc method calls (e.g. devise for, acts_as_whatever )
   #########################
+  after_create :add_gravatar
+
   acts_as_taggable_on :bio_tags, :skills, :needs
 
+  gravtastic :secure => false,
+              :filetype => :gif,
+              :default => :identicon,
+              :size => 512
 
   #########################
   # Setup attributes (reader, accessible, protected)
@@ -24,6 +31,10 @@ class Profile < ActiveRecord::Base
   extend FriendlyId
   friendly_id :username, :use => :slugged
   belongs_to :user
+  has_many   :images,   :as => :imageable, :dependent => :destroy
+  has_many   :avatars,  :as => :imageable, :source => :images, :class_name => "Image", :conditions => ["image_type = ?", "avatar"]
+  has_many   :pictures, :as => :imageable, :source => :images, :class_name => "Image", :conditions => ["image_type = ?", "picture"]
+
 
 
   #########################
@@ -58,6 +69,29 @@ class Profile < ActiveRecord::Base
     self.user.username
   end
 
+  # Steal email from user
+  # mostly for Gravtastics benefit
+  def email
+    self.user.email
+  end
+
+  # Override default json representation
+  def as_json(opts={})
+    default_opts = { :methods => [ :avatar ] }
+    default_opts = default_opts.merge! opts unless opts.blank?
+    result = super(default_opts)
+    result
+  end
+
+  # Current avatar Image
+  def avatar
+    if ret = avatars.last
+      return ret
+    else
+      return Image.new(:imageable => self, :image_type => 'avatar')
+    end
+  end
+
   # Helper for token_autocomplete
   def bio_tokens= ids
     self.bio_tag_list = ids
@@ -73,6 +107,15 @@ class Profile < ActiveRecord::Base
     self.need_list = ids
   end
 
+  # The users who may modify this model
+  def editors
+    editors = [self.user]
+    editors
+  end
+
+  def bam
+    add_gravatar
+  end
 
   #########################
   # Protected Methods
@@ -87,7 +130,10 @@ class Profile < ActiveRecord::Base
   #########################
   private
 
-  # Same as Public Instance Methods
+  # Adds a gravatar if no avatar exists
+  def add_gravatar
+    images.create({ remote_image_url: gravatar_url, image_type: 'avatar' }) if avatars.count == 0
+  end
 
 
 end

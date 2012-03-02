@@ -11,7 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120229004133) do
+ActiveRecord::Schema.define(:version => 20120301031058) do
+
+  create_table "images", :force => true do |t|
+    t.integer  "imageable_id"
+    t.string   "imageable_type"
+    t.string   "image"
+    t.string   "image_type",     :default => "picture"
+    t.string   "description"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+  end
 
   create_table "profiles", :force => true do |t|
     t.string   "name"

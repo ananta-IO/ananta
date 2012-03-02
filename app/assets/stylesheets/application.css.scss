@@ -39,6 +39,24 @@ a{
 	}
 }
 
+.alert{
+	a.close{
+		&:active{
+		 	top: -2px;
+		 	right: -21px;
+		 	left: auto;
+		}	
+	}
+}
+
+.popover{
+	width: 100px;
+	height: 100px;
+	.content{
+		padding: 0;
+	}
+}
+
 .navbar{
 	.navbar-inner{
 		@include border-radius(0);

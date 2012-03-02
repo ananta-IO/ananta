@@ -13,6 +13,7 @@ class MyModel < ActiveRecord::Base
   # Setup attributes (reader, accessible, protected)
   #########################
   #attr_reader
+  #attr_accessor
   #attr_accessible
   #attr_protected
 

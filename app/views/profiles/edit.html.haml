@@ -1,17 +1,52 @@
 =content_for :javascripts do
   :javascript
+    //
     window.bio_tags = #{raw  @tags['bio_tags'].to_json}
     window.skills = #{raw  @tags['skills'].to_json}
     window.needs = #{raw  @tags['needs'].to_json}
-
+    //
     window.selected_bio_tags = #{raw @selected_tags['bio_tags'].to_json}
     window.selected_skills = #{raw @selected_tags['skills'].to_json}
     window.selected_needs = #{raw @selected_tags['needs'].to_json}
-
+    //
     $(document).ready(function() {
       $('#profile_bio_tokens').tokenInput(window.bio_tags, { theme : 'facebook', preventDuplicates: true, tokenLimit: 100, prePopulate: window.selected_bio_tags, createTokenFromQuery: true } );
       $('#profile_skill_tokens').tokenInput(window.skills, { theme : 'facebook', preventDuplicates: true, tokenLimit: 100, prePopulate: window.selected_skills, createTokenFromQuery: true } );
       $('#profile_need_tokens').tokenInput(window.needs, { theme : 'facebook', preventDuplicates: true, tokenLimit: 100, prePopulate: window.selected_needs, createTokenFromQuery: true } );
+    });
+    //
+    $(function () {
+      // Initialize the jQuery File Upload widget:
+      $("#profile_avatar").fileupload({
+        namespace: "file_upload_profile_avatar",
+        url: "/images.json",
+        method: "PUT",
+        autoUpload: true,
+        maxFileSize: 5000000,
+        acceptFileTypes: /(\.|\/)(gif|jpg|jpeg|png)$/i,
+        formData: [
+          {
+            name: "imageable_type",
+            value: "Profile"
+          }, {
+            name: "imageable_id",
+            value: #{@profile.id}
+          }, {
+            name: "image_type",
+            value: "avatar"
+          }
+        ],
+        add: function(e, data){
+          $('.new-image').prepend('<img src="/assets/ajax-loader-white-bg.gif" class="loader" />')
+          $('.new-image input').attr('disabled', 'disabled')
+          data.submit();
+        },
+        done: function(e, data){
+          $('.new-image img').remove()
+          $('.new-image input').removeAttr('disabled')
+          $('#profile_avatar > img').attr('src', data.result[0].medium_url)
+        }
+      });
     });
 
 .page-header
@@ -28,6 +63,12 @@
         = simple_form_for @profile, :html => {:class => "form-horizontal"} do |f|
 
           = f.input :name
+          %br
+          = f.input :avatar do
+            #profile_avatar
+              = image_tag(@profile.avatar.image.medium.url)
+              %span.new-image
+                = f.file_field :avatar, name: :image, id: :avatar_file
           %br
           = f.input :bio_tokens, label: "Bio Tags"
           %br

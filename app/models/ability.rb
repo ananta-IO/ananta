@@ -19,13 +19,23 @@ class Ability
 		# Normal (confirmed) users
 		######################################################
 		if user.permissions >= 2
-			# Users
-			can :update, User do |usr|
-				usr == user
-			end
+			# Images
+      can [:create, :read, :modify], Image do |image|
+        # Requires all imageable models to implement an editors method
+        # which returns a list of users who can edit it
+        image.imageable.editors.include? user rescue false
+      end
+
+      can [:modify], Image do |image|
+        if image.imageable_id == nil && image.imageable_type != nil
+          image.imageable_type.classify.constantize.find(params[:image][:imageable_id]).editors.include? user rescue false
+        else
+          false
+        end
+      end
 
 
-			# Profiles
+      # Profiles
 			can [:update], Profile do |profile|
 				profile.user == user
 			end
@@ -34,7 +44,16 @@ class Ability
 			# Projects
 			can [:create], Project
 			can [:update], Project do |project|
-				project.user == user or (params[:project] ? (params[:project][:vote] && params[:project][:current_user_id] && params[:project].size == 2) : false)
+				# The user owns the project
+				project.editors.include? user or 
+					# The user is voting and only voting. current_user is filed in by the controller.
+					(params[:project] ? (params[:project][:vote] && params[:project][:current_user_id] && params[:project].size == 2) : false)
+			end
+
+
+			# Users
+			can :update, User do |usr|
+				usr == user
 			end
 		end
 
@@ -47,7 +66,14 @@ class Ability
 			can :read, Project
 		end
 
+		# Users
 		cannot :destroy, User
+
+		# Images
+    can [:create], Image do |image|
+      image.imageable_id == nil rescue false
+    end
+
 
 		# The first argument to `can` is the action you are giving the user permission to do.
 		# If you pass :manage it will apply to every action. Other common actions here are

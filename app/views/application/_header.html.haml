@@ -16,8 +16,8 @@
 					%ul.nav.pull-right
 						-if current_user
 							%li
-								= link_to current_user.profile do
-									%i.icon-user  
+								= link_to current_user.profile, rel: :tooltip, 'data-placement' => 'bottom', 'data-delay' => 300, 'data-original-title' => raw( "<img src='#{current_user.profile.avatar.image.small.url}' alt='#{current_user.username}' width=32 height=32 />" ) do
+									%i.icon-user
 							%li.dropdown
 								%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
 									%i.icon-chevron-down
@@ -28,13 +28,26 @@
 										= link_to "/users/edit" do
 											%i.icon-cog
 											settings
-									%li
-										%hr
+									%li.divider
 									%li
 										= link_to "logout", "/logout"
 						-else
-							%li
-								= link_to "login", "/login"
+							%li.dropdown
+								%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+									login
+								%ul.dropdown-menu
+									= form_for(User.new, :url => user_session_path) do |f|
+										%li.nav-header
+											= f.text_field :login, class: 'span2', placeholder: 'username or email', autofocus: true
+										%li.nav-header
+											= f.password_field :password, class: 'span2', placeholder: 'password'
+										%li.center.right
+											= f.submit :login, class: 'btn btn-info'
+									%li.divider
+									%li
+										= link_to "Sign Up", "users/sign_up"
+									%li
+										= link_to "Forgot Password", "users/password/new"
 			-# Center
 			%ul.nav.center
 				%li
