@@ -64,7 +64,7 @@
 
           = f.input :name
           %br
-          = f.input :avatar do
+          = f.input :avatar, hint: raw('avatar will change as soon as you choose a file or <br/> drag an image onto the screen') do
             #profile_avatar
               = image_tag(@profile.avatar.image.medium.url)
               %span.new-image
