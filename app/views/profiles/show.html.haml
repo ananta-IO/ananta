@@ -3,12 +3,14 @@
 .page-header
 	%h1 
 		= @profile.name
+		-if can? :edit, @profile
+			.pull-right 
+				= link_to 'Edit Profile', edit_profile_path(@profile)
 .row
 	.span4
-		.sub-header 
-			%h2.inline 
-				Profile
-			= link_to 'Edit', edit_profile_path(@profile)
+		.row
+			.span4
+				= image_tag(@profile.avatar.image.medium.url)
 		%br
 		.row
 			.span1
@@ -16,24 +18,28 @@
 			.span3
 				%p
 					= @profile.bio_tag_list
+					&nbsp;
 		.row
 			.span1
 				%h4 Skills
 			.span3
 				%p
 					= @profile.skill_list
+					&nbsp;
 		.row
 			.span1
 				%h4 Needs
 			.span3
 				%p
 					= @profile.need_list
+					&nbsp;
 	.span8
 		.sub-header 
 			%h2 
 				Projects
-				.pull-right 
-					= link_to "New Project", new_user_project_path(@profile.user)
+				-if can? :edit, @profile
+					.pull-right 
+						= link_to "New Project", new_user_project_path(@profile.user)
 		%table.table
 			- @profile.user.projects.each do |project|
 				%tr

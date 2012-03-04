@@ -42,6 +42,9 @@ class User < ActiveRecord::Base
 	# has_many 		:joined_projects, :class_name => 'Project', :through => :project_memberships
 	# has_many 		:team_memberships                    		# TODO: ?
 	# has_many 		:teams, :through => :team_memberships		# TODO: ?
+	has_many   		:images
+	has_many   		:questions
+	has_many   		:answers
 
 	accepts_nested_attributes_for :profile
 

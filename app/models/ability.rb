@@ -20,22 +20,25 @@ class Ability
 		######################################################
 		if user.permissions >= 2
 			# Images
-      can [:create, :read, :modify], Image do |image|
-        # Requires all imageable models to implement an editors method
-        # which returns a list of users who can edit it
-        image.imageable.editors.include? user rescue false
-      end
+			can [:create], Image do |image|
+				# Requires all imageable models to implement an editors method
+				# which returns a list of users who can edit it
+				image.imageable.editors.include? user rescue false
+			end
 
-      can [:modify], Image do |image|
-        if image.imageable_id == nil && image.imageable_type != nil
-          image.imageable_type.classify.constantize.find(params[:image][:imageable_id]).editors.include? user rescue false
-        else
-          false
-        end
-      end
+			can [:update], Image do |image|
+				if image.user_id 
+					user.id == image.user_id 
+				elsif image.imageable
+					image.imageable.editors.include? user rescue false	
+				elsif image.imageable_id == nil && image.imageable_type != nil
+					image.imageable_type.classify.constantize.find(params[:image][:imageable_id]).editors.include? user rescue false
+				else
+					false
+				end
+			end
 
-
-      # Profiles
+			# Profiles
 			can [:update], Profile do |profile|
 				profile.user == user
 			end
@@ -68,11 +71,6 @@ class Ability
 
 		# Users
 		cannot :destroy, User
-
-		# Images
-    can [:create], Image do |image|
-      image.imageable_id == nil rescue false
-    end
 
 
 		# The first argument to `can` is the action you are giving the user permission to do.

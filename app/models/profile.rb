@@ -85,11 +85,8 @@ class Profile < ActiveRecord::Base
 
   # Current avatar Image
   def avatar
-    if ret = avatars.last
-      return ret
-    else
-      return Image.new(:imageable => self, :image_type => 'avatar')
-    end
+    current_avatar = avatars.last
+    current_avatar ? current_avatar : Image.new(:imageable => self, :image_type => 'avatar')
   end
 
   # Helper for token_autocomplete
@@ -132,7 +129,7 @@ class Profile < ActiveRecord::Base
 
   # Adds a gravatar if no avatar exists
   def add_gravatar
-    images.create({ remote_image_url: gravatar_url, image_type: 'avatar' }) if avatars.count == 0
+    images.create({ remote_image_url: gravatar_url, image_type: 'avatar', user_id: user.id }) if avatars.count == 0
   end
 
 

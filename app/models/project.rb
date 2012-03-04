@@ -37,7 +37,7 @@ class Project < ActiveRecord::Base
   # Setup attributes (reader, accessible, protected)
   #########################
   attr_reader :tag_tokens, :vote
-  attr_accessible :name, :description, :state_action, :tag_tokens, :vote
+  attr_accessible :name, :description, :state_event, :tag_tokens, :vote
   #attr_protected
 
 
@@ -47,6 +47,10 @@ class Project < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, :use => :slugged
   belongs_to :user
+  has_many   :images,   :as => :imageable, :dependent => :destroy
+  has_many   :avatars,  :as => :imageable, :source => :images, :class_name => "Image", :conditions => ["image_type = ?", "avatar"]
+  has_many   :pictures, :as => :imageable, :source => :images, :class_name => "Image", :conditions => ["image_type = ?", "picture"]
+
 
 
   #########################
@@ -76,6 +80,12 @@ class Project < ActiveRecord::Base
   # Public Instance Methods ( def method_name )
   #########################
 
+  # Current avatar Image
+  def avatar
+    current_avatar = avatars.last
+    current_avatar ? current_avatar : Image.new(:imageable => self, :image_type => 'avatar')
+  end
+  
   # Helper for token_autocomplete
   def tag_tokens= ids
     self.tag_list = ids

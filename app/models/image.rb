@@ -14,18 +14,20 @@ class Image < ActiveRecord::Base
   # Setup attributes (reader, accessible, protected)
   #########################
   #attr_reader
-  attr_accessible :image, :remote_image_url, :image_type, :imageable, :imageable_id, :imageable_type, :description, :latitude, :longitude
+  attr_accessible :image, :remote_image_url, :image_type, :user_id, :imageable, :imageable_id, :imageable_type, :description, :latitude, :longitude
   #attr_protected
 
   #########################
   # Associations
   #########################
-  belongs_to :imageable, :polymorphic => true
+  belongs_to :user # The uploader/owner
+  belongs_to :imageable, :polymorphic => true # The thing the image relates to -- Profiles, Projects, etc
   mount_uploader :image, ImageUploader
 
   #########################
   # Validations
   #########################
+  #validates :user_id, :presence => true
   #validates :imageable_id, :presence => true
   validates :imageable_type,
             :presence => true

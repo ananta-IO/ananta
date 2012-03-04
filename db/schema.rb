@@ -14,6 +14,7 @@
 ActiveRecord::Schema.define(:version => 20120301031058) do
 
   create_table "images", :force => true do |t|
+    t.integer  "user_id"
     t.integer  "imageable_id"
     t.string   "imageable_type"
     t.string   "image"
@@ -24,6 +25,11 @@ ActiveRecord::Schema.define(:version => 20120301031058) do
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
   end
+
+  add_index "images", ["image_type"], :name => "index_images_on_image_type"
+  add_index "images", ["imageable_id", "imageable_type"], :name => "index_images_on_imageable_id_and_imageable_type"
+  add_index "images", ["latitude", "longitude"], :name => "index_images_on_latitude_and_longitude"
+  add_index "images", ["user_id"], :name => "index_images_on_user_id"
 
   create_table "profiles", :force => true do |t|
     t.string   "name"
