@@ -26,15 +26,17 @@
 										= current_user.username.possessive
 									%li
 										= link_to "/users/edit" do
-											%i.icon-cog
+											%i.icon-cogs
 											settings
 									%li.divider
 									%li
-										= link_to "logout", "/logout"
+										= link_to "/logout" do
+											%i.icon-signout
+											logout
 						-else
 							%li.dropdown
-								%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-									login
+								%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", rel: :tooltip, 'data-placement' => 'bottom', 'data-delay' => 500, 'data-original-title' => 'login'}
+									%i.icon-signin
 								%ul.dropdown-menu
 									= form_for(User.new, :url => user_session_path) do |f|
 										%li.nav-header

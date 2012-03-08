@@ -4,6 +4,8 @@ gem 'rails', '3.2.1'
 
 gem 'pg'
 
+gem 'thin'
+
 # Authentications & Permissions
 gem 'devise'
 gem 'omniauth-facebook'
@@ -41,7 +43,7 @@ gem 'jbuilder'
 gem 'jquery-rails'
 gem 'haml-rails'
 gem 'simple_form'
-gem "possessive" 
+gem 'possessive' 
 
 
 # Gems used only for assets and not required

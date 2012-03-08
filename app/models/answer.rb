@@ -1,7 +1,7 @@
-# One or two line description of what the model represents
+# An answer to a question may be submitted by anyone, logged in or not 
+# generally takes the form or Yes No or Don't Care, but may be elaborated on
 #
-#
-class MyModel < ActiveRecord::Base
+class Answer < ActiveRecord::Base
 
   #########################
   # Callbacks & Misc method calls (e.g. devise for, acts_as_whatever )
@@ -20,9 +20,8 @@ class MyModel < ActiveRecord::Base
   #########################
   # Associations
   #########################
-  #belongs_to
-  #has_one
-  #has_many
+  belongs_to :user 
+  belongs_to :question
 
 
   #########################

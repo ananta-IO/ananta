@@ -5,9 +5,13 @@
 		.tabbable.tabs-left
 			%ul.nav.nav-tabs
 				%li
-					= link_to "Edit Profile", edit_profile_path(@user.profile)
+					= link_to edit_profile_path(@user.profile) do
+						%i.icon-user
+						Edit Profile
 				%li.active
-					= link_to "Edit Account", "/users/edit"
+					= link_to "/users/edit" do
+						%i.icon-key
+						Edit Account
 			.tab-content
 				= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => "form-horizontal" }) do |f|
 					= f.input :email

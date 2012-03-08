@@ -15,7 +15,7 @@ class Image < ActiveRecord::Base
   #########################
   #attr_reader
   attr_accessible :image, :remote_image_url, :image_type, :user_id, :imageable, :imageable_id, :imageable_type, :description, :latitude, :longitude
-  #attr_protected
+
 
   #########################
   # Associations
@@ -23,6 +23,7 @@ class Image < ActiveRecord::Base
   belongs_to :user # The uploader/owner
   belongs_to :imageable, :polymorphic => true # The thing the image relates to -- Profiles, Projects, etc
   mount_uploader :image, ImageUploader
+
 
   #########################
   # Validations

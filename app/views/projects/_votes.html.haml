@@ -3,8 +3,8 @@
         - if current_user
             .btn-group            
                 - if current_user.voted_for? @project
-                    = link_to pluralize(@project.votes_for, 'Lover'), "#", class: 'btn btn-success', rel: :tooltip, title: 'including you!', 'data-placement' => 'bottom'
-                    = link_to user_project_url(@user, @project, project: {vote: :cancel}), method: :put, remote: :true, class: 'btn', rel: :tooltip, title: 'unlove', 'data-placement' => 'bottom' do
+                    = link_to pluralize(@project.votes_for, 'Lover'), "#", class: 'btn', rel: :tooltip, title: 'including you!', 'data-placement' => 'bottom'
+                    = link_to user_project_url(@user, @project, project: {vote: :cancel}), method: :put, remote: :true, class: 'btn btn-success', rel: :tooltip, title: 'unlove', 'data-placement' => 'bottom' do
                         %i.icon-heart
                 - else
                     .btn
@@ -13,11 +13,11 @@
                         %i.icon-heart.opacity4
             .btn-group
                 - if current_user.voted_against? @project            
-                    = link_to user_project_url(@user, @project, project: {vote: :cancel}), method: :put, remote: :true, class: 'btn btn-danger', rel: 'tooltip', title: 'unflag', 'data-placement' => 'bottom' do
+                    = link_to user_project_url(@user, @project, project: {vote: :cancel}), method: :put, remote: :true, class: 'btn btn-warning', rel: 'tooltip', title: 'unflag', 'data-placement' => 'bottom' do
                         %i.icon-flag
                 - else
                     = link_to user_project_url(@user, @project, project: {vote: :against}), method: :put, remote: :true, class: 'btn', rel: 'tooltip', title: 'flag', 'data-placement' => 'bottom' do
-                        %i.icon-flag
+                        %i.icon-flag.opacity4
         - else
             .btn-group 
                 .btn

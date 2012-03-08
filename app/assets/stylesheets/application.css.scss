@@ -16,6 +16,7 @@
 @import "jquery-ui/jquery-ui-1.8.16.custom.css";
 @import "bootstrap";
 @import "bootstrap-responsive";
+@import "font-awesome";
 @import "token-input-facebook"; // TODO: merge into application css and restyle
 
 @include sticky-footer(50px, "#wrapper", "#layout_footer", "#footer");
@@ -37,6 +38,12 @@ a{
 		top: 1px;
 		left: 1px;
 	}
+}
+
+// hack to disable bootstrap default icons
+[class^="icon-"], [class*=" icon-"] {
+	background-image: none;
+	vertical-align: baseline;
 }
 
 .alert{
@@ -76,17 +83,17 @@ a{
 			color: $color-highlight;
 			i{
 				opacity:1;
-				visibility: visible;
 			}
 		}
 		i{
+			color: $color-base;
+			font-size: 16px;
 			@include transition-property(all);
 			@include transition-duration(0.5s);
 			@include transition-timing-function(ease-in);
 			opacity: 0;
-			visibility: hidden;
-			margin-top: 7px;
-			margin-left: 5px;
+			margin-top: 6px;
+			margin-left: 0px;
 		}
 	}
 	.nav{
@@ -95,6 +102,9 @@ a{
 				border-top-color: $color-base;
 			}
 			&.open{
+				.dropdown-toggle{
+					color: $color-base
+				}
 				.caret{
 				 	border-top-color: $color-base;
 				}	

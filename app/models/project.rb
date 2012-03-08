@@ -38,7 +38,6 @@ class Project < ActiveRecord::Base
   #########################
   attr_reader :tag_tokens, :vote
   attr_accessible :name, :description, :state_event, :tag_tokens, :vote
-  #attr_protected
 
 
   #########################

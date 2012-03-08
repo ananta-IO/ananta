@@ -19,6 +19,8 @@ Great! This page is for you. Read on.
 
 ### Setup
 
+NEWBS. [Read this if you are new to Rails development and need to get up and running for the first time](http://railsapps.github.com/installing-rails.html)
+
 1. [Install RVM](http://beginrescueend.com/rvm/)
 
 2. [Install & Config PostgeSQL](http://blog.willj.net/2011/05/31/setting-up-postgresql-for-ruby-on-rails-development-on-os-x/)

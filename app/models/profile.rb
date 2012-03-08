@@ -22,7 +22,6 @@ class Profile < ActiveRecord::Base
   attr_reader :skill_tokens
   attr_reader :need_tokens
   attr_accessible :name, :bio_tokens, :skill_tokens, :need_tokens
-  #attr_protected
 
 
   #########################

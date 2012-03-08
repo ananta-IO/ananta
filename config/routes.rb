@@ -1,5 +1,9 @@
 Ananta::Application.routes.draw do
 
+	resources :questions do
+		resources :answers
+	end
+
 	resources :images, :only => [:create, :update, :destroy]
 
 	devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }

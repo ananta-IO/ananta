@@ -25,9 +25,8 @@ class User < ActiveRecord::Base
 	# Setup attributes (reader, accessible, protected)
 	#########################
 	#attr_reader
-	attr_accessible :username, :login, :email, :password, :password_confirmation, :remember_me, :facebook_id
 	attr_accessor :login
-	#attr_protected
+	attr_accessible :username, :login, :email, :password, :password_confirmation, :remember_me, :facebook_id
 
 
 	#########################

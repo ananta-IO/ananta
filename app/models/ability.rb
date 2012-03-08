@@ -65,12 +65,20 @@ class Ability
 		# Guest users & unconfirmed users
 		######################################################
 		if user.permissions >= 0
+			# can :read, Answer
 			can :read, Profile
 			can :read, Project
+			# can :read, Question
 		end
 
 		# Users
 		cannot :destroy, User
+
+		# Questions
+		# No one can kill a question
+		# cannot [:update], Question do |question|
+		#	params[:question][:state_event] == 'kill' rescue false
+		# end
 
 
 		# The first argument to `can` is the action you are giving the user permission to do.
