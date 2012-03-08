@@ -47,10 +47,10 @@ class Question < ActiveRecord::Base
   #########################
   # Validations
   #########################
-  validates :question, :presence => :true, :length => { :in => 10..140 }
-  validates :questionable_id, :allow_blank => true
-  validates :questionable_type, :allow_blank => true
-  validates :user_id, :allow_blank => true
+  validates :question, :presence => true, :length => { :in => 1..140 }, :uniqueness => {:scope => [:questionable_id, :questionable_type]}
+  # validates :questionable_id, :allow_blank => true
+  # validates :questionable_type, :allow_blank => true
+  # validates :user_id, :allow_blank => true
 
   #########################
   # Scopes

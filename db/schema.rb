@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120301031058) do
+ActiveRecord::Schema.define(:version => 20120308010335) do
 
   create_table "images", :force => true do |t|
     t.integer  "user_id"
@@ -56,6 +56,19 @@ ActiveRecord::Schema.define(:version => 20120301031058) do
   add_index "projects", ["slug"], :name => "index_projects_on_slug", :unique => true
   add_index "projects", ["state"], :name => "index_projects_on_state"
   add_index "projects", ["user_id"], :name => "index_projects_on_user_id"
+
+  create_table "questions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "questionable_id"
+    t.string   "questionable_type"
+    t.string   "question"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "questions", ["question"], :name => "index_questions_on_question"
+  add_index "questions", ["questionable_id", "questionable_type"], :name => "index_questions_on_questionable_id_and_questionable_type"
+  add_index "questions", ["user_id"], :name => "index_questions_on_user_id"
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false

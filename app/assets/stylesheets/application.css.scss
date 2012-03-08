@@ -139,6 +139,13 @@ a{
 			@media(max-width: 979px){
 				margin: 5px auto 0;
 			}
+			a:hover{
+				// background-color: rgba($color-base, 0.2);
+			}
+			a.active{
+				background-color: rgba($color-base, 0.2);
+				color: $color-base;	
+			}
 		}
 	}
 	.dropdown-menu{
@@ -175,5 +182,14 @@ a{
 				}
 			}
 		}
+	}
+}
+
+#marq{
+	background-color: $color-border;
+	@include box-shadow(rgba($color-base, 0.2) 0 0 3px 1px inset);
+	.container{
+		display: none;
+		padding-top: 20px;
 	}
 }
