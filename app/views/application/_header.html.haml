@@ -1,4 +1,20 @@
-= render 'marq/marq'
+=content_for :javascripts do
+	:javascript
+		$(function() {
+			// Add marq to view
+			Ananta.router = new Ananta.Routers.MarqRouter();
+			Backbone.history.start();
+		});
+		// Open and close marq
+		$('#marq_toggle a').click(function() {
+			$('#marq_toggle a').toggleClass('active');
+			$('#marq .container').slideToggle('slow');
+		});
+
+-# Marq slide down container
+#marq
+
+-# Top Nav
 .navbar
 	.navbar-inner
 		.container  

@@ -78,7 +78,7 @@ a{
 		@include transition-duration(0.5s);
 		@include transition-timing-function(ease-in);
 		letter-spacing: 0.05em;
-		color: $color-base;
+		color: #999;
 		&:hover{
 			color: $color-highlight;
 			i{
@@ -191,7 +191,7 @@ a{
 	@include box-shadow(rgba($color-base, 0.2) 0 0 3px 1px inset);
 	.container{
 		display: none;
-		padding-top: 20px;
+		padding: 20px 0;
 		#question_question{
 			@media (max-width: 979px){
 			 	width: 100%;
