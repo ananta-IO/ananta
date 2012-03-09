@@ -6,7 +6,21 @@ class Answer < ActiveRecord::Base
   #########################
   # Callbacks & Misc method calls (e.g. devise for, acts_as_whatever )
   #########################
-  #acts_as_...
+
+  # Answer state machine
+  state_machine :initial => :unanswered do
+    event :ans_yes do
+      transition :unanswered => :yes
+    end
+
+    event :ans_no do
+      transition :unanswered => :no
+    end
+
+    event :ans_dont_care do
+      transition :unanswered => :dont_care
+    end
+  end
 
 
   #########################
@@ -27,7 +41,7 @@ class Answer < ActiveRecord::Base
   #########################
   # Validations
   #########################
-  #validates :attribute  # use validates syntax instead of validates_uniqueness_of...
+  validates :user_id, :pressence => true
 
 
   #########################

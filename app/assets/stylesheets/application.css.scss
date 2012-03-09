@@ -143,7 +143,8 @@ a{
 				// background-color: rgba($color-base, 0.2);
 			}
 			a.active{
-				background-color: rgba($color-base, 0.2);
+				background-color: #bbb;
+				// background-color: rgba($color-base, 0.2);
 				color: $color-base;	
 			}
 		}
@@ -186,10 +187,15 @@ a{
 }
 
 #marq{
-	background-color: $color-border;
+	background-color: #ccc;
 	@include box-shadow(rgba($color-base, 0.2) 0 0 3px 1px inset);
 	.container{
 		display: none;
 		padding-top: 20px;
+		#question_question{
+			@media (max-width: 979px){
+			 	width: 100%;
+			}	
+		}
 	}
 }

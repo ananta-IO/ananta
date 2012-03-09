@@ -1,4 +1,4 @@
-# A question must be binary (yes, no) and can be asked by anyone, logged in or not.
+# A question must be binary (yes, no)
 # It can be answered with Yes, No, Don't Care. 
 # The questions with more Yes, No answers and fewer Don't Cares get displayed more.
 class Question < ActiveRecord::Base
@@ -50,7 +50,7 @@ class Question < ActiveRecord::Base
   validates :question, :presence => true, :length => { :in => 1..140 }, :uniqueness => {:scope => [:questionable_id, :questionable_type]}
   # validates :questionable_id, :allow_blank => true
   # validates :questionable_type, :allow_blank => true
-  # validates :user_id, :allow_blank => true
+  validates :user_id, :presence => true
 
   #########################
   # Scopes

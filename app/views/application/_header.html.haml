@@ -1,30 +1,4 @@
-=content_for :javascripts do
-	:javascript
-		$('#marq_toggle a').click(function() {
-			$('#marq_toggle a').toggleClass('active');
-			$('#marq .container').slideToggle('slow', function() {
-				// Animation complete.
-			});
-		});
-
-#marq
-	.container
-		= form_for(Question.new, :url => new_question_path, :html => {:class => 'form-inline'}) do |f|
-			.row
-				.span11
-					= f.text_field :question, class: 'span12', placeholder: 'Ask a yes or no question in 140 characters or less'
-				.span1
-					= f.submit :ask, class: 'btn btn-primary pull-right'
-		.row
-			.span4
-				.well
-					Q1
-			.span4
-				.well
-					Q2
-			.span4
-				.well
-					Q3
+= render 'marq/marq'
 .navbar
 	.navbar-inner
 		.container  

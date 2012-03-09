@@ -3,7 +3,7 @@
 .page-header
 	%h1 
 		.pull-right
-			= render "votes"
+			= render "vote"
 		= link_to @user.username, profile_path(@user.profile), rel: :tooltip, title: 'creator', 'data-placement' => 'bottom'
 		\/
 		= link_to @project.name, user_project_path(@user, @project), rel: :tooltip, title: 'project', 'data-placement' => 'bottom'

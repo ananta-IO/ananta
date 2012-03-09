@@ -11,7 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120308010335) do
+ActiveRecord::Schema.define(:version => 20120308235743) do
+
+  create_table "answers", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "question_id"
+    t.string   "state"
+    t.string   "comment"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
+  add_index "answers", ["state"], :name => "index_answers_on_state"
+  add_index "answers", ["user_id"], :name => "index_answers_on_user_id"
 
   create_table "images", :force => true do |t|
     t.integer  "user_id"
@@ -62,12 +75,14 @@ ActiveRecord::Schema.define(:version => 20120308010335) do
     t.integer  "questionable_id"
     t.string   "questionable_type"
     t.string   "question"
+    t.string   "state"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
   end
 
   add_index "questions", ["question"], :name => "index_questions_on_question"
   add_index "questions", ["questionable_id", "questionable_type"], :name => "index_questions_on_questionable_id_and_questionable_type"
+  add_index "questions", ["state"], :name => "index_questions_on_state"
   add_index "questions", ["user_id"], :name => "index_questions_on_user_id"
 
   create_table "sessions", :force => true do |t|
