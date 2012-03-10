@@ -12,14 +12,17 @@ class Answer < ActiveRecord::Base
     event :ans_yes do
       transition :unanswered => :yes
     end
+    after_transition :on => :ans_yes, :do => :increment_yeses
 
     event :ans_no do
       transition :unanswered => :no
     end
+    after_transition :on => :ans_no, :do => :increment_noes
 
     event :ans_dont_care do
       transition :unanswered => :dont_care
     end
+    after_transition :on => :ans_dont_care, :do => :increment_dont_cares
   end
 
 
@@ -28,7 +31,7 @@ class Answer < ActiveRecord::Base
   #########################
   #attr_reader
   #attr_accessor
-  #attr_accessible
+  attr_accessible :state_event, :comment
 
 
   #########################
@@ -41,7 +44,9 @@ class Answer < ActiveRecord::Base
   #########################
   # Validations
   #########################
-  validates :user_id, :pressence => true
+  validates :user_id, :presence => true
+  validates :question_id, :presence => true
+  validates :comment, :length => { :in => 1..140 }, :allow_blank => true
 
 
   #########################
@@ -77,7 +82,23 @@ class Answer < ActiveRecord::Base
   #########################
   protected
 
-  # Same as Public Instance Methods
+  # Increment the question yes counters
+  def increment_yeses
+    Question.increment_counter(:yeses, self.question_id)
+    true
+  end
+
+  # Increment the question no counters
+  def increment_noes
+    Question.increment_counter(:noes, self.question_id)
+    true
+  end
+
+  # Increment the question yes counters
+  def increment_dont_cares
+    Question.increment_counter(:dont_cares, self.question_id)
+    true
+  end
 
 
   #########################

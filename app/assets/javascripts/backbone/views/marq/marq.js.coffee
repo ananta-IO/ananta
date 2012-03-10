@@ -6,18 +6,13 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 	className: 'container'
 
 	initialize: (options) ->
-		_.bindAll(@, 'render', 'addAllQuestions', 'addQuestion')
-		@questions = options.questions
+		_.bindAll(@, 'render', 'renderQuestion')
 
 	render: ->
-		console.log @el
-		$(@el).html(@template( questions: @questions.toJSON() ))
-		@addAllQuestions()
+		$(@el).html(@template())
+		@collection.each(@renderQuestion)
 		@
-
-	addAllQuestions: ->
-		@questions.each(@addQuestion)
-
-	addQuestion: (question) ->
-		view = new Ananta.Views.Question.MiniQuestionView({model : question})
-		@$("#questions").prepend(view.render().el)
+		
+	renderQuestion: (question) ->
+		view = new Ananta.Views.Marq.QuestionView({model : question})
+		@$(".questions").prepend(view.render().el)

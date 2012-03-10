@@ -11,6 +11,10 @@ class ProjectsController < InheritedResources::Base
 
 	protected
 
+	def collection
+		@projects ||= end_of_association_chain.page(params[:page]).per(10)
+	end
+
 	def current_user_to_params
 		params[:project] ||= {}
 		params[:project][:current_user_id] = current_user.id 

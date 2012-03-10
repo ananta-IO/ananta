@@ -65,10 +65,10 @@ class Ability
 		# Guest users & unconfirmed users
 		######################################################
 		if user.permissions >= 0
-			# can :read, Answer
+			can :read, Answer
 			can :read, Profile
 			can :read, Project
-			# can :read, Question
+			can :read, Question
 		end
 
 		# Users

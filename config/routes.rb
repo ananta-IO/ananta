@@ -1,7 +1,8 @@
 Ananta::Application.routes.draw do
 
-	resources :questions do
-		resources :answers
+	resources :questions, :only => [:index, :create, :update] do
+		get 'page/:page', :action => :index, :on => :collection
+		resources :answers, :only => [:index, :create, :update]
 	end
 
 	resources :images, :only => [:create, :update, :destroy]
@@ -18,7 +19,9 @@ Ananta::Application.routes.draw do
 
 	root :to => 'pages#home'
 
-	resources :projects, :only => [:index]
+	resources :projects, :only => [:index] do
+		get 'page/:page', :action => :index, :on => :collection
+	end
 	resources :profiles, :path => ''
 	resources :users, :path => '', :only => [] do
 		resources :projects, :path => '', :except => [:index]

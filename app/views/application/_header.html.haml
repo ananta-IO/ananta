@@ -51,7 +51,7 @@
 											logout
 						-else
 							%li.dropdown
-								%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", rel: :tooltip, 'data-placement' => 'bottom', 'data-delay' => 500, 'data-original-title' => 'login'}
+								%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", rel: :tooltip, 'data-placement' => 'bottom', 'data-original-title' => 'login'}
 									%i.icon-signin
 								%ul.dropdown-menu
 									= form_for(User.new, :url => user_session_path) do |f|

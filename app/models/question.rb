@@ -31,26 +31,24 @@ class Question < ActiveRecord::Base
   #########################
   #attr_reader
   #attr_accessor
-  attr_accessible :question, :vote, :state_event
+  attr_accessible :question, :questionable_url, :on => :create
+  attr_accessible :vote, :state_event
 
 
   #########################
   # Associations
   #########################
-  extend FriendlyId
-  friendly_id :question, :use => :slugged
   belongs_to :user 
-  belongs_to :questionable, :polymorphic => true
   has_many :answers
 
 
   #########################
   # Validations
   #########################
-  validates :question, :presence => true, :length => { :in => 1..140 }, :uniqueness => {:scope => [:questionable_id, :questionable_type]}
-  # validates :questionable_id, :allow_blank => true
-  # validates :questionable_type, :allow_blank => true
   validates :user_id, :presence => true
+  # validates :questionable_url, :presence => true
+  validates :question, :presence => true, :length => { :in => 1..140 }, :uniqueness => {:scope => [:questionable_url]}
+  
 
   #########################
   # Scopes

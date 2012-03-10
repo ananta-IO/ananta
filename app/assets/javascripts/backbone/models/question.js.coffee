@@ -3,4 +3,7 @@ class Ananta.Models.Question extends Backbone.Model
 
 class Ananta.Collections.QuestionsCollection extends Backbone.Collection
 	model: Ananta.Models.Question
-	url: '/questions'
+	initialize: (models, options) ->
+		if options then @query = options.query else @query = ''
+	url: ->
+		"/questions#{@query}"

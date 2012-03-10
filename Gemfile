@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.1'
+gem 'rails', '3.2.2'
 
 gem 'pg'
 
@@ -26,6 +26,9 @@ gem 'state_machine'
 
 # Voting
 gem 'thumbs_up'
+
+# Pagination
+gem 'kaminari'
 
 # Images and Uploads
 gem 'carrierwave'
