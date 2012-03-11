@@ -1,2 +1,4 @@
-.well
-	= @question
+.question
+	.outer
+		.inner
+			= @question

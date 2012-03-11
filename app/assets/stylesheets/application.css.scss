@@ -236,5 +236,25 @@ a{
 				}
 			}
 		}
+		.answer{
+			.questions{
+				.question{
+					background-color: darken($color-background-hover, 2%); 
+					border: 1px solid darken($color-background-hover, 10%);
+					@include box-shadow((#fff 0px 1px 0px, darken($color-background-hover, 5%) 0px 0px 17px 0 inset));
+					@include border-radius(2px);
+					.outer{
+						margin: 5px;
+						.inner{
+							border: 1px solid darken($color-background-hover, 10%);
+							background-color: #fff;
+							@include border-radius(2px);
+							position: relative;
+							padding: 10px;
+						}
+					}
+				}
+			}
+		}
 	}
 }
