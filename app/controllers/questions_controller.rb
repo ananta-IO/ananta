@@ -12,7 +12,7 @@ class QuestionsController < InheritedResources::Base
 	protected
 
 	def collection
-		@questions ||= end_of_association_chain.
+		@questions ||= end_of_association_chain.published.
 		page( params[:page] ).
 		per( ((1..100) === params[:per].to_i ? params[:per] : 10) )
 	end

@@ -16,6 +16,7 @@
 //= require underscore
 //= require sugar-1.1.3.min.js
 //= require backbone
+//= require backbone-relational
 //= require backbone_rails_sync
 //= require backbone_datalink
 //= require bootstrap

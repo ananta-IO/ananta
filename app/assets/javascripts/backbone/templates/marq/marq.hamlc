@@ -1,11 +1,19 @@
-.row
-	.span4
-		%h2
+.row.ask
+	.span2
+		%h1
 			Ask
-		.row.ask
-			.span4
-				.well
-	.span8
-		%h2
+	.span10
+		.row
+			%form.span10{:name => "question"}
+				.outer
+					.inner
+						%span.counter.pull-right 140
+						%input.question{:class => "string", :type => "text", :name => "question", :maxlength => "140", :placeholder => "Ask a yes or no question in 140 characters or less"}
+						%button.btn.btn-large.btn-info{:name => "submit", :type => "submit"}
+							%span Ask
+.row.answer
+	.span2
+		%h1
 			Answer
+	.span10
 		.row.questions

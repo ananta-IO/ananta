@@ -5,6 +5,10 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 
 	className: 'container'
 
+	events:
+		'keyup .ask input.question'              : 'questionCharCount'
+		'change .ask input.question'             : 'questionCharCount'
+
 	initialize: (options) ->
 		_.bindAll(@, 'render', 'renderQuestion')
 
@@ -16,3 +20,8 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 	renderQuestion: (question) ->
 		view = new Ananta.Views.Marq.QuestionView({model : question})
 		@$(".questions").prepend(view.render().el)
+
+	questionCharCount: ->
+		count = @$(".ask input.question").val().length
+		available = 140 - count
+		@$(".ask .counter").html(available)

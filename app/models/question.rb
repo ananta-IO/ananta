@@ -53,7 +53,7 @@ class Question < ActiveRecord::Base
   #########################
   # Scopes
   #########################
-  #scope :red, where(:color => 'red')
+  scope :published, where(:state => 'published')
 
 
   #########################

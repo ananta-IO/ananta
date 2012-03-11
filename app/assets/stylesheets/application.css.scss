@@ -139,12 +139,8 @@ a{
 			@media(max-width: 979px){
 				margin: 5px auto 0;
 			}
-			a:hover{
-				// background-color: rgba($color-base, 0.2);
-			}
 			a.active{
-				background-color: #bbb;
-				// background-color: rgba($color-base, 0.2);
+				background-color: darken($color-background-hover, 10%);
 				color: $color-base;	
 			}
 		}
@@ -187,15 +183,58 @@ a{
 }
 
 #marq{
-	background: #ccc;
+	background: $color-background-hover;
 	@include box-shadow(rgba($color-base, 0.2) 0 0 3px 1px inset);
 	.container{
+		h1{
+			color: transparent;
+			background-color: rgba(82,96,117,0.5);
+			@include background-clip(text);
+			text-shadow: rgba(255,255,255,0.5) 0 5px 6px;
+		}
 		display: none;
 		padding: 20px 0;
-		#question_question{
-			@media (max-width: 979px){
-			 	width: 100%;
-			}	
+		.ask{
+			form{
+				background-color: darken($color-background-hover, 2%); 
+				border: 1px solid darken($color-background-hover, 10%);
+				@include box-shadow((#fff 0px 1px 0px, darken($color-background-hover, 5%) 0px 0px 17px 0 inset));
+				@include border-radius(2px);
+				.outer{
+					margin: 5px;
+					.inner{
+						border: 1px solid darken($color-background-hover, 10%);
+						background-color: #fff;
+						@include border-radius(2px);
+						position: relative;
+						.counter{
+							font-size: 18px;
+							padding: 7px 12px;
+							color: #808080;	
+						}
+						input.question{
+							position: absolute;
+							width: 70%;
+							background: none repeat scroll 0 0 transparent;
+							border: 0 none;
+							outline: 0 none;
+							height: 30px;
+							font-size: 18px;
+							margin-left: 60px;
+							@include box-shadow(none);
+							&:focus{
+								border-color: rgba(82, 168, 236, 0.0);
+								@include box-shadow(none);
+								outline: 0;
+							}
+						}
+						button{
+							// float: right;
+							@include border-radius(0px);
+						}
+					}
+				}
+			}
 		}
 	}
 }
