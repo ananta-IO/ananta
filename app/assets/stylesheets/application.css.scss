@@ -251,6 +251,28 @@ a{
 							@include border-radius(2px);
 							position: relative;
 							padding: 10px;
+							.string{
+								min-height: 3em;
+							}
+							.actions{
+								margin: 0px;
+								margin-top: 10px;
+								.btn{
+									@include border-radius(0);
+									&.state-event{
+										width: 7em;
+										@media(max-width: 1199px){
+											width: 4.7em;
+										}
+										@media(max-width: 979px){
+											width: auto;
+										}
+									}
+								}
+								form{
+									margin: 10px;
+								}
+							}
 						}
 					}
 				}

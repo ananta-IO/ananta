@@ -54,6 +54,13 @@ class Ability
 			end
 
 
+			#Questions
+			can :create, Question
+			# can :update, Question do |question|
+				
+			# end
+
+
 			# Users
 			can :update, User do |usr|
 				usr == user
@@ -70,7 +77,7 @@ class Ability
 			can :read, Project
 			can :read, Question
 		end
-
+		
 		# Users
 		cannot :destroy, User
 

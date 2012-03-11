@@ -82,19 +82,19 @@ class Answer < ActiveRecord::Base
   #########################
   protected
 
-  # Increment the question yes counters
+  # Increment the question's yes counters
   def increment_yeses
     Question.increment_counter(:yeses, self.question_id)
     true
   end
 
-  # Increment the question no counters
+  # Increment the question's no counters
   def increment_noes
     Question.increment_counter(:noes, self.question_id)
     true
   end
 
-  # Increment the question yes counters
+  # Increment the question's don't care counters
   def increment_dont_cares
     Question.increment_counter(:dont_cares, self.question_id)
     true

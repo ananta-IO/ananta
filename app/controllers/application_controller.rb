@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  after_filter :set_questionable, :if =>  lambda { request.format == 'html' }
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_url, :alert => exception.message
@@ -22,5 +23,14 @@ class ApplicationController < ActionController::Base
       filtered[key.to_sym] = value if keys.include?(key.to_sym) 
     end
     filtered
+  end
+
+  def set_questionable
+    session[:questionable_id] = params[:id]
+    session[:questionable_type] = request.referer
+    puts ""
+    puts ">>>>>>>>>>>>>>>>"
+    puts session[:questionable_type]
+    puts session[:questionable_id]
   end
 end

@@ -72,20 +72,25 @@ ActiveRecord::Schema.define(:version => 20120308235743) do
 
   create_table "questions", :force => true do |t|
     t.integer  "user_id"
-    t.string   "questionable_url"
+    t.text     "questionable_url"
+    t.integer  "questionable_id"
+    t.string   "questionable_type"
     t.string   "question"
     t.string   "state"
-    t.integer  "yeses",            :default => 0
-    t.integer  "noes",             :default => 0
-    t.integer  "dont_cares",       :default => 0
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.integer  "yeses",             :default => 0
+    t.integer  "noes",              :default => 0
+    t.integer  "dont_cares",        :default => 0
+    t.integer  "score",             :default => 1000
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
   end
 
   add_index "questions", ["dont_cares"], :name => "index_questions_on_dont_cares"
   add_index "questions", ["noes"], :name => "index_questions_on_noes"
   add_index "questions", ["question"], :name => "index_questions_on_question"
+  add_index "questions", ["questionable_id", "questionable_type"], :name => "index_questions_on_questionable_id_and_questionable_type"
   add_index "questions", ["questionable_url"], :name => "index_questions_on_questionable_url"
+  add_index "questions", ["score"], :name => "index_questions_on_score"
   add_index "questions", ["state"], :name => "index_questions_on_state"
   add_index "questions", ["user_id"], :name => "index_questions_on_user_id"
   add_index "questions", ["yeses"], :name => "index_questions_on_yeses"

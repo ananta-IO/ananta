@@ -5,9 +5,15 @@ class Ananta.Views.Marq.QuestionView extends Backbone.View
 
 	className: 'span5'
 
+	events:
+		'click textarea'		: 'stopPropagation'
+
 	initialize: (options) ->
-		_.bindAll(@, 'render')
+		_.bindAll(@, 'render', 'stopPropagation')
 
 	render: ->
 		$(@el).html(@template( @model.toJSON() ))
 		@
+
+	stopPropagation: (e) ->
+		e.stopPropagation()

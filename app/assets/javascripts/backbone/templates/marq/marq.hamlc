@@ -16,5 +16,4 @@
 		%h1
 			Answer
 	.span10
-		.row
-			.questions
+		.row.questions
