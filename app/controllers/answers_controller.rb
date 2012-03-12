@@ -12,11 +12,11 @@ class AnswersController < InheritedResources::Base
 		attrs = {}
 		attrs = attrs.merge pick(params, :state_event)
 		attrs[:user_id] = current_user ? current_user.id : nil
-		# attrs[:comment_attributes] = {}
-		# attrs[:comment_attributes] = attrs[:comment_attributes].merge pick(params, :comment)
-		# attrs[:comment_attributes][:user_id] = attrs[:user_id]	
-
-		puts attrs.inspect
+		unless pick(params, :comment)[:comment].blank?
+			attrs[:comment_attributes] = {}
+			attrs[:comment_attributes] = attrs[:comment_attributes].merge pick(params, :comment)
+			attrs[:comment_attributes][:user_id] = attrs[:user_id]	
+		end
 
 		@answer = @question.answers.new attrs
 

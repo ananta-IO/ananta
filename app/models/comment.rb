@@ -14,6 +14,7 @@ class Comment < ActiveRecord::Base
   #########################
   #attr_reader
   #attr_accessor
+  # Make sure all controllers that create comments define user_id = current_user.id
   attr_accessible :comment, :user_id, :on => :create
 
 

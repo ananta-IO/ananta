@@ -39,7 +39,7 @@ class Answer < ActiveRecord::Base
   #########################
   belongs_to :user 
   belongs_to :question
-  has_many :comment, :as => :commentable, :dependent => :destroy
+  has_one :comment, :as => :commentable, :dependent => :destroy
 
   accepts_nested_attributes_for :comment
 

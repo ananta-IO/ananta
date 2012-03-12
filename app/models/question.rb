@@ -59,7 +59,7 @@ class Question < ActiveRecord::Base
   scope :published, where(:state => 'published')
   scope :answered, where("answer_count > ?", 0)
   scope :unanswered, where("answer_count = ?", 0)
-  scope :unanswered_by, lambda {|user_id| find(:all, :include =>:answers, :conditions => ["answers.user_id != ? OR answer_count = ?", user_id, 0] ) }
+  scope :unanswered_by, lambda {|user_id| includes(:answers).where("answers.user_id != ? OR answer_count = ?", user_id, 0) }
 
 
   #########################
