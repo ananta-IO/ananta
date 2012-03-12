@@ -19,6 +19,20 @@ class Ability
 		# Normal (confirmed) users
 		######################################################
 		if user.permissions >= 2
+			# Answers
+			can [:create], Answer
+			# can [:update], Answer do |answer|
+
+			# end
+
+
+			# Comments
+			can [:create], Comment
+			# can [:update], Comment do |comment|
+
+			# end
+
+
 			# Images
 			can [:create], Image do |image|
 				# Requires all imageable models to implement an editors method
@@ -54,9 +68,9 @@ class Ability
 			end
 
 
-			#Questions
-			can :create, Question
-			# can :update, Question do |question|
+			# Questions
+			can [:create], Question
+			# can [:update], Question do |question|
 				
 			# end
 
@@ -73,11 +87,12 @@ class Ability
 		######################################################
 		if user.permissions >= 0
 			can :read, Answer
+			can :read, Comment
 			can :read, Profile
 			can :read, Project
 			can :read, Question
 		end
-		
+
 		# Users
 		cannot :destroy, User
 

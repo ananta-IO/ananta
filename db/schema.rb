@@ -11,13 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120308235743) do
+ActiveRecord::Schema.define(:version => 20120311190628) do
 
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
     t.integer  "question_id"
     t.string   "state"
-    t.string   "comment"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
@@ -25,6 +24,18 @@ ActiveRecord::Schema.define(:version => 20120308235743) do
   add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
   add_index "answers", ["state"], :name => "index_answers_on_state"
   add_index "answers", ["user_id"], :name => "index_answers_on_user_id"
+
+  create_table "comments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.text     "comment"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "comments", ["commentable_id", "commentable_type"], :name => "index_comments_on_commentable_id_and_commentable_type"
+  add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
   create_table "images", :force => true do |t|
     t.integer  "user_id"
@@ -72,28 +83,33 @@ ActiveRecord::Schema.define(:version => 20120308235743) do
 
   create_table "questions", :force => true do |t|
     t.integer  "user_id"
-    t.text     "questionable_url"
     t.integer  "questionable_id"
     t.string   "questionable_type"
+    t.text     "questionable_url"
+    t.string   "questionable_action"
     t.string   "question"
     t.string   "state"
-    t.integer  "yeses",             :default => 0
-    t.integer  "noes",              :default => 0
-    t.integer  "dont_cares",        :default => 0
-    t.integer  "score",             :default => 1000
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.integer  "answer_count",        :default => 0
+    t.integer  "yes_count",           :default => 0
+    t.integer  "no_count",            :default => 0
+    t.integer  "dont_care_count",     :default => 0
+    t.integer  "score",               :default => 1000
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
   end
 
-  add_index "questions", ["dont_cares"], :name => "index_questions_on_dont_cares"
-  add_index "questions", ["noes"], :name => "index_questions_on_noes"
-  add_index "questions", ["question"], :name => "index_questions_on_question"
+  add_index "questions", ["answer_count"], :name => "index_questions_on_answer_count"
+  add_index "questions", ["dont_care_count"], :name => "index_questions_on_dont_care_count"
+  add_index "questions", ["no_count"], :name => "index_questions_on_no_count"
+  add_index "questions", ["questionable_action"], :name => "index_questions_on_questionable_action"
   add_index "questions", ["questionable_id", "questionable_type"], :name => "index_questions_on_questionable_id_and_questionable_type"
+  add_index "questions", ["questionable_id"], :name => "index_questions_on_questionable_id"
+  add_index "questions", ["questionable_type"], :name => "index_questions_on_questionable_type"
   add_index "questions", ["questionable_url"], :name => "index_questions_on_questionable_url"
   add_index "questions", ["score"], :name => "index_questions_on_score"
   add_index "questions", ["state"], :name => "index_questions_on_state"
   add_index "questions", ["user_id"], :name => "index_questions_on_user_id"
-  add_index "questions", ["yeses"], :name => "index_questions_on_yeses"
+  add_index "questions", ["yes_count"], :name => "index_questions_on_yes_count"
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false

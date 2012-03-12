@@ -1,8 +1,12 @@
 Ananta::Application.routes.draw do
 
+	resources :comments, :only => [:index, :create, :update]
+
 	resources :questions, :only => [:index, :create, :update] do
 		get 'page/:page', :action => :index, :on => :collection
-		resources :answers, :only => [:index, :create, :update]
+		resources :answers, :only => [:index, :create, :update] do
+			resources :comments, :only => [:create]
+		end
 	end
 
 	resources :images, :only => [:create, :update, :destroy]

@@ -186,14 +186,14 @@ a{
 	background: $color-background-hover;
 	@include box-shadow(rgba($color-base, 0.2) 0 0 3px 1px inset);
 	.container{
+		display: none;
+		padding: 20px 0 10px;
 		h1{
 			color: transparent;
 			background-color: rgba(82,96,117,0.5);
 			@include background-clip(text);
 			text-shadow: rgba(255,255,255,0.5) 0 5px 6px;
 		}
-		display: none;
-		padding: 20px 0;
 		.ask{
 			form{
 				background-color: darken($color-background-hover, 2%); 
@@ -239,6 +239,7 @@ a{
 		.answer{
 			.questions{
 				.question{
+					margin-bottom: 20px;
 					background-color: darken($color-background-hover, 2%); 
 					border: 1px solid darken($color-background-hover, 10%);
 					@include box-shadow((#fff 0px 1px 0px, darken($color-background-hover, 5%) 0px 0px 17px 0 inset));
@@ -269,8 +270,17 @@ a{
 										}
 									}
 								}
-								form{
-									margin: 10px;
+								.dropdown-menu{
+									@include border-radius(0);
+									form{
+										margin: 10px;
+										textarea{
+											@include border-radius(0);
+										}
+										button{
+											margin-bottom: 10px;
+										}
+									}
 								}
 							}
 						}

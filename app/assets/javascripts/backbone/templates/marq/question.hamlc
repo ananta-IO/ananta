@@ -13,7 +13,7 @@
 							%li 
 								%textarea.input-xlarge{:rows => 3, :name => "comment", :placeholder => "Why yes?"}
 							%li
-								%button.btn{:name => "submit", :type => "submit"} comment
+								%button.btn{:name => "submit", :type => "submit"} yes &amp; comment
 
 				.btn-group.no
 					%a.btn.state-event{:href => "#"} no
@@ -24,7 +24,7 @@
 							%li 
 								%textarea.input-xlarge{:rows => 3, :name => "comment", :placeholder => "Why no?"}
 							%li
-								%button.btn{:name => "submit", :type => "submit"} comment
+								%button.btn{:name => "submit", :type => "submit"} no &amp; comment
 
 				.btn-group.dont-care
 					%a.btn.state-event{:href => "#"} don't care
@@ -33,7 +33,7 @@
 					%ul.dropdown-menu
 						%form{:name => "answer"}
 							%li 
-								%textarea.input-xlarge{:rows => 3, :name => "comment", :placeholder => "Why don't care?"}
+								%textarea.input-xlarge{:rows => 3, :name => "comment", :placeholder => "Why don't you care?"}
 							%li
-								%button.btn{:name => "submit", :type => "submit"} comment
+								%button.btn{:name => "submit", :type => "submit"} don't care &amp; comment
 

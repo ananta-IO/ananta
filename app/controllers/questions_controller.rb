@@ -3,6 +3,7 @@ class QuestionsController < InheritedResources::Base
 	actions :index, :create, :update
 
 	before_filter :authenticate_user!, :except => [:index, :show]
+	# load_and_authorize_resource # TODO: uncomment and fix bug with query :per
 
 	def create
 		@question = current_user.questions.new pick(params, :question, :questionable_url)

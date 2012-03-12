@@ -6,6 +6,8 @@ class Question < ActiveRecord::Base
   #########################
   # Callbacks & Misc method calls (e.g. devise for, acts_as_whatever )
   #########################
+  before_save :update_answer_count, :if => :answer_counts_changed?
+
   # flag or vote up
   acts_as_voteable
 
@@ -39,7 +41,8 @@ class Question < ActiveRecord::Base
   # Associations
   #########################
   belongs_to :user 
-  has_many :answers
+  has_many :answers, :dependent => :destroy
+  has_many :comments, :through => :answers, :source => :comment
 
 
   #########################
@@ -54,6 +57,8 @@ class Question < ActiveRecord::Base
   # Scopes
   #########################
   scope :published, where(:state => 'published')
+  scope :unanswered, where(:answer_count => 0)
+  # scope :unanswered_by, lambda {|user_id| includes(:answers).where("answers.user_id != ?", user_id) }
 
 
   #########################
@@ -77,7 +82,19 @@ class Question < ActiveRecord::Base
   #########################
   protected
 
-  # Same as Public Instance Methods
+  # Return true if any of the answer counts change
+  def answer_counts_changed?
+    if yes_count_changed? or no_count_changed? or dont_care_count_changed?
+      true
+    else
+      false
+    end
+  end
+
+  # Increment or decrement answer_count
+  def update_answer_count
+
+  end
 
 
   #########################

@@ -8,11 +8,17 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 	events:
 		'keyup .ask input.question'              : 'questionCharCount'
 		'change .ask input.question'             : 'questionCharCount'
-		'submit .ask form'						 : 'createQuestion'
+		'submit .ask form'                       : 'createQuestion'
 
 	initialize: (options) ->
-		_.bindAll(@, 'render', 'renderQuestion', 'questionCharCount', 'addPopovers', 'createQuestion')
+		_.bindAll(@, 'render', 'renderQuestion', 'incrementCompleteness', 'questionCharCount', 'addPopovers', 'createQuestion', 'fetchQuestion')
+		
+		@collection.each(@incrementCompleteness)
+		# @collection.comparator: (question) =>
+		#   question.get('completeness')
+
 		@collection.bind('add', @renderQuestion)
+		@collection.bind('remove', @fetchQuestion)
 
 	render: ->
 		$(@el).html(@template())
@@ -25,6 +31,11 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 		view = new Ananta.Views.Marq.QuestionView({model : question})
 		@$(".questions").prepend(view.render().el)
 
+	incrementCompleteness: (question) ->
+		c = question.get('completeness')
+		new_c = if c then c + 1 else 0
+		question.set('completeness', new_c)
+
 	questionCharCount: ->
 		count = @$(".ask input.question").val().length
 		available = 140 - count
@@ -33,13 +44,13 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 	addPopovers: ->
 		@$(".ask .span2 h1").popover
 			placement: 'bottom'
-			# title: 'About Ask'
-			content: 'Ask a yes or no question in 140 characters or less. Your question should have something to do with the site in general or the current page you are on.'
+			title: 'Dying to know something?'
+			content: 'Ask a yes or no question in 140 characters or less. Your question should have "something" to do with the site in general or the current page you are on.'
 
 		@$(".answer .span2 h1").popover
 			placement: 'bottom'
-			# title: 'About Answer'
-			content: 'Answer as many questions as you want. If you like, leave comments. Asking and answering questions is the quickest way to impact the features and direction of the site. Never stop questioning.'
+			title: 'answers = input => itteration'
+			content: 'Answer as many questions as you want. If you like, leave comments. Asking and answering questions is the quickest way to impact the features and direction of this site. Never stop questioning and Ananta will never stop itterating.'
 
 	createQuestion: (e) ->
 		e.preventDefault()
@@ -52,7 +63,12 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 				@questionCharCount()
 				@collection.add(data)
 			error: (data, jqXHR) =>
-		        # question.set({errors: $.parseJSON(jqXHR.responseText)})
-		        # @render()
+				# question.set({errors: $.parseJSON(jqXHR.responseText)})
+				# @render()
 		)
 
+	fetchQuestion: ->
+		if @collection.length <= 2
+			return false #TODO
+		else
+			return false #TODO
