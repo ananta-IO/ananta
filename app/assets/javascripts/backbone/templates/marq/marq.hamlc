@@ -8,7 +8,7 @@
 				.outer
 					.inner
 						%span.counter.pull-right
-						%input.question{:class => "string", :type => "text", :name => "question", :maxlength => "140", :placeholder => "Ask a yes or no question"}
+						%input.question{:class => "string", :type => "text", :name => "question", :maxlength => "140", :placeholder => "a yes or no question"}
 						%button.btn.btn-large.btn-info{:name => "submit", :type => "submit"}
 							%span Ask
 .row.answer

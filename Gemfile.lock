@@ -294,6 +294,7 @@ DEPENDENCIES
   gravtastic
   haml-rails
   haml_coffee_assets
+  has_scope
   inherited_resources
   jbuilder
   jquery-rails

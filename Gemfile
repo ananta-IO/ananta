@@ -15,8 +15,10 @@ gem 'cancan'
 # Slugging
 gem "friendly_id", ">= 4.0.0.beta14"
 
-# Clean RESTful controlers 
+# Clean RESTful controllers 
 gem 'inherited_resources'
+# and scopes
+gem 'has_scope'
 
 # Tagging
 gem 'acts-as-taggable-on'

@@ -57,8 +57,9 @@ class Question < ActiveRecord::Base
   # Scopes
   #########################
   scope :published, where(:state => 'published')
-  scope :unanswered, where(:answer_count => 0)
-  # scope :unanswered_by, lambda {|user_id| includes(:answers).where("answers.user_id != ?", user_id) }
+  scope :answered, where("answer_count > ?", 0)
+  scope :unanswered, where("answer_count = ?", 0)
+  scope :unanswered_by, lambda {|user_id| find(:all, :include =>:answers, :conditions => ["answers.user_id != ? OR answer_count = ?", user_id, 0] ) }
 
 
   #########################
@@ -93,7 +94,11 @@ class Question < ActiveRecord::Base
 
   # Increment or decrement answer_count
   def update_answer_count
-
+    c = 0
+    c = c + changes[:yes_count][1] - changes[:yes_count][0] if yes_count_changed?
+    c = c + changes[:no_count][1] - changes[:no_count][0] if no_count_changed?
+    c = c + changes[:dont_care_count][1] - changes[:dont_care_count][0] if dont_care_count_changed?
+    self.answer_count = self.answer_count + c
   end
 
 

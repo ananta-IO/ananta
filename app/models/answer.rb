@@ -88,23 +88,32 @@ class Answer < ActiveRecord::Base
 
   # Increment the question's yes counters
   def increment_yes_count
-    Question.increment_counter(:yes_count, self.question_id)
+    # Question.increment_counter(:yes_count, self.question_id) # using this breaks the callback on questions :update_answer_count 
+    q = self.question
+    q.yes_count += 1
+    q.save
     true
   end
 
   # Increment the question's no counters
   def increment_no_count
-    Question.increment_counter(:no_count, self.question_id)
+    # Question.increment_counter(:no_count, self.question_id) # using this breaks the callback on questions :update_answer_count 
+    q = self.question
+    q.no_count += 1
+    q.save
     true
   end
 
   # Increment the question's don't care counters
   def increment_dont_care_count
-    Question.increment_counter(:dont_care_count, self.question_id)
+    # Question.increment_counter(:dont_care_count, self.question_id) # using this breaks the callback on questions :update_answer_count 
+    q = self.question
+    q.dont_care_count += 1
+    q.save
     true
   end
 
-  # Check if the state_event is acceptable
+  # Check if the state is acceptable
   def validate_state
     errors.add(:state, "must be yes, no or don't care") unless state_changed? and %w(yes no dont_care).include? changes['state'][1]
   end 
