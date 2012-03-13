@@ -9,7 +9,7 @@ class Question < ActiveRecord::Base
   before_save :update_answer_count, :if => :answer_counts_changed?
 
   # flag or vote up
-  acts_as_voteable
+  acts_as_voteable # TODO: replace with relevance. to be queried in a 0-1000 range slider after every answer is submited. saved as question_relevance on answer and averaged in a worked and stored on quesiton as avg_relevance 
 
   # Question state machine
   state_machine :initial => :published do
@@ -33,7 +33,7 @@ class Question < ActiveRecord::Base
   #########################
   #attr_reader
   #attr_accessor
-  attr_accessible :question, :questionable_url, :on => :create
+  attr_accessible :question, :questionable_url, :questionable_sid, :questionable_controller, :questionable_action, :on => :create
   attr_accessible :vote, :state_event
 
 
@@ -58,9 +58,13 @@ class Question < ActiveRecord::Base
   #########################
   scope :published, where(:state => 'published')
   scope :answered, where("answer_count > ?", 0)
+  scope :answered_by, lambda { |user_id| joins(:answers).where("answers.user_id = ?", user_id)}
   scope :unanswered, where("answer_count = ?", 0)
-  scope :unanswered_by, lambda {|user_id| includes(:answers).where("answers.user_id != ? OR answer_count = ?", user_id, 0) }
-
+  scope :unanswered_by, lambda { |user_id| where( "answer_count = ? OR id NOT IN (?)", 0, ( [0] | ( User.find(user_id).answers.pluck(:question_id) rescue [] ) ) ) }
+  scope :q_url, lambda { |q_url| where("questionable_url = ?", q_url) } 
+  scope :q_sid, lambda { |q_sid| where("questionable_sid = ?", q_sid) } 
+  scope :q_controller, lambda { |q_con| where("questionable_controller = ?", q_con) } 
+  scope :q_action, lambda { |q_act| where("questionable_action = ?", q_act) } 
 
   #########################
   # Public Class Methods ( def self.method_name )

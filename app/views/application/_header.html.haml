@@ -8,7 +8,7 @@
 		// Open and close marq
 		$('#marq_toggle a').click(function() {
 			$('#marq_toggle a').toggleClass('active');
-			$('#marq .container').slideToggle('slow');
+			$('#marq').slideToggle('slow');
 		});
 
 -# Marq slide down container
@@ -51,10 +51,12 @@
 											logout
 						-else
 							%li.dropdown
-								%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", rel: :tooltip, 'data-placement' => 'bottom', 'data-original-title' => 'login'}
+								%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
 									%i.icon-signin
 								%ul.dropdown-menu
 									= form_for(User.new, :url => user_session_path) do |f|
+										%li.nav-header
+											Login
 										%li.nav-header
 											= f.text_field :login, class: 'span2', placeholder: 'username or email', autofocus: true
 										%li.nav-header

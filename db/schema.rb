@@ -16,12 +16,14 @@ ActiveRecord::Schema.define(:version => 20120311190628) do
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
     t.integer  "question_id"
+    t.integer  "question_relevance"
     t.string   "state"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
+  add_index "answers", ["question_relevance"], :name => "index_answers_on_question_relevance"
   add_index "answers", ["state"], :name => "index_answers_on_state"
   add_index "answers", ["user_id"], :name => "index_answers_on_user_id"
 
@@ -85,26 +87,30 @@ ActiveRecord::Schema.define(:version => 20120311190628) do
     t.integer  "user_id"
     t.integer  "questionable_id"
     t.string   "questionable_type"
+    t.string   "questionable_sid"
+    t.string   "questionable_controller"
     t.text     "questionable_url"
     t.string   "questionable_action"
     t.string   "question"
     t.string   "state"
-    t.integer  "answer_count",        :default => 0
-    t.integer  "yes_count",           :default => 0
-    t.integer  "no_count",            :default => 0
-    t.integer  "dont_care_count",     :default => 0
-    t.integer  "score",               :default => 1000
-    t.datetime "created_at",                            :null => false
-    t.datetime "updated_at",                            :null => false
+    t.integer  "answer_count",            :default => 0
+    t.integer  "yes_count",               :default => 0
+    t.integer  "no_count",                :default => 0
+    t.integer  "dont_care_count",         :default => 0
+    t.integer  "avg_relevance",           :default => 0
+    t.integer  "score",                   :default => 1000
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
   end
 
   add_index "questions", ["answer_count"], :name => "index_questions_on_answer_count"
+  add_index "questions", ["avg_relevance"], :name => "index_questions_on_avg_relevance"
   add_index "questions", ["dont_care_count"], :name => "index_questions_on_dont_care_count"
   add_index "questions", ["no_count"], :name => "index_questions_on_no_count"
   add_index "questions", ["questionable_action"], :name => "index_questions_on_questionable_action"
+  add_index "questions", ["questionable_controller"], :name => "index_questions_on_questionable_controller"
   add_index "questions", ["questionable_id", "questionable_type"], :name => "index_questions_on_questionable_id_and_questionable_type"
-  add_index "questions", ["questionable_id"], :name => "index_questions_on_questionable_id"
-  add_index "questions", ["questionable_type"], :name => "index_questions_on_questionable_type"
+  add_index "questions", ["questionable_sid"], :name => "index_questions_on_questionable_sid"
   add_index "questions", ["questionable_url"], :name => "index_questions_on_questionable_url"
   add_index "questions", ["score"], :name => "index_questions_on_score"
   add_index "questions", ["state"], :name => "index_questions_on_state"

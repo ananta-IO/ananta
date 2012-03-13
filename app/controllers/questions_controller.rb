@@ -9,9 +9,24 @@ class QuestionsController < InheritedResources::Base
 	#########################
 	# Scopes
 	#########################
+	has_scope :published, :type => :boolean, :only => :index, :default => true
+	has_scope :answered, :type => :boolean, :only => :index
+	# has_scope :answered_by # This is not exposed at the moment
 	has_scope :unanswered, :type => :boolean, :only => :index
 	has_scope :unanswered_by, :only => :index do |controller, scope, value|
 		value != "me" ? scope.unanswered_by(value) : (controller.current_user ? scope.unanswered_by(controller.current_user.id) : scope)
+	end
+	has_scope :q_url, :only => :index do |controller, scope, value|
+		value != "this" ? scope.q_url(value) : scope.q_url(controller.session[:questionable_url])
+	end
+	has_scope :q_sid, :only => :index do |controller, scope, value|
+		value != "this" ? scope.q_sid(value) : scope.q_sid(controller.session[:questionable_sid])
+	end
+	has_scope :q_controller, :only => :index do |controller, scope, value|
+		value != "this" ? scope.q_controller(value) : scope.q_controller(controller.session[:questionable_controller])
+	end
+	has_scope :q_action, :only => :index do |controller, scope, value|
+		value != "this" ? scope.q_action(value) : scope.q_action(controller.session[:questionable_action])
 	end
 	has_scope :order, :only => :index, :default => 'score DESC' do |controller, scope, value|
 		scope.order(value)
@@ -35,7 +50,15 @@ class QuestionsController < InheritedResources::Base
 	# Modifited Actions
 	#########################
 	def create
-		@question = current_user.questions.new pick(params, :question, :questionable_url)
+		attrs = {}
+		attrs = attrs.merge pick(params, :question, :questionable_url)
+		attrs[:questionable_sid]		= session[:questionable_sid]
+		attrs[:questionable_controller] = session[:questionable_controller]
+		attrs[:questionable_url]   		||= session[:questionable_url]
+		attrs[:questionable_action]		= session[:questionable_action]
+
+		@question = current_user.questions.new attrs
+
 		create!
 	end
 

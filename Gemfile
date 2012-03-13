@@ -1,10 +1,14 @@
 source 'https://rubygems.org'
 
+# The Framework
 gem 'rails', '3.2.2'
 
+# The Database
 gem 'pg'
 
+# The Server
 gem 'thin'
+
 
 # Authentications & Permissions
 gem 'devise'
@@ -13,12 +17,17 @@ gem 'omniauth-openid'
 gem 'cancan'
 
 # Slugging
-gem "friendly_id", ">= 4.0.0.beta14"
+gem 'friendly_id', '>= 4.0.0.beta14'
 
 # Clean RESTful controllers 
 gem 'inherited_resources'
-# and scopes
+# and controller scopes
 gem 'has_scope'
+
+# Searching and Scoping made easier with method missing
+# TODO: do we need either?
+# gem 'searchlogic'
+# gem 'meta_search'
 
 # Tagging
 gem 'acts-as-taggable-on'
@@ -48,6 +57,8 @@ gem 'jbuilder'
 gem 'jquery-rails'
 gem 'haml-rails'
 gem 'simple_form'
+
+# Really Misc
 gem 'possessive' 
 
 

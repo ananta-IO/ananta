@@ -26,15 +26,9 @@ class ApplicationController < ActionController::Base
   end
 
   def set_questionable
-    session[:questionable_id] = "id = #{params[:id]}"
-    session[:questionable_url] = request.url
+    session[:questionable_sid] = params[:id]
     session[:questionable_controller] = params[:controller]
+    session[:questionable_url] = request.url
     session[:questionable_action] = params[:action]
-    puts ""
-    puts ">>>>>>>>>>>>>>>>"
-    puts session[:questionable_id]
-    puts session[:questionable_url]
-    puts session[:questionable_controller]
-    puts session[:questionable_action]
   end
 end

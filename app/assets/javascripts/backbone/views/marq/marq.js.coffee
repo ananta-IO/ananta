@@ -11,7 +11,7 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 		'submit .ask form'                       : 'createQuestion'
 
 	initialize: (options) ->
-		_.bindAll(@, 'render', 'renderQuestion', 'incrementCompleteness', 'questionCharCount', 'addPopovers', 'createQuestion', 'fetchQuestion')
+		_.bindAll(@, 'render', 'renderQuestions', 'renderQuestion', 'incrementCompleteness', 'questionCharCount', 'addPopovers', 'createQuestion', 'fetchQuestion')
 		
 		@collection.each(@incrementCompleteness)
 		# @collection.comparator: (question) =>
@@ -24,8 +24,14 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 		$(@el).html(@template())
 		@questionCharCount()
 		@addPopovers()
-		@collection.each(@renderQuestion)
+		@renderQuestions()
 		@
+
+	renderQuestions: ->
+		if @collection.length > 0
+			@collection.each(@renderQuestion)
+		else
+			@$(".questions").html("<div class='span5'><div class='question'><div class='outer'><div class='inner'>You have answered every question</div></div></div></div>")
 		
 	renderQuestion: (question) ->
 		view = new Ananta.Views.Marq.QuestionView({model : question})
