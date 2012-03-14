@@ -36,7 +36,7 @@ gem 'acts-as-taggable-on'
 gem 'state_machine'
 
 # Voting
-gem 'thumbs_up'
+gem 'thumbs_up', '~> 0.4.6' # Heroku not working with 0.5.3
 
 # Pagination
 gem 'kaminari'
