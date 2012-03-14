@@ -1,20 +1,4 @@
 .row.scope
-	.span10.offset2
-		.wrap
-			.outer
-
-				-# TODO: make this work !!!!!
-
-				%a.pull-right{href: '#you_only_need_to_hover', rel: 'popover', 'data-placement' => 'below', 'data-origintal-title' => 'Scope', 'data-content' => 'Any question you ask will automatically be connected to the current page. Go to a different page to change the scope of your question.'}
-					?&nbsp;&nbsp;
-				%a{href: '#TODO-same_controller_questions', rel: 'tooltip', 'data-placement' => 'below', 'data-origintal-title' => 'controller'}
-					controller 
-				\/ 
-				%a{href: '#TODO-same_controller_&_action_questions', rel: 'tooltip', 'data-placement' => 'below', 'data-origintal-title' => 'action'}
-					action 
-				\/ 
-				%a{href: '#TODO-same_controller_&_action_&_sid_questions', rel: 'tooltip', 'data-placement' => 'below', 'data-origintal-title' => 'id'}
-					sid
 
 .row.ask
 	.span2
@@ -32,6 +16,7 @@
 							%input.question{:class => "string", :type => "text", :name => "question", :maxlength => "140", :placeholder => "a yes or no question"}
 							%button.btn.btn-large.btn-info{:name => "submit", :type => "submit"}
 								%span Ask
+								
 .row.answer
 	.span2
 		%h1

@@ -43,6 +43,6 @@ class TemplateController < InheritedResources::Base
 	protected
 
 	def collection
-		@templates ||= apply_scopes(end_of_association_chain).all
+		@templates ||= apply_scopes(end_of_association_chain)
 	end
 end

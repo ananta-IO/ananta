@@ -1,0 +1,13 @@
+.wrap
+	.outer
+		%a.controller{href: "/questions?questionable_controller=current"}
+			= @questionable_controller 
+		\/ 
+		%a.action{href: "/questions?questionable_action=current"}
+			= @questionable_action 
+		\/ 
+		%a.id{href: "/questions?questionable_sid=current"}
+			= @questionable_sid
+		&nbsp;&middot;&nbsp;
+		%a.info{href: '#you_only_need_to_hover'}
+			?

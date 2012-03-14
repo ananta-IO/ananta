@@ -1,0 +1,36 @@
+-content_for :title do "questions" end
+
+.page-header
+	%h1 
+		Questions
+.row
+	.span12
+		.sub-header 
+			%h3 
+				= raw page_entries_info(@questions)
+	
+		%table.table
+			%tr
+				%th question
+				%th controller
+				%th action
+				%th id
+				%th url
+				%th love
+			- @questions.each do |question|
+				%tr
+					%td
+						= link_to question.question, question
+					%td
+						= link_to question.questionable_controller, "/questions?questionable_controller=#{question.questionable_controller}"
+					%td
+						= link_to question.questionable_action, "/questions?questionable_action=#{question.questionable_action}"
+					%td
+						= link_to question.questionable_sid, "/questions?questionable_sid=#{question.questionable_sid}"
+					%td
+						= link_to question.questionable_url, "/questions?questionable_url=#{question.questionable_url}"
+					%td
+						= question.votes_for
+						%i.icon-heart
+
+		= paginate @questions

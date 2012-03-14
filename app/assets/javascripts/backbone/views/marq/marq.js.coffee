@@ -25,7 +25,12 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 		$(@el).html(@template())
 		@questionCharCount()
 		@addPopovers()
+
+		scopeView = new Ananta.Views.Marq.ScopeView()
+		@$(".scope").html(scopeView.render().el)
+
 		@renderQuestions()
+		
 		@
 
 	renderQuestions: ->

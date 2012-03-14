@@ -71,6 +71,6 @@ class QuestionsController < InheritedResources::Base
 	protected
 
 	def collection
-		@questions ||= apply_scopes(end_of_association_chain).all
+		@questions ||= apply_scopes(end_of_association_chain)
 	end
 end

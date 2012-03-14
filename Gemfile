@@ -86,6 +86,7 @@ end
 
 group :development do
   gem 'pry'
+  gem 'heroku'
   # gem 'ruby-debug19', :require => 'ruby-debug'
 end
 
