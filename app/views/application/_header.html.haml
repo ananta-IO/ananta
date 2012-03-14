@@ -6,12 +6,15 @@
 			Backbone.history.start();
 		});
 		// Open and close marq
-		$('#marq_toggle a').click(function() {
+		$('#marq_toggle a').click(function(e) {
 			$('#marq_toggle a').toggleClass('active');
 			$('#marq').slideToggle('slow');
+			e.preventDefault();
+			e.stopPropagation();
 		});
 
 -# Marq slide down container
+-# Starts as display:none
 #marq
 
 -# Top Nav
@@ -32,7 +35,7 @@
 					%ul.nav.pull-right
 						-if current_user
 							%li
-								= link_to current_user.profile, rel: :tooltip, 'data-placement' => 'bottom', 'data-delay' => 300, 'data-original-title' => raw( "<img src='#{current_user.profile.avatar.image.small.url}' alt='#{current_user.username}' width=32 height=32 />" ) do
+								= link_to current_user.profile, rel: :tooltip, 'data-placement' => 'bottom', 'data-delay' => 300, 'data-original-title' => raw( "ME<br/><img src='#{current_user.profile.avatar.image.small.url}' alt='#{current_user.username}' width=32 height=32 />" ) do
 									%i.icon-user
 							%li.dropdown
 								%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}

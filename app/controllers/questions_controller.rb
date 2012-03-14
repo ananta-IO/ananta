@@ -11,24 +11,24 @@ class QuestionsController < InheritedResources::Base
 	#########################
 	has_scope :published, :type => :boolean, :only => :index, :default => true
 	has_scope :answered, :type => :boolean, :only => :index
-	# has_scope :answered_by # This is not exposed at the moment
+	# has_scope :answered_by # This is not exposed at the moment #TODO: should it be exposed?
 	has_scope :unanswered, :type => :boolean, :only => :index
 	has_scope :unanswered_by, :only => :index do |controller, scope, value|
 		value != "me" ? scope.unanswered_by(value) : (controller.current_user ? scope.unanswered_by(controller.current_user.id) : scope)
 	end
 	has_scope :q_url, :only => :index do |controller, scope, value|
-		value != "this" ? scope.q_url(value) : scope.q_url(controller.session[:questionable_url])
+		value != "current" ? scope.q_url(value) : scope.q_url(controller.session[:questionable_url])
 	end
 	has_scope :q_sid, :only => :index do |controller, scope, value|
-		value != "this" ? scope.q_sid(value) : scope.q_sid(controller.session[:questionable_sid])
+		value != "current" ? scope.q_sid(value) : scope.q_sid(controller.session[:questionable_sid])
 	end
 	has_scope :q_controller, :only => :index do |controller, scope, value|
-		value != "this" ? scope.q_controller(value) : scope.q_controller(controller.session[:questionable_controller])
+		value != "current" ? scope.q_controller(value) : scope.q_controller(controller.session[:questionable_controller])
 	end
 	has_scope :q_action, :only => :index do |controller, scope, value|
-		value != "this" ? scope.q_action(value) : scope.q_action(controller.session[:questionable_action])
+		value != "current" ? scope.q_action(value) : scope.q_action(controller.session[:questionable_action])
 	end
-	has_scope :order, :only => :index, :default => 'score DESC' do |controller, scope, value|
+	has_scope :order, :only => :index do |controller, scope, value|
 		scope.order(value)
 	end
 	has_scope :page, :only => :index, :default => 1 do |controller, scope, value|
@@ -37,6 +37,8 @@ class QuestionsController < InheritedResources::Base
 	has_scope :per, :only => :index, :default => 10 do |controller, scope, value|
 		(1..100) === value.to_i ? scope.per(value.to_i) : scope.per(10)
 	end
+	has_scope :select, :only => :index 
+	has_scope :uniq, :type => :boolean
 
 
 	#########################

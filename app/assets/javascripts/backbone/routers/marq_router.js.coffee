@@ -1,6 +1,6 @@
 class Ananta.Routers.MarqRouter extends Backbone.Router
 	initialize: (options) ->
-		@questions =  new Ananta.Collections.QuestionsCollection([], {query : "?per=1&unanswered_by=me"})
+		@questions =  new Ananta.Collections.QuestionsCollection([], {query : "?per=1&unanswered_by=me&order=score"})
 
 	routes:
 		".*" : "index"

@@ -6,6 +6,7 @@ class Ananta.Views.Marq.QuestionView extends Backbone.View
 	className: 'span5'
 
 	events:
+		'click .dropdown-toggle'                 		: 'focusForm'
 		'click textarea'                         		: 'stopPropagation'
 		'click .btn-group.yes .state-event'      		: 'yes'
 		'submit .btn-group.yes form'             		: 'yes'
@@ -16,7 +17,7 @@ class Ananta.Views.Marq.QuestionView extends Backbone.View
 
 
 	initialize: (options) ->
-		_.bindAll(@, 'render', 'stopPropagation', 'yes', 'no', 'dontCare', 'saveAnswer')
+		_.bindAll(@, 'render', 'focusForm', 'stopPropagation', 'yes', 'no', 'dontCare', 'saveAnswer')
 		@answer = new Ananta.Models.Answer
 		@answer.urlRoot = "/questions/#{@model.id}/answers"
 		@answer.bind('')
@@ -24,6 +25,10 @@ class Ananta.Views.Marq.QuestionView extends Backbone.View
 	render: ->
 		$(@el).html(@template( @model.toJSON() ))
 		@
+
+	focusForm: ->
+		wait 100, ->
+			$('.btn-group textarea:enabled:visible:first').focus()
 
 	stopPropagation: (e) ->
 		e.stopPropagation()
@@ -48,6 +53,7 @@ class Ananta.Views.Marq.QuestionView extends Backbone.View
 			{state_event: "ans_#{state_event}", comment: comment}
 			success: (data) =>
 				@$(".actions").html("#{state_event}!")	
+				@.trigger('fetchQuestion')
 			error: (data, jqXHR) =>
 				# @answer.set({errors: $.parseJSON(jqXHR.responseText)})
 				# @render()	
