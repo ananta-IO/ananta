@@ -34,7 +34,7 @@ Ananta::Application.configure do
   # config.log_level = :debug
 
   # Prepend all log lines with the following tags
-  config.log_tags = [ :subdomain, :uuid. :remote_ip ]
+  config.log_tags = [ :subdomain, :uuid, :remote_ip ]
 
   # Use a different logger for distributed setups
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
