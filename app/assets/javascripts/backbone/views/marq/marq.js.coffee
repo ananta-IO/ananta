@@ -30,7 +30,7 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 		@$(".scope").html(scopeView.render().el)
 
 		@renderQuestions()
-		
+
 		@
 
 	renderQuestions: ->
@@ -63,7 +63,7 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 
 		@$(".answer .span2 h1").popover
 			placement: 'bottom'
-			title: 'answers = input => itteration'
+			title: 'answers &nbsp;<i class="icon-chevron-right"/>&nbsp;itteration'
 			content: 'Answer as many questions as you want. If you like, leave comments. Asking and answering questions is the quickest way to impact the features and direction of this site. Never stop questioning and Ananta will never stop itterating.'
 
 	createQuestion: (e) ->

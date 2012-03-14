@@ -21,7 +21,7 @@ class Ananta.Views.Marq.ScopeView extends Backbone.View
 		@$("a.info").popover
 			placement: 'bottom'
 			title: 'Scope'
-			content: 'Any question you ask will automatically be connected to the current page. Go to a different page to change the scope of your question.'
+			content: 'This is your current scope. Any question you ask will automatically be connected to the current page. Go to a different page to change the scope of your question.'
 		@$("a.controller").tooltip
 			placement: 'bottom'
 			title: 'controller'	

@@ -1,13 +1,17 @@
 .wrap
 	.outer
-		%a.controller{href: "/questions?questionable_controller=current"}
+		.pull-right
+			%a.all{href: "/questions"}
+				all questions 
+			&nbsp;
+		%a.controller{href: "/questions?q_controller=#{@questionable_controller}"}
 			= @questionable_controller 
 		\/ 
-		%a.action{href: "/questions?questionable_action=current"}
+		%a.action{href: "/questions?q_controller=#{@questionable_controller}\&q_action=#{@questionable_action}"}
 			= @questionable_action 
 		\/ 
-		%a.id{href: "/questions?questionable_sid=current"}
+		%a.id{href: "/questions?q_controller=#{@questionable_controller}\&q_action=#{@questionable_action}\&q_sid=#{@questionable_sid}"}
 			= @questionable_sid
 		&nbsp;&middot;&nbsp;
-		%a.info{href: '#you_only_need_to_hover'}
+		%a.info{href: '#'}
 			?

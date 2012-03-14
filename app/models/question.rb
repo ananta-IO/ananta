@@ -61,7 +61,7 @@ class Question < ActiveRecord::Base
   scope :answered_by, lambda { |user_id| joins(:answers).where("answers.user_id = ?", user_id)}
   scope :unanswered, where("answer_count = ?", 0)
   scope :unanswered_by, lambda { |user_id| where( "answer_count = ? OR id NOT IN (?)", 0, ( [0] | ( User.find(user_id).answers.pluck(:question_id) rescue [] ) ) ) }
-  scope :q_url, lambda { |q_url| where("questionable_url = ?", q_url) } 
+  scope :q_url, lambda { |q_url| where("questionable_url LIKE ?", "%#{q_url}%") } 
   scope :q_sid, lambda { |q_sid| where("questionable_sid = ?", q_sid) } 
   scope :q_controller, lambda { |q_con| where("questionable_controller = ?", q_con) } 
   scope :q_action, lambda { |q_act| where("questionable_action = ?", q_act) } 

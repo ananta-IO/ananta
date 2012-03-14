@@ -6,31 +6,62 @@
 .row
 	.span12
 		.sub-header 
+			.pull-right
+				== "?#{request.query_string}"
 			%h3 
 				= raw page_entries_info(@questions)
 	
 		%table.table
 			%tr
 				%th question
+				%th answers
+				%th yes
+				%th no
+				%th{rel: 'tooltip', 'data-placement' => 'bottom', 'data-original-title' => "don't care"} d c
 				%th controller
 				%th action
 				%th id
 				%th url
 				%th love
+				%th trend
 			- @questions.each do |question|
 				%tr
 					%td
 						= link_to question.question, question
 					%td
-						= link_to question.questionable_controller, "/questions?questionable_controller=#{question.questionable_controller}"
+						= question.answer_count
 					%td
-						= link_to question.questionable_action, "/questions?questionable_action=#{question.questionable_action}"
+						= question.yes_count
 					%td
-						= link_to question.questionable_sid, "/questions?questionable_sid=#{question.questionable_sid}"
+						= question.no_count
 					%td
-						= link_to question.questionable_url, "/questions?questionable_url=#{question.questionable_url}"
+						= question.dont_care_count
+					%td
+						= link_to question.questionable_controller, "/questions?q_controller=#{question.questionable_controller}"
+					%td
+						= link_to question.questionable_action, "/questions?q_action=#{question.questionable_action}"
+					%td
+						- if question.questionable_sid
+							= link_to question.questionable_sid, "/questions?q_sid=#{question.questionable_sid}"
+						- else
+							nil
+					%td
+						= link_to question.questionable_url, "/questions?q_url=#{question.questionable_url.html_safe}"
 					%td
 						= question.votes_for
 						%i.icon-heart
+					%td
+						-# TODO: make this work. up, right, down arrow for trend up, sideways, down 
+						%i.icon-arrow-right
 
+		.pull-right
+			-# TODO make a session variable for question_per and use it to set the default if per is ever changed
+			-# remove per from query string and optionally add an ampersand
+			- query_string = request.query_string.gsub(/(&per|per)=([0-9][0-9][0-9]|[0-9][0-9]|[0-9])/, '')
+			- query_string += "\&" unless query_string.blank?
+			= link_to 10, "/questions?#{query_string}per=10"
+			&middot;
+			= link_to 30, "/questions?#{query_string}per=30"
+			&middot;
+			= link_to 100, "/questions?#{query_string}per=100"
 		= paginate @questions

@@ -34,8 +34,14 @@ class QuestionsController < InheritedResources::Base
 	has_scope :page, :only => :index, :default => 1 do |controller, scope, value|
 		value.to_i > 0 ? scope.page(value.to_i) : scope.page(1)
 	end
-	has_scope :per, :only => :index, :default => 10 do |controller, scope, value|
-		(1..100) === value.to_i ? scope.per(value.to_i) : scope.per(10)
+	has_scope :per, :only => :index, :default => Proc.new { |c| c.session[:questions_per] ? c.session[:questions_per] : 10 } do |controller, scope, value|
+		if value.to_i == 1
+			# special case for marq router
+			scope.per(value.to_i)
+		else
+			controller.session[:questions_per] = value.to_i if (2..100) === value.to_i
+			controller.session[:questions_per] ? scope.per(controller.session[:questions_per]) : scope.per(10)
+		end
 	end
 	has_scope :select, :only => :index 
 	has_scope :uniq, :type => :boolean
