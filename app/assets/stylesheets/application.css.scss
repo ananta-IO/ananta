@@ -280,6 +280,9 @@ a{
 										@media(max-width: 979px){
 											width: auto;
 										}
+										@media(max-width: 767px){
+											width: 4.7em;
+										}
 									}
 								}
 								.dropdown-menu{
