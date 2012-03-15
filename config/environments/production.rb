@@ -34,7 +34,7 @@ Ananta::Application.configure do
   # config.log_level = :debug
 
   # Prepend all log lines with the following tags
-  config.log_tags = [ :subdomain, :uuid, :remote_ip ]
+  # config.log_tags = [ :subdomain, :uuid, :remote_ip ] # Heroku complains about this 3/14/12
 
   # Use a different logger for distributed setups
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
