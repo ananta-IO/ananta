@@ -70,5 +70,9 @@ module Ananta
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # Connect to the DB on precompile
+    # Heroku does not like this. Set it to false for now
+    config.assets.initialize_on_precompile = false
   end
 end
