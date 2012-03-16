@@ -305,3 +305,14 @@ a{
 		}
 	}
 }
+
+#question{
+	.answer{
+		.row > [class*="span"]{
+		 	@media(max-width: 767px){
+		 	
+		 		margin: 30px 0;
+		 	}
+		}	
+	}
+}

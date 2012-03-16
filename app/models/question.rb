@@ -8,8 +8,11 @@ class Question < ActiveRecord::Base
   #########################
   before_save :update_answer_count, :if => :answer_counts_changed?
 
-  # flag or vote up
-  acts_as_voteable # TODO: replace with relevance. to be queried in a 0-1000 range slider after every answer is submited. saved as question_relevance on answer and averaged in a worked and stored on quesiton as avg_relevance 
+  # Should more people answer this question? Yes or No
+  # Maybe just call it Vote and let the user decide what to make of it
+  acts_as_voteable 
+
+  # TODOooooooooo: add relevance. to be queried in a 0-1000 range slider after every answer is submited. saved as question_relevance on answer and averaged in a worker and stored on quesiton as avg_relevance. bias the ui to users with really nice track pads ;) and increase relevence by the durration and vigor with which a user rubs an answered question, make the question heat up (dark to red) as the user rubs. AND HAVE SPARKS COME OUT WHEN A QUESTION GETS RED HOT! Do not count the relevance of the user who created the question towards the average
 
   # Question state machine
   state_machine :initial => :published do
@@ -81,6 +84,10 @@ class Question < ActiveRecord::Base
   # Public Instance Methods ( def method_name )
   #########################
 
+  # Similar to the scope, but for the current record
+  def answered_by user_id
+    answers.where("user_id = ?", user_id).first
+  end
 
   #########################
   # Protected Methods

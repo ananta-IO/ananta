@@ -3,7 +3,7 @@ class QuestionsController < InheritedResources::Base
 	# Response Types
 	#########################
 	respond_to :html, :json
-	actions :index, :create, :update
+	actions :index, :show, :create, :update
 
 
 	#########################
@@ -11,7 +11,15 @@ class QuestionsController < InheritedResources::Base
 	#########################
 	has_scope :published, :type => :boolean, :only => :index, :default => true
 	has_scope :answered, :type => :boolean, :only => :index
-	# has_scope :answered_by # This is not exposed at the moment #TODO: should it be exposed?
+	has_scope :answered_by, :only => :index, :default => 'me' do |controller, scope, value|
+		if value == 'ireadthecode'
+			# Way to go! No scope for you!
+			scope
+		else
+			controller.current_user ? scope.answered_by(controller.current_user.id) : scope.answered_by(0)
+			# value != "me" ? scope.answered_by(value) : (controller.current_user ? scope.answered_by(controller.current_user.id) : scope)
+		end
+	end
 	has_scope :unanswered, :type => :boolean, :only => :index
 	has_scope :unanswered_by, :only => :index do |controller, scope, value|
 		value != "me" ? scope.unanswered_by(value) : (controller.current_user ? scope.unanswered_by(controller.current_user.id) : scope)
@@ -51,7 +59,8 @@ class QuestionsController < InheritedResources::Base
 	# Authentication
 	#########################
 	before_filter :authenticate_user!, :except => [:index, :show]
-	# load_and_authorize_resource # TODO: uncomment and fix bug with query :per
+	before_filter :authenticate_user!, :if =>  lambda { request.format == 'html' }, :except => :show
+	load_and_authorize_resource # TODO: uncomment and fix bug with query :per
 
 
 	#########################

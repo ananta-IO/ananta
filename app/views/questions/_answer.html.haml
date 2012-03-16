@@ -1,0 +1,20 @@
+.answer
+	-if current_user and (ans = @question.answered_by(current_user.id))
+		%h3.pull-right
+			%span.font-thin Your Answer &middot;
+			= ans.state.titleize
+	-else
+		%h3
+			Answer
+		= form_for( @question.answers.new, :url => "/questions/#{@question.id}/answers" ) do |f|
+			= text_area_tag :comment, nil, :class => "span4", :rows => 3, :placeholder => 'Comment (optional)'	
+			.row
+				= label :state_event_ans_, 'yes', :class => 'btn btn span1'
+				= radio_button_tag :state_event, :ans_yes, false, :onclick => "$('#new_answer').submit();", :class => 'off-screen'
+				
+				= label :state_event_ans_, 'no', :class => 'btn btn span1'
+				= radio_button_tag :state_event, :ans_no, false, :onclick => "$('#new_answer').submit();", :class => 'off-screen'
+				
+				= label :state_event_ans_, "Don't Care", :class => 'btn btn span1', :for => :state_event_ans_dont_care
+				= radio_button_tag :state_event, :ans_dont_care, false, :onclick => "$('#new_answer').submit();", :class => 'off-screen'
+		
