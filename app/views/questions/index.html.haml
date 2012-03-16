@@ -3,7 +3,9 @@
 #questions
 	.page-header
 		%h1 
-			Questions I've Answered
+			Questions 
+			%span{rel: 'tooltip', 'data-placement' => 'top', 'data-delay' => 500, 'data-original-title' => "ô_o"} I've 
+			Answered
 	.row
 		.span12
 			.sub-header 
@@ -14,22 +16,22 @@
 		
 			%table.table
 				%tr
-					%th question
-					%th answers
-					%th yes
-					%th no
-					%th{rel: 'tooltip', 'data-placement' => 'bottom', 'data-original-title' => "don't care"} d c
-					%th created
-					%th controller
-					%th action
-					%th id
-					%th url
-					%th love
-					%th trend
+					%th Question
+					%th{rel: 'tooltip', 'data-placement' => 'bottom', 'data-original-title' => "answer count"} ANS
+					%th{rel: 'tooltip', 'data-placement' => 'bottom', 'data-original-title' => "yes count"} Y
+					%th{rel: 'tooltip', 'data-placement' => 'bottom', 'data-original-title' => "no count"} N
+					%th{rel: 'tooltip', 'data-placement' => 'bottom', 'data-original-title' => "don't care count"} DC
+					%th Date
+					%th Controller
+					%th Action
+					%th Id
+					%th Url
+					%th Love
+					%th Trend
 				- @questions.each do |question|
 					%tr
 						%td
-							= link_to question.question, question
+							= link_to truncate(question.question, :length => 30), question, :rel => 'tooltip', 'data-placement' => 'right', 'data-original-title' => question.question
 						%td
 							= question.answer_count
 						%td
@@ -48,9 +50,9 @@
 							- if question.questionable_sid
 								= link_to question.questionable_sid, "/questions?q_sid=#{question.questionable_sid}"
 							- else
-								nil
+								none
 						%td
-							= link_to question.questionable_url, "/questions?q_url=#{question.questionable_url.html_safe}"
+							= link_to truncate(question.questionable_url, :length => 30), "/questions?q_url=#{question.questionable_url.html_safe}", :rel => 'tooltip', 'data-placement' => 'bottom', 'data-original-title' => question.questionable_url
 						%td
 							= question.votes_for
 							%i.icon-heart

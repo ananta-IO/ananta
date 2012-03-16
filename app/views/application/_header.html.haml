@@ -22,9 +22,13 @@
 	.navbar-inner
 		.container  
 			-# Left
-			%a.brand{:href => "/"} 
-				ananta IO
-				%i.icon-home
+			- if !current_user and request.path == '/'
+				%a.brand{:href => "/"} 
+					ananta IO
+			- else
+				%a.brand{:href => "/"} 
+					ananta IO
+					%i.icon-home
 			-# Right
 			.user-nav
 				%a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
