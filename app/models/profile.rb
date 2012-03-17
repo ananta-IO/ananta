@@ -122,6 +122,7 @@ class Profile < ActiveRecord::Base
   def add_gravatar
     puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
     puts self.inspect
+    puts self.user.inspect
     puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
     self.images.create({ remote_image_url: gravatar_url, image_type: 'avatar', user_id: self.user.id }) if self.avatars.count == 0
   end
