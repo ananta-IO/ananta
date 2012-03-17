@@ -27,7 +27,7 @@
 					%th Id
 					%th Url
 					%th Votes
-					%th Trend
+					%th Activity
 				- @questions.each do |question|
 					%tr
 						%td
@@ -56,7 +56,7 @@
 						%td
 							= question.plusminus
 						%td
-							-# TODO: make this work. up, right, down arrow for trend up, sideways, down 
+							-# TODO: make this work. up, right, down arrow for activity up, sideways, down 
 							%i.icon-arrow-right
 
 			.pull-right
