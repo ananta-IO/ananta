@@ -118,18 +118,19 @@ class Profile < ActiveRecord::Base
   #########################
   protected
 
-  # Same as Public Instance Methods
+  # Adds a gravatar if no avatar exists
+  def add_gravatar
+    puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+    puts.self.inspect
+    puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+    self.images.create({ remote_image_url: self.gravatar_url, image_type: 'avatar', user_id: self.user.id }) if self.avatars.count == 0
+  end
 
 
   #########################
   # Private Methods
   #########################
   private
-
-  # Adds a gravatar if no avatar exists
-  def add_gravatar
-    images.create({ remote_image_url: gravatar_url, image_type: 'avatar', user_id: user.id }) if avatars.count == 0
-  end
 
 
 end
