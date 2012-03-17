@@ -298,8 +298,8 @@ div.selector {
 div.selector select {
   width: 190px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size: 12px
-	border: solid 1px #fff;
+	font-size: 12px;
+	border: 1px solid #fff;
 }
 
 div.selector span {
@@ -346,7 +346,7 @@ div.uploader span.action {
 div.uploader span.filename {
   color: #777;
   width: 82px;
-  border-right: solid 1px #bbb;
+  border-right: 1px solid #bbb;
   font-size: 11px;
 }
 
