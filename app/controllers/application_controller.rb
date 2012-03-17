@@ -25,6 +25,15 @@ class ApplicationController < ActionController::Base
     filtered
   end
 
+  # Helper to insert the Current User ID (cuid) into hash fields that need it
+  # Adds nil if no current_user
+  def add_cuid(hash, *keys)
+    keys.each do |key|
+      hash[key][:cuid] = (current_user.id rescue nil) if hash[key]
+    end
+    hash
+  end
+
   def set_questionable
     session[:questionable_sid] = params[:id]
     session[:questionable_controller] = params[:controller]

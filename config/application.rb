@@ -74,5 +74,8 @@ module Ananta
     # Connect to the DB on precompile
     # Heroku does not like this. Set it to false for now
     config.assets.initialize_on_precompile = false
+
+    # Precompile *all* assets, except those that start with underscore
+    # config.assets.precompile << /(^[^_\/]|\/[^_])[^\/]*$/
   end
 end

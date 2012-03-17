@@ -1,7 +1,15 @@
+# This canonical record is the foundation of the site
+# Everything revolves around projects and making them better
+#
+
+require File.join(Rails.root, 'lib/ananta/vote')
+
 class Project < ActiveRecord::Base
   #########################
   # Callbacks & Misc method calls (e.g. devise for, acts_as_whatever )
   #########################
+  include Ananta::Vote
+
   acts_as_taggable_on :tags
   acts_as_voteable
 
@@ -36,8 +44,8 @@ class Project < ActiveRecord::Base
   #########################
   # Setup attributes (reader, accessible, protected)
   #########################
-  attr_reader :tag_tokens, :vote
-  attr_accessible :name, :description, :state_event, :tag_tokens, :vote
+  attr_reader :tag_tokens, :cast_vote
+  attr_accessible :name, :description, :state_event, :tag_tokens, :cast_vote
 
 
   #########################
@@ -90,19 +98,6 @@ class Project < ActiveRecord::Base
     self.tag_list = ids
   end
 
-  # Extend to handle voting
-  def update_attributes opts={}
-    # Loving and Flaging = Voting
-    vote(opts) if opts[:vote]
-
-    # Sanitize the hash
-    opts.delete :vote if opts[:vote] 
-    opts.delete :current_user_id if opts[:current_user_id]
-
-    # Super
-    super opts
-  end
-
   # The users who may modify this model
   def editors
     editors = [self.user]
@@ -119,21 +114,6 @@ class Project < ActiveRecord::Base
   # Private Methods
   #########################
   private
-
-  # Update Methods
-
-  # Cast a vote on this project i.e. Love or Flag
-  def vote opts
-    case opts[:vote]
-    when 'for'
-      vote = "vote_exclusively_for"
-    when 'against'
-      vote = "vote_exclusively_against"
-    when 'cancel'
-      vote = "unvote_for"
-    end
-    User.find(opts[:current_user_id]).send(vote, self) rescue nil
-  end
 
 
 end

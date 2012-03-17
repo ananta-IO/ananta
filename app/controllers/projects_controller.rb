@@ -6,7 +6,7 @@ class ProjectsController < InheritedResources::Base
 	before_filter :populate_selected_tags, :only => [:edit, :update]
 
 	before_filter :authenticate_user!, :except => [:index, :show]
-	before_filter :current_user_to_params, :only => :update
+	before_filter :cuid_to_params, :only => :update
 	load_and_authorize_resource
 
 	protected
@@ -15,9 +15,9 @@ class ProjectsController < InheritedResources::Base
 		@projects ||= end_of_association_chain.page(params[:page]).per(10)
 	end
 
-	def current_user_to_params
+	def cuid_to_params
 		params[:project] ||= {}
-		params[:project][:current_user_id] = current_user.id 
+		params[:project] = add_cuid(params[:project], :cast_vote)
 	end
 
 	def populate_tags

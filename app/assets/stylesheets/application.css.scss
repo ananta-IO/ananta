@@ -11,13 +11,26 @@
  *= require_self
 */
 
+// Resets and mixins
 @import "base";
+
+// Jquery ui
 @import "jquery-ui/jquery-ui-1.8.16.ie.css";
 @import "jquery-ui/jquery-ui-1.8.16.custom.css";
+
+// Twitter bootstrap
 @import "bootstrap";
 @import "bootstrap-responsive";
+
+// Iconic for bootstrap
 @import "font-awesome";
 @import "token-input-facebook"; // TODO: merge into application css and restyle
+
+
+
+///////////////////////////
+//     Ananta SCSS       //
+///////////////////////////
 
 @include sticky-footer(50px, "#wrapper", "#layout_footer", "#footer");
 
