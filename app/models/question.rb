@@ -1,11 +1,16 @@
 # A question must be binary (yes, no)
 # It can be answered with Yes, No, Don't Care. 
 # The questions with more Yes, No answers and fewer Don't Cares get displayed more.
+
+require File.join(Rails.root, 'lib/ananta/vote')
+
 class Question < ActiveRecord::Base
 
   #########################
   # Callbacks & Misc method calls (e.g. devise for, acts_as_whatever )
   #########################
+  include Ananta::Vote
+
   before_save :update_answer_count, :if => :answer_counts_changed?
 
   # Vote
@@ -36,7 +41,7 @@ class Question < ActiveRecord::Base
   #attr_reader
   #attr_accessor
   attr_accessible :question, :questionable_url, :questionable_sid, :questionable_controller, :questionable_action, :on => :create
-  attr_accessible :vote, :state_event
+  attr_accessible :cast_vote, :state_event
 
 
   #########################

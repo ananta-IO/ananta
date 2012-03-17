@@ -2,7 +2,7 @@ class QuestionsController < InheritedResources::Base
 	#########################
 	# Response Types
 	#########################
-	respond_to :html, :json
+	respond_to :js, :html, :json
 	actions :index, :show, :create, :update
 
 
@@ -60,6 +60,7 @@ class QuestionsController < InheritedResources::Base
 	#########################
 	before_filter :authenticate_user!, :except => [:index, :show]
 	before_filter :authenticate_user!, :if =>  lambda { request.format == 'html' }, :except => :show
+	before_filter :cuid_to_params, :only => :update
 	load_and_authorize_resource # TODO: uncomment and fix bug with query :per
 
 
@@ -87,5 +88,9 @@ class QuestionsController < InheritedResources::Base
 
 	def collection
 		@questions ||= apply_scopes(end_of_association_chain)
+	end
+
+	def cuid_to_params
+		params[:question] = add_cuid(params[:question], :cast_vote) if params[:question]
 	end
 end

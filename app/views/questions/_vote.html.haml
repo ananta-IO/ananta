@@ -1,0 +1,26 @@
+.vote
+    - if current_user  
+        .up        
+            - if current_user.voted_for? @question
+                = link_to question_url(@question, question: {cast_vote: {vote: :cancel}}), method: :put, remote: :true do
+                    %i.icon-chevron-up
+            - else
+                = link_to question_url(@question, question: {cast_vote: {vote: :for}}), method: :put, remote: :true do
+                    %i.icon-chevron-up.opacity4
+            &nbsp;
+        
+        .count
+            = @question.plusminus
+
+        .down
+            - if current_user.voted_against? @question            
+                = link_to question_url(@question, question: {cast_vote: {vote: :cancel}}), method: :put, remote: :true do
+                    %i.icon-chevron-down
+            - else
+                = link_to question_url(@question, question: {cast_vote: {vote: :against}}), method: :put, remote: :true do
+                    %i.icon-chevron-down.opacity4
+            &nbsp;
+
+    - else  
+        %h3
+            = pluralize(@question.plusminus, 'Vote')

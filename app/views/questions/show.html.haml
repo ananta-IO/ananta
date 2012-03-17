@@ -3,9 +3,15 @@
 #question
 	.page-header
 		.row
-			.span8
-				%h3 
-					== Question ##{@question.id}
+			.span1
+				= render 'vote'
+			.span7
+				%ul.breadcrumb.display-inline-block
+					%li
+						= link_to "questions", questions_path
+						%span.divider /
+					%li.active
+						= link_to @question.id, @question
 				%h1
 					= @question.question
 				%br
@@ -16,15 +22,6 @@
 			.span4
 				= render 'answer'
 	- if current_user and @question.answered_by(current_user.id)
-		.row
-			.span12
-				%ul.breadcrumb.display-inline-block
-					%li
-						= link_to "questions", questions_path
-						%span.divider /
-					%li.active
-						= link_to @question.id, @question
-
 		.row
 			.span5
 				.sub-header 

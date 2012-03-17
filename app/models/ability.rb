@@ -63,16 +63,17 @@ class Ability
 			can [:update], Project do |project|
 				# The user owns the project
 				project.editors.include? user or 
-					# The user is voting and only voting. current_user is filed in by the controller.
-					(params[:project] ? (params[:project][:vote] && params[:project][:current_user_id] && params[:project].size == 2) : false)
+					# The user is voting and only voting. cuid is filed in by the controller.
+					(params[:project] ? (params[:project][:cast_vote] && params[:project][:cast_vote][:cuid] && params[:project].size == 1) : false)
 			end
 
 
 			# Questions
 			can [:create], Question
-			# can [:update], Question do |question|
-				
-			# end
+			can [:update], Question do |question|
+				# The user is voting and only voting. cuid is filed in by the controller. No other params are present
+				(params[:question] ? (params[:question][:cast_vote] && params[:question][:cast_vote][:cuid] && params[:question].size == 1) : false)	
+			end
 
 
 			# Users

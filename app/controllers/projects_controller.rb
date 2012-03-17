@@ -16,8 +16,7 @@ class ProjectsController < InheritedResources::Base
 	end
 
 	def cuid_to_params
-		params[:project] ||= {}
-		params[:project] = add_cuid(params[:project], :cast_vote)
+		params[:project] = add_cuid(params[:project], :cast_vote) if params[:project]
 	end
 
 	def populate_tags

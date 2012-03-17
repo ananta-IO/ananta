@@ -1,8 +1,10 @@
 .answer
 	-if current_user and (ans = @question.answered_by(current_user.id))
-		%h3.pull-right
-			%span.font-thin Your Answer &middot;
-			= ans.state.titleize
+		.row
+			%h3.pull-right
+				%span.font-thin Your Answer &middot;
+				= ans.state.titleize
+			
 	-else
 		%h3
 			Answer

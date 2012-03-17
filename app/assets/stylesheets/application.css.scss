@@ -320,6 +320,23 @@ a{
 }
 
 #question{
+	.vote{
+		display: block;
+		font-size: 24px;
+		text-align: center;
+		// padding: 10px;
+		.up{
+			font-size: 28px;
+			margin-bottom: 10px;
+		}
+		.count{
+			margin-left: -8px;
+		}
+		.down{
+			font-size: 28px;
+			margin-top: -5px;
+		}
+	}
 	.answer{
 		.row > [class*="span"]{
 		 	@media(max-width: 767px){

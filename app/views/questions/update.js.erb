@@ -1,0 +1,3 @@
+$('#question .vote [rel*=tooltip]').tooltip('hide');
+$('#question .vote').replaceWith('<%= escape_javascript render("vote") %>');
+$('#question .vote [rel*=tooltip]').tooltip();

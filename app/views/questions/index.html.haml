@@ -26,7 +26,7 @@
 					%th Action
 					%th Id
 					%th Url
-					%th Love
+					%th Votes
 					%th Trend
 				- @questions.each do |question|
 					%tr
@@ -54,8 +54,7 @@
 						%td
 							= link_to truncate(question.questionable_url, :length => 30), "/questions?q_url=#{question.questionable_url.html_safe}", :rel => 'tooltip', 'data-placement' => 'bottom', 'data-original-title' => question.questionable_url
 						%td
-							= question.votes_for
-							%i.icon-heart
+							= question.plusminus
 						%td
 							-# TODO: make this work. up, right, down arrow for trend up, sideways, down 
 							%i.icon-arrow-right
