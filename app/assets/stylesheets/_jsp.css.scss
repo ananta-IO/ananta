@@ -9,6 +9,10 @@ $jsp_size:       	8px;
 $jsp_color_track:	$color-background;
 $jsp_color_drag: 	darken($color-background, 30%);
 
+.jspScrollable:focus{
+	outline: 0;
+}
+
 .jspContainer
 {
 	overflow: hidden;
