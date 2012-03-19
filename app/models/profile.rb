@@ -109,29 +109,23 @@ class Profile < ActiveRecord::Base
     editors
   end
 
-  def bam
-    add_gravatar
-  end
-
   #########################
   # Protected Methods
   #########################
   protected
 
-  # Adds a gravatar if no avatar exists
-  def add_gravatar
-    puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-    puts self.inspect
-    puts self.user.inspect
-    puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-    self.images.create({ remote_image_url: gravatar_url, image_type: 'avatar', user_id: self.user.id }) if self.avatars.count == 0
-  end
+  # Same as Public Instance Methods
 
 
   #########################
   # Private Methods
   #########################
   private
+
+  # Adds a gravatar if no avatar exists
+  def add_gravatar
+    images.create({ remote_image_url: gravatar_url, image_type: 'avatar', user_id: user.id }) if avatars.count == 0
+  end
 
 
 end

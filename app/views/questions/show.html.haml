@@ -5,13 +5,7 @@
 		.row
 			.span1
 				= render 'vote'
-			.span7
-				%ul.breadcrumb.display-inline-block
-					%li
-						= link_to "questions", questions_path
-						%span.divider /
-					%li.active
-						= link_to @question.id, @question
+			.span7	
 				%h1
 					= @question.question
 				%br
@@ -19,6 +13,12 @@
 					Asked by
 					= link_to @question.user.name, @question.user.profile 
 					= time_tag @question.created_at, "#{time_ago_in_words(@question.created_at)} ago"
+				%ul.breadcrumb.display-inline-block
+					%li
+						= link_to "questions", questions_path
+						%span.divider /
+					%li.active
+						= link_to @question.id, @question
 			.span4
 				= render 'answer'
 	- if current_user and @question.answered_by(current_user.id)

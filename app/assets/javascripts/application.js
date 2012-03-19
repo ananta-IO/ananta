@@ -25,6 +25,7 @@
 //= require backbone/ananta
 //= require jquery.isotope.min
 //= require jquery.uniform
+//= require jquery.mousewheel
 
 // Jquery FileUpload
 //= require 'jQUpload/tmpl.js'

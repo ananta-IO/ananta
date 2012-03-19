@@ -271,6 +271,9 @@ a{
 			}
 		}
 		.answer{
+			.span10{
+				overflow-x: auto;
+			}
 			.questions{
 				.question.wrap{
 					margin-bottom: 20px;

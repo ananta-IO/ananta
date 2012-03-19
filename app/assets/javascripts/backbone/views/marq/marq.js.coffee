@@ -44,6 +44,8 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 		view = new Ananta.Views.Marq.QuestionView({model : question})
 		view.bind('fetchQuestion', @fetchQuestion)
 		@$(".questions").prepend(view.render().el)
+		if @$(".questions").width() == 0 then @$(".questions").css( 'width', @$(".span10").width() )
+		@$(".questions").css( 'width', ( @$(".questions").outerWidth() + @$(".questions .span5").outerWidth() ) )
 
 	incrementCompleteness: (question) ->
 		c = question.get('completeness')
@@ -70,7 +72,7 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 		e.preventDefault()
 		e.stopPropagation()
 
-		question = new Ananta.Models.Question({question: @$(".ask input.question").val(), questionable_url: document.URL})
+		question = new Ananta.Models.Question({ question: @$(".ask input.question").val() })
 		question.save(null
 			success: (data) =>
 				@$(".ask input.question").val('')
