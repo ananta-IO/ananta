@@ -26,6 +26,8 @@
 @import "font-awesome";
 @import "token-input-facebook"; // TODO: merge into application css and restyle
 
+// Jquery Scroll Pane
+@import "jsp";
 
 
 ///////////////////////////
@@ -275,6 +277,21 @@ a{
 				overflow-x: auto;
 			}
 			.questions{
+				tr{
+					vertical-align: top;
+				}
+				td{
+					.span5{
+						width: 470px;
+						margin-left: 24px;
+					}
+
+					&:first-child{
+						.span5{
+							margin-left: 0;
+						}
+					}
+				}
 				.question.wrap{
 					margin-bottom: 20px;
 					.outer{
@@ -290,15 +307,15 @@ a{
 									@include border-radius(0);
 									&.state-event{
 										width: 7em;
-										@media(max-width: 1199px){
-											width: 4.7em;
-										}
-										@media(max-width: 979px){
-											width: auto;
-										}
-										@media(max-width: 767px){
-											width: 4.7em;
-										}
+										// @media(max-width: 1199px){
+										//	width: 4.7em;
+										// }
+										// @media(max-width: 979px){
+										//	width: auto;
+										// }
+										// @media(max-width: 767px){
+										//	width: 4.7em;
+										// }
 									}
 								}
 								.dropdown-menu{

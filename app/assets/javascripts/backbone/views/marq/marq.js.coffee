@@ -22,7 +22,9 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 		@collection.bind('remove', @fetchQuestion)
 
 	render: ->
+		# render the hamlc template
 		$(@el).html(@template())
+		
 		@questionCharCount()
 		@addPopovers()
 
@@ -35,17 +37,17 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 
 	renderQuestions: ->
 		if @collection.length > 0
-			@$(".questions").html("")
+			@$(".questions tr").html("")
 			@collection.each(@renderQuestion)
 		else
-			@$(".questions").html("<div class='span5'><div class='question wrap'><div class='outer'><div class='inner'>You have answered every question. Ask some. Please ^_^</div></div></div></div>")
+			@$(".questions tr").html("<div class='span5'><div class='question wrap'><div class='outer'><div class='inner'>You have answered every question. Ask some. Please ^_^</div></div></div></div>")
 		
 	renderQuestion: (question) ->
 		view = new Ananta.Views.Marq.QuestionView({model : question})
 		view.bind('fetchQuestion', @fetchQuestion)
-		@$(".questions").prepend(view.render().el)
-		if @$(".questions").width() == 0 then @$(".questions").css( 'width', @$(".span10").width() )
-		@$(".questions").css( 'width', ( @$(".questions").outerWidth() + @$(".questions .span5").outerWidth() ) )
+		@$(".questions tr").prepend(view.render().el)
+		# change the questions scroll bar to jsp for when questions overflow their container
+		$('#marq .answer .span10').jScrollPane()
 
 	incrementCompleteness: (question) ->
 		c = question.get('completeness')

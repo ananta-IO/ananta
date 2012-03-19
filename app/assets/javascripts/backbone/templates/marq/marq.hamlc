@@ -23,4 +23,6 @@
 			Answer
 
 	.span10
-		.row.questions
+		.questions
+			%table
+				%tr.row

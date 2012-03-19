@@ -1,39 +1,40 @@
-.question.wrap
-	.outer
-		.inner
-			.string
-				= @question
-			.actions.btn-toolbar
-				.btn-group.yes
-					%a.btn.state-event{:href => "#"} yes
-					%a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-						%span.caret
-					%ul.dropdown-menu
-						%form{:name => "answer"}
-							%li 
-								%textarea.input-xlarge{:rows => 3, :name => "comment", :placeholder => "Why yes?"}
-							%li
-								%button.btn{:name => "submit", :type => "submit"} yes &amp; comment
+.span5
+	.question.wrap
+		.outer
+			.inner
+				.string
+					= @question
+				.actions.btn-toolbar
+					.btn-group.yes
+						%a.btn.state-event{:href => "#"} yes
+						%a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+							%span.caret
+						%ul.dropdown-menu
+							%form{:name => "answer"}
+								%li 
+									%textarea.input-xlarge{:rows => 3, :name => "comment", :placeholder => "Why yes?"}
+								%li
+									%button.btn{:name => "submit", :type => "submit"} yes &amp; comment
 
-				.btn-group.no
-					%a.btn.state-event{:href => "#"} no
-					%a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-						%span.caret
-					%ul.dropdown-menu
-						%form{:name => "answer"}
-							%li 
-								%textarea.input-xlarge{:rows => 3, :name => "comment", :placeholder => "Why no?"}
-							%li
-								%button.btn{:name => "submit", :type => "submit"} no &amp; comment
+					.btn-group.no
+						%a.btn.state-event{:href => "#"} no
+						%a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+							%span.caret
+						%ul.dropdown-menu
+							%form{:name => "answer"}
+								%li 
+									%textarea.input-xlarge{:rows => 3, :name => "comment", :placeholder => "Why no?"}
+								%li
+									%button.btn{:name => "submit", :type => "submit"} no &amp; comment
 
-				.btn-group.dont-care
-					%a.btn.state-event{:href => "#"} don't care
-					%a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-						%span.caret
-					%ul.dropdown-menu
-						%form{:name => "answer"}
-							%li 
-								%textarea.input-xlarge{:rows => 3, :name => "comment", :placeholder => "Why don't you care?"}
-							%li
-								%button.btn{:name => "submit", :type => "submit"} don't care &amp; comment
+					.btn-group.dont-care
+						%a.btn.state-event{:href => "#"} don't care
+						%a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+							%span.caret
+						%ul.dropdown-menu
+							%form{:name => "answer"}
+								%li 
+									%textarea.input-xlarge{:rows => 3, :name => "comment", :placeholder => "Why don't you care?"}
+								%li
+									%button.btn{:name => "submit", :type => "submit"} don't care &amp; comment
 

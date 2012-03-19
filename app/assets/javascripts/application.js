@@ -26,6 +26,8 @@
 //= require jquery.isotope.min
 //= require jquery.uniform
 //= require jquery.mousewheel
+//= require mwheelIntent
+//= require jquery.jscrollpane
 
 // Jquery FileUpload
 //= require 'jQUpload/tmpl.js'
