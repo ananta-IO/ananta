@@ -11,7 +11,7 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 		'submit .ask form'                       : 'createQuestion'
 
 	initialize: (options) ->
-		_.bindAll(@, 'render', 'renderQuestions', 'renderQuestion', 'incrementCompleteness', 'questionCharCount', 'addPopovers', 'createQuestion', 'fetchQuestion')
+		_.bindAll(@, 'render', 'renderQuestions', 'renderQuestion', 'incrementCompleteness', 'questionCharCount', 'addPopovers', 'createQuestion', 'fetchQuestion', 'updateAnsScrollBar')
 		
 		@collection.each(@incrementCompleteness)
 		# @collection.comparator: (question) =>
@@ -20,6 +20,8 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 		@collection.bind('add', @renderQuestion)
 		@collection.bind('reset', @renderQuestions)
 		@collection.bind('remove', @fetchQuestion)
+		
+		$(window).bind('resize', @updateAnsScrollBar)
 
 	render: ->
 		# render the hamlc template
@@ -37,17 +39,22 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 
 	renderQuestions: ->
 		if @collection.length > 0
+			# render the question(s)
 			@$(".questions tr").html("")
 			@collection.each(@renderQuestion)
 		else
+			# render "you've answered them all hon :)"
 			@$(".questions tr").html("<div class='span5'><div class='question wrap'><div class='outer'><div class='inner'>You have answered every question. Ask some. Please ^_^</div></div></div></div>")
 		
 	renderQuestion: (question) ->
 		view = new Ananta.Views.Marq.QuestionView({model : question})
 		view.bind('fetchQuestion', @fetchQuestion)
 		@$(".questions tr").prepend(view.render().el)
-		# change the questions scroll bar to jsp for when questions overflow their container
-		$('#marq .answer .span10').jScrollPane()
+		@$(".questions tr td").first().hide()
+		@$(".questions tr td").first().show("slide", { direction: "left" }, 500)
+
+		# update the scroll bar
+		@updateAnsScrollBar()
 
 	incrementCompleteness: (question) ->
 		c = question.get('completeness')
@@ -86,11 +93,8 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 		)
 
 	fetchQuestion: ->
-		@collection.fetch
-			success: (collection) =>
-				# @collection.reset(collection)
+		@collection.fetch({add: true})
 
-		if @collection.length <= 2
-			return false #TODO
-		else
-			return false #TODO
+	updateAnsScrollBar: ->
+		$('#marq .answer .span10').jScrollPane()	
+

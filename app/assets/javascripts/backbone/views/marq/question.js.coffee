@@ -53,7 +53,7 @@ class Ananta.Views.Marq.QuestionView extends Backbone.View
 			{state_event: "ans_#{state_event}", comment: comment}
 			success: (data) =>
 				@$(".actions").html("#{state_event}!")	
-				# @.trigger('fetchQuestion')
+				@.trigger('fetchQuestion')
 			error: (data, jqXHR) =>
 				# @answer.set({errors: $.parseJSON(jqXHR.responseText)})
 				# @render()	
