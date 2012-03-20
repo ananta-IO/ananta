@@ -4,7 +4,6 @@ class Ananta.Views.Marq.QuestionView extends Backbone.View
 	template: JST['backbone/templates/marq/question']
 
 	tagName: 'td'
-	# className: 'span5'
 
 	events:
 		'click .dropdown-toggle'                 		: 'focusForm'

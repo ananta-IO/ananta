@@ -63,12 +63,12 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 		@$(".ask .span2 h1").popover
 			placement: 'bottom'
 			title: 'Dying to know something?'
-			content: 'Ask a yes or no question in 140 characters or less. Ask anything. Your questions and answers guide the evolution of this site.'
+			content: 'Ask a yes or no question in 140 characters or less. Ask anything. Your questions guide the evolution of this site and the projects on it.'
 
 		@$(".answer .span2 h1").popover
 			placement: 'bottom'
 			title: 'answers &nbsp;<i class="icon-chevron-right"/>&nbsp;itteration'
-			content: 'Answer as many questions as you want. Comments are optional. Asking and answering questions is the easiest way to impact the features and direction of this site.'
+			content: 'Answer as many questions as you want. Comments are optional. Answering questions is the easiest way to impact this site and the projects on it.'
 
 	createQuestion: (e) ->
 		e.preventDefault()

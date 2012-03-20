@@ -66,6 +66,11 @@ $color-border:          	#EEE;
 	display: inline-block;
 }
 
+.dropdown-menu.drop-left{
+	right: 0;
+	left: auto;
+}
+
 .font-normal{
 	font-weight: normal;
 }

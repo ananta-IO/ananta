@@ -274,6 +274,7 @@ a{
 		}
 		.answer{
 			.span10{
+				overflow: auto;
 				overflow-x: auto;
 			}
 			.questions{
@@ -297,6 +298,7 @@ a{
 					.outer{
 						.inner{
 							padding: 10px;
+							// height: 87px;
 							.string{
 								min-height: 3em;
 							}
@@ -319,11 +321,16 @@ a{
 									}
 								}
 								.dropdown-menu{
+									top: -67px;
 									@include border-radius(0);
+									&.no{
+										left: -147px;
+									}
 									form{
 										margin: 10px;
 										textarea{
 											@include border-radius(0);
+											width: 400px;
 										}
 										button{
 											margin-bottom: 10px;
