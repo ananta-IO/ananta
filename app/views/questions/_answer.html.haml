@@ -1,9 +1,36 @@
+=content_for :javascripts do
+	:javascript
+		window.onload = function () {
+			var r = Raphael("question_pie_chart", 275, 150),
+				pie = r.piechart(200, 75, 50, [#{@question.yes_count}, #{@question.no_count}, #{@question.dont_care_count}], { legend: ["%% - Yes", "%% - No", "%% - Don't Care"], legendpos: "west"});
+			//
+			pie.hover(function () {
+				this.sector.stop();
+				this.sector.scale(1.1, 1.1, this.cx, this.cy);
+				//
+				if (this.label) {
+					this.label[0].stop();
+					this.label[0].attr({ r: 7.5 });
+					this.label[1].attr({ "font-weight": 800 });
+				}
+			}, function () {
+				this.sector.animate({ transform: 's1 1 ' + this.cx + ' ' + this.cy }, 500, "bounce");
+				//
+				if (this.label) {
+					this.label[0].animate({ r: 5 }, 500, "bounce");
+					this.label[1].attr({ "font-weight": 400 });
+				}
+			});
+		};
+		
+
 .answer
 	-if current_user and (ans = @question.answered_by(current_user.id))
 		.row
 			%h3.pull-right
 				%span.font-thin Your Answer &middot;
 				= ans.state.titleize
+			#question_pie_chart.pull-right
 			
 	-else
 		%h3
@@ -19,4 +46,3 @@
 				
 				= label :state_event_ans_, "Don't Care", :class => 'btn btn span1', :for => :state_event_ans_dont_care
 				= radio_button_tag :state_event, :ans_dont_care, false, :onclick => "$('#new_answer').submit();", :class => 'off-screen'
-		

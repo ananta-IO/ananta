@@ -1,0 +1,11 @@
+.string.pull-left
+	%a.up{href: '#'}
+		%i.icon-chevron-up
+	%span.vote-count
+		= @vote_count
+	%a.down{href: '#'}
+		%i.icon-chevron-down
+	%p
+		= @question
+
+%div.pie.pull-left{id: "marq_pie_#{@id}"}

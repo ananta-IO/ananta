@@ -35,7 +35,6 @@ GEM
     ask_geo (0.1.0)
       json
     bcrypt-ruby (3.0.1)
-    blankslate (2.1.2.4)
     bootstrap-sass (2.0.1)
     builder (3.0.0)
     cancan (1.6.7)
@@ -133,9 +132,6 @@ GEM
     inherited_resources (1.3.1)
       has_scope (~> 0.5.0)
       responders (~> 0.6)
-    jbuilder (0.3.2)
-      activesupport (>= 3.0.0)
-      blankslate (>= 2.1.2.4)
     journey (1.0.3)
     jquery-rails (2.0.1)
       railties (>= 3.2.0, < 5.0)
@@ -186,6 +182,9 @@ GEM
       coderay (~> 1.0.5)
       method_source (~> 0.7.1)
       slop (>= 2.4.4, < 3)
+    rabl (0.6.1)
+      activesupport (>= 2.3.14)
+      multi_json (~> 1.1.0)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -307,7 +306,6 @@ DEPENDENCIES
   has_scope
   heroku
   inherited_resources
-  jbuilder
   jquery-rails
   kaminari
   koala
@@ -316,6 +314,7 @@ DEPENDENCIES
   pg
   possessive
   pry
+  rabl
   rails (= 3.2.2)
   rails-backbone
   rake

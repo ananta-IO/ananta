@@ -1,6 +1,12 @@
+-# Add the application js
 = javascript_include_tag "application"
 
+-# Add the google js api for goodies like charts
+%script{ src: "https://www.google.com/jsapi" }
+
 :javascript
+  google.load('visualization', '1.0', {'packages':['corechart']});
+  
   $(function(){
     // $('.modal').modal();
     // $('.dropdown-toggle').dropdown();

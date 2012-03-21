@@ -53,7 +53,7 @@ gem 'geocoder'
 gem 'ask_geo'
 
 # Misc
-gem 'jbuilder'
+gem 'rabl'
 gem 'jquery-rails'
 gem 'haml-rails'
 gem 'simple_form'

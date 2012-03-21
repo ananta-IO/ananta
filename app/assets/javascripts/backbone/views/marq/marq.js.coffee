@@ -11,17 +11,13 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 		'submit .ask form'                       : 'createQuestion'
 
 	initialize: (options) ->
-		_.bindAll(@, 'render', 'renderQuestions', 'renderQuestion', 'incrementCompleteness', 'questionCharCount', 'addPopovers', 'createQuestion', 'fetchQuestion', 'updateAnsScrollBar')
-		
-		@collection.each(@incrementCompleteness)
-		# @collection.comparator: (question) =>
-		#   question.get('completeness')
+		_.bindAll(@, 'render', 'renderQuestions', 'renderQuestion', 'questionCharCount', 'addPopovers', 'createQuestion', 'fetchQuestion', 'updateAnsScrollBar')
 
 		@collection.bind('add', @renderQuestion)
 		@collection.bind('reset', @renderQuestions)
 		@collection.bind('remove', @fetchQuestion)
 		
-		$(window).bind('resize', @updateAnsScrollBar)
+		# $(window).bind('resize', @updateAnsScrollBar)
 
 	render: ->
 		# render the hamlc template
@@ -55,11 +51,6 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 
 		# update the scroll bar
 		@updateAnsScrollBar()
-
-	incrementCompleteness: (question) ->
-		c = question.get('completeness')
-		new_c = if c then c + 1 else 0
-		question.set('completeness', new_c)
 
 	questionCharCount: ->
 		count = @$(".ask input.question").val().length

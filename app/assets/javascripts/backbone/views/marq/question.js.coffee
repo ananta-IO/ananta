@@ -6,14 +6,14 @@ class Ananta.Views.Marq.QuestionView extends Backbone.View
 	tagName: 'td'
 
 	events:
-		'click .dropdown-toggle'                 		: 'focusForm'
-		'click textarea'                         		: 'stopPropagation'
-		'click .btn-group.yes .state-event'      		: 'yes'
-		'submit .btn-group.yes form'             		: 'yes'
-		'click .btn-group.no .state-event'       		: 'no'
-		'submit .btn-group.no form'              		: 'no'
-		'click .btn-group.dont-care .state-event'		: 'dontCare'
-		'submit .btn-group.dont-care form'       		: 'dontCare'
+		'click .dropdown-toggle'                        : 'focusForm'
+		'click textarea'                                : 'stopPropagation'
+		'click .btn-group.yes .state-event'             : 'yes'
+		'submit .btn-group.yes form'                    : 'yes'
+		'click .btn-group.no .state-event'              : 'no'
+		'submit .btn-group.no form'                     : 'no'
+		'click .btn-group.dont-care .state-event'       : 'dontCare'
+		'submit .btn-group.dont-care form'              : 'dontCare'
 
 
 	initialize: (options) ->
@@ -51,10 +51,15 @@ class Ananta.Views.Marq.QuestionView extends Backbone.View
 	saveAnswer: (state_event, comment) ->
 		@answer.save(
 			{state_event: "ans_#{state_event}", comment: comment}
-			success: (data) =>
-				@$(".actions").html("#{state_event}!")	
+			success: (data) =>  
+				# add the data from the server to the question
+				@model.set(data['attributes']['question'])
+				# add the vote view
+				voteView = new Ananta.Views.Marq.VoteView({model: @model})
+				@$(".inner").html(voteView.render().el)
+				# fetch a new question
 				@.trigger('fetchQuestion')
 			error: (data, jqXHR) =>
 				# @answer.set({errors: $.parseJSON(jqXHR.responseText)})
-				# @render()	
+				# @render() 
 		)

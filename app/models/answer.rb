@@ -74,12 +74,6 @@ class Answer < ActiveRecord::Base
   # Public Instance Methods ( def method_name )
   #########################
 
-  ## One line description
-  ## maybe two
-  #def my_method
-  #
-  #end
-
 
   #########################
   # Protected Methods
