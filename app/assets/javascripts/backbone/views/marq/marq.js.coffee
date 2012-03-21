@@ -40,7 +40,7 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 			@collection.each(@renderQuestion)
 		else
 			# render "you've answered them all hon :)"
-			@$(".questions tr").html("<div class='span5'><div class='question wrap'><div class='outer'><div class='inner'>You have answered every question. Ask some. Please ^_^</div></div></div></div>")
+			@$(".questions tr").html("<div class='span5'><div class='question wrap'><div class='outer'><div class='inner'>You have answered every question. Why don't you go outside and take a break.</div></div></div></div>")
 		
 	renderQuestion: (question) ->
 		view = new Ananta.Views.Marq.QuestionView({model : question})

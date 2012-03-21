@@ -1,31 +1,54 @@
+- show_chart = current_user and (ans = @question.answered_by(current_user.id))
 =content_for :javascripts do
-	:javascript
-		window.onload = function () {
-			var r = Raphael("question_pie_chart", 275, 150),
-				pie = r.piechart(200, 75, 50, [#{@question.yes_count}, #{@question.no_count}, #{@question.dont_care_count}], { legend: ["%% - Yes", "%% - No", "%% - Don't Care"], legendpos: "west"});
-			//
-			pie.hover(function () {
-				this.sector.stop();
-				this.sector.scale(1.1, 1.1, this.cx, this.cy);
-				//
-				if (this.label) {
-					this.label[0].stop();
-					this.label[0].attr({ r: 7.5 });
-					this.label[1].attr({ "font-weight": 800 });
+	-if show_chart
+		:javascript
+			window.onload = function () {
+				var y = #{@question.yes_count},
+					n = #{@question.no_count},
+					d = #{@question.dont_care_count},
+					cy = '#5bb65b',
+					cn = '#da4e49',
+					cd = '#999999',
+					colors = Array(3);
+				if(y >= n && n >= d) {
+					colors = [cy, cn, cd];
+				}else if(y >= d && d >=n){
+					colors = [cy, cd, cn];
+				}else if(n >= y && y >= d){
+					colors = [cn, cy, cd];
+				}else if(n >= d && d >= y){
+					colors = [cn, cd, cy];
+				}else if(d >= y && y >= n){
+					colors = [cd, cy, cn];
+				}else if(d >= n && n >= y){
+					colors = [cd, cn, cy];
 				}
-			}, function () {
-				this.sector.animate({ transform: 's1 1 ' + this.cx + ' ' + this.cy }, 500, "bounce");
 				//
-				if (this.label) {
-					this.label[0].animate({ r: 5 }, 500, "bounce");
-					this.label[1].attr({ "font-weight": 400 });
-				}
-			});
-		};
+				var r = Raphael("question_pie_chart", 275, 150),
+					pie = r.piechart(200, 75, 50, [y, n, d], { legend: ["%% - Yes", "%% - No", "%% - Don't Care"], legendpos: "west", colors: [colors[0], colors[1], colors[2]] });
+				//
+				pie.hover(function () {
+					this.sector.stop();
+					this.sector.scale(1.1, 1.1, this.cx, this.cy);
+					//
+					if (this.label) {
+						this.label[0].stop();
+						this.label[0].attr({ r: 7.5 });
+						this.label[1].attr({ "font-weight": 800 });
+					}
+				}, function () {
+					this.sector.animate({ transform: 's1 1 ' + this.cx + ' ' + this.cy }, 500, "bounce");
+					//
+					if (this.label) {
+						this.label[0].animate({ r: 5 }, 500, "bounce");
+						this.label[1].attr({ "font-weight": 400 });
+					}
+				});
+			};
 		
 
 .answer
-	-if current_user and (ans = @question.answered_by(current_user.id))
+	-if show_chart
 		.row
 			%h3.pull-right
 				%span.font-thin Your Answer &middot;

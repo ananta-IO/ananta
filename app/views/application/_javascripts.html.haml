@@ -1,12 +1,7 @@
 -# Add the application js
 = javascript_include_tag "application"
 
--# Add the google js api for goodies like charts
-%script{ src: "https://www.google.com/jsapi" }
-
 :javascript
-  google.load('visualization', '1.0', {'packages':['corechart']});
-  
   $(function(){
     // $('.modal').modal();
     // $('.dropdown-toggle').dropdown();
@@ -25,6 +20,11 @@
       
 -#  Append your own using content_for :javascripts
 = yield :javascripts
+
+-# Add the google js api for goodies like charts
+%script{ src: "https://www.google.com/jsapi" }
+:javascript
+  google.load('visualization', '1.0', {'packages':['corechart']});
 
 -# Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
 -# chromium.org/developers/how-tos/chrome-frame-getting-started

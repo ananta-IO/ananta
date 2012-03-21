@@ -21,13 +21,14 @@ class Ananta.Views.Marq.VoteView extends Backbone.View
 
 	renderPieChart: ->
 		data = new google.visualization.DataTable()
-		console.log data
 		data.addColumn "string", "Answer"
 		data.addColumn "number", "Count"
 		data.addRows [ [ "Yes", @model.get('yes_count') ], [ "No", @model.get('no_count') ], [ "Dont' Care", @model.get('dont_care_count') ] ]
 		options =
-			width: 200
+			width: 175
 			height: 107
+			# colors: ['#d6e9c6', '#eed3d7', '#fbeed5']
+			colors: ['#5bb65b', '#da4e49', '#999999'] 
 
 		chart = new google.visualization.PieChart(document.getElementById("marq_pie_#{@model.id}"))
 		chart.draw data, options		
@@ -43,10 +44,10 @@ class Ananta.Views.Marq.VoteView extends Backbone.View
 		e.stopPropagation()
 
 	saveVote: (vote) ->
-		@model.toJSON(
+		@model.save(
 			{cast_vote: {vote: vote}}
-			# success: (data) =>
-			#	@$(".actions").html("#{vote}!")
+			success: (data) =>
+				@$(".actions").html("#{vote}!")
 			# error: (data, jqXHR) =>
 				# @answer.set({errors: $.parseJSON(jqXHR.responseText)})
 				# @render()	
