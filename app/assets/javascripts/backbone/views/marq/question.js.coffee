@@ -17,14 +17,20 @@ class Ananta.Views.Marq.QuestionView extends Backbone.View
 
 
 	initialize: (options) ->
-		_.bindAll(@, 'render', 'focusForm', 'stopPropagation', 'yes', 'no', 'dontCare', 'saveAnswer')
+		_.bindAll(@, 'render', 'addPopovers', 'focusForm', 'stopPropagation', 'yes', 'no', 'dontCare', 'saveAnswer')
 		@answer = new Ananta.Models.Answer
 		@answer.urlRoot = "/questions/#{@model.id}/answers"
 		@answer.bind('')
 
 	render: ->
 		$(@el).html(@template( @model.toJSON() ))
+		@addPopovers()
 		@
+
+	addPopovers: ->
+		@$(".string").tooltip
+			placement: 'bottom'
+			title: "#{@model.get('questionable_controller')} / #{@model.get('questionable_action')} #{if @model.get('questionable_sid') then '/ ' + @model.get('questionable_sid') else ''}"
 
 	focusForm: ->
 		wait 100, ->

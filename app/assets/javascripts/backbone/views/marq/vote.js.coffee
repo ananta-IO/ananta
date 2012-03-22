@@ -44,11 +44,13 @@ class Ananta.Views.Marq.VoteView extends Backbone.View
 		e.stopPropagation()
 
 	saveVote: (vote) ->
-		@model.save(
-			{cast_vote: {vote: vote}}
-			success: (data) =>
-				@$(".actions").html("#{vote}!")
-			# error: (data, jqXHR) =>
-				# @answer.set({errors: $.parseJSON(jqXHR.responseText)})
-				# @render()	
-		)
+		$.ajax 
+			type: 'PUT'
+			dataType: "json"
+			url: "/questions/#{@model.id}"
+			data: {question: {cast_vote: {vote: vote}}}  
+			success: (data) => 
+				console.log data
+				@model.set(data)
+				@render()
+			error: =>

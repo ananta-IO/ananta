@@ -6,6 +6,7 @@
 				var y = #{@question.yes_count},
 					n = #{@question.no_count},
 					d = #{@question.dont_care_count},
+					data = [y,n,d],
 					cy = '#5bb65b',
 					cn = '#da4e49',
 					cd = '#999999',
@@ -25,7 +26,8 @@
 				}
 				//
 				var r = Raphael("question_pie_chart", 275, 150),
-					pie = r.piechart(200, 75, 50, [y, n, d], { legend: ["%% - Yes", "%% - No", "%% - Don't Care"], legendpos: "west", colors: [colors[0], colors[1], colors[2]] });
+					pie = r.piechart(200, 75, 50, data, { legend: ["%% - Yes", "%% - No", "%% - Don't Care"], legendothers: '0% - Other', legendpos: "west", colors: colors });
+					r.text(200, 75, "Answers").attr({ font: "20px sans-serif" });
 				//
 				pie.hover(function () {
 					this.sector.stop();
