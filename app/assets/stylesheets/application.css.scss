@@ -229,12 +229,17 @@ a{
 			.wrap{
 				.outer{
 					margin-left: 10px;
+
+					.info{
+						color: #bbb;
+						font-size: 22px;
+					}
 				}
 			}
 		}
 		.ask{
 			form{
-				margin-bottom: 20px;
+				margin-bottom: 10px;
 				.wrap{
 					margin-bottom: 0px;
 					.outer{
@@ -272,10 +277,27 @@ a{
 				}
 			}
 		}
+		.alerts{
+			margin-bottom: 10px;
+			.alert{
+				display: inline-block;
+				margin: 0;
+				margin-right: 10px;	
+			}
+			// .alert-error{
+			//	color: white;
+			//	@include background-image(linear-gradient(#df3f3f, #c03232));
+			//	@include border-radius(3px);
+			//	@include box-shadow(rgba(255, 255, 255, 0.3) 0 1px 0 0 inset);
+			//	border: 1px solid #c03232;
+			//	@include text-shadow(rgba(black, 0.3) 1px 1px 0);
+			// }
+		}
 		.answer{
 			.span10{
 				overflow: auto;
 				overflow-x: auto;
+
 			}
 			.questions{
 				tr{

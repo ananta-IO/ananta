@@ -8,10 +8,10 @@
 			= @questionable_controller 
 		\/ 
 		%a.action{href: "/questions?q_controller=#{@questionable_controller}\&q_action=#{@questionable_action}"}
-			= @questionable_action 
-		\/ 
-		%a.id{href: "/questions?q_controller=#{@questionable_controller}\&q_action=#{@questionable_action}\&q_sid=#{@questionable_sid}"}
-			= @questionable_sid
+			= @questionable_action  
+		- if @questionable_sid
+			\/
+			%a.id{href: "/questions?q_controller=#{@questionable_controller}\&q_action=#{@questionable_action}\&q_sid=#{@questionable_sid}"}
+				= @questionable_sid 
 		&nbsp;&middot;&nbsp;
-		%a.info{href: '#'}
-			?
+		%i.info.icon-info-sign

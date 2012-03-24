@@ -27,7 +27,6 @@
 				//
 				var r = Raphael("question_pie_chart", 275, 150),
 					pie = r.piechart(200, 75, 50, data, { legend: ["%% - Yes", "%% - No", "%% - Don't Care"], legendothers: '0% - Other', legendpos: "west", colors: colors });
-					r.text(200, 75, "Answers").attr({ font: "20px sans-serif" });
 				//
 				pie.hover(function () {
 					this.sector.stop();

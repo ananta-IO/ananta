@@ -66,6 +66,5 @@ class Ananta.Views.Marq.QuestionView extends Backbone.View
 				# fetch a new question
 				@.trigger('fetchQuestion')
 			error: (data, jqXHR) =>
-				# @answer.set({errors: $.parseJSON(jqXHR.responseText)})
-				# @render() 
+				@.trigger( 'renderErrors', $.parseJSON(jqXHR.responseText) ) 
 		)
