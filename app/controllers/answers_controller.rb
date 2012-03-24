@@ -4,7 +4,7 @@ class AnswersController < InheritedResources::Base
 	actions :index, :show, :create, :update
 
 	before_filter :authenticate_user!, :except => [:index, :show]
-	load_and_authorize_resource
+	load_and_authorize_resource :only => [:index, :show, :update] # TODO: load and authorize "create" without breaking comment mass assignment
 
 	def show
 		super do |format|
@@ -16,12 +16,11 @@ class AnswersController < InheritedResources::Base
 		@question = Question.find(params[:question_id])
 
 		attrs = {}
-
-		attrs[:state_event] = params[:state_event]
+		attrs[:state_event] = params[:answer][:state_event]
 		attrs[:user_id] = current_user ? current_user.id : nil
-		unless pick(params, :comment)[:comment].blank?
+		unless (params[:answer][:comment].blank? rescue true)
 			attrs[:comment_attributes] = {}
-			attrs[:comment_attributes][:comment] = params[:comment]
+			attrs[:comment_attributes][:comment] = params[:answer][:comment]
 			attrs[:comment_attributes][:user_id] = attrs[:user_id]	
 		end
 

@@ -2,10 +2,10 @@
 	%a.up{href: '#'}
 		%i.icon-chevron-up
 	%span.vote-count
-		= @vote_count
+		= @question['vote_count']
 	%a.down{href: '#'}
 		%i.icon-chevron-down
 	%p
-		= @question
+		= @question['question']
 
-%div.pie.pull-left{id: "marq_pie_#{@id}"}
+%div.pie.pull-left{id: "marq_pie_#{@question['id']}"}

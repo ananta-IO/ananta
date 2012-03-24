@@ -3,7 +3,7 @@
 		.outer
 			.inner
 				.string
-					= @question
+					= @question['question']
 				.actions.btn-toolbar
 					.btn-group.yes
 						%a.btn.state-event{:href => "#"} yes

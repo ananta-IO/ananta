@@ -59,9 +59,8 @@ class QuestionsController < InheritedResources::Base
 	# Authentication
 	#########################
 	before_filter :authenticate_user!, :except => [:index, :show]
-	# before_filter :authenticate_user!, :if =>  lambda { request.format == 'html' }, :except => :show     # TODO: is this needed for anything?
 	before_filter :cuid_to_params, :only => :update
-	load_and_authorize_resource # TODO: uncomment and fix bug with query :per
+	load_and_authorize_resource
 
 
 	#########################
@@ -69,7 +68,7 @@ class QuestionsController < InheritedResources::Base
 	#########################
 	def create
 		attrs = {}
-		attrs = attrs.merge pick(params, :question)
+		attrs = attrs.merge pick(params[:question], :question)
 		attrs[:questionable_sid]		= session[:questionable_sid]
 		attrs[:questionable_controller] = session[:questionable_controller]
 		attrs[:questionable_url]   		= session[:questionable_url]

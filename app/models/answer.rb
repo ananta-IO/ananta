@@ -49,7 +49,6 @@ class Answer < ActiveRecord::Base
   #########################
   validates :user_id, :presence => true
   validates :question_id, :presence => true, :uniqueness => {:scope => :user_id, :message => "has already been answered by you"}
-  # validates :comment, :length => { :in => 1..140 }, :allow_blank => true
   validate :validate_state, :on => :create
 
 
