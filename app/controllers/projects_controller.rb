@@ -2,15 +2,38 @@ class ProjectsController < InheritedResources::Base
 	respond_to :js, :html, :json
 	belongs_to :user
 	defaults :route_prefix => ''
-	before_filter :populate_tags, :only => [:new, :create, :edit, :update]
+	before_filter :populate_tags, :only => [:new, :create, :edit, :update, :destroy]
 	before_filter :populate_selected_tags, :only => [:edit, :update]
 
 	before_filter :authenticate_user!, :except => [:index, :show]
 	before_filter :cuid_to_params, :only => :update
 	load_and_authorize_resource
 
+	def create
+		update! do |success, failure|
+			success.html do 
+				flash[:notice] = "Successfully created project. #{undo_link}"
+				redirect_to user_project_url(@user, @project)
+			end
+		end
+	end
+
 	def update
-		update!(:notice => "Successfully updated project. #{undo_link}") { user_project_url(@user, @project) }
+		update! do |success, failure|
+			success.html do 
+				flash[:notice] = "Successfully updated project. #{undo_link}"
+				redirect_to user_project_url(@user, @project)
+			end
+		end
+	end
+
+	def destroy
+		destroy! do |success, failure|
+			success.html do 
+				flash[:notice] = "Successfully deleted project. #{undo_link}"
+				redirect_to profile_url(@user)
+			end
+		end
 	end
 
 	protected

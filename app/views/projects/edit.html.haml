@@ -2,3 +2,5 @@
 	%h1 Editing project
 
 = render 'form'
+
+= link_to "Delete this project", user_project_path(@user, @project), :method => :delete

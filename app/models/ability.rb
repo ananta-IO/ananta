@@ -66,6 +66,10 @@ class Ability
 					# The user is voting and only voting. cuid is filed in by the controller.
 					(params[:project] ? (params[:project][:cast_vote] && params[:project][:cast_vote][:cuid] && params[:project].size == 1) : false)
 			end
+			can [:destroy], Project do |project|
+				# The user created the project
+				project.user_id == user.id
+			end
 
 
 			# Questions
@@ -84,7 +88,7 @@ class Ability
 			# Versions
 			can :revert, Version do |version|
 				# Versionable items must return an editors array
-				version.item.editors.include? user
+				version.whodunnit.to_i == user.id or (version.item.editors.include? user rescue false)
 			end
 		end
 
