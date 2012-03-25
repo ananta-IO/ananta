@@ -9,6 +9,10 @@ class ProjectsController < InheritedResources::Base
 	before_filter :cuid_to_params, :only => :update
 	load_and_authorize_resource
 
+	def update
+		update!(:notice => "Successfully updated project. #{undo_link}") { user_project_url(@user, @project) }
+	end
+
 	protected
 
 	def collection
@@ -30,5 +34,9 @@ class ProjectsController < InheritedResources::Base
 		@project = Project.find(params[:id])
 
 		@selected_tags['tags'] = @project.tags.map{|t| {:id => t.name, :name => t.name}}
+	end
+
+	def undo_link
+		view_context.link_to("undo", revert_version_path(@project.versions.scoped.last), :method => :post)
 	end
 end

@@ -1,5 +1,7 @@
 Ananta::Application.routes.draw do
 
+	post "versions/:id/revert" => "versions#revert", :as => "revert_version"
+	
 	resources :sessions, :only => [:index]
 
 	resources :comments, :only => [:index, :create, :update]

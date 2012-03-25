@@ -10,6 +10,7 @@ class Project < ActiveRecord::Base
   #########################
   include Ananta::Vote
 
+  has_paper_trail # TODO: add tags to versioning, exclude name (i.e. friendly_id) from version
   acts_as_taggable_on :tags
   acts_as_voteable
 
@@ -44,7 +45,8 @@ class Project < ActiveRecord::Base
   #########################
   # Setup attributes (reader, accessible, protected)
   #########################
-  attr_reader :tag_tokens, :cast_vote
+  # attr_reader :cast_vote
+  attr_accessor :tag_tokens
   attr_accessible :name, :description, :state_event, :tag_tokens, :cast_vote
 
 

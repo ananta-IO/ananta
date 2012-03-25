@@ -19,6 +19,9 @@ gem 'cancan'
 # Slugging
 gem 'friendly_id', '>= 4.0.0.beta14'
 
+# Versioning
+gem 'paper_trail'
+
 # Clean RESTful controllers 
 gem 'inherited_resources'
 # and controller scopes

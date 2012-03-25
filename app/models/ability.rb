@@ -80,6 +80,12 @@ class Ability
 			can :update, User do |usr|
 				usr == user
 			end
+
+			# Versions
+			can :revert, Version do |version|
+				# Versionable items must return an editors array
+				version.item.editors.include? user
+			end
 		end
 
 
