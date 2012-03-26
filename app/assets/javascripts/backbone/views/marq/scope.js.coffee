@@ -23,11 +23,11 @@ class Ananta.Views.Marq.ScopeView extends Backbone.View
 			title: 'Scope'
 			content: 'This is your current scope. Any question you ask will automatically be connected to your current scope. Go to a different page to change the scope of your question.'
 		@$("a.controller").tooltip
-			placement: 'left'
+			placement: 'bottom'
 			title: 'controller'	
 		@$("a.action").tooltip
-			placement: 'left'
+			placement: 'bottom'
 			title: 'action'	
 		@$("a.id").tooltip
-			placement: 'left'
+			placement: 'bottom'
 			title: 'id'	

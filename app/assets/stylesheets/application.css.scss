@@ -34,7 +34,7 @@
 //     Ananta SCSS       //
 ///////////////////////////
 
-@include sticky-footer(50px, "#wrapper", "#layout_footer", "#footer");
+@include sticky-footer(60px, "#wrapper", "#layout_footer", "#footer");
 
 body{
 	background: $color-background;
@@ -402,5 +402,11 @@ a{
 		 		margin: 30px 0;
 		 	}
 		}	
+	}
+}
+
+#footer{
+	.container{
+		padding-top: 20px;
 	}
 }

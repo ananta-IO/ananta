@@ -17,7 +17,7 @@ class Ananta.Views.Marq.QuestionView extends Backbone.View
 
 
 	initialize: (options) ->
-		_.bindAll(@, 'render', 'addPopovers', 'focusForm', 'stopPropagation', 'yes', 'no', 'dontCare', 'saveAnswer')
+		_.bindAll(@, 'render', 'addPopovers', 'focusForm', 'stopPropagation', 'yes', 'no', 'dontCare', 'saveAnswer', 'removeQuestion')
 		@answer = new Ananta.Models.Answer
 		@answer.urlRoot = "/questions/#{@model.id}/answers"
 		@answer.bind('')
@@ -30,7 +30,7 @@ class Ananta.Views.Marq.QuestionView extends Backbone.View
 	addPopovers: ->
 		@$(".string").tooltip
 			placement: 'bottom'
-			title: "#{@model.get('questionable_controller')} / #{@model.get('questionable_action')} #{if @model.get('questionable_sid') then '/ ' + @model.get('questionable_sid') else ''}"
+			title: "Scope &middot; #{@model.get('questionable_controller')} / #{@model.get('questionable_action')} #{if @model.get('questionable_sid') then '/ ' + @model.get('questionable_sid') else ''}"
 
 	focusForm: ->
 		wait 100, ->
@@ -62,10 +62,14 @@ class Ananta.Views.Marq.QuestionView extends Backbone.View
 				@model.set(data['attributes']['question'])
 				@model.set('just_answered', true)
 				# add the vote view
-				voteView = new Ananta.Views.Marq.VoteView({model: @model})
+				voteView = new Ananta.Views.Marq.VoteView({model: @model, collection: @collection})
+				voteView.bind('removeQuestion', @removeQuestion)
 				@$(".inner").html(voteView.render().el)
 				# fetch a new question
 				@.trigger('fetchQuestion')
 			error: (data, jqXHR) =>
 				@.trigger( 'renderErrors', $.parseJSON(jqXHR.responseText) ) 
 		)
+
+	removeQuestion: ->
+		@remove()

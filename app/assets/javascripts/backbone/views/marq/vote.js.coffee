@@ -52,4 +52,7 @@ class Ananta.Views.Marq.VoteView extends Backbone.View
 			success: (data) => 
 				@model.set(data)
 				@render()
+				wait 300, =>
+					@collection.remove(@model)
+					@.trigger('removeQuestion')
 			error: =>

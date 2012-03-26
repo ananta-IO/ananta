@@ -40,7 +40,7 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 			@noMoreQuestions()
 			
 	renderQuestion: (question) ->
-		view = new Ananta.Views.Marq.QuestionView({model : question})
+		view = new Ananta.Views.Marq.QuestionView({model : question, collection : @collection})
 		view.bind('fetchQuestion', @fetchQuestion)
 		view.bind('renderErrors', @renderErrors)
 		@$(".questions tr").prepend(view.render().el)
