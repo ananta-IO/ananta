@@ -10,3 +10,8 @@ class Ananta.Collections.QuestionsCollection extends Backbone.Collection
 		if options then @query = options.query else @query = ''
 	url: ->
 		"/questions#{@query}"
+
+	justAnswered: () ->
+		_(@.filter( (question) ->
+			question.get('just_answered') == true
+			))

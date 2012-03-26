@@ -50,7 +50,6 @@ class Ananta.Views.Marq.VoteView extends Backbone.View
 			url: "/questions/#{@model.id}"
 			data: {question: {cast_vote: {vote: vote}}}  
 			success: (data) => 
-				console.log data
 				@model.set(data)
 				@render()
 			error: =>

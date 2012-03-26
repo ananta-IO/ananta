@@ -11,13 +11,10 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 		'submit .ask form'                       : 'createQuestion'
 
 	initialize: (options) ->
-		_.bindAll(@, 'render', 'renderQuestions', 'renderQuestion', 'renderErrors', 'clearErrors', 'questionCharCount', 'addPopovers', 'createQuestion', 'fetchQuestion', 'updateAnsScrollBar')
+		_.bindAll(@, 'render', 'renderQuestions', 'renderQuestion', 'renderErrors', 'clearErrors', 'questionCharCount', 'addPopovers', 'createQuestion', 'fetchQuestion', 'updateAnsScrollBar', 'noMoreQuestions')
 
 		@collection.bind('add', @renderQuestion)
 		@collection.bind('reset', @renderQuestions)
-		@collection.bind('remove', @fetchQuestion)
-		
-		# $(window).bind('resize', @updateAnsScrollBar)
 
 	render: ->
 		# render the hamlc template
@@ -40,8 +37,8 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 			@collection.each(@renderQuestion)
 		else
 			# render "you've answered them all hon :)"
-			@$(".questions tr").html("<div class='span5'><div class='question wrap'><div class='outer'><div class='inner'>You have answered every question. Why don't you go outside and take a break... Or don't do that and ask more questions.</div></div></div></div>")
-		
+			@noMoreQuestions()
+			
 	renderQuestion: (question) ->
 		view = new Ananta.Views.Marq.QuestionView({model : question})
 		view.bind('fetchQuestion', @fetchQuestion)
@@ -82,13 +79,13 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 	addPopovers: ->
 		@$(".ask .span2 h1").popover
 			placement: 'bottom'
-			title: 'Dying to know something?'
-			content: 'Ask a yes or no question in 140 characters or less. Ask anything. Your questions guide the evolution of this site and the projects on it.'
+			title: 'Want to know something?'
+			content: 'Ask a yes or no question in 140 characters or less. Ask anything. Each question is tied to the page it was asked on. Please try to ask questions relevant to the current page. Thanks for asking.'
 
 		@$(".answer .span2 h1").popover
 			placement: 'bottom'
 			title: 'Answers &nbsp;<i class="icon-chevron-right"/>&nbsp;Iteration'
-			content: 'Answer as many questions as you want. Comments are optional. Answering questions is the easiest way to impact this site and the projects on it.'
+			content: 'Answering questions is the easiest way to impact this site and the projects on it. Answer as many questions as you want. Comments are optional. The questions on every page are unique. Go to a different page to see the questions asked on it.'
 
 	createQuestion: (e) ->
 		e.preventDefault()
@@ -106,8 +103,20 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 		)
 
 	fetchQuestion: ->
-		@collection.fetch({add: true})
+		l = @collection.length
+		# Only fetch a question if all questions have been answered
+		if l == @collection.justAnswered().size()
+			@collection.fetch
+				add: true
+				success: (collection) =>
+					# If no question could be fetched then all questions are answered
+					if collection.length == l
+						@noMoreQuestions()
+						@updateAnsScrollBar()
 
 	updateAnsScrollBar: ->
 		$('#marq .answer .span10').jScrollPane()	
+
+	noMoreQuestions: ->
+		@$(".questions tr").prepend("<td><div class='span5'><div class='question wrap'><div class='outer'><div class='inner'>You have answered every question on this page. Why don't you go outside and take a break... Or go to a different page and answer more questions.</div></div></div></div></td>")
 

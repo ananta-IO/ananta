@@ -60,6 +60,7 @@ class Ananta.Views.Marq.QuestionView extends Backbone.View
 			success: (data) =>  
 				# add the data from the server to the question
 				@model.set(data['attributes']['question'])
+				@model.set('just_answered', true)
 				# add the vote view
 				voteView = new Ananta.Views.Marq.VoteView({model: @model})
 				@$(".inner").html(voteView.render().el)

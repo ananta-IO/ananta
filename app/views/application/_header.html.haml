@@ -2,7 +2,11 @@
 	:javascript
 		$(function() {
 			// Add marq to view
-			Ananta.router = new Ananta.Routers.MarqRouter();
+			Ananta.router = new Ananta.Routers.MarqRouter({
+				q_controller: "#{params[:controller]}",
+				q_action: "#{params[:action]}",
+				q_sid: "#{params[:id]}"
+			});
 			// Backbone.history.start();
 		});
 		// Open and close marq
