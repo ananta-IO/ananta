@@ -33,12 +33,9 @@
 //= require g.pie-min
 
 // Jquery FileUpload
-//= require 'jQUpload/tmpl.js'
 //= require 'jQUpload/load-image.js'
-//= require 'jQUpload/vendor/jquery.ui.widget.js'
 //= require 'jQUpload/jquery.iframe-transport.js'
 //= require 'jQUpload/jquery.fileupload.js'
-//= require 'jQUpload/jquery.fileupload-ui.js'
 
 //= require wait
 //= require date
