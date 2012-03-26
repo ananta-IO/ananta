@@ -4,8 +4,9 @@
 	%h1 
 		= @profile.name
 		-if can? :edit, @profile
-			.pull-right 
-				= link_to 'Edit Profile', edit_profile_path(@profile)
+			.display-inline-block
+				%p.m0 
+					= link_to 'Edit Profile', edit_profile_path(@profile)
 .row
 	.span4
 		.row

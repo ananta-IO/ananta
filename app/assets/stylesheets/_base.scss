@@ -87,6 +87,10 @@ $color-border:          	#EEE;
 	font-weight: 100;
 }
 
+.m0{
+	margin: 0;
+}
+
 .off-screen{
 	position: absolute;
 	left: -999px;
@@ -101,3 +105,7 @@ $color-border:          	#EEE;
 .opacity7{ opacity: 0.7; }
 .opacity8{ opacity: 0.8; }
 .opacity9{ opacity: 0.9; }
+
+.p0{
+	padding: 0;
+}
