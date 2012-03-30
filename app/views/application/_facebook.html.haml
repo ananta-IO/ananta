@@ -23,27 +23,18 @@
 
   // Login function
   function fbLogin(callback) {
-    // Is user logged into FB
-    FB.getLoginStatus(function(response) {
-      // User has authorized ananta app
-      if (response.status === 'connected') {
+    FB.login(function(response) {
+      // User authorizes app
+      if (response.authResponse) {
         login(response);
-      // User needs to authorize ananta app
-      } else {
-        FB.login(function(response) {
-          // User authorizes app
-          if (response.authResponse) {
-            login(response);
-          }
-        }, { scope: '#{Facebook::SCOPE}' });
       }
-    });
+    }, { scope: '#{Facebook::SCOPE}' });
 
     function login(response) {
       if (callback) {
         callback(response);
       } else {
-        $('.facebook-button a').prepend('<img src="/assets/ajax-loader-white.gif" class="loader" />&nbsp;')
+        $('.facebook-button a').prepend('<img src="/assets/ajax-loader-black-dots.gif" class="loader" />&nbsp;')
         $.ajax({
           url: "#{user_omniauth_callback_path(:facebook)}",
           success: function(){

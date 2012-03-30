@@ -50,6 +50,8 @@
 			- @profile.user.projects.each do |project|
 				%tr
 					%td
+						.pull-left
+							= image_tag(project.avatar.image.small.url)
 						%h3
 							= link_to project.name, [@profile.user, project]
 							.pull-right

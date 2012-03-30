@@ -114,14 +114,6 @@ class User < ActiveRecord::Base
 		self.name.split(" ").last
 	end
 
-	# TODO: use jbuilder
-	def as_json(opts={})
-		default_opts = {:only => [:id, :email, :name], :include => { :profile => { :methods => :avatar }  }}
-		default_opts = default_opts.merge! opts unless opts.blank?
-		results = super(default_opts)
-		results
-	end
-
 	# The users who may modify this model
 	def editors
 		editors = [self]

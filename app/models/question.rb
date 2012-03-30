@@ -100,11 +100,7 @@ class Question < ActiveRecord::Base
 
   # Return true if any of the answer counts change
   def answer_counts_changed?
-    if yes_count_changed? or no_count_changed? or dont_care_count_changed?
-      true
-    else
-      false
-    end
+    (yes_count_changed? or no_count_changed? or dont_care_count_changed?) ? true : false
   end
 
   # Increment or decrement answer_count

@@ -8,12 +8,55 @@
 		$(document).ready(function() {
 			$('#project_tag_tokens').tokenInput(window.project_tags, { theme : 'facebook', preventDuplicates: true, tokenLimit: 100, prePopulate: window.selected_project_tags, createTokenFromQuery: true } );
 		});
+		//
+	-if params[:action] == 'edit'
+		:javascript
+			$(function () {
+				// Initialize the jQuery File Upload widget:
+				$("#project_avatar").fileupload({
+					namespace: "file_upload_project_avatar",
+					url: "/images.json",
+					method: "PUT",
+					autoUpload: true,
+					maxFileSize: 5000000,
+					acceptFileTypes: /(\.|\/)(gif|jpg|jpeg|png)$/i,
+					formData: [
+						{
+							name: "imageable_type",
+							value: "Project"
+						}, {
+							name: "imageable_id",
+							value: #{@project.id}
+						}, {
+							name: "image_type",
+							value: "avatar"
+						}
+					],
+					add: function(e, data){
+						$('.new-image').prepend('<img src="/assets/ajax-loader-white-bg.gif" class="loader" />')
+						$('.new-image input').attr('disabled', 'disabled')
+						data.submit();
+					},
+					done: function(e, data){
+						$('.new-image img').remove()
+						$('.new-image input').removeAttr('disabled')
+						$('#project_avatar > img').attr('src', data.result[0].medium_url)
+					}
+				});
+			});
 
 .row
 	.span12
 		= simple_form_for [@user, @project], :html => {:class => "form-horizontal"} do |f|
 			= f.input :name, input_html: {class: :span4}
 			%br
+			-if params[:action] == 'edit'
+				= f.input :avatar, hint: raw('avatar will change as soon as you choose a file or <br/> drag an image onto the screen') do
+					#project_avatar
+						= image_tag(@project.avatar.image.medium.url)
+						.new-image
+							= f.file_field :avatar, name: :image, id: :avatar_file
+				%br
 			= f.input :description, input_html: {rows: 5, class: :span4}
 			%br
 			= f.input :tag_tokens, label: "Tags"

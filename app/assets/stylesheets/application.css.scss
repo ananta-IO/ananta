@@ -410,3 +410,15 @@ a{
 		padding-top: 20px;
 	}
 }
+
+#home{
+	#waywo{
+		margin-top: 200px;
+		input{
+			border: 0 none;
+			outline: 0 none;
+			@include box-shadow(none);
+			border-bottom: 1px dashed #bbb;
+		}
+	}
+}

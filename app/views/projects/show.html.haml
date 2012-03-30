@@ -15,6 +15,7 @@
 			%p
 				%b Name:
 				= @project.name
+			= image_tag(@project.avatar.image.small.url)
 			%p
 				%b Description:
 				= @project.description

@@ -28,7 +28,7 @@ class Comment < ActiveRecord::Base
   #########################
   # Validations
   #########################
-  validates :comment, :presence => true, :length => { :in => 1..2047 }
+  validates :comment, :presence => true, :length => { :in => 1..65535 }
 
 
   #########################
