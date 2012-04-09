@@ -9,7 +9,7 @@
                 - else
                     .btn
                         = pluralize(@project.votes_for, 'Lover')
-                    = link_to user_project_url(@user, @project, project: {cast_vote: {vote: :for}}), method: :put, remote: :true, class: 'btn', rel: 'tooltip', title: 'love', 'data-placement' => 'left' do
+                    = link_to user_project_url(@user, @project, project: {cast_vote: {vote: :for}}), method: :put, remote: :true, class: 'btn', rel: 'tooltip', title: 'send love', 'data-placement' => 'left' do
                         %i.icon-heart.opacity4
             .btn-group
                 - if current_user.voted_against? @project            

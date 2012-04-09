@@ -220,10 +220,12 @@ a{
 	.container{
 		padding: 10px 0 15px;
 		h1{
-			color: transparent;
-			background-color: rgba(82,96,117,0.5);
-			@include background-clip(text);
-			text-shadow: rgba(255,255,255,0.5) 0 5px 6px;
+			color: #999;
+			font-weight: 200;
+			// color: transparent;
+			// background-color: rgba(82,96,117,0.5);
+			// @include background-clip(text);
+			// text-shadow: rgba(255,255,255,0.5) 0 5px 6px;
 		}
 		.scope{
 			.wrap{
@@ -300,6 +302,9 @@ a{
 
 			}
 			.questions{
+				// @include transition-property(all);
+				// @include transition-duration(1.0s);
+				// @include transition-timing-function(ease-in);
 				tr{
 					vertical-align: top;
 				}
