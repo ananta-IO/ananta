@@ -1,0 +1,20 @@
+.modal-header
+	%a.close{"data-dismiss" => "modal"} ×
+.modal-body
+	.center
+		.facebook
+			%p Sign in with
+			%a{href: '#'}
+				%img{src: '/assets/facebook_circle.png', alt: 'facebook'}
+		.separator 
+			%span Or
+		.email
+			%form.login{:name => "login", :action => "/users/sign_in", :method => "post"}
+				%div{:class => "input string required login-email"}
+					%input#login-email{:type => "text", :name => "user[email]", :title => "email"}
+				%div{:class => "input string required password"}
+					%input#login-password{:type => "password", :name => "user[password]", :title => "password"}
+					%a.forgot-password{href: '/users/password/new'} Forgot?
+				%div{:class => "button"}
+					%button#login-action.login-action{:name => "login-action", :type => "submit"} 
+						%span Sign in

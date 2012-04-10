@@ -25,6 +25,7 @@
 //= require backbone/ananta
 //= require jquery.isotope.min
 //= require jquery.uniform
+//= require jquery.jlabel
 //= require jquery.mousewheel
 //= require mwheelIntent
 //= require jquery.jscrollpane
@@ -41,13 +42,3 @@
 //= require date
 
 //= require_tree .
-
-// Remove flash after a few seconds
-// $(window).load(function() {
-//	$('#flash .alert').show('fade', {}, 1000).delay(8000).slideUp(500);
-// });
-
-// Stop dropdowns from closing when input field clicked
-$('.dropdown input').bind('click', function (e) {
-	e.stopPropagation();
-})

@@ -15,6 +15,7 @@ Ananta::Application.routes.draw do
 
 	resources :images, :only => [:create, :update, :destroy]
 
+	resources :users, :only => [:index]
 	devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 	devise_scope :user do
 		get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
@@ -22,8 +23,7 @@ Ananta::Application.routes.draw do
 		get '/logout' => 'devise/sessions#destroy'
 	end
 
-	# TODO: remove before golive
-	match '/tb' => 'pages#tb'
+	match '/tb' => 'pages#tb' if Rails.env == 'development'
 
 	root :to => 'pages#home'
 

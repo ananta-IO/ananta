@@ -61,12 +61,18 @@
 											%i.icon-signout
 											logout
 						-else
+							%li
+								%a.login
+									%i.icon-signin
 							%li.dropdown
 								%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
 									%i.icon-signin
 								%ul.dropdown-menu
 									= form_for(User.new, :url => user_session_path) do |f|
 										%li.nav-header
+											.pull-right
+												= link_to '#', onclick: "fbLogin()", :class => 'fb-login', rel: :tooltip, 'data-placement' => 'left', 'data-original-title' => 'login with facebook' do
+													%i.icon-facebook-sign
 											Login
 										%li.nav-header
 											= f.text_field :login, class: 'span2', placeholder: 'username or email', autofocus: true

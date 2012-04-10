@@ -9,7 +9,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Facebook" 
     sign_in @user, :event => :authentication
-    render json: {user: @user.to_json, success: true}\
+    render json: {user: @user.to_json, success: true}
   end
 
   def passthru

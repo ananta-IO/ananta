@@ -34,14 +34,14 @@
       if (callback) {
         callback(response);
       } else {
-        $('.facebook-button a').prepend('<img src="/assets/ajax-loader-black-dots.gif" class="loader" />&nbsp;')
+        $('a.fb-login').prepend('<img src="/assets/ajax-loader-black-dots.gif" class="loader" />&nbsp;')
         $.ajax({
           url: "#{user_omniauth_callback_path(:facebook)}",
           success: function(){
             window.location.replace("#{root_url}");
           },
           error: function(){
-            $('.facebook-button img').remove();
+            $('a.fb-login .loader').remove();
           }
         });
       }
