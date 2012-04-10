@@ -24,6 +24,11 @@
 
 // Iconic for bootstrap
 @import "font-awesome";
+
+// Auth buttons
+@import "auth/auth-buttons";
+
+// Token input js form style
 @import "token-input-facebook"; // TODO: merge into application css and restyle
 
 // Jquery Scroll Pane

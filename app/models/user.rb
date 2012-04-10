@@ -5,10 +5,11 @@ class User < ActiveRecord::Base
 	#########################
 	# Callbacks & Misc method calls (e.g. devise for, acts_as_whatever )
 	#########################
-	after_validation	:validate_reserved
+	after_validation	:validate_username_reserved
 	before_create   	:before_create
-	after_save      	:sync_slug, :if => Proc.new { |user| user.slug != user.profile.slug }
-	
+	after_save      	:sync_slug, :if => Proc.new { |user| user.username != user.profile.slug }
+	after_save      	:generate_username, :unless => :username?
+
 	# Include default devise modules. Others available are:
 	# :encryptable, :confirmable
 	devise :database_authenticatable, :registerable,
@@ -51,9 +52,9 @@ class User < ActiveRecord::Base
 	#########################
 	# Validations
 	#########################
-	validates :username, :uniqueness => true, :length => 3..63 #, :allow_blank => true
-	validate  :valid_username_format
-	# TODO: a user should not be able to register without a project
+	validates :username, :uniqueness => true, :length => 3..63, :allow_blank => true, :if => Proc.new { |user| user.username != user.id.to_s }
+	validate  :validate_username_format
+	# TODO: a user should not be able to register without a project?
 
 
 	#########################
@@ -86,7 +87,8 @@ class User < ActiveRecord::Base
 			user
 		else # Create a user
 			passwd = Devise.friendly_token + Devise.friendly_token
-			user = User.new({ email: fb_user.email.downcase, facebook_id: fb_user.id, name: fb_user.name, password: passwd, password_confirmation: passwd })
+			user = User.new({ email: fb_user.email.downcase, facebook_id: fb_user.id, password: passwd, password_confirmation: passwd })
+			user.build_profile(:name => fb_user.name) 
 			user.profile.images.new({ remote_image_url: "https://graph.facebook.com/#{fb_user.id}/picture?type=large", image_type: 'avatar' })
 			user
 		end
@@ -114,7 +116,6 @@ class User < ActiveRecord::Base
 		self.name.split(" ").last
 	end
 
-	# The users who may modify this model
 	def editors
 		editors = [self]
 		editors
@@ -132,37 +133,36 @@ class User < ActiveRecord::Base
 	#########################
 	private
 
-	# Callbacks
+	def email_to_name
+		email.split("@").first.split(/[\-\_\.]/).reduce{ |full_name, name| full_name = "#{full_name} #{name}" }.titleize rescue ""
+	end
 
-	# Check if username is a reserved word
-	def validate_reserved
+	def validate_username_reserved
 		if errors[:friendly_id].present?
 			errors[:username] = "is reserved. Please choose something else."
 			errors.messages.delete(:friendly_id)
 		end
 	end
 
-	# Build a profile for the new user
 	def before_create
-		# Derives a default name from the user's email if no name is passed
-		name = email.split("@").first.split(/[\-\_\.]/).reduce{ |full_name, name| full_name = "#{full_name} #{name}" }.titleize rescue ""
-		build_profile(:name => name)
+		if profile.blank?
+			build_profile(:name => email_to_name) 
+		elsif profile.name.blank?
+			profile.name = email_to_name
+		end
 
-		# Set the permissions for a new user
 		self.permissions = 2 
 	end
 
-	# Sync profile slug with user slug
 	def sync_slug
-		p = profile
-		p.slug = slug
-		p.save
+		profile.update_attribute(:slug, username)
 	end
 
-	# Validations
+	def generate_username
+		self.update_attribute(:username, self.id.to_s)	
+	end
 
-	# Check the username format
-	def valid_username_format
+	def validate_username_format
 		unless username =~ /^[A-Za-z-]*$/i or username == id.to_s
 			errors.add(:username, "only letters and hyphens allowed")
 		end

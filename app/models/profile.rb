@@ -28,7 +28,7 @@ class Profile < ActiveRecord::Base
   # Associations
   #########################
   extend FriendlyId
-  friendly_id :username, :use => :slugged
+  friendly_id :slug #, :use => :slugged
   belongs_to :user
   has_many   :images,   :as => :imageable, :dependent => :destroy
   has_many   :avatars,  :as => :imageable, :source => :images, :class_name => "Image", :conditions => ["image_type = ?", "avatar"]
