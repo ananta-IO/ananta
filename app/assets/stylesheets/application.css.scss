@@ -435,15 +435,34 @@ form{
 }
 
 #login_register_modal{
+	background-color: #f6f6f6;
 	.modal-header{
 		border-bottom: 0;
 	}
 	.facebook{
+		p{
+			color: #bbb;
+		}
+	}
+	.show-email{
+		margin-top: 15px;
 	}
 	.separator{
 		margin: 30px 0;
 	}
 	.email{
+		.login-email .loader{
+			position: absolute;
+			right: 164px;
+			top: 12px;
+		}
+		.icon-ok{
+			position: absolute;
+			right: 164px;
+			top: 6px;
+			color: #7EB854;
+			font-size: 18px;
+		}
 		.forgot-password{
 			position: absolute;
 			right: 159px;
@@ -456,11 +475,14 @@ form{
 			line-height: 1em;
 			padding: 3px;
 			text-decoration: none;
-			@include transition(all 0.5s);
+			@include transition(all 0.25s);
 			&:hover{
 				background-color: lighten($color-base, 5%);
 				border: 1px solid $color-base;
 				color: white;
+			}
+			&:active{
+				left: auto;
 			}
 		}
 	}

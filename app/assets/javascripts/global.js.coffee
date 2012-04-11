@@ -8,5 +8,8 @@ $('.dropdown input').bind 'click', (e) ->
 
 # Open login and register modal
 $('a.login').bind 'click', (e) ->
-	modalView = new Ananta.Views.Users.LoginRegisterModal()
+	callback = ->
+		window.location = '/'
+	modalView = new Ananta.Views.Users.LoginRegisterModal({ callback: callback })
 	modalView.render()
+	e.stopPropagation()
