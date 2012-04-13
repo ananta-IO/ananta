@@ -70,7 +70,7 @@
 					%br
 					= f.input :avatar, hint: raw('avatar will change as soon as you choose a file or <br/> drag an image onto the screen') do
 						#profile_avatar
-							= image_tag(@profile.avatar.image.medium.url)
+							= image_tag(@profile.avatar.image.medium.url, :class => 'circle')
 							.new-image
 								= f.file_field :avatar, name: :image, id: :avatar_file
 					%br

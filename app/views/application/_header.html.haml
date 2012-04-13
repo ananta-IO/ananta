@@ -43,7 +43,7 @@
 					%ul.nav.pull-right
 						-if current_user
 							%li
-								= link_to current_user.profile, rel: :tooltip, 'data-placement' => 'bottom', 'data-delay' => 300, 'data-original-title' => raw( "Me<br/><img src='#{current_user.profile.avatar.image.small.url}' alt='#{current_user.username}' width=32 height=32 />" ) do
+								= link_to current_user.profile, rel: :tooltip, 'data-placement' => 'bottom', 'data-delay' => 300, 'data-original-title' => raw( "Me<br/><img src='#{current_user.profile.avatar.image.small.url}' alt='#{current_user.username}' width=32 height=32 class='circle' />" ) do
 									%i.icon-user
 							%li.dropdown
 								%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}

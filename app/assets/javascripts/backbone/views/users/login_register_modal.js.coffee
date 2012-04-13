@@ -12,6 +12,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 		'focus #login-password' 		: 'passwordFocus'
 		'blur #login-password'  		: 'passwordBlur'
 		'blur #login-email'     		: 'checkEmail'
+		'keyup #login-password' 		: 'checkPassword'
 		'keyup #username'       		: 'checkUsername'
 
 	initialize: (options) ->
@@ -71,11 +72,12 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 								@$('.username').remove()
 						else
 							@register = true
-							@$('#login-email').attr('name', 'user[email]')
+							@$('#login-email').attr('name', 'user[email]').after('<i class="icon-ok" />')
 							@$('form').attr('action', '/users')
 							@$('#login-action').html("Register").show()
-							$('<div class="input string required username"><input id="username" type="text" name="user[username]" title="username" /></div>').hide().insertAfter(@.$('.password')).slideDown()
-							@addJLabel("#username")
+							if @$('.username').length == 0
+								$('<div class="input string required username"><input id="username" type="text" name="user[username]" title="username" autocomplete="off" /></div>').hide().insertAfter(@.$('.password')).slideDown()
+								@addJLabel("#username")
 							@$('.forgot-password').fadeOut(500)
            
 			else
@@ -83,6 +85,19 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 				@$('#login-email').removeAttr('disabled')
 				.after('<i class="icon-remove" />')
 				@$('.login-email i').tooltip({placement: 'top', title: "that's not an email"}).tooltip('show')
+
+	checkPassword: () ->
+		@password = @$('#login-password').val()
+		@$('.password i').tooltip('hide').remove()
+		if @password != ''
+			@$('#login-password').after('<img src="/assets/ajax-loader-black-dots.gif" class="loader" />')
+			if @password.length < 8
+				@$('.password .loader').remove()
+				@$('#login-password').after('<i class="icon-remove" />')
+				@$('.password i').tooltip({placement: 'top', title: "must be 8 or more characters"}).tooltip('show')
+			else
+				@$('.password .loader').remove()
+				@$('#login-password').after('<i class="icon-ok" />')
 
 	checkUsername: () ->
 		@username = @$('#username').val()

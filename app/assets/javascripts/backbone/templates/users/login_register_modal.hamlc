@@ -11,9 +11,9 @@
 		.email
 			%form.login{:action => "/users/sign_in", :method => "post"}
 				%div{:class => "input string required login-email"}
-					%input#login-email{:type => "text", :name => "user[login]", :title => "email"}
+					%input#login-email{:type => "text", :name => "user[login]", :title => "email", autocomplete: "off"}
 				%div{:class => "input string required password"}
-					%input#login-password{:type => "password", :name => "user[password]", :title => "password"}
+					%input#login-password{:type => "password", :name => "user[password]", :title => "password", autocomplete: "off"}
 					%a.forgot-password{href: '/users/password/new'} Forgot?
 				%div{:class => "button"}
 					%button#login-action.login-action.btn{:name => "login-action", :type => "submit"} Sign in
