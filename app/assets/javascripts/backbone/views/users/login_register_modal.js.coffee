@@ -7,10 +7,12 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 	id: 'login_register_modal'
 
 	events:
-		'click .show-email a'  		: 'expand'
-		'focus #login-password'		: 'passwordFocus'
-		'blur #login-password' 		: 'passwordBlur'
-		'blur #login-email'    		: 'checkEmail'
+		'click .fb-login-button'		: 'facebookLogin'
+		'click .show-email a'   		: 'expand'
+		'focus #login-password' 		: 'passwordFocus'
+		'blur #login-password'  		: 'passwordBlur'
+		'blur #login-email'     		: 'checkEmail'
+		'keyup #username'       		: 'checkUsername'
 
 	initialize: (options) ->
 		_.bindAll(@, 'render')
@@ -21,40 +23,105 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 	render: () ->
 		$(@el).html(@template())
 		$(@el).modal('show')
-		@.$('.separator').hide()
-		@.$('.email').hide()
-		$('<p class="show-email"><a href="#">Don\'t have a Facebook account?</a></p>').insertAfter(@.$('.facebook'))
+		@$('.separator').hide()
+		@$('.email').hide()
+		$('<p class="show-email"><a href="#">Don\'t have a Facebook account?</a></p>').insertAfter(@$('.facebook'))
 
-	expand: () ->
-		@.$('.show-email').hide()
-		@.$('.separator').slideDown()
-		@.$('.email').slideDown()
-		$(this.el).find(".string input").jLabel({color: "#999", yShift: '-2'})
-		$(this.el).find(".string label").click ->
-			$(this).parent().find('input').focus()
-		return false
+	expand: (e) ->
+		@$('#login-action').hide()
+		@$('.show-email').hide()
+		@$('.separator').slideDown()
+		@$('.email').slideDown()
+		@addJLabel(".string input")
+		e.preventDefault()
+		e.stopPropagation()
 
 	passwordFocus: () ->
-		@.$('.forgot-password').fadeOut(500)
+		@$('.forgot-password').fadeOut(500)
 
 	passwordBlur: () ->
-		if @.$('#login-password').val() == '' and @register == false
-			@.$('.forgot-password').fadeIn(500)
+		if @$('#login-password').val() == '' and @register == false
+			@$('.forgot-password').fadeIn(500)
 
 	checkEmail: () ->
-		if @.$('#login-email').val() != @email and @.$('#login-email').val() != ''
-			@email = @.$('#login-email').val()
-			@.$('#login-email').attr('disabled', 'disabled').after('<img src="/assets/ajax-loader-black-dots.gif" class="loader" />')
-			$.ajax
-				dataType : 'json'
-				type : 'GET'
-				url : '/users'
-				data :
-					email : @email
-				success: (data) =>
-					@.$('.email .loader').remove()
-					@.$('#login-email').removeAttr('disabled')
-					if data.length > 0
-						@.$('#login-email').after('<i class="icon-ok" />')
-					else
-						@.$('.login-email .icon-ok').remove()
+		if @$('#login-email').val() != @email and @$('#login-email').val() != ''
+			@email = @$('#login-email').val()
+			@$('.login-email i').tooltip('hide').remove()
+			@$('#login-email').attr('disabled', 'disabled').after('<img src="/assets/ajax-loader-black-dots.gif" class="loader" />')
+			email_pattern = /^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i
+			space_pattern = /\s/;
+			if(email_pattern.test(@email) && space_pattern.test(@email) == false)
+				$.ajax
+					dataType : 'json'
+					type : 'GET'
+					url : '/users'
+					data :
+						email : @email
+					success: (data) =>
+						@$('.email .loader').remove()
+						@$('#login-email').removeAttr('disabled')
+						if data.length > 0
+							@register = false
+							@$('#login-email').attr('name', 'user[login]').after('<i class="icon-ok" />')
+							@$('form').attr('action', '/users/sign_in')
+							@$('#login-action').html("Login").show()
+							if !@$('#login-password').is(':focus') then @$('.forgot-password').fadeIn(500)
+							@$('.username').slideUp()
+							wait 600, =>
+								@$('.username').remove()
+						else
+							@register = true
+							@$('#login-email').attr('name', 'user[email]')
+							@$('form').attr('action', '/users')
+							@$('#login-action').html("Register").show()
+							$('<div class="input string required username"><input id="username" type="text" name="user[username]" title="username" /></div>').hide().insertAfter(@.$('.password')).slideDown()
+							@addJLabel("#username")
+							@$('.forgot-password').fadeOut(500)
+           
+			else
+				@$('.email .loader').remove()
+				@$('#login-email').removeAttr('disabled')
+				.after('<i class="icon-remove" />')
+				@$('.login-email i').tooltip({placement: 'top', title: "that's not an email"}).tooltip('show')
+
+	checkUsername: () ->
+		@username = @$('#username').val()
+		@$('.username i').tooltip('hide').remove()
+		username_pattern = /^[A-Za-z-]*$/i
+		if @username != ''
+			@$('#username').after('<img src="/assets/ajax-loader-black-dots.gif" class="loader" />')
+			if @username.length < 3
+				@$('.username .loader').remove()
+				@$('#username').after('<i class="icon-remove" />')
+				@$('.username i').tooltip({placement: 'top', title: "must be 3 or more letters"}).tooltip('show')
+			else if !username_pattern.test(@username)
+				@$('.username .loader').remove()
+				@$('#username').after('<i class="icon-remove" />')
+				@$('.username i').tooltip({placement: 'top', title: "letters and hyphens only"}).tooltip('show')
+			else
+				$.ajax
+					dataType : 'json'
+					type : 'GET'
+					url : '/users'
+					data :
+						username : @username
+					success: (data) =>
+						@$('.username .loader').remove()				
+						if data.length == 0
+							@$('#username').after('<i class="icon-ok" />')		
+						else
+							@$('#username').after('<i class="icon-remove" />')
+							@$('.username i').tooltip({placement: 'top', title: "taken"}).tooltip('show')
+						
+
+	facebookLogin: (e) ->
+		@$('.fb-login-button img').addClass('rideSpinners')
+		fbLogin()
+		e.preventDefault()
+		e.stopPropagation()
+
+	addJLabel: (element) ->
+		wait 200, =>
+			$(@el).find(element).jLabel({color: "#999", yShift: '-2'})
+			$(@el).find(element).click ->
+				$(@).parent().find('input').focus()

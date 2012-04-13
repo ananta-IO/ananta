@@ -34,6 +34,9 @@
 // Jquery Scroll Pane
 @import "jsp";
 
+// Animate.css http://daneden.me/animate/
+@import "animate";
+
 
 ///////////////////////////
 //     Ananta SCSS       //
@@ -66,6 +69,17 @@ form{
 	}
 }
 
+::-webkit-scrollbar {
+	width: 12px;
+}
+::-webkit-scrollbar-track {
+    background-color: $color-background-hover;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #999;
+}
+
 // hack to disable bootstrap default icons
 [class^="icon-"], [class*=" icon-"] {
 	background-image: none;
@@ -88,6 +102,17 @@ form{
 	.content{
 		padding: 0;
 	}
+}
+
+@-webkit-keyframes rotate{from{-webkit-transform:rotate(0deg)}to{-webkit-transform:rotate(360deg)}}
+@-moz-keyframes rotate{from{-moz-transform:rotate(0deg)}to{-moz-transform:rotate(360deg)}}
+.rideSpinners {
+	-webkit-animation-name: rotate;
+	-webkit-animation-duration: 5s;
+	-webkit-animation-iteration-count: infinite;
+	-moz-animation-name: rotate;
+	-moz-animation-duration: 5s;
+	-moz-animation-iteration-count: infinite;
 }
 
 .separator{
@@ -451,29 +476,39 @@ form{
 		margin: 30px 0;
 	}
 	.email{
-		.login-email .loader{
+		input{
+			padding-right: 26px
+		}
+		.loader{
 			position: absolute;
-			right: 164px;
+			right: 152px;
 			top: 12px;
 		}
 		.icon-ok{
 			position: absolute;
-			right: 164px;
+			right: 152px;
 			top: 6px;
 			color: #7EB854;
 			font-size: 18px;
 		}
+		.icon-remove{
+			position: absolute;
+			right: 152px;
+			top: 7px;
+			color: #f44;
+			font-size: 18px;
+		}
 		.forgot-password{
 			position: absolute;
-			right: 159px;
-			top: 5px;
+			right: 148px;
+			top: 4px;
 			font-size: 11px;
 			background-color: darken(#fff, 8%);
-			border: 1px solid darken(#fff, 13%);
+			border: 1px solid darken(#fff, 18%);
 			@include border-radius(3px);
 			color: #777;
 			line-height: 1em;
-			padding: 3px;
+			padding: 2px 6px 5px;
 			text-decoration: none;
 			@include transition(all 0.25s);
 			&:hover{
