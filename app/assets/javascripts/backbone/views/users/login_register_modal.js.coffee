@@ -14,6 +14,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 		'blur #login-email'     		: 'checkEmail'
 		'keyup #login-password' 		: 'checkPassword'
 		'keyup #username'       		: 'checkUsername'
+		'click #login-action'   		: 'loginSpinner'
 
 	initialize: (options) ->
 		_.bindAll(@, 'render')
@@ -165,3 +166,8 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 	addCSRF: () ->
 		authenticity_token = $("<div style='margin:0;padding:0;display:inline'><input name='utf8' type='hidden' value='✓'><input name='authenticity_token' type='hidden' value='#{$('meta[name="csrf-token"]').attr('content')}'></div>")
 		@$('form').prepend(authenticity_token)
+
+	loginSpinner: () ->
+		@$('#login-action').after('<img src="/assets/ajax-loader-black-dots.gif" class="loader" />')
+		wait 100, =>
+			return
