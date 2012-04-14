@@ -3,13 +3,17 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
     @user = User.find_for_facebook(env["omniauth.auth"].extra.raw_info, current_user)
 
-    @user.save unless @user.persisted?
+    # @user.save unless @user.persisted?
 
     session['facebook_cookies'] = Koala::Facebook::OAuth.new.get_user_info_from_cookie(cookies)
 
-    flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Facebook" 
-    sign_in @user, :event => :authentication
-    render json: {user: @user.to_json, success: true}
+    flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Facebook"
+    if @user.persisted? 
+      sign_in @user, :event => :authentication 
+    else
+      # session[:facebook_user] = @user
+    end
+    render json: @user.to_json({:only => [:id, :email, :username, :facebook_id]})
   end
 
   def passthru

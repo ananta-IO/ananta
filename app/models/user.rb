@@ -86,8 +86,7 @@ class User < ActiveRecord::Base
 			user.profile.images.create({ remote_image_url: "https://graph.facebook.com/#{fb_user.id}/picture?type=large", image_type: 'avatar' }) if user.profile.avatars.count == 0
 			user
 		else # Create a user
-			passwd = Devise.friendly_token + Devise.friendly_token
-			user = User.new({ email: fb_user.email.downcase, facebook_id: fb_user.id, password: passwd, password_confirmation: passwd })
+			user = User.new({ email: fb_user.email.downcase, facebook_id: fb_user.id })
 			user.build_profile(:name => fb_user.name) 
 			user.profile.images.new({ remote_image_url: "https://graph.facebook.com/#{fb_user.id}/picture?type=large", image_type: 'avatar' })
 			user

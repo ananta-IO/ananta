@@ -9,11 +9,13 @@
 		.separator 
 			%span Or
 		.email
-			%form.login{:action => "/users/sign_in", :method => "post"}
+			%form.login{:action => "/users", :method => "post"}
 				%div{:class => "input string required login-email"}
-					%input#login-email{:type => "text", :name => "user[login]", :title => "email", autocomplete: "off"}
+					%input#login-email{:type => "text", :name => "user[email]", :title => "email", autocomplete: "off", value: "#{if @email then @email else ''}"}
 				%div{:class => "input string required password"}
 					%input#login-password{:type => "password", :name => "user[password]", :title => "password", autocomplete: "off"}
 					%a.forgot-password{href: '/users/password/new'} Forgot?
+				%div{:class => "input string required username"}
+					%input#username{:type => "text" :name => "user[username]" :title => "username" autocomplete: "off", value: "#{if @username then @username else ''}"}
 				%div{:class => "button"}
 					%button#login-action.login-action.btn{:name => "login-action", :type => "submit"} Sign in

@@ -17,16 +17,34 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 
 	initialize: (options) ->
 		_.bindAll(@, 'render')
-		@user = options.user
+		@user = new Ananta.Models.User( options.user )
 		@callback = options.callback
 		@register = false
+		@checkUser()
+
+	checkUser: () ->
+		if @user.get('id') == null
+			@register = true
 
 	render: () ->
-		$(@el).html(@template())
+		$(@el).html(@template( @user.toJSON() ))
 		$(@el).modal('show')
-		@$('.separator').hide()
-		@$('.email').hide()
-		$('<p class="show-email"><a href="#">Don\'t have a Facebook account?</a></p>').insertAfter(@$('.facebook'))
+		if !@register
+			@$('#login-email').attr('name', 'user[login]')
+			@$('form').attr('action', '/users/sign_in')
+			@$('.separator').hide()
+			@$('.email').hide()
+			@$('.username').remove()
+			$('<p class="show-email"><a href="#">Don\'t have a Facebook account?</a></p>').insertAfter(@$('.facebook'))
+		else
+			@checkEmail()
+			@addJLabel(".string input")
+			@$('.forgot-password').hide()
+			@$('.separator span').hide()
+			wait 1000, =>
+				@$('.facebook img').tooltip({ placement:'bottom', title:'continue registration <i class="icon-arrow-down"/>' }).tooltip('show')
+				wait 4000, =>
+					@$('.facebook img').tooltip('hide')
 
 	expand: (e) ->
 		@$('#login-action').hide()
