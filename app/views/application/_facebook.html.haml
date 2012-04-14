@@ -34,9 +34,11 @@
       if (callback) {
         callback(response);
       } else {
+        $('a.btn-facebook').append('<img src="assets/ajax-loader-black-dots.gif" class="loader"/>');
         $.ajax({
           url: "#{user_omniauth_callback_path(:facebook)}",
           success: function(data){
+            $('a.btn-facebook .loader').remove();
             var user = data
             if (user['id'] != null) {
               window.location.replace("#{root_url}");
@@ -44,8 +46,10 @@
               var callback = function(){
                 window.location = '/'
               }
-              $(window.loginModal.el).modal('hide');
-              window.loginModal.remove();
+              if(window.loginModal){
+                $(window.loginModal.el).modal('hide');
+                window.loginModal.remove();
+              }
               window.loginModal = new Ananta.Views.Users.LoginRegisterModal({ callback: callback, user: user });
               window.loginModal.render();
             }

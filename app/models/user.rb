@@ -86,9 +86,9 @@ class User < ActiveRecord::Base
 			user.profile.images.create({ remote_image_url: "https://graph.facebook.com/#{fb_user.id}/picture?type=large", image_type: 'avatar' }) if user.profile.avatars.count == 0
 			user
 		else # Create a user
-			user = User.new({ email: fb_user.email.downcase, facebook_id: fb_user.id })
-			user.build_profile(:name => fb_user.name) 
-			user.profile.images.new({ remote_image_url: "https://graph.facebook.com/#{fb_user.id}/picture?type=large", image_type: 'avatar' })
+			user = User.new({ email: fb_user.email.downcase, facebook_id: fb_user.id, username: fb_user.username })  #, locale: fb_user.locale, timezone: fb_user.timezone, facebook_verified: fb_user.verified 
+			# user.build_profile(:name => fb_user.name) 
+			# user.profile.images.new({ remote_image_url: "https://graph.facebook.com/#{fb_user.id}/picture?type=large", image_type: 'avatar' })
 			user
 		end
 	end

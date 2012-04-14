@@ -29,6 +29,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 	render: () ->
 		$(@el).html(@template( @user.toJSON() ))
 		$(@el).modal('show')
+		@addCSRF()
 		if !@register
 			@$('#login-email').attr('name', 'user[login]')
 			@$('form').attr('action', '/users/sign_in')
@@ -38,11 +39,13 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 			$('<p class="show-email"><a href="#">Don\'t have a Facebook account?</a></p>').insertAfter(@$('.facebook'))
 		else
 			@checkEmail()
+			@checkUsername()
 			@addJLabel(".string input")
 			@$('.forgot-password').hide()
 			@$('.separator span').hide()
 			wait 1000, =>
-				@$('.facebook img').tooltip({ placement:'bottom', title:'continue registration <i class="icon-arrow-down"/>' }).tooltip('show')
+				@$('#login-password').focus()
+				@$('.facebook img').tooltip({ placement:'bottom', title:'finish registration <i class="icon-arrow-down"/>' }).tooltip('show')
 				wait 4000, =>
 					@$('.facebook img').tooltip('hide')
 
@@ -154,7 +157,11 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 		e.stopPropagation()
 
 	addJLabel: (element) ->
-		wait 200, =>
+		wait 500, =>
 			$(@el).find(element).jLabel({color: "#999", yShift: '-2'})
 			$(@el).find(element).click ->
 				$(@).parent().find('input').focus()
+
+	addCSRF: () ->
+		authenticity_token = $("<div style='margin:0;padding:0;display:inline'><input name='utf8' type='hidden' value='✓'><input name='authenticity_token' type='hidden' value='#{$('meta[name="csrf-token"]').attr('content')}'></div>")
+		@$('form').prepend(authenticity_token)

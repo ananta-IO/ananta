@@ -1,50 +1,45 @@
 class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
-    params[resource][:password_confirmation] = params[resource][:password] if params[resource][:password_confirmation].blank?
+    # r_name = resource.class.to_s.downcase
+    # params[r_name][:password_confirmation] = params[r_name][:password] if params[r_name][:password_confirmation].blank?
     build_resource
-    
+
+    Rails.logger.debug
+    Rails.logger.debug ">>>>>>>>"
+    Rails.logger.debug resource.inspect
+    Rails.logger.debug session.inspect
+    Rails.logger.debug ">>"
+    Rails.logger.debug params.inspect
+
+    # resource = add_facebook_attributes resource if session[:facebook_user_attributes]
+
+
     if resource.save
+      # resource = add_facebook_attributes resource if session[:facebook_user_attributes]
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_navigational_format?
         sign_in(resource_name, resource)
-        respond_to do |format|
-          format.html {respond_with resource, :location => after_sign_up_path_for(resource)}
-          format.json {render json: {user: resource, success: true}}
-        end
+        respond_with resource, :location => after_sign_up_path_for(resource)
       else
-        set_flash_message :notice, :inactive_signed_up, :reason => inactive_reason(resource) if is_navigational_format?
+        set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_navigational_format?
         expire_session_data_after_sign_in!
-        respond_to do |format|
-          format.html {respond_with resource, :location => after_inactive_sign_up_path_for(resource)}
-          format.json {render json: {user: resource.to_json, success: true}}
-        end
+        respond_with resource, :location => after_inactive_sign_up_path_for(resource)
       end
     else
       clean_up_passwords resource
-      respond_to do |format|
-        format.html
-        format.json {render json: resource.errors, status: :unprocessable_entity}
-      end
+      respond_with resource, :location => 'users/registrations/new'
     end
   end
 
-  def update
-    self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
+  private
 
-    if resource.update_with_password(params[resource_name])
-      if is_navigational_format?
-        if resource.respond_to?(:pending_reconfirmation?) && resource.pending_reconfirmation?
-          flash_key = :update_needs_confirmation
-        end
-        set_flash_message :notice, flash_key || :updated
-      end
-      sign_in resource_name, resource, :bypass => true
-      respond_with resource, :location => after_update_path_for(resource)
-    else      
-      clean_up_passwords resource
-      respond_with resource
-    end    
+  def add_facebook_attributes resource
+    fb_user = session[:facebook_user_attributes]
+    resource.facebook_id = fb_user.id  #, locale: fb_user.locale, timezone: fb_user.timezone, facebook_verified: fb_user.verified 
+    resource.build_profile(:name => "carl") 
+    resource.profile.images.new({ remote_image_url: "https://graph.facebook.com/#{fb_user.id}/picture?type=large", image_type: 'avatar' })
+    resource
   end
 
 end
