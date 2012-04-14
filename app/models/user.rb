@@ -85,10 +85,8 @@ class User < ActiveRecord::Base
 			user.update_attribute(:facebook_id, fb_user.id)
 			user.profile.images.create({ remote_image_url: "https://graph.facebook.com/#{fb_user.id}/picture?type=large", image_type: 'avatar' }) if user.profile.avatars.count == 0
 			user
-		else # Create a user
-			user = User.new({ email: fb_user.email.downcase, facebook_id: fb_user.id, username: fb_user.username })  #, locale: fb_user.locale, timezone: fb_user.timezone, facebook_verified: fb_user.verified 
-			# user.build_profile(:name => fb_user.name) 
-			# user.profile.images.new({ remote_image_url: "https://graph.facebook.com/#{fb_user.id}/picture?type=large", image_type: 'avatar' })
+		else # Create a user. This should never get persisted. The user should confirm the info and fb data should be synced on registration.
+			user = User.new({ email: fb_user.email.downcase, facebook_id: fb_user.id, username: fb_user.username })
 			user
 		end
 	end
