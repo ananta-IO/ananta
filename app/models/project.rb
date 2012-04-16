@@ -15,11 +15,7 @@ class Project < ActiveRecord::Base
   acts_as_voteable
 
   # Project state machine
-  state_machine :initial => :brainstoming do
-    event :plan do
-      transition :brainstoming => :planning
-    end
-
+  state_machine :initial => :planning do
     event :work do
       transition :planning => :working
     end
@@ -37,7 +33,7 @@ class Project < ActiveRecord::Base
     end
 
     event :kill do
-      transition [:brainstoming, :planning, :working, :completing] => :killed
+      transition [:planning, :working, :completing] => :killed
     end
   end
 

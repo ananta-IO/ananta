@@ -1,8 +1,8 @@
--content_for :title do "#{@profile.name.possessive} profile" end
+-content_for :title do "#{@profile.user.username.possessive} profile" end
 
 .page-header
 	%h1 
-		= @profile.name
+		= @profile.user.username
 		-if can? :edit, @profile
 			.display-inline-block
 				%p.m0 

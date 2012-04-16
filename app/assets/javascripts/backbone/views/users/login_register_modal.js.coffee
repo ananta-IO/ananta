@@ -21,6 +21,8 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 		@user = new Ananta.Models.User( options.user )
 		@callback = options.callback
 		@register = false
+		@username_pattern = /^[A-Za-z-]*$/i
+		@email_pattern = /^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i
 		@checkUser()
 
 	checkUser: () ->
@@ -56,6 +58,8 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 		@$('.separator').slideDown()
 		@$('.email').slideDown()
 		@addJLabel(".string input")
+		wait 500, =>
+			@$('#login-email').focus()
 		e.preventDefault()
 		e.stopPropagation()
 
@@ -71,9 +75,8 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 			@email = @$('#login-email').val()
 			@$('.login-email i').tooltip('hide').remove()
 			@$('#login-email').attr('disabled', 'disabled').after('<img src="/assets/ajax-loader-black-dots.gif" class="loader" />')
-			email_pattern = /^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i
-			space_pattern = /\s/;
-			if(email_pattern.test(@email) && space_pattern.test(@email) == false)
+			space_pattern = /\s/
+			if(@email_pattern.test(@email) && space_pattern.test(@email) == false)
 				$.ajax
 					dataType : 'json'
 					type : 'GET'
@@ -84,14 +87,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 						@$('.email .loader').remove()
 						@$('#login-email').removeAttr('disabled')
 						if data.length > 0
-							@register = false
-							@$('#login-email').attr('name', 'user[login]').after('<i class="icon-ok" />')
-							@$('form').attr('action', '/users/sign_in')
-							@$('#login-action').html("Login").show()
-							if !@$('#login-password').is(':focus') then @$('.forgot-password').fadeIn(500)
-							@$('.username').slideUp()
-							wait 600, =>
-								@$('.username').remove()
+							@displayLogin()
 						else
 							@register = true
 							@$('#login-email').attr('name', 'user[email]').after('<i class="icon-ok" />')
@@ -101,11 +97,26 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 								$('<div class="input string required username"><input id="username" type="text" name="user[username]" title="username" autocomplete="off" /></div>').hide().insertAfter(@.$('.password')).slideDown()
 								@addJLabel("#username")
 							@$('.forgot-password').fadeOut(500)
-           
+
+			else if(@username_pattern.test(@email))
+				$.ajax
+					dataType : 'json'
+					type : 'GET'
+					url : '/users'
+					data :
+						username : @email
+					success: (data) =>
+						@$('.email .loader').remove()
+						@$('#login-email').removeAttr('disabled')
+						if data.length > 0
+							@displayLogin()
+						else
+							@$('#login-email').after('<i class="icon-remove" />')
+							@$('.login-email i').tooltip({placement: 'top', title: "that's not an email"}).tooltip('show')
+
 			else
 				@$('.email .loader').remove()
-				@$('#login-email').removeAttr('disabled')
-				.after('<i class="icon-remove" />')
+				@$('#login-email').removeAttr('disabled').after('<i class="icon-remove" />')
 				@$('.login-email i').tooltip({placement: 'top', title: "that's not an email"}).tooltip('show')
 
 	checkPassword: () ->
@@ -124,14 +135,13 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 	checkUsername: () ->
 		@username = @$('#username').val()
 		@$('.username i').tooltip('hide').remove()
-		username_pattern = /^[A-Za-z-]*$/i
 		if @username != ''
 			@$('#username').after('<img src="/assets/ajax-loader-black-dots.gif" class="loader" />')
 			if @username.length < 3
 				@$('.username .loader').remove()
 				@$('#username').after('<i class="icon-remove" />')
 				@$('.username i').tooltip({placement: 'top', title: "must be 3 or more letters"}).tooltip('show')
-			else if !username_pattern.test(@username)
+			else if !@username_pattern.test(@username)
 				@$('.username .loader').remove()
 				@$('#username').after('<i class="icon-remove" />')
 				@$('.username i').tooltip({placement: 'top', title: "letters and hyphens only"}).tooltip('show')
@@ -171,3 +181,13 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 		@$('#login-action').after('<img src="/assets/ajax-loader-black-dots.gif" class="loader" />')
 		wait 100, =>
 			return
+
+	displayLogin: () ->
+		@register = false
+		@$('#login-email').attr('name', 'user[login]').after('<i class="icon-ok" />')
+		@$('form').attr('action', '/users/sign_in')
+		@$('#login-action').html("Login").show()
+		if !@$('#login-password').is(':focus') then @$('.forgot-password').fadeIn(500)
+		@$('.username').slideUp()
+		wait 600, =>
+			@$('.username').remove()

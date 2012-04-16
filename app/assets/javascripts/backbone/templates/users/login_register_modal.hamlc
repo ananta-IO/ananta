@@ -11,7 +11,7 @@
 		.email
 			%form.login{:action => "/users", :method => "post"}
 				%div{:class => "input string required login-email"}
-					%input#login-email{:type => "text", :name => "user[email]", :title => "email", autocomplete: "off", value: "#{if @email then @email else ''}"}
+					%input#login-email{:type => "text", :name => "user[email]", :title => "email", autocomplete: "on", value: "#{if @email then @email else ''}"}
 				%div{:class => "input string required password"}
 					%input#login-password{:type => "password", :name => "user[password]", :title => "password", autocomplete: "off"}
 					%a.forgot-password{href: '/users/password/new'} Forgot?
