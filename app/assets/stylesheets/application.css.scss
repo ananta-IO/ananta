@@ -69,6 +69,13 @@ form{
 	}
 }
 
+// webkit browsers only
+.webkit {
+	h1{
+		@include inset-text();
+	}
+}
+
 ::-webkit-scrollbar {
 	width: 12px;
 }
@@ -94,6 +101,11 @@ form{
 		 	left: auto;
 		}	
 	}
+}
+
+#flash{
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 .popover{
@@ -158,6 +170,7 @@ form{
 }
 
 .navbar{
+	margin-bottom: 0px;
 	.navbar-inner{
 		@include border-radius(0);
 		@include box-shadow($color-background 0 0 0);
@@ -285,6 +298,9 @@ form{
 	}
 }
 
+.webkit #marq .container h1{
+	@include inset-text();
+}
 #marq{
 	display: none;
 	background: $color-background-hover;
@@ -306,15 +322,12 @@ form{
 		}
 	}
 	.container{
+		position: relative;
 		padding: 10px 0 15px;
 		h1{
-			color: #999;
 			font-weight: 200;
+			color: #999;
 			text-shadow: 0 1px 0 rgba(255,255,255,.8), 0 0 30px rgba(255,255,255,.825);
-			// color: transparent;
-			// background-color: rgba(82,96,117,0.5);
-			// @include background-clip(text);
-			// text-shadow: rgba(255,255,255,0.5) 0 5px 6px;
 		}
 		.scope{
 			.wrap{
@@ -468,6 +481,16 @@ form{
 				}
 			}
 		}
+		.tldr{
+			font-size: 65px;
+			line-height: 65px;
+			font-weight: 100;
+			position: absolute;
+			bottom: 30px;
+			left: 0px;
+			color: darken($color-background-hover, 5%);
+			display: block;
+		}
 	}
 }
 
@@ -571,12 +594,22 @@ form{
 
 #home{
 	#waywo{
-		margin-top: 200px;
-		input{
-			border: 0 none;
-			outline: 0 none;
-			@include box-shadow(none);
-			border-bottom: 1px dashed #bbb;
+		margin-top: 80px;
+		.span6{
+			position: relative;
+			.icon.blueprint{
+				position: absolute;
+				bottom: 5px;
+				left: -45px;
+			}
+			input{
+				border: 0 none;
+				outline: 0 none;
+				@include box-shadow(none);
+				border-bottom: 1px dashed #bbb;
+				@include border-radius(0px);
+				font-size: 21px;
+			}
 		}
 	}
 }

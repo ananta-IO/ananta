@@ -79,13 +79,19 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 	addPopovers: ->
 		@$(".ask .span2 h1").popover
 			placement: 'bottom'
-			title: 'Want to know something?'
-			content: 'Ask a yes or no question in 140 characters or less. Ask anything. Each question is tied to the page it was asked on. Please try to ask questions relevant to the current page. Thanks for asking.'
+			title: 'About Ask'
+			content: 'Ask a yes or no question in 140 characters or less. Ask anything. Every question is tied to the page it was asked on. Please try to ask questions relevant to the current page. Thanks for asking.'
 
 		@$(".answer .span2 h1").popover
 			placement: 'bottom'
-			title: 'Answers &nbsp;<i class="icon-chevron-right"/>&nbsp;Iteration'
+			title: 'About Answer'
 			content: 'Answering questions is the easiest way to impact this site and the projects on it. Answer as many questions as you want. Comments are optional. The questions on every page are unique. Go to a different page to see the questions asked on it.'
+
+		@$(".tldr").popover
+			placement: 'bottom'
+			delay: { show: 0, hide: 2000 }
+			title: "About Marq"
+			content: "We call this questionably large dropdown: Marq. It's a tool for giving and getting quick feedback. Ananta IO is open source software but sadly not everyone is a programmer. Nonetheless, even if you do not program you still own this software: becasue it's free. And you should be able to quickly, painlessly and enjoyably impact the evolution of this software. Everyone should look at our <a href='https://github.com/ananta-io/ananta' target='_blank'>code</a> and ask questions about it. But if you need a lot of quick feedback on a specific page, project, bug, feature or idea; go ahead and ask your question here."
 
 	createQuestion: (e) ->
 		e.preventDefault()
