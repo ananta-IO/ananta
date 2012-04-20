@@ -1,13 +1,14 @@
--content_for :title do "Ananta IO" end
+-content_for :title do "Ananta IO - Show your work" end
 
 #home
 	.row#waywo
 		.span12
 			%h1.center
 				Whatever you're working on &middot;
-				%i We 
-				can help
+				%i{rel: 'tooltip', 'data-original-title' => "All #{number_with_delimiter(User.count)} of us"} We 
+				would like to help
 				%br
+				%br 
 				%br 
 				%br 
 		.span6.offset3

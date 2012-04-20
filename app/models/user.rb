@@ -52,7 +52,7 @@ class User < ActiveRecord::Base
 	#########################
 	# Validations
 	#########################
-	validates :username, :uniqueness => true, :length => 3..63, :allow_blank => true, :if => Proc.new { |user| user.username != user.id.to_s }
+	validates :username, :uniqueness => {:case_sensitive => false}, :length => 3..63, :allow_blank => true, :if => Proc.new { |user| user.username != user.id.to_s }
 	validate  :validate_username_format
 	# TODO: a user should not be able to register without a project?
 

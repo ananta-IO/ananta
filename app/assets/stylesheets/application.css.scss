@@ -80,17 +80,20 @@ form{
 	width: 12px;
 }
 ::-webkit-scrollbar-track {
-    background-color: $color-background-hover;
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #999;
+    background-color: rgba(0, 0, 0, 0.15);
 }
 
 // hack to disable bootstrap default icons
 [class^="icon-"], [class*=" icon-"] {
 	background-image: none;
 	vertical-align: baseline;
+	width: auto;
+	height: auto;
+	line-height: auto;
 }
 
 .alert{
@@ -266,6 +269,10 @@ form{
 		 	// background-color: $color-background-hover;
 		}	
 	} 
+}
+
+.page-header h1 {
+	line-height: 1.2em;
 }
 
 .sub-header{
@@ -482,14 +489,17 @@ form{
 			}
 		}
 		.tldr{
-			font-size: 65px;
-			line-height: 65px;
-			font-weight: 100;
+			width: 13px;
+			height: 13px;
 			position: absolute;
 			bottom: 30px;
-			left: 0px;
-			color: darken($color-background-hover, 5%);
+			left: 20px;
+			background-color: darken($color-background-hover, 5%);
 			display: block;
+			@media (max-width: 767px){
+				bottom: 10px;
+				left: 50px;
+			}
 		}
 	}
 }

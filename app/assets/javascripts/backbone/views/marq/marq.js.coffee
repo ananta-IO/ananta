@@ -91,7 +91,7 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 			placement: 'bottom'
 			delay: { show: 0, hide: 2000 }
 			title: "About Marq"
-			content: "We call this questionably large dropdown: Marq. It's a tool for giving and getting quick feedback. Ananta IO is open source software but sadly not everyone is a programmer. Nonetheless, even if you do not program you still own this software: becasue it's free. And you should be able to quickly, painlessly and enjoyably impact the evolution of this software. Everyone should look at our <a href='https://github.com/ananta-io/ananta' target='_blank'>code</a> and ask questions about it. But if you need a lot of quick feedback on a specific page, project, bug, feature or idea; go ahead and ask your question here."
+			content: "This questionably large dropdown is named Marq. Marq is a tool for getting and giving quick feedback. Ananta IO is open source software designed to host public projects. You own this software. You own these projects. And you should be able to quickly and enjoyably impact the evolution of this software and the projects grown in it. Everyone <i>should</i> look at our <a href='https://github.com/ananta-io/ananta' target='_blank'>code</a> and ask questions about it. But if you want a lot of quick feedback on a specific page, project, bug, feature or idea; go ahead and ask your question here."
 
 	createQuestion: (e) ->
 		e.preventDefault()

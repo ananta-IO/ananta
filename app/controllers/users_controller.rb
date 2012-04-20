@@ -3,13 +3,13 @@ class UsersController < InheritedResources::Base
 	actions :index
 
 	has_scope :email, :only => :index do |controller, scope, value|
-		scope.where("email = ?", value)
+		scope.where("email = ?", value.downcase)
 	end
 	has_scope :username, :only => :index do |controller, scope, value|
-		scope.where("username = ?", value)
+		scope.where("username = ?", value.downcase)
 	end
 	has_scope :id, :only => :index do |controller, scope, value|
-		scope.where("id = ?", value)
+		scope.where("id = ?", value.downcase)
 	end
 	has_scope :order, :only => :index do |controller, scope, value|
 		scope.order(value)

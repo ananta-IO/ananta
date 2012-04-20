@@ -25,6 +25,7 @@ Ananta::Application.routes.draw do
 	end
 
 	match '/tb' => 'pages#tb' if Rails.env == 'development'
+	match '/about' => 'pages#about'
 
 	root :to => 'pages#home'
 

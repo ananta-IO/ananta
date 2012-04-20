@@ -25,11 +25,11 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 		@email_pattern = /^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i
 		@checkUser()
 
-	checkUser: () ->
+	checkUser: ->
 		if @user.get('id') == null
 			@register = true
 
-	render: () ->
+	render: ->
 		$(@el).html(@template( @user.toJSON() ))
 		$(@el).modal('show')
 		@addCSRF()
@@ -63,16 +63,16 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 		e.preventDefault()
 		e.stopPropagation()
 
-	passwordFocus: () ->
+	passwordFocus: ->
 		@$('.forgot-password').fadeOut(500)
 
-	passwordBlur: () ->
+	passwordBlur: ->
 		if @$('#login-password').val() == '' and @register == false
 			@$('.forgot-password').fadeIn(500)
 
-	checkEmail: () ->
+	checkEmail: ->
 		if @$('#login-email').val() != @email and @$('#login-email').val() != ''
-			@email = @$('#login-email').val()
+			@email = @$('#login-email').val().toLowerCase()
 			@$('.login-email i').tooltip('hide').remove()
 			@$('#login-email').attr('disabled', 'disabled').after('<img src="/assets/ajax-loader-black-dots.gif" class="loader" />')
 			space_pattern = /\s/
@@ -119,7 +119,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 				@$('#login-email').removeAttr('disabled').after('<i class="icon-remove" />')
 				@$('.login-email i').tooltip({placement: 'top', title: "that's not an email"}).tooltip('show')
 
-	checkPassword: () ->
+	checkPassword: ->
 		@password = @$('#login-password').val()
 		@$('.password i').tooltip('hide').remove()
 		if @password != ''
@@ -132,7 +132,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 				@$('.password .loader').remove()
 				@$('#login-password').after('<i class="icon-ok" />')
 
-	checkUsername: () ->
+	checkUsername: ->
 		@username = @$('#username').val()
 		@$('.username i').tooltip('hide').remove()
 		if @username != ''
@@ -173,16 +173,16 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 			$(@el).find(element).click ->
 				$(@).parent().find('input').focus()
 
-	addCSRF: () ->
+	addCSRF: ->
 		authenticity_token = $("<div style='margin:0;padding:0;display:inline'><input name='utf8' type='hidden' value='✓'><input name='authenticity_token' type='hidden' value='#{$('meta[name="csrf-token"]').attr('content')}'></div>")
 		@$('form').prepend(authenticity_token)
 
-	loginSpinner: () ->
+	loginSpinner: ->
 		@$('#login-action').after('<img src="/assets/ajax-loader-black-dots.gif" class="loader" />')
 		wait 100, =>
 			return
 
-	displayLogin: () ->
+	displayLogin: ->
 		@register = false
 		@$('#login-email').attr('name', 'user[login]').after('<i class="icon-ok" />')
 		@$('form').attr('action', '/users/sign_in')
