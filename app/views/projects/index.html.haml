@@ -14,10 +14,10 @@
       %td= project.name
       %td= project.description
       %td= project.state
-      %td= link_to 'Show', project
-      %td= link_to 'Edit', edit_project_path(project)
-      %td= link_to 'Destroy', project, :confirm => 'Are you sure?', :method => :delete
+      %td= link_to 'Show', user_projects_path([project.user, project])
+      / %td= link_to 'Edit', edit_project_path(project)
+      / %td= link_to 'Destroy', project, :confirm => 'Are you sure?', :method => :delete
 
 %br
 
-= link_to 'New Project', new_project_path
+/ = link_to 'New Project', new_project_path

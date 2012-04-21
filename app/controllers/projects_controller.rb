@@ -1,6 +1,6 @@
 class ProjectsController < InheritedResources::Base
 	respond_to :js, :html, :json
-	belongs_to :user
+	belongs_to :user, :optional => true
 	defaults :route_prefix => ''
 	before_filter :populate_tags, :only => [:new, :create, :edit, :update, :destroy]
 	before_filter :populate_selected_tags, :only => [:edit, :update]
@@ -8,6 +8,17 @@ class ProjectsController < InheritedResources::Base
 	before_filter :authenticate_user!, :except => [:index, :show]
 	before_filter :cuid_to_params, :only => :update
 	load_and_authorize_resource
+
+	has_scope :order, :only => :index do |controller, scope, value|
+		scope.order(value)
+	end
+	has_scope :page, :only => :index, :default => 1 do |controller, scope, value|
+		value.to_i > 0 ? scope.page(value.to_i) : scope.page(1)
+	end
+	has_scope :per, :only => :index, :default => Proc.new { |c| c.session[:projects_per] ? c.session[:projects_per] : 10 } do |controller, scope, value|
+		controller.session[:projects_per] = value.to_i if (1..100) === value.to_i
+		controller.session[:projects_per] ? scope.per(controller.session[:projects_per]) : scope.per(10)
+	end
 
 	def create
 		update! do |success, failure|
@@ -39,7 +50,7 @@ class ProjectsController < InheritedResources::Base
 	protected
 
 	def collection
-		@projects ||= end_of_association_chain.page(params[:page]).per(10)
+		@projects ||= apply_scopes(end_of_association_chain)
 	end
 
 	def cuid_to_params

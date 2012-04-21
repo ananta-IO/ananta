@@ -20,15 +20,15 @@ class Project < ActiveRecord::Base
       transition :planning => :working
     end
 
-    event :check_done do
+    event :check_complete do
       transition :working => :completing
     end
 
-    event :not_done do
+    event :not_complete do
       transition :completing => :working
     end
 
-    event :done do
+    event :complete do
       transition :completing => :complete
     end
 
