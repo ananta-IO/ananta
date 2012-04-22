@@ -228,6 +228,9 @@ form{
 				.caret{
 				 	border-top-color: $color-base;
 				}	
+				.dropdown-menu::before {
+					border-bottom: 7px solid #ccc;
+				}
 			}
 		}
 		&>li{
