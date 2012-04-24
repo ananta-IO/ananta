@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120324222522) do
+ActiveRecord::Schema.define(:version => 20120422205245) do
 
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
@@ -57,6 +57,25 @@ ActiveRecord::Schema.define(:version => 20120324222522) do
   add_index "images", ["latitude", "longitude"], :name => "index_images_on_latitude_and_longitude"
   add_index "images", ["user_id"], :name => "index_images_on_user_id"
 
+  create_table "locations", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zipcode"
+    t.string   "time_zone"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "locations", ["city", "state"], :name => "index_locations_on_city_and_state"
+  add_index "locations", ["latitude", "longitude"], :name => "index_locations_on_latitude_and_longitude"
+  add_index "locations", ["user_id"], :name => "index_locations_on_user_id"
+  add_index "locations", ["zipcode"], :name => "index_locations_on_zipcode"
+
   create_table "profiles", :force => true do |t|
     t.string   "name"
     t.string   "slug"
@@ -76,8 +95,12 @@ ActiveRecord::Schema.define(:version => 20120324222522) do
     t.string   "slug"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "time_zone"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
+  add_index "projects", ["latitude", "longitude"], :name => "index_projects_on_latitude_and_longitude"
   add_index "projects", ["name"], :name => "index_projects_on_name"
   add_index "projects", ["slug"], :name => "index_projects_on_slug", :unique => true
   add_index "projects", ["state"], :name => "index_projects_on_state"

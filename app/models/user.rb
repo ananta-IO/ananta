@@ -36,6 +36,7 @@ class User < ActiveRecord::Base
 	extend FriendlyId
 	friendly_id		:username
 	has_one    		:profile, :dependent => :destroy
+	has_one    		:location
 	# has_one  		:account, :dependent => :destroy				# TODO: ?
 	has_many   		:projects
 	# has_many 		:project_memberships
