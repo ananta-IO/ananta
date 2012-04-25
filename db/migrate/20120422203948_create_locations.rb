@@ -3,11 +3,12 @@ class CreateLocations < ActiveRecord::Migration
 		create_table :locations do |t|
 			t.integer :user_id
 			t.string :name
-			t.string :address
+			t.string :street
 			t.string :city
 			t.string :state
 			t.string :zipcode
-			t.string :time_zone    
+			t.string :timezone    
+			t.string :country    
 			t.float  :latitude
 			t.float  :longitude
 
@@ -16,6 +17,7 @@ class CreateLocations < ActiveRecord::Migration
 		add_index "locations", ["user_id"]
 		add_index "locations", ["city", "state"]
 		add_index "locations", ["zipcode"]
+		add_index "locations", ["country"]
 		add_index "locations", ["latitude", "longitude"]
 	end
 end

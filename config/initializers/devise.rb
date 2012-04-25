@@ -17,9 +17,9 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
   if Rails.env == "staging"
-    config.mailer_sender = "Ananta Registrations <registrations@ananta-staging.herokuapp.com>"
+    config.mailer_sender = "Ananta Registrations <registrations@a-staging.herokuapp.com>"
   elsif Rails.env == "sandbox"
-    config.mailer_sender = "Ananta Registrations <registrations@ananta-sandbox.herokuapp.com>"
+    config.mailer_sender = "Ananta Registrations <registrations@a-sandbox.herokuapp.com>"
   else
     config.mailer_sender = "Ananta Registrations <registrations@ananta.io>"
   end

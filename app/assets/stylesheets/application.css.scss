@@ -516,6 +516,7 @@ form{
 	background-color: #f6f6f6;
 	.modal-header{
 		border-bottom: 0;
+		display: list-item; //TODO: wtf?
 	}
 	.facebook{
 		p{
@@ -535,19 +536,19 @@ form{
 		.loader{
 			position: absolute;
 			right: 152px;
-			top: 12px;
+			top: 10px;
 		}
 		.icon-ok{
 			position: absolute;
 			right: 152px;
-			top: 6px;
+			top: 4px;
 			color: #7EB854;
 			font-size: 18px;
 		}
 		.icon-remove{
 			position: absolute;
 			right: 152px;
-			top: 7px;
+			top: 4px;
 			color: #f44;
 			font-size: 18px;
 		}
@@ -607,6 +608,9 @@ form{
 #footer{
 	.container{
 		padding-top: 20px;
+		img {
+			margin-bottom: 4px;
+		}
 	}
 }
 
@@ -621,6 +625,7 @@ form{
 				left: -45px;
 			}
 			input{
+				width: 100%;
 				border: 0 none;
 				outline: 0 none;
 				@include box-shadow(none);

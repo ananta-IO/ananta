@@ -68,7 +68,7 @@ gem 'possessive'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'bootstrap-sass', '~> 2.0.1'
+  gem 'bootstrap-sass', '~> 2.0.2'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'compass-rails'
   gem 'compass-h5bp'

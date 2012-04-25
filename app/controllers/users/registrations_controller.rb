@@ -3,8 +3,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     build_resource
 
+    resource.build_location
+    resource.location.ip = request.remote_ip
+
     if fb_user = session[:facebook_user_attributes]
-      resource.facebook_id = fb_user.id  #, locale: fb_user.locale, timezone: fb_user.timezone, facebook_verified: fb_user.verified 
+      resource.facebook_id = fb_user.id  #, locale: fb_user.locale, facebook_verified: fb_user.verified 
       resource.build_profile(:name => fb_user.name) 
       resource.profile.images.new({ remote_image_url: "https://graph.facebook.com/#{fb_user.id}/picture?type=large", image_type: 'avatar' })
     end

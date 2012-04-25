@@ -5,21 +5,28 @@ class Location < ActiveRecord::Base
   #########################
   # Callbacks & Misc method calls (e.g. devise for, acts_as_whatever )
   #########################
-  geocoded_by :full_street_address
-  # reverse_geocoded_by :latitude, :longitude
+  geocoded_by :address
+  reverse_geocoded_by :latitude, :longitude do |obj,results|
+    if geo = results.first
+      obj.city    = geo.city
+      obj.state   = geo.state
+      obj.zipcode = geo.postal_code
+      obj.country = geo.country_code
+    end
+  end
 
-  before_validation Proc.new { |location| location.name = 'default' }, :if => Proc.new { |location| location.name.blank? }
-  after_validation :geocode, :if => Proc.new { |location| (location.address_changed? or location.city_changed? or location.state_changed? or location.zipcode_changed?) }
-  # after_validation :reverse_geocode, :if => Proc.new { |location| (location.city.blank? or location.state.blank?) and (location.latitude_changed? or location.longitude_changed?) }  # TODO: reverse_geocode sets <address: "280 Broadway, Manhattan, NY 10007, USA">. this must be parsed into city, state, zip
-  after_validation :set_time_zone, :if => Proc.new { |location| location.time_zone.blank? or location.latitude_changed? or location.longitude_changed? }
+  before_validation Proc.new { |location| location.name = 'default' }, :if => Proc.new { |location| location.name.blank? }  # DEFAULT: name    = default
+  before_validation Proc.new { |location| location.country = 'US' }, :if => Proc.new { |location| location.country.blank? } # DEFAULT: country = US
+  after_validation :geocode, :if => Proc.new { |location| (location.city_changed? or location.state_changed? or !location.ip.nil? or location.street_changed? or location.zipcode_changed? or location.country_changed?) }
+  after_validation :reverse_geocode, :if => Proc.new { |location| (location.latitude_changed? or location.longitude_changed?) }
+  after_validation :set_timezone, :if => Proc.new { |location| (location.timezone.blank? or location.latitude_changed? or location.longitude_changed?) }
 
 
   #########################
   # Setup attributes (reader, accessible, protected)
   #########################
-  #attr_reader
-  #attr_accessor
-  attr_accessible :name, :address, :city, :state, :zipcode
+  attr_accessor :ip
+  attr_accessible :name, :street, :city, :state, :zipcode
 
 
   #########################
@@ -32,8 +39,9 @@ class Location < ActiveRecord::Base
   # Validations
   #########################
   validates :name, :presence => true
-  validates :city, :presence => true, :if => Proc.new { |location| location.latitude.blank? or location.longitude.blank? }
-  validates :state, :presence => true, :if => Proc.new { |location| location.latitude.blank? or location.longitude.blank? }
+  validates :country, :presence => true
+  validates :city, :presence => true, :if => Proc.new { |location| (location.latitude.blank? or location.longitude.blank?) and location.ip.nil? }
+  validates :state, :presence => true, :if => Proc.new { |location| (location.latitude.blank? or location.longitude.blank?) and location.ip.nil? }
 
 
   #########################
@@ -57,19 +65,19 @@ class Location < ActiveRecord::Base
   # Public Instance Methods ( def method_name )
   #########################
 
-  def full_street_address
-    "#{self.address} #{self.city} #{self.state} #{self.zipcode}"
+  def address
+    self.ip || [street, city, state, zipcode, country].compact.join(', ')
   end
 
   def map_url
-    "http://maps.google.com/maps?q=#{self.address},+#{self.city},+#{self.state},+#{self.zipcode}&hl=en"
+    "http://maps.google.com/maps?q=#{self.street},+#{self.city},+#{self.state},+#{self.zipcode}&hl=en"
   end
 
 
   #########################
   # Protected Methods
   #########################
-  protected
+  # protected
 
   # Same as Public Instance Methods
 
@@ -77,19 +85,19 @@ class Location < ActiveRecord::Base
   #########################
   # Private Methods
   #########################
-  private
+  # private
 
-  def set_time_zone   
+  def set_timezone   
     begin
       # TODO: move this to a config file
       client = AskGeo.new(:account_id => '424004', :api_key => 'jstmdfns3e95odjv56hrgg79ak')
 
       response = client.lookup("#{self.latitude}, #{self.longitude}")
       tz = response["timeZone"]
-      self.update_attribute("time_zone", tz)
+      self.timezone = tz
     rescue AskGeo::APIError => e
       # Default to EST/EDT
-      self.update_attribute("time_zone", "America/New_York")
+      self.timezone = "America/New_York"
     end
   end
 

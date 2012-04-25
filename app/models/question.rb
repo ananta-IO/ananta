@@ -57,7 +57,7 @@ class Question < ActiveRecord::Base
   #########################
   validates :user_id, :presence => true
   # validates :questionable_url, :presence => true
-  validates :question, :presence => true, :length => { :in => 15..141 }, :uniqueness => {:scope => [:questionable_url], :message => 'has already been asked on this page'}, :format => { :with => /\?$/, :message => "must end with question mark (?)" }
+  validates :question, :presence => true, :length => { :in => 15..141 }, :uniqueness => {:scope => [:questionable_url], :message => 'has already been asked on this page'}, :format => { :with => /\?$/, :message => "must end with a question mark (?)" }
   
 
   #########################

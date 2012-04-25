@@ -60,11 +60,12 @@ ActiveRecord::Schema.define(:version => 20120422205245) do
   create_table "locations", :force => true do |t|
     t.integer  "user_id"
     t.string   "name"
-    t.string   "address"
+    t.string   "street"
     t.string   "city"
     t.string   "state"
     t.string   "zipcode"
-    t.string   "time_zone"
+    t.string   "timezone"
+    t.string   "country"
     t.float    "latitude"
     t.float    "longitude"
     t.datetime "created_at", :null => false
@@ -72,6 +73,7 @@ ActiveRecord::Schema.define(:version => 20120422205245) do
   end
 
   add_index "locations", ["city", "state"], :name => "index_locations_on_city_and_state"
+  add_index "locations", ["country"], :name => "index_locations_on_country"
   add_index "locations", ["latitude", "longitude"], :name => "index_locations_on_latitude_and_longitude"
   add_index "locations", ["user_id"], :name => "index_locations_on_user_id"
   add_index "locations", ["zipcode"], :name => "index_locations_on_zipcode"
@@ -95,7 +97,7 @@ ActiveRecord::Schema.define(:version => 20120422205245) do
     t.string   "slug"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-    t.string   "time_zone"
+    t.string   "timezone"
     t.float    "latitude"
     t.float    "longitude"
   end
