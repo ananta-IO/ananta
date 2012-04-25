@@ -18,8 +18,8 @@ class Location < ActiveRecord::Base
   before_validation Proc.new { |location| location.name = 'default' }, :if => Proc.new { |location| location.name.blank? }  # DEFAULT: name    = default
   before_validation Proc.new { |location| location.country = 'US' }, :if => Proc.new { |location| location.country.blank? } # DEFAULT: country = US
   after_validation :geocode, :if => Proc.new { |location| (location.city_changed? or location.state_changed? or !location.ip.nil? or location.street_changed? or location.zipcode_changed? or location.country_changed?) }
-  after_validation :reverse_geocode, :if => Proc.new { |location| (location.latitude_changed? or location.longitude_changed?) }
   after_validation :set_timezone, :if => Proc.new { |location| (location.timezone.blank? or location.latitude_changed? or location.longitude_changed?) }
+  before_save :reverse_geocode, :if => Proc.new { |location| (location.latitude_changed? or location.longitude_changed?) }
 
 
   #########################
