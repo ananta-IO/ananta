@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120422205245) do
+ActiveRecord::Schema.define(:version => 20120426015522) do
 
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
@@ -58,24 +58,25 @@ ActiveRecord::Schema.define(:version => 20120422205245) do
   add_index "images", ["user_id"], :name => "index_images_on_user_id"
 
   create_table "locations", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "name"
+    t.integer  "locatable_id"
+    t.string   "locatable_type"
+    t.string   "name",           :default => "default"
     t.string   "street"
     t.string   "city"
     t.string   "state"
     t.string   "zipcode"
     t.string   "timezone"
-    t.string   "country"
+    t.string   "country",        :default => "US"
     t.float    "latitude"
     t.float    "longitude"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
   end
 
   add_index "locations", ["city", "state"], :name => "index_locations_on_city_and_state"
   add_index "locations", ["country"], :name => "index_locations_on_country"
   add_index "locations", ["latitude", "longitude"], :name => "index_locations_on_latitude_and_longitude"
-  add_index "locations", ["user_id"], :name => "index_locations_on_user_id"
+  add_index "locations", ["locatable_id", "locatable_type"], :name => "index_locations_on_locatable_id_and_locatable_type"
   add_index "locations", ["zipcode"], :name => "index_locations_on_zipcode"
 
   create_table "profiles", :force => true do |t|
@@ -193,12 +194,16 @@ ActiveRecord::Schema.define(:version => 20120422205245) do
     t.string   "facebook_id"
     t.string   "username"
     t.string   "slug"
+    t.string   "timezone"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["facebook_id"], :name => "index_users_on_facebook_id"
+  add_index "users", ["latitude", "longitude"], :name => "index_users_on_latitude_and_longitude"
   add_index "users", ["permissions"], :name => "index_users_on_permissions"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["slug"], :name => "index_users_on_slug", :unique => true

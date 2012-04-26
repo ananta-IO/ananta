@@ -40,4 +40,13 @@ class ApplicationController < ActionController::Base
     session[:questionable_url] = request.url
     session[:questionable_action] = params[:action]
   end
+
+  def remote_ip
+    if request.remote_ip == '127.0.0.1'
+      # Random remote address for testing on develop
+      "#{rand(255)}.#{rand(255)}.#{rand(255)}.#{rand(255)}"
+    else
+      request.remote_ip
+    end
+  end
 end

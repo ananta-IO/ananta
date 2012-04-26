@@ -184,6 +184,8 @@ form{
 		}
 	}
 	.brand{
+		// font-family: 'Futura';
+		font-weight: 100;
 		@include transition-property(all);
 		@include transition-duration(0.5s);
 		@include transition-timing-function(ease-in);
@@ -616,7 +618,13 @@ form{
 
 #home{
 	#waywo{
-		margin-top: 80px;
+		margin-top: 140px;
+		h1{
+			font-size: 60px;
+			line-height: 60px;
+			font-weight: 200;
+			margin-bottom: 60px;
+		}
 		.span6{
 			position: relative;
 			.icon.blueprint{

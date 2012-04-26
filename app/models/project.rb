@@ -52,16 +52,19 @@ class Project < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, :use => :slugged
   belongs_to :user
+  has_one    :location, :as => :locatable, :dependent => :destroy
   has_many   :images,   :as => :imageable, :dependent => :destroy
   has_many   :avatars,  :as => :imageable, :source => :images, :class_name => "Image", :conditions => ["image_type = ?", "avatar"]
   has_many   :pictures, :as => :imageable, :source => :images, :class_name => "Image", :conditions => ["image_type = ?", "picture"]
 
+  accepts_nested_attributes_for :location
 
 
   #########################
   # Validations
   #########################
-  validates :name, :presence => true
+  validates :name, :presence => true, :uniqueness => {:scope => :user_id, :message => "cannot be the same as one of your other projects."}
+  validates :user_id, :presence => true
 
 
   #########################

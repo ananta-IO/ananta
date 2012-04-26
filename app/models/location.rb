@@ -15,24 +15,23 @@ class Location < ActiveRecord::Base
     end
   end
 
-  before_validation Proc.new { |location| location.name = 'default' }, :if => Proc.new { |location| location.name.blank? }  # DEFAULT: name    = default
-  before_validation Proc.new { |location| location.country = 'US' }, :if => Proc.new { |location| location.country.blank? } # DEFAULT: country = US
   after_validation :geocode, :if => Proc.new { |location| (location.city_changed? or location.state_changed? or !location.ip.nil? or location.street_changed? or location.zipcode_changed? or location.country_changed?) }
   after_validation :set_timezone, :if => Proc.new { |location| (location.timezone.blank? or location.latitude_changed? or location.longitude_changed?) }
   before_save :reverse_geocode, :if => Proc.new { |location| (location.latitude_changed? or location.longitude_changed?) }
+  after_save :sync_locatable, :if => Proc.new { |location| location.locatable and (location.latitude_changed? or location.longitude_changed? or location.timezone_changed?) }
 
 
   #########################
   # Setup attributes (reader, accessible, protected)
   #########################
   attr_accessor :ip
-  attr_accessible :name, :street, :city, :state, :zipcode
+  attr_accessible :name, :street, :city, :state, :zipcode, :country
 
 
   #########################
   # Associations
   #########################
-  belongs_to :user
+  belongs_to :locatable, :polymorphic => true
 
 
   #########################
@@ -85,7 +84,7 @@ class Location < ActiveRecord::Base
   #########################
   # Private Methods
   #########################
-  # private
+  private
 
   def set_timezone   
     begin
@@ -99,6 +98,14 @@ class Location < ActiveRecord::Base
       # Default to EST/EDT
       self.timezone = "America/New_York"
     end
+  end
+
+  def sync_locatable
+    obj = self.locatable
+    %w(latitude longitude timezone).each do |a|
+      obj[a.to_sym] = self[a.to_sym]
+   end
+    obj.save
   end
 
 end

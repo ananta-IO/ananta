@@ -37,7 +37,6 @@ class Answer < ActiveRecord::Base
   #########################
   # Associations
   #########################
-  belongs_to :user 
   belongs_to :question
   has_one :comment, :as => :commentable, :dependent => :destroy
 

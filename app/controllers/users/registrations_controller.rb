@@ -4,7 +4,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     build_resource
 
     resource.build_location
-    resource.location.ip = request.remote_ip
+    resource.location.ip = remote_ip
 
     if fb_user = session[:facebook_user_attributes]
       resource.facebook_id = fb_user.id  #, locale: fb_user.locale, facebook_verified: fb_user.verified 
