@@ -1,13 +1,13 @@
 class QuestionsController < InheritedResources::Base
 	#########################
-	# Response Types
+	# Config via inherited_resources https://github.com/josevalim/inherited_resources 
 	#########################
 	respond_to :js, :html, :json
 	actions :index, :show, :create, :update
 
 
 	#########################
-	# Scopes
+	# Scopes via has_scope https://github.com/plataformatec/has_scope
 	#########################
 	has_scope :published, :type => :boolean, :only => :index, :default => true
 	has_scope :answered, :type => :boolean, :only => :index
@@ -56,7 +56,7 @@ class QuestionsController < InheritedResources::Base
 
 
 	#########################
-	# Authentication
+	# Callbacks. Auth & Permissions via devise & cancan.
 	#########################
 	before_filter :authenticate_user!, :except => [:index, :show]
 	before_filter :cuid_to_params, :only => :update

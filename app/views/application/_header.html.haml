@@ -26,9 +26,9 @@
 	.navbar-inner
 		.container  
 			-# Left
-			- if request.path == '/'
+			- if !current_user and request.path == '/'
 				%a.brand{:href => "/"}
-					&nbsp; 
+					ananta IO
 			- else
 				%a.brand{:href => "/"} 
 					ananta IO

@@ -12,7 +12,7 @@ class SessionsController < InheritedResources::Base
 
 
 	#########################
-	# Auth & Permissions via devise & cancan
+	# Callbacks. Auth & Permissions via devise & cancan.
 	#########################
 	# before_filter :authenticate_user!, :except => [:index, :show]
 	# load_and_authorize_resource

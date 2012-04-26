@@ -1,14 +1,15 @@
 class ProjectsController < InheritedResources::Base
+	#########################
+	# Config via inherited_resources https://github.com/josevalim/inherited_resources 
+	#########################
 	respond_to :js, :html, :json
 	belongs_to :user, :optional => true
 	defaults :route_prefix => ''
-	before_filter :populate_tags, :only => [:new, :create, :edit, :update, :destroy]
-	before_filter :populate_selected_tags, :only => [:edit, :update]
 
-	before_filter :authenticate_user!, :except => [:index, :show]
-	before_filter :cuid_to_params, :only => :update
-	load_and_authorize_resource
 
+	#########################
+	# Scopes via has_scope https://github.com/plataformatec/has_scope
+	#########################
 	has_scope :order, :only => :index do |controller, scope, value|
 		scope.order(value)
 	end
@@ -20,8 +21,24 @@ class ProjectsController < InheritedResources::Base
 		controller.session[:projects_per] ? scope.per(controller.session[:projects_per]) : scope.per(10)
 	end
 
+
+	#########################
+	# Callbacks. Auth & Permissions via devise & cancan.
+	#########################
+	before_filter :populate_tags, :only => [:new, :create, :edit, :update, :destroy]
+	before_filter :populate_selected_tags, :only => [:edit, :update]
+
+	before_filter :authenticate_user!, :except => [:index, :show]
+	before_filter :cuid_to_params, :only => :update
+	load_and_authorize_resource
+
+
+	#########################
+	# Modifited Actions
+	#########################
 	def create
-		update! do |success, failure|
+		@project.location = @user.location.dup
+		create! do |success, failure|
 			success.html do 
 				flash[:notice] = "Successfully created project. #{undo_link}"
 				redirect_to user_project_url(@user, @project)
@@ -47,6 +64,10 @@ class ProjectsController < InheritedResources::Base
 		end
 	end
 
+
+	#########################
+	# Protected Methods
+	#########################
 	protected
 
 	def collection
