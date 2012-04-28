@@ -10,20 +10,20 @@ class Ananta.Views.ProjectFlow.ProjectFlowView extends Backbone.View
 
 	render: ->
 		$(@el).html(@template())
-		@addProjectNameForm().hide().fadeIn(10000)
+		@addProjectNameForm().hide().fadeIn(5000)
 		@
 
 	addProjectNameForm: ->
-		view = new Ananta.Views.ProjectFlow.ProjectNameFormView({collection : @collection})
-		view.bind('removeProjectNameForm', @removeProjectNameForm)
-		el = $(view.render().el)
-		$(@el).append(el)
-		el
+		@formView = new Ananta.Views.ProjectFlow.ProjectNameFormView({collection : @collection})
+		@formView.bind('removeProjectNameForm', @removeProjectNameForm)
+		$(@el).append(@formView.render().el)
+		$(@formView.el)
 
 	removeProjectNameForm: ->
-		old = @$('.project-name-form')
-		old.addClass('animated fadeOutLeftBig')
+		$(@formView.el).addClass('animated fadeOutLeftBig')
 		wait 400, () =>
-			old.remove()
-			wait 200, () =>
+			@formView.remove()
+			wait 100, () =>
 				@addProjectNameForm().addClass('animated fadeInUp')
+				wait 1000, () =>
+					$(@formView.el).removeClass('animated fadeInUp')

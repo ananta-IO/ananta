@@ -6,7 +6,7 @@ class Ananta.Views.ProjectFlow.ProjectNameFormView extends Backbone.View
 	className: 'project-name-form'
 
 	events:
-		'click button'		:'submit'
+		'submit form'		:'submit'
 
 	initialize: (options) ->
 		_.bindAll(@, 'render')
