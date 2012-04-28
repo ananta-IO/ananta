@@ -1,0 +1,8 @@
+.span6.offset3
+	%form.project{:action => "/projects", :method => "post"}
+		.input.string.required.project-name
+			-# %label.center What are you working on?
+			%object.icon.blueprint{:data => "assets/tnp-1050-blueprint-lightgrey.svg", :height => "40", :type => "image/svg+xml", :width => "40"}
+			%input{:type => "text", :name => "project[name]", :placeholder => "What are you working on?", :title => "What are you working on?", autocomplete: "off", :autofocus => true}
+		.button.center
+			%button.project-action.btn{:name => "project-action", :type => "submit"} Start Project

@@ -1,8 +1,12 @@
 -content_for :title do "Ananta IO - The Project Database" end
 
+=content_for :javascripts do
+	:javascript
+		$(function() {
+			// Add project_flow to view
+			Ananta.router = new Ananta.Routers.ProjectFlowRouter();
+			Backbone.history.start();
+		});
+
 #home
-	.row#waywo
-		/ %h1.center ananta IO
-		.span6.offset3
-			%object.icon.blueprint{:data => "assets/tnp-1050-blueprint.svg", :height => "40", :type => "image/svg+xml", :width => "40"}
-			%input{placeholder: 'What are you working on?', type: 'text'}
+	#project_flow

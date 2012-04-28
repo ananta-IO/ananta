@@ -63,7 +63,10 @@ class Project < ActiveRecord::Base
   #########################
   # Validations
   #########################
-  validates :name, :presence => true, :uniqueness => {:scope => :user_id, :message => "cannot be the same as one of your other projects."}
+  validates :name, 
+    :presence => true, 
+    :uniqueness => {:scope => :user_id, :message => "cannot be the same as one of your other projects."},
+    :length => { :minimum   => 3, :maximum   => 141, :too_short => "Please say a little more. #{count} characters minimum.", :too_long  => "Please say a little less. #{count} characters maximum." }
   validates :user_id, :presence => true
 
 
