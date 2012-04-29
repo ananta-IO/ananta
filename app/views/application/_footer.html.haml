@@ -1,5 +1,37 @@
+=content_for :javascripts do
+	:coffeescript
+		$(() ->
+			buttons = $("#footer .addthis_toolbox").children()  
+			pre = 99
+			cur = 0
+			hover = false
+			time = 3000
+			$(buttons).fadeTo(0, 0.4);
+			$(buttons).hide()
+			transitionButtons = () =>
+				cur = if (pre+1) < buttons.length then (pre+1) else 0
+				$(buttons[pre]).fadeOut(500)
+				$(buttons[cur]).fadeIn(500)
+				pre = cur
+				recur = () =>
+					if hover
+						wait time, () => recur()
+					else
+						transitionButtons()
+				wait time, () => recur()
+			transitionButtons()
+			#
+			$("#footer .addthis_toolbox").live
+				mouseenter: =>
+					hover = true
+					$(buttons[cur]).fadeTo(300, 1.0);
+				mouseleave: =>
+					hover = false
+					$(buttons[cur]).fadeTo(300, 0.4);
+		)
+
 .container
-	%p.center
+	.center
 		ananta IO 
 		= image_tag "/assets/copyleft.png", style: "height: 10px"
 		#{ Date.today.year }
@@ -7,4 +39,9 @@
 		= link_to 'github', "https://github.com/ananta-io/ananta", target: "_blank"
 		&middot;
 		= link_to 'about', '/about'
-		
+		&middot;
+		.addthis_toolbox.addthis_default_style
+			%a.addthis_button_facebook_like{"fb:like:layout" => "button_count"}
+			%a.addthis_button_tweet
+			%a.addthis_button_google_plusone{"g:plusone:size" => "medium"}
+		%script{:src => "http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4e07edfe1206c99f", :type => "text/javascript"}

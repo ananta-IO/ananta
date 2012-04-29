@@ -526,6 +526,10 @@ input{
 		border-bottom: 0;
 		display: list-item; //TODO: wtf?
 	}
+	.modal-body{
+		padding-top: 0;
+		margin-top: -5px;
+	}
 	.facebook{
 		p{
 			color: #bbb;
@@ -618,6 +622,17 @@ input{
 		padding-top: 20px;
 		img {
 			margin-bottom: 4px;
+		}
+		.addthis_toolbox{
+			display: inline-block;
+			vertical-align: top;
+			margin-top: 1px;
+			position: relative;
+			width: 125px;
+			height: 25px;
+			a{
+				position: absolute;
+			}
 		}
 	}
 }

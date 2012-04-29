@@ -10,12 +10,17 @@ class Ananta.Views.ProjectFlow.ProjectNameFormView extends Backbone.View
 
 	initialize: (options) ->
 		_.bindAll(@, 'render')
+		@model = new Ananta.Models.Project
+		@model.urlRoot = "/#{Ananta.App.currentUser.id}"
 
 	render: ->
 		$(@el).html(@template())
 		@
 
 	submit: (e) ->
-		@.trigger('removeProjectNameForm')
 		e.preventDefault()
 		e.stopPropagation()
+		@model.set('name', @$('input').val())
+		@model.save()
+		@collection.add(@model)
+		@.trigger('removeProjectNameForm')

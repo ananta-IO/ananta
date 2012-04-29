@@ -1,1 +1,3 @@
-extends 'users/show'
+collection @users
+
+extends 'users/base'

@@ -1,6 +1,7 @@
 class Ananta.Routers.ProjectFlowRouter extends Backbone.Router
 	initialize: (options) ->
-		@projects =  new Ananta.Collections.ProjectsCollection({})
+		Ananta.App.currentUser = new Ananta.Models.User(options.currentUser)
+		@projects =  new Ananta.Collections.ProjectsCollection()
 
 	routes:
 		".*" : "index"
