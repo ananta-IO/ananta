@@ -28,4 +28,5 @@ class Ananta.Views.ProjectFlow.ProjectNameFormView extends Backbone.View
 		@model.set('name', @$('input').val())
 		@model.save()
 		@collection.add(@model)
+		@$('input').tooltip('hide')
 		@.trigger('removeProjectNameForm')
