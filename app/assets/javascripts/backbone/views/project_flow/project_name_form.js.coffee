@@ -15,7 +15,12 @@ class Ananta.Views.ProjectFlow.ProjectNameFormView extends Backbone.View
 
 	render: ->
 		$(@el).html(@template())
+		@addTooltips()
 		@
+
+	addTooltips: ->
+		@$('input').tooltip
+			placement: 'top'
 
 	submit: (e) ->
 		e.preventDefault()
