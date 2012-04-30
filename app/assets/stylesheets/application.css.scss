@@ -102,6 +102,10 @@ input{
 	line-height: inherit;
 }
 
+.tooltip-inner {
+	max-width: 300px;
+}
+
 .alert{
 	a.close{
 		&:active{
