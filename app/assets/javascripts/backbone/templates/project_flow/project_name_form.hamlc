@@ -1,4 +1,4 @@
-.span6.offset3
+.span6.center
 	%form.project{:action => "/projects", :method => "post"}
 		.input.string.required.project-name
 			-# %label.center What are you working on?

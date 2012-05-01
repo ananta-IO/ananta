@@ -1,3 +1,5 @@
+-content_for :title do "Edit #{resource.username.possessive} profile" end
+
 =content_for :javascripts do
 	:javascript
 		//
@@ -49,37 +51,31 @@
 			});
 		});
 
-.page-header
-	%h1 Editing Profile
-.row
-	.span12
-		.tabbable.tabs-left
-			%ul.nav.nav-tabs
-				%li.active
-					= link_to edit_profile_path(@profile) do
-						%i.icon-user
-						Edit Profile
-				%li
-					= link_to "/users/edit" do
-						%i.icon-key
-						Edit Account
-			.tab-content
-				= simple_form_for @profile, :html => {:class => "form-horizontal"} do |f|
+#edit_profile.user-edit
+	.row
+		.span2
+			= render 'users/edit_nav', user: @profile.user, active: 'profile'
+		.span10
+			.boxed-group
+				%h3
+					Profile
+				.inner
+					= simple_form_for @profile, :html => {:class => "form-horizontal"} do |f|
 
-					-#= f.input :name, input_html: {class: :span4}
-					-#%br
-					= f.input :avatar, hint: raw('avatar will change as soon as you choose a file or <br/> drag an image onto the screen') do
-						#profile_avatar
-							= image_tag(@profile.avatar.image.medium.url, :class => 'circle')
-							.new-image
-								= f.file_field :avatar, name: :image, id: :avatar_file
-					%br
-					= f.input :bio_tokens, label: "Bio Tags"
-					%br
-					= f.input :skill_tokens, label: "Skills"
-					%br
-					= f.input :need_tokens, label: "Needs"
-					%br
-					.form-actions
-						= f.button :submit, :class => "btn-primary"
-						= link_to 'Cancel', @profile, :class => "btn btn-danger"
+						-#= f.input :name, input_html: {class: :span4}
+						-#%br
+						= f.input :avatar, hint: raw('avatar will change as soon as you choose a file or <br/> drag an image onto the screen') do
+							#profile_avatar
+								= image_tag(@profile.avatar.image.medium.url, :class => 'circle')
+								.new-image
+									= f.file_field :avatar, name: :image, id: :avatar_file
+						%br
+						= f.input :bio_tokens, label: "Bio Tags"
+						%br
+						= f.input :skill_tokens, label: "Skills"
+						%br
+						= f.input :need_tokens, label: "Needs"
+						%br
+						.form-actions
+							= f.button :submit, :class => "btn-primary"
+							= link_to 'Cancel', @profile, :class => "btn btn-danger"

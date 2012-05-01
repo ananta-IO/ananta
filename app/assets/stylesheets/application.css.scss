@@ -144,6 +144,71 @@ input{
 	-moz-animation-iteration-count: infinite;
 }
 
+.boxed-group{
+	padding: 3px;
+	background: #EFEFEF;
+	@include border-radius(2px);
+	& > h3{
+		background: #FAFAFA;
+		@include background-image(linear-gradient(#FAFAFA,#E0E0E0));
+		margin: 0;
+		@include border-top-radius(1px);
+		border: 1px solid #D8D8D8;
+		border-bottom: 1px solid #CCC;
+		padding: 10px 10px 11px 10px;
+		font-size: 14px;
+		text-shadow: 0 1px 0 white;
+	}
+	& > .inner{
+		padding: 1px 10px;
+		background: white;
+		border: 1px solid #D8D8D8;
+		border-top: none;
+		@include border-bottom-radius(1px);
+		form{
+			margin-top: 30px;
+		}
+		.form-actions{
+			background-color: white;
+		}
+	}
+	.nav{ 
+		margin: 0;
+		padding: 0;
+		background: white;
+		border: 1px solid #D8D8D8;
+		border-top: none;
+		background-color: #F9F9FB;
+		@include border-bottom-radius(1px);
+		li{
+			border-bottom: 1px solid #EEE;
+			border-top: 1px solid white;
+			&:first-child {
+				border-top: none;
+			}
+			&:last-child {
+				border-bottom: none;
+			}
+		}
+		a{
+			display: block;
+			padding: 8px 10px;
+			text-shadow: 0 1px 0 white;
+			&.active{
+				background: white;
+				border-left: 2px solid #D26911;
+				font-weight: bold;
+				color: #222;
+				cursor: default;
+				box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.1);
+			}
+			&:hover{
+				background-color: #FDFDFE;
+			}
+		}
+	}
+}
+
 .separator{
 	margin: 10px 0;
 	&:before{
@@ -672,3 +737,6 @@ input{
 		}
 	}
 }
+
+// Import these mixins last to overide everything else
+@import "html_mixins";

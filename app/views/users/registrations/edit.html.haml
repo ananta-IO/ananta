@@ -1,24 +1,20 @@
-.page-header
-	%h1 Edit account
-.row
-	.span12
-		.tabbable.tabs-left
-			%ul.nav.nav-tabs
-				%li
-					= link_to edit_profile_path(@user.profile) do
-						%i.icon-user
-						Edit Profile
-				%li.active
-					= link_to "/users/edit" do
-						%i.icon-key
-						Edit Account
-			.tab-content
-				= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => "form-horizontal" }) do |f|
-					= f.input :email
-					= f.input :username, hint: raw("WARNING </br> If you change this the links to you and your projects will change. </br> The links that other people use to connect to you will break.")
-					= f.input :password, label: 'New password', hint: "Leave blank if you don't want to change it."
-					= f.input :password_confirmation
-					= f.input :current_password, hint: "We need your current password to confirm your changes."
-					.form-actions
-						= f.button :submit, :class => 'btn-primary'
-						= link_to I18n.t('cancel'), root_url, :class => "btn btn-danger"
+-content_for :title do "Edit #{resource.username.possessive} account" end
+
+#edit_account.user-edit
+	.row
+		.span2
+			= render 'users/edit_nav', user: resource, active: 'account settings'
+		.span10
+			.boxed-group
+				%h3
+					Account Settings
+				.inner
+					= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => "form-horizontal" }) do |f|
+						= f.input :email
+						= f.input :username, hint: raw("WARNING </br> If you change this the links to you and your projects will change. </br> The links that other people use to connect to you will break.")
+						= f.input :password, label: 'New password', hint: "Leave blank if you don't want to change it."
+						= f.input :password_confirmation
+						= f.input :current_password, hint: "We need your current password to confirm your changes."
+						.form-actions
+							= f.button :submit, :class => 'btn-primary'
+							= link_to I18n.t('cancel'), root_url, :class => "btn btn-danger"
