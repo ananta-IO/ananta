@@ -17,6 +17,7 @@ class Ananta.Views.ProjectFlow.ProjectNameFormView extends Backbone.View
 			'_____', 
 			'baking', 
 			'building a robot', 
+			'building a rocket',
 			'building a tree-house', 
 			'building a website', 
 			'buying a toothbrush', 
@@ -32,8 +33,11 @@ class Ananta.Views.ProjectFlow.ProjectNameFormView extends Backbone.View
 			'learning a language', 
 			'looking for someone to make stuff with', 
 			'looking for something to do', 
+			'looking for test subjects',
 			'meditating', 
 			'mowing the lawn', 
+			'performing an experiment',
+			'playing a game',
 			'reticulating splines', 
 			'starting a company', 
 			'teaching adults to think for themselves', 
@@ -41,6 +45,7 @@ class Ananta.Views.ProjectFlow.ProjectNameFormView extends Backbone.View
 			'training for a marathon', 
 			'traveling the world', 
 			'trying to loose weight', 
+			'trying to take over the world',
 			'writing a book'
 		]
 
