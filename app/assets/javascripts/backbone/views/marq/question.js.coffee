@@ -68,8 +68,13 @@ class Ananta.Views.Marq.QuestionView extends Backbone.View
 				# fetch a new question
 				@.trigger('fetchQuestion')
 			error: (data, jqXHR) =>
-				@.trigger( 'renderErrors', $.parseJSON(jqXHR.responseText) ) 
+				errors = $.parseJSON(jqXHR.responseText)
+				@.trigger( 'renderErrors', errors ) 
+				if errors['error'] == "You need to sign in or sign up before continuing."
+					@loginModal()
 		)
 
 	removeQuestion: ->
 		@remove()
+
+_.extend(Ananta.Views.Marq.QuestionView::, Ananta.Mixins.Logins)

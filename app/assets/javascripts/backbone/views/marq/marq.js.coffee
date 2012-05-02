@@ -105,7 +105,10 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 				@clearErrors()
 				@collection.add(data)
 			error: (data, jqXHR) =>
-				@renderErrors($.parseJSON(jqXHR.responseText))
+				errors = $.parseJSON(jqXHR.responseText)
+				@renderErrors(errors)
+				if errors['error'] == "You need to sign in or sign up before continuing."
+					@loginModal()
 		)
 
 	fetchQuestion: ->
@@ -126,3 +129,4 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 	noMoreQuestions: ->
 		@$(".questions tr").prepend("<td><div class='span5'><div class='question wrap'><div class='outer'><div class='inner'>You have answered every question on this page. Why don't you go outside and take a break... Or go to a different page and answer more questions.</div></div></div></div></td>")
 
+_.extend(Ananta.Views.Marq.MarqView::, Ananta.Mixins.Logins)

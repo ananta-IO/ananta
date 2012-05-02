@@ -20,6 +20,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 		_.bindAll(@, 'render')
 		@user = new Ananta.Models.User( options.user )
 		@callback = options.callback
+		@message = options.message
 		@register = false
 		@username_pattern = /^[A-Za-z-]*$/i
 		@email_pattern = /^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i
@@ -30,9 +31,11 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 			@register = true
 
 	render: ->
+		$('#login_register_modal').remove() #TODO: remove on close rather than render
 		$(@el).html(@template( @user.toJSON() ))
 		$(@el).modal('show')
 		@addCSRF()
+		if @message then @addMessage()
 		if !@register
 			@$('#login-email').attr('name', 'user[login]')
 			@$('form').attr('action', '/users/sign_in')
@@ -191,3 +194,6 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 		@$('.username').slideUp()
 		wait 600, =>
 			@$('.username').remove()
+
+	addMessage: ->
+		@$(".facebook").prepend("<h1>#{@message}</h1>")
