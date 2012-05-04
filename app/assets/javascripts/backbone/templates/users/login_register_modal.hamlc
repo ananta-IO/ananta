@@ -18,4 +18,4 @@
 				%div{:class => "input string required username"}
 					%input#username{:type => "text" :name => "user[username]" :title => "username" autocomplete: "off", value: "#{if @username then @username else ''}"}
 				%div{:class => "button"}
-					%button#login-action.login-action.btn{:name => "login-action", :type => "submit"} Sign in
+					%button#login-action.login-action.btn{:name => "login-action", :type => "submit"} Log in

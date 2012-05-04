@@ -38,6 +38,7 @@ class Answer < ActiveRecord::Base
   # Associations
   #########################
   belongs_to :question
+  belongs_to :user
   has_one :comment, :as => :commentable, :dependent => :destroy
 
   accepts_nested_attributes_for :comment

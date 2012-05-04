@@ -189,11 +189,11 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 		@register = false
 		@$('#login-email').attr('name', 'user[login]').after('<i class="icon-ok" />')
 		@$('form').attr('action', '/users/sign_in')
-		@$('#login-action').html("Login").show()
+		@$('#login-action').html("Log in").show()
 		if !@$('#login-password').is(':focus') then @$('.forgot-password').fadeIn(500)
 		@$('.username').slideUp()
 		wait 600, =>
 			@$('.username').remove()
 
 	addMessage: ->
-		@$(".facebook").prepend("<h1>#{@message}</h1>")
+		@$(".facebook").prepend("<h1 class='font-thin'>#{@message}</h1>")

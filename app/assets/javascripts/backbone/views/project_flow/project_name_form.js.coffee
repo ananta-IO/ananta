@@ -22,7 +22,7 @@ class Ananta.Views.ProjectFlow.ProjectNameFormView extends Backbone.View
             'building a website', 
             'buying a toothbrush', 
             'coding', 
-            'destabilizing electrons', 
+            'destabilizing quantum states', 
             'drawing a blank', 
             'filming a movie',  
             'getting married', 
@@ -84,7 +84,6 @@ class Ananta.Views.ProjectFlow.ProjectNameFormView extends Backbone.View
             error: (data, jqXHR) =>   
                 @$('input').removeAttr('disabled')
                 errors = $.parseJSON(jqXHR.responseText)
-                @.trigger( 'renderErrors', errors ) 
                 if errors['error'] == "You need to sign in or sign up before continuing."
                     @loginModal()
         )

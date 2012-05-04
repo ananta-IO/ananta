@@ -84,6 +84,10 @@ input{
 	}
 }
 
+h1{
+	color: rgba(82, 96, 117, 0.5);
+}
+
 // webkit browsers only
 .webkit {
 	h1{
@@ -114,6 +118,10 @@ input{
 		 	left: auto;
 		}	
 	}
+}
+
+.modal-body{
+	max-height: none;
 }
 
 #flash{
@@ -552,6 +560,7 @@ input{
 										textarea{
 											@include border-radius(0);
 											width: 400px;
+											height: 37px;
 										}
 										button{
 											margin-bottom: 10px;
