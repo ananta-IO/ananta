@@ -16,3 +16,5 @@
 
 # Ignore all uploads
 public/uploads
+
+/.idea
