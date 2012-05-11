@@ -754,5 +754,10 @@ h1{
 	}
 }
 
+#about{
+	text-align: justify;
+}
+
+
 // Import these mixins last to overide everything else
 @import "html_mixins";

@@ -189,9 +189,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 		@$('form').prepend(authenticity_token)
 
 	loginSpinner: ->
-		@$('#login-action').after('<img src="/assets/ajax-loader-black-dots.gif" class="loader" />')
-		wait 100, =>
-			return
+		@$('#login-action').after '<img src="/assets/ajax-loader-black-dots.gif" class="loader" />'
 
 	displayLogin: ->
 		@register = false
@@ -199,8 +197,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 		@$('form').attr('action', '/users/sign_in')
 		@$('#login-action').html("Log in").show()
 		if !@$('#login-password').is(':focus') then @$('.forgot-password').fadeIn(500)
-		@$('.username').slideUp()
-		wait 600, =>
+		@$('.username').slideUp () => 
 			@$('.username').remove()
 
 	addMessage: ->
