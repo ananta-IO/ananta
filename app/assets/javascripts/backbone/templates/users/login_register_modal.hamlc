@@ -11,11 +11,17 @@
 		.email
 			%form.login{:action => "/users", :method => "post"}
 				%div{:class => "input string required login-email"}
-					%input#login-email{:type => "text", :name => "user[email]", :title => "email", autocomplete: "on", value: "#{if @email then @email else ''}"}
+					%label{ :for => "login-email"}
+						%i.icon-envelope &nbsp;email
+					%input#login-email{:type => "text", :name => "user[email]", title: "email", autocomplete: "on", value: "#{if @email then @email else ''}"}
 				%div{:class => "input string required password"}
-					%input#login-password{:type => "password", :name => "user[password]", :title => "password", autocomplete: "on"}
+					%label{ :for => "login-password"}
+						%i.icon-key &nbsp;password
+					%input#login-password{:type => "password", :name => "user[password]", title: "password", autocomplete: "on"}
 					%a.forgot-password{href: '/users/password/new'} Forgot?
 				%div{:class => "input string required username"}
-					%input#username{:type => "text" :name => "user[username]" :title => "username" autocomplete: "off", value: "#{if @username then @username else ''}"}
+					%label{ :for => "login-username"}
+						%i.icon-pencil &nbsp;username
+					%input#login-username{:type => "text", :name => "user[username]", title: "username", autocomplete: "off", value: "#{if @username then @username else ''}"}
 				%div{:class => "button"}
 					%button#login-action.login-action.btn{:name => "login-action", :type => "submit"} Log in

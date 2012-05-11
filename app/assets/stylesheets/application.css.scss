@@ -110,6 +110,10 @@ h1{
 	max-width: 300px;
 }
 
+.input-prepend .add-on {
+	margin-right: -5px;
+}
+
 .alert{
 	a.close{
 		&:active{

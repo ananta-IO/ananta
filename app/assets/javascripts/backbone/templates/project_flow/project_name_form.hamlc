@@ -6,4 +6,6 @@
 				%object{:data => "assets/tnp-1050-blueprint-lightgrey.svg", :height => "40", :type => "image/svg+xml", :width => "40"}
 			%input{:type => "text", :name => "project[name]", :placeholder => "What are you working on?", :title => "Name one thing you are working on.", autocomplete: "off", :autofocus => true}
 		.button.center
-			%button.project-action.btn{:name => "project-action", :type => "submit"} Start Project
+			-# %button.project-action-search.btn{:name => "project-action-search", :type => "submit"} Search Projects
+			-# &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			%button.project-action-start.btn{:name => "project-action-start", :type => "submit"} Start Project

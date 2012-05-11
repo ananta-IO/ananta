@@ -6,7 +6,9 @@ class Ananta.Views.ProjectFlow.ProjectNameFormView extends Backbone.View
     className: 'project-name-form'
 
     events:
-        'submit form'                   :'submit'
+        'submit form'                   :'create'
+        'click .project-action-search'  :'search'
+        'click .project-action-start'   :'create'
         'mouseout .icon.blueprint'      :'randomizeIconTooltip'
 
     initialize: (options) ->
@@ -15,20 +17,21 @@ class Ananta.Views.ProjectFlow.ProjectNameFormView extends Backbone.View
         @model.urlRoot = "/#{Ananta.App.currentUser.id}"
         @projectNames = [
             '_____', 
-            'baking', 
+            'baking a cake', 
+            'brushing your teeth',
             'building a robot', 
             'building a rocket',
             'building a tree-house', 
-            'building a website', 
-            'buying a toothbrush', 
-            'coding', 
+            'building a website',
+            'chasing your dreams',
             'destabilizing quantum states', 
             'drawing a blank', 
             'filming a movie',  
             'getting married', 
             'going on a date', 
             'going to start a project',
-            'having fun yet', 
+            'happy',
+            'having fun yet',
             'inspiring kids to dream big', 
             'learning a language', 
             'looking for someone to make stuff with', 
@@ -38,15 +41,22 @@ class Ananta.Views.ProjectFlow.ProjectNameFormView extends Backbone.View
             'mowing the lawn', 
             'performing an experiment',
             'playing a game',
+            'programming this website',
             'reticulating splines', 
+            'starting a band', 
             'starting a company', 
+            'starting a revolution', 
             'teaching adults to think for themselves', 
             'thinking', 
             'training for a marathon', 
-            'traveling the world', 
+            'traveling the world',
+            'traveling to other worlds', 
+            'trying to gain weight', 
             'trying to loose weight', 
             'trying to take over the world',
             'writing a book'
+            'writing a play'
+            'writing a poem'
         ]
 
     render: ->
@@ -71,7 +81,11 @@ class Ananta.Views.ProjectFlow.ProjectNameFormView extends Backbone.View
     randSugquestion: ->
         "Are you #{@projectNames[Math.floor(Math.random()*@projectNames.length)]}?"
 
-    submit: (e) ->
+    search: (e) ->
+        e.preventDefault()
+        e.stopPropagation()
+
+    create: (e) ->
         e.preventDefault()
         e.stopPropagation()
         @$('input').attr('disabled', 'disabled')
