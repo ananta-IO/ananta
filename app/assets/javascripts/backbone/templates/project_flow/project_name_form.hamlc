@@ -1,10 +1,9 @@
 .span6.center
 	%form.project{:action => "/projects", :method => "post"}
 		.input.string.required.project-name
-			-# %label.center What are you working on?
-			.icon.blueprint{style:"height:40px; width:40px;"}
-				%object{:data => "assets/tnp-1050-blueprint-lightgrey.svg", :height => "40", :type => "image/svg+xml", :width => "40"}
-			%input{:type => "text", :name => "project[name]", :placeholder => "What are you working on?", :title => "Name one thing you are working on.", autocomplete: "off", :autofocus => true}
+			%span.hint
+				%i.icom-blueprint
+			%input{:type => "text", :name => "project[name]", :placeholder => "What are you working on?", :title => "Name one thing you are, or would like to be, working on.", autocomplete: "off", :autofocus => true}
 		.button.center
 			-# %button.project-action-search.btn{:name => "project-action-search", :type => "submit"} Search Projects
 			-# &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

@@ -9,51 +9,51 @@ class Ananta.Views.ProjectFlow.ProjectNameFormView extends Backbone.View
         'submit form'                   :'create'
         'click .project-action-search'  :'search'
         'click .project-action-start'   :'create'
-        'mouseout .icon.blueprint'      :'randomizeIconTooltip'
+        'mouseout span.hint'            :'randomizeIconTooltip'
 
     initialize: (options) ->
         _.bindAll(@, 'render')
         @model = new Ananta.Models.Project
         @model.urlRoot = "/#{Ananta.App.currentUser.id}"
         @projectNames = [
-            '_____', 
-            'baking a cake', 
-            'brushing your teeth',
-            'building a robot', 
-            'building a rocket',
-            'building a tree-house', 
-            'building a website',
-            'chasing your dreams',
-            'destabilizing quantum states', 
-            'drawing a blank', 
-            'filming a movie',  
-            'getting married', 
-            'going on a date', 
-            'going to start a project',
-            'happy',
-            'having fun yet',
-            'inspiring kids to dream big', 
-            'learning a language', 
-            'looking for someone to make stuff with', 
-            'looking for something to do', 
-            'looking for test subjects',
-            'meditating', 
-            'mowing the lawn', 
-            'performing an experiment',
-            'playing a game',
-            'programming this website',
-            'reticulating splines', 
-            'starting a band', 
-            'starting a company', 
-            'starting a revolution', 
-            'teaching adults to think for themselves', 
-            'thinking', 
-            'training for a marathon', 
-            'traveling the world',
-            'traveling to other worlds', 
-            'trying to gain weight', 
-            'trying to loose weight', 
-            'trying to take over the world',
+            '_____'
+            'baking a cake'
+            'brushing your teeth'
+            'building a robot'
+            'building a rocket'
+            'building a tree-house'
+            'building a website'
+            'chasing your dreams'
+            'destabilizing quantum states'
+            'drawing a blank'
+            'filming a movie' 
+            'getting married'
+            'going on a date'
+            'going to start a project'
+            'happy'
+            'having fun yet'
+            'inspiring kids to dream big'
+            'learning a language'
+            'looking for someone to make stuff with'
+            'looking for something to do'
+            'looking for test subjects'
+            'meditating'
+            'mowing the lawn'
+            'performing an experiment'
+            'playing a game'
+            'programming this website'
+            'reticulating splines'
+            'starting a band'
+            'starting a company'
+            'starting a revolution'
+            'teaching adults to think for themselves'
+            'thinking'
+            'training for a marathon'
+            'traveling the world'
+            'traveling to other worlds'
+            'trying to gain weight' 
+            'trying to loose weight'
+            'trying to take over the world'
             'writing a book'
             'writing a play'
             'writing a poem'
@@ -67,16 +67,16 @@ class Ananta.Views.ProjectFlow.ProjectNameFormView extends Backbone.View
     addTooltips: ->
         @$('input').tooltip
             placement: 'top'
-        @$('.icon.blueprint').tooltip
+        @$('span.hint').tooltip
             placement: 'right'
             title: @randSugquestion()
 
     hideTooltips: ->
         @$('input').tooltip('hide')
-        @$('.icon.blueprint').tooltip('hide')
+        @$('span.hint').tooltip('hide')
 
     randomizeIconTooltip: ->
-        @$('.icon.blueprint').attr('data-original-title', @randSugquestion())
+        @$('span.hint').attr('data-original-title', @randSugquestion())
 
     randSugquestion: ->
         "Are you #{@projectNames[Math.floor(Math.random()*@projectNames.length)]}?"

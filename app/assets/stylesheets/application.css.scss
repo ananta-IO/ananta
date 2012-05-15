@@ -25,6 +25,9 @@
 // Iconic for bootstrap
 @import "font-awesome";
 
+// Custom IcoMoon icons
+@import "icomoon";
+
 // Auth buttons
 @import "auth/auth-buttons";
 
@@ -649,6 +652,14 @@ h1{
 			color: #f44;
 			font-size: 18px;
 		}
+		.mailcheck{
+			margin: 0;
+			margin-bottom: 9px;
+			margin-top: -5px;
+			font-size: 12px;
+			color: #999;
+			display: none;
+		}
 		.forgot-password{
 			position: absolute;
 			right: 148px;
@@ -726,10 +737,28 @@ h1{
 	.project-name-form{
 		padding-top: 181px;
 		position: relative;
-		.icon.blueprint{
+		span.hint{
+			@include transition-property(all);
+			@include transition-duration(0.2s);
+			@include transition-timing-function(ease-in);
 			position: absolute;
+			font-size: 40px;
+			width: 40px;
+			height: 40px;
 			bottom: 5px;
 			left: -45px;
+			color: #ccc;
+			overflow: hidden;
+			&:hover{
+				color: #184890;
+			}
+			.icom-blueprint{
+				position: absolute;
+				bottom: -4px;
+				right: 0;
+				width: 40px;
+				height: 40px;
+			}
 		}
 		input{
 			width: 100%;

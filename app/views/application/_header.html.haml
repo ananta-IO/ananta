@@ -43,18 +43,39 @@
 					%ul.nav.pull-right
 						-if current_user
 							%li
-								= link_to current_user.profile, rel: :tooltip, 'data-placement' => 'bottom', 'data-delay' => 300, 'data-original-title' => raw( "Me<br/><img src='#{current_user.profile.avatar.image.small.url}' alt='#{current_user.username}' width=32 height=32 class='circle' />" ) do
+								= link_to current_user.profile, rel: :tooltip, 'data-placement' => 'bottom', 'data-delay' => 0, 'data-original-title' => raw( "Me<br/><img src='#{current_user.profile.avatar.image.small.url}' alt='#{current_user.username}' width=32 height=32 class='circle' />" ) do
 									%i.icon-user
 							%li.dropdown
-								%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-									%i.icon-chevron-down
+								%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", rel: :tooltip, 'data-placement' => 'bottom', 'data-delay' => 0, 'data-original-title' => raw( "<i class='icon-chevron-down' />" )}
+									%i.icon-book
 								%ul.dropdown-menu
 									%li.nav-header
-										= current_user.username.possessive
+										%i.icon-list-alt
+										My projects
+									- current_user.projects.each do |project|
+										%li
+											= link_to [current_user, project] do
+												%i.icon-play
+												= project.name
+									%li.divider
+									%li.nav-header
+										%i.icon-list-alt
+										Joined projects
+									%li.divider
+							%li.dropdown
+								%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", rel: :tooltip, 'data-placement' => 'bottom', 'data-delay' => 0, 'data-original-title' => raw( "<i class='icon-chevron-down' />" )}
+									%i.icon-cogs
+								%ul.dropdown-menu
+									%li.nav-header
+										Settings
+									%li
+										= link_to edit_profile_path(current_user.profile) do
+											%i.icon-cog
+											profile
 									%li
 										= link_to "/users/edit" do
-											%i.icon-cogs
-											settings
+											%i.icon-cog
+											account
 									%li.divider
 									%li
 										= link_to "/logout" do

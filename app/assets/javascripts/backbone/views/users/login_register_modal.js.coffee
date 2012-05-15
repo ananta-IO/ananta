@@ -7,16 +7,17 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 	id: 'login_register_modal'
 
 	events:
-		'click .fb-login-button'		: 'facebookLogin'
-		'click .show-email a'   		: 'expand'
-		'focus #login-password' 		: 'passwordFocus'
-		'blur #login-password'  		: 'passwordBlur'
-		'blur #login-email'     		: 'checkEmail'
-		'keyup #login-password' 		: 'checkPassword'
-		'keyup #login-username' 		: 'checkUsername'
-		'click #login-action'   		: 'loginSpinner'
-		'shown'                 		: 'renderWhenReady'
-		'hidden'                		: 'cleanUp'
+		'click .fb-login-button'   		: 'facebookLogin'
+		'click .show-email a'      		: 'expand'
+		'focus #login-password'    		: 'passwordFocus'
+		'blur #login-password'     		: 'passwordBlur'
+		'blur #login-email'        		: 'checkEmail'
+		'click .mailcheck a.domain'		: 'acceptSuggestion'
+		'keyup #login-password'    		: 'checkPassword'
+		'keyup #login-username'    		: 'checkUsername'
+		'submit form'              		: 'loginSpinner'
+		'shown'                    		: 'renderWhenReady'
+		'hidden'                   		: 'cleanUp'
 
 	initialize: (options) ->
 		_.bindAll(@, 'render', 'cleanUp')
@@ -27,6 +28,26 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 		@username_pattern = /^[A-Za-z-]*$/i
 		@email_pattern = /^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i
 		@checkUser()
+		@mailcheckDomains = [
+			'att.net'
+			'comcast.net'
+			'facebook.com'
+			'gmail.com'
+			'gmx.com'
+			'google.com'
+			'googlemail.com'
+			'hotmail.co.uk'
+			'hotmail.com'
+			'live.com'
+			'mac.com'
+			'mail.com'
+			'me.com, aol.com'
+			'msn.com'
+			'sbcglobal.net'
+			'verizon.net'
+			'yahoo.co.uk'
+			'yahoo.com'
+		]
 
 	checkUser: ->
 		if @user.get('id') == null
@@ -84,6 +105,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 		if @$('#login-email').val() != @email and @$('#login-email').val() != ''
 			@email = @$('#login-email').val().toLowerCase()
 			@$('.login-email i.hint').tooltip('hide').remove()
+			$('.mailcheck').css('display', 'none').empty();
 			@$('#login-email').attr('disabled', 'disabled').after('<img src="/assets/ajax-loader-black-dots.gif" class="loader" />')
 			space_pattern = /\s/
 			if(@email_pattern.test(@email) && space_pattern.test(@email) == false)
@@ -96,10 +118,12 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 					success: (data) =>
 						@$('.email .loader').remove()
 						@$('#login-email').removeAttr('disabled')
+						@$('#login-password').focus()
 						if data.length > 0
 							@displayLogin()
 						else
 							@register = true
+							@mailcheck()
 							@$('#login-email').attr('name', 'user[email]').after('<i class="hint icon-ok" />')
 							@$('form').attr('action', '/users')
 							@$('#login-action').html("Register").show()
@@ -119,6 +143,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 					success: (data) =>
 						@$('.email .loader').remove()
 						@$('#login-email').removeAttr('disabled')
+						@$('#login-password').focus()
 						if data.length > 0
 							@displayLogin()
 						else
@@ -129,6 +154,26 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 				@$('.email .loader').remove()
 				@$('#login-email').removeAttr('disabled').after('<i class="hint icon-remove" />')
 				@$('.login-email i.hint').tooltip({placement: 'top', title: "that's not an email"}).tooltip('show')
+				@$('#login-email').focus()
+	
+	mailcheck: ->
+		$('#login-email').mailcheck
+			domains: @mailcheckDomains
+			suggested: (e, suggestion) =>
+				hint = "Did you mean <span class='suggestion'>" +
+					"<span class='address'>" + suggestion.address + "</span>" +
+					"@<a href='#' class='domain'>" + suggestion.domain + 
+					"</a></span>?"             
+				$('.mailcheck').html(hint).fadeIn(150)
+			empty: (e) =>
+				$('.mailcheck').css('display', 'none').empty()
+
+	acceptSuggestion: (e) ->
+		$('#login-email').val($('.login-email .mailcheck .suggestion').text())
+		$('.login-email .mailcheck').css('display', 'none').empty()
+		@checkEmail()
+		e.preventDefault()
+		e.stopPropagation()
 
 	checkPassword: ->
 		@password = @$('#login-password').val()

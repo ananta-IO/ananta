@@ -1,0 +1,188 @@
+@font-face {
+	font-family: 'IcoMoon';
+	src: url('icomoon.eot');
+	src: url('icomoon.eot?#iefix') format('embedded-opentype'),
+		url('icomoon.svg#IcoMoon') format('svg'),
+		url('icomoon.woff') format('woff'),
+		url('icomoon.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* Add the following classes to your stylesheet if you want to use data attributes for inserting your icoms */
+.icomb:before, .icoma:after {
+	font-family: 'IcoMoon';
+	content: attr(data-icom);
+}
+
+/* Add the following CSS properties to your stylesheet if you want to have a class per icom */
+[class^="icom-"], [class*=" icom-"] {
+	font-family: 'IcoMoon';
+	font-style: normal;
+	-webkit-font-smoothing: antialiased;
+}
+.icom-blueprint:before {
+	content: "\0021";
+}
+.icom-newspaper:before {
+	content: "\0022";
+}
+.icom-pencil:before {
+	content: "\0024";
+}
+.icom-droplet:before {
+	content: "\0025";
+}
+.icom-camera:before {
+	content: "\0026";
+}
+.icom-music:before {
+	content: "\0027";
+}
+.icom-broadcast:before {
+	content: "\0029";
+}
+.icom-microphone:before {
+	content: "\002a";
+}
+.icom-book:before {
+	content: "\002b";
+}
+.icom-cart:before {
+	content: "\002c";
+}
+.icom-support:before {
+	content: "\002d";
+}
+.icom-compass:before {
+	content: "\002e";
+}
+.icom-phone:before {
+	content: "\002f";
+}
+.icom-gift:before {
+	content: "\0030";
+}
+.icom-rocket:before {
+	content: "\0032";
+}
+.icom-lab:before {
+	content: "\0033";
+}
+.icom-accessibility:before {
+	content: "\0034";
+}
+.icom-share:before {
+	content: "\0035";
+}
+.icom-movie:before {
+	content: "\0036";
+}
+.icom-palette:before {
+	content: "\0058";
+}
+.icom-video:before {
+	content: "\0028";
+}
+.icom-tablet:before {
+	content: "\0037";
+}
+.icom-cars:before {
+	content: "\0038";
+}
+.icom-bus:before {
+	content: "\0039";
+}
+.icom-flight:before {
+	content: "\0059";
+}
+.icom-search:before {
+	content: "\0031";
+}
+.icom-ninja:before {
+	content: "\003b";
+}
+.icom-beach-ball:before {
+	content: "\003d";
+}
+.icom-sewing:before {
+	content: "\003e";
+}
+.icom-factory:before {
+	content: "\003f";
+}
+.icom-fedora:before {
+	content: "\0040";
+}
+.icom-splat:before {
+	content: "\0041";
+}
+.icom-glasses:before {
+	content: "\0042";
+}
+.icom-top-hat:before {
+	content: "\0043";
+}
+.icom-video-game:before {
+	content: "\0044";
+}
+.icom-earth:before {
+	content: "\0045";
+}
+.icom-code:before {
+	content: "\0046";
+}
+.icom-revolution:before {
+	content: "\004b";
+}
+.icom-24hrs:before {
+	content: "\004c";
+}
+.icom-brain:before {
+	content: "\004d";
+}
+.icom-tv:before {
+	content: "\004e";
+}
+.icom-laptop:before {
+	content: "\004f";
+}
+.icom-recycle:before {
+	content: "\0050";
+}
+.icom-puzzle:before {
+	content: "\0049";
+}
+.icom-wrench:before {
+	content: "\0051";
+}
+.icom-cube:before {
+	content: "\0052";
+}
+.icom-coffee:before {
+	content: "\0054";
+}
+.icom-trophy:before {
+	content: "\003a";
+}
+.icom-home:before {
+	content: "\0023";
+}
+.icom-college:before {
+	content: "\0055";
+}
+.icom-robot:before {
+	content: "\004a";
+}
+.icom-announce:before {
+	content: "\0048";
+}
+.icom-soccer-ball:before {
+	content: "\003c";
+}
+.icom-screw:before {
+	content: "\0053";
+}
+.icom-light-bulb:before {
+	content: "\0056";
+}

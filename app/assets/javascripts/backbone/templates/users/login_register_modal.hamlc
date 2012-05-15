@@ -14,6 +14,7 @@
 					%label{ :for => "login-email"}
 						%i.icon-envelope &nbsp;email
 					%input#login-email{:type => "text", :name => "user[email]", title: "email", autocomplete: "on", value: "#{if @email then @email else ''}"}
+					.mailcheck
 				%div{:class => "input string required password"}
 					%label{ :for => "login-password"}
 						%i.icon-key &nbsp;password
