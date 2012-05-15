@@ -781,6 +781,28 @@ h1{
 			@include border-radius(0px);
 		}
 	}
+	.project-tags{
+		.thumbnail{
+			height: 120px;
+			color: $color-base;
+			&:hover{
+				color: #08C;
+			}
+			i{
+				font-size: 100px;
+				&.icom-laptop{
+					margin-left: -10px;
+				}
+			}
+			@media(max-width: 1199px){
+				height: 80px;
+				min-width: 100px;
+				i{
+					font-size: 60px;
+				}
+			}
+		}
+	}
 }
 
 #about{

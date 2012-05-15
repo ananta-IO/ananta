@@ -14,7 +14,8 @@ class Ananta.Views.ProjectFlow.ProjectFlowView extends Backbone.View
 		@
 
 	addProjectNameForm: ->
-		@formView = new Ananta.Views.ProjectFlow.ProjectNameFormView({collection : @collection})
+		@formView = new Ananta.Views.ProjectFlow.ProjectTagsView({collection : @collection})
+		# @formView = new Ananta.Views.ProjectFlow.ProjectNameFormView({collection : @collection})
 		@formView.bind('removeProjectNameForm', @removeProjectNameForm)
 		$(@el).append(@formView.render().el)
 		$(@formView.el)
