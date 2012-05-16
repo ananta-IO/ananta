@@ -1,0 +1,2 @@
+%a.thumbnail.center{ href: '#', class: "#{if @selected then 'selected'}" }
+	%i{ class: "tag #{@name}", data-tag: "#{@name}" }

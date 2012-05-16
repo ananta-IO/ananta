@@ -6,12 +6,18 @@ class Ananta.Views.ProjectFlow.ProjectTagsView extends Backbone.View
 	className: 'project-tags span12'
 
 	initialize: (options) ->
-		_.bindAll(@, 'render')
+		_.bindAll(@, 'render', 'renderSelectionCountdown')
+		@tags = new Backbone.Collection()
+		@maxTags = 5
 
 	render: ->
 		$(@el).html(@template())
+		@renderSelectionCountdown()
 		@renderTags()
 		@
+
+	renderSelectionCountdown: ->
+		@$('.count.remaining').html(@selectionCountdown())
 
 	renderTags: ->
 		icons = [
@@ -71,6 +77,22 @@ class Ananta.Views.ProjectFlow.ProjectTagsView extends Backbone.View
 			'icom-screw'
 			'icom-light-bulb'
 		]
+		icons = shuffle(icons)
 		for icon in icons 
-			view = $("<li class='span2'><a href='#' class='thumbnail center'><i class='#{icon}'></i></div></li>")
-			@$(".thumbnails").append(view)
+			tag = new Backbone.Model({ name : icon, selected : false })
+			@tags.add tag
+			view =  new Ananta.Views.ProjectFlow.ProjectTagView({ model : tag, parent : @ })
+			view.bind('renderSelectionCountdown', @renderSelectionCountdown)
+			@$(".thumbnails").append(view.render().el)
+
+	selectionCountdown: ->
+		@maxTags - @tags.where({ selected : true }).length
+
+	shuffle = (o) ->
+		i = o.length
+		while i
+			j = parseInt(Math.random() * i)
+			x = o[--i]
+			o[i] = o[j]
+			o[j] = x
+		o

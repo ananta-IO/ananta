@@ -41,6 +41,7 @@ class MyModel < ActiveRecord::Base
   # Public Class Methods ( def self.method_name )
   #########################
 
+  ## (description is optional - try to make the name clear and method small so no description is needed)
   ## One line description
   ## maybe two
   #def self.my_method
@@ -52,8 +53,7 @@ class MyModel < ActiveRecord::Base
   # Public Instance Methods ( def method_name )
   #########################
 
-  ## One line description
-  ## maybe two
+  ## (description is optional - try to make the name clear and method small so no description is needed)
   #def my_method
   #
   #end

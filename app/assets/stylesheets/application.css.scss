@@ -41,9 +41,13 @@
 @import "animate";
 
 
-///////////////////////////
-//     Ananta SCSS       //
-///////////////////////////
+////////////////////////////
+//      Ananta SCSS       //
+////////////////////////////
+
+// TODO: make the custom scrollbar work with animate.css and other transitions
+//		 at the moment it has a tendency to go all black after a transition
+// @import "scrollbar";
 
 @include sticky-footer(60px, "#wrapper", "#layout_footer", "#footer");
 
@@ -91,14 +95,16 @@ h1{
 	color: rgba(82, 96, 117, 0.5);
 }
 
+.yield{
+	overflow: hidden;
+}
+
 // webkit browsers only
 .webkit {
 	h1{
 		@include inset-text();
 	}
 }
-
-@import "scrollbar";
 
 // hack to disable bootstrap default icons
 [class^="icon-"], [class*=" icon-"] {
@@ -300,6 +306,17 @@ h1{
 	}
 	.nav{
 		.dropdown{
+			.nav-header{
+				a{
+					padding: 0;
+					background-color: white;
+					color: $color-base;
+					&:hover{
+						background-color: white;
+						color: $color-link;	
+					}
+				}
+			}
 			a{
 				&.fb-login{
 					padding: 0;
@@ -782,11 +799,15 @@ h1{
 		}
 	}
 	.project-tags{
-		.thumbnail{
+		a.thumbnail{
 			height: 120px;
 			color: $color-base;
 			&:hover{
-				color: #08C;
+				color: $color-link;
+			}
+			&.selected{
+				color: $color-highlight2;
+				border: 1px solid $color-highlight2;
 			}
 			i{
 				font-size: 100px;
