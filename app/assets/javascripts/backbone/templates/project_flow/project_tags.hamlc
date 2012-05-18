@@ -1,11 +1,13 @@
 %br
 %h2.count.remaining.pull-right
 %h2 
-	Select the tags that relate to your project the most
+	Select the five tags that relate to your project the most
 %br
-%ul.thumbnails
-%br
-.center
-	%button.submit-tags.btn.btn-inverse{ :type => "submit" } Add Tags
+%ul.tags.thumbnails
+%hr
+.bottom
+	%ul.preview.thumbnails
+	.center
+		%button.submit-tags.btn{ :type => "submit" } Add Tags
 %br
 %br

@@ -50,7 +50,7 @@
 									%i.icon-book
 								%ul.dropdown-menu
 									%li.nav-header
-										%a.pull-right{:href => "/"} 
+										= link_to new_user_project_path(current_user), :class => 'pull-right' do
 											%i.icon-plus
 										%i.icon-list-alt
 										My projects

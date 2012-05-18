@@ -11,7 +11,7 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 		'submit .ask form'                       : 'createQuestion'
 
 	initialize: (options) ->
-		_.bindAll(@, 'render', 'renderQuestions', 'renderQuestion', 'renderErrors', 'clearErrors', 'questionCharCount', 'addPopovers', 'createQuestion', 'fetchQuestion', 'updateAnsScrollBar', 'noMoreQuestions')
+		_.bindAll(@, 'render', 'renderQuestions', 'renderQuestion', 'renderErrors', 'clearErrors', 'questionCharCount', 'addPopovers', 'createQuestion', 'fetchQuestion', 'noMoreQuestions')
 
 		@collection.bind('add', @renderQuestion)
 		@collection.bind('reset', @renderQuestions)
@@ -43,14 +43,9 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 		view = new Ananta.Views.Marq.QuestionView({model : question, collection : @collection})
 		view.bind('fetchQuestion', @fetchQuestion)
 		view.bind('renderErrors', @renderErrors)
-		@$(".questions tr").prepend(view.render().el)
-		# Update the scroll bar
-		@updateAnsScrollBar()
-		# If inside scrollbar then add absolute positioning    # TODO: figure out if absolute positioning can be added before the scrollbar wrapper 
-		if @collection.length == 2 then @$(".questions").css({'position':'absolute'})
-		# Animate the transition
-		@$(".questions").css({'left':'-496px'})
-		@$(".questions").animate({"left":"0px"}, 1000)
+		v = $(view.render().el)
+		@$(".questions tr").prepend(v)
+		v.addClass('animated fadeInDown')
 
 	renderErrors: (errors) ->
 		@clearErrors()
@@ -121,10 +116,6 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 					# If no question could be fetched then all questions are answered
 					if collection.length == l
 						@noMoreQuestions()
-						@updateAnsScrollBar()
-
-	updateAnsScrollBar: ->
-		$('#marq .answer .span10').jScrollPane()	
 
 	noMoreQuestions: ->
 		@$(".questions tr").prepend("<td><div class='span5'><div class='question wrap'><div class='outer'><div class='inner'>You have answered every question on this page. Why don't you go outside and take a break... Or go to a different page and answer more questions.</div></div></div></div></td>")

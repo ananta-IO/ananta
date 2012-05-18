@@ -93,15 +93,20 @@ class Ananta.Views.ProjectFlow.ProjectNameFormView extends Backbone.View
 		@model.save({}
 			success: (data) =>
 				@collection.add(@model)
-				@hideTooltips()
-				@.trigger('removeProjectNameForm')
-				@.trigger('renderProjectTags')
+				@goToNextStep()
 			error: (data, jqXHR) =>   
 				@$('input').removeAttr('disabled')
 				errors = $.parseJSON(jqXHR.responseText)
 				if errors['error'] == "You need to sign in or sign up before continuing."
+					@goToNextStep()
 					@loginModal()
 		)
+
+	goToNextStep: ->
+		@hideTooltips()
+		@.trigger('removeProjectNameForm')
+		@.trigger('renderProjectTags')		
+
 
 _.extend(Ananta.Views.ProjectFlow.ProjectNameFormView::, Ananta.Mixins.Logins)
 

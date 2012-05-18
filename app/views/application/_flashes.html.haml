@@ -5,9 +5,9 @@
     -if msg.kind_of?(Array)
       -msg.each do |msg|
         %div{ title: name.to_s.humanize, class: "alert alert-#{tb_alert_name name}" }
-          <a class="close" data-dismiss="alert" href="#">&times;</a>
+          %span.close{ 'data-dismiss' => 'alert' } &times;
           = raw msg
     -else
       %div{ title: name.to_s.humanize, class: "alert alert-#{tb_alert_name name}" }
-        <a class="close" data-dismiss="alert" href="#">&times;</a>
+        %span.close{ 'data-dismiss' => 'alert' } &times;
         = raw msg

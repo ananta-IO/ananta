@@ -47,7 +47,7 @@
 
 // TODO: make the custom scrollbar work with animate.css and other transitions
 //		 at the moment it has a tendency to go all black after a transition
-// @import "scrollbar";
+@import "scrollbar";
 
 @include sticky-footer(60px, "#wrapper", "#layout_footer", "#footer");
 
@@ -547,13 +547,14 @@ h1{
 					}
 				}
 				.question.wrap{
-					margin-bottom: 15px;
+					margin-bottom: 2px;
 					.outer{
 						.inner{
 							padding: 10px;
 							height: 87px;
 							.string{
 								min-height: 3em;
+								overflow: hidden;
 							}
 							.actions{
 								margin: 0px;
@@ -594,6 +595,9 @@ h1{
 							}
 							.vote{
 								display: inline-block;
+								p{
+									margin: 0;
+								}
 								.string{
 									width: 250px;
 								}
@@ -821,6 +825,25 @@ h1{
 				i{
 					font-size: 60px;
 				}
+			}
+		}
+		.bottom{
+			position: relative;
+		}
+		.preview{
+			position: absolute;
+			top: 0;
+			left: 0;
+			i{
+				font-size: 33px;
+			}
+			@media(max-width: 1199px){
+				i{
+					font-size: 20px;
+				}
+			}
+			@media(max-width: 758px){
+				position: relative;
 			}
 		}
 	}

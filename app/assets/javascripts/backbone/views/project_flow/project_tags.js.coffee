@@ -6,7 +6,7 @@ class Ananta.Views.ProjectFlow.ProjectTagsView extends Backbone.View
 	className: 'project-tags span12'
 
 	initialize: (options) ->
-		_.bindAll(@, 'render', 'renderSelectionCountdown')
+		_.bindAll(@, 'render', 'renderSelectionCountdown', 'renderPreview')
 		@tags = new Backbone.Collection()
 		@maxTags = 5
 
@@ -18,6 +18,11 @@ class Ananta.Views.ProjectFlow.ProjectTagsView extends Backbone.View
 
 	renderSelectionCountdown: ->
 		@$('.count.remaining').html(@selectionCountdown())
+
+	renderPreview: ->
+		@$('ul.preview').html('') 
+		for tag in @tags.where({ selected : true })
+			@$('ul.preview').append("<li class='span1'><span class='thumbnail center'><i class='tag #{tag.get('name')}', data-tag='#{tag.get('name')}''></i></span></li>")
 
 	renderTags: ->
 		icons = [
@@ -83,7 +88,8 @@ class Ananta.Views.ProjectFlow.ProjectTagsView extends Backbone.View
 			@tags.add tag
 			view =  new Ananta.Views.ProjectFlow.ProjectTagView({ model : tag, parent : @ })
 			view.bind('renderSelectionCountdown', @renderSelectionCountdown)
-			@$(".thumbnails").append(view.render().el)
+			view.bind('renderPreview', @renderPreview)
+			@$(".tags").append(view.render().el)
 
 	selectionCountdown: ->
 		@maxTags - @tags.where({ selected : true }).length

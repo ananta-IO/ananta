@@ -5,22 +5,23 @@
 		= render "head"
 	
 	%body{ class: "#{ controller.controller_name }" }
-		= render "facebook"
+		.scrl{ style: 'width:100%; height:100%; overflow:auto;' }
+			= render "facebook"
 
-		#wrapper
-			%header#header
-				= render "header"
+			#wrapper
+				%header#header
+					= render "header"
 
-			#main{ role: "main" }
-				.container
-					.content
-						= render "flashes"
-						#yield
-							= yield
+				#main{ role: "main" }
+					.container
+						.content
+							= render "flashes"
+							#yield
+								= yield
 
-			#layout_footer      
-		%footer#footer
-			= render "footer"
+				#layout_footer      
+			%footer#footer
+				= render "footer"
 
 
 
