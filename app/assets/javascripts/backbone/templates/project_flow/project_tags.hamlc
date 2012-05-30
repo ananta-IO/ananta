@@ -6,8 +6,9 @@
 %ul.tags.thumbnails
 %hr
 .bottom
+	%h2.count.remaining.pull-right
 	%ul.preview.thumbnails
 	.center
-		%button.submit-tags.btn{ :type => "submit" } Add Tags
+		%button.submit-tags.btn.btn-primary{ :type => "submit" } Add Tags
 %br
 %br

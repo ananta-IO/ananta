@@ -59,9 +59,9 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 				_.each(errors['errors']['answer'], (error) ->
 					@$(".alerts .span10").append("<div class='alert alert-error'><a class='close' data-dismiss='alert' href='#'>&times;</a>answer #{error}</div>")
 				)
-		@$('.alert').hide()
-		@$('.alert').show('fade', {}, 800)
-		@$('.alert').delay(10000).hide('fade', {}, 800)
+		@$('.alert').addClass('animated fadeInDown')
+		wait 7000, () =>
+			@$('.alert').addClass('animated fadeOutUp').delay(500).slideUp(500)
 
 	clearErrors: ->
 		@$(".alerts .span10").html('')

@@ -13,7 +13,7 @@
 						.inner
 							%span.counter.pull-right
 							-# %img.return.pull-right{src: "/assets/return-symbol.jpg"}
-							%input.question{:class => "string", :type => "text", :name => "question", :maxlength => "141", :placeholder => "a yes or no question"}
+							%input.question{:class => "string", :type => "text", :name => "question", :maxlength => "141", :placeholder => "a yes or no question", title: 'Ask a YES or NO question'}
 							%button.btn.btn-large.btn-info{:name => "submit", :type => "submit"}
 								%span Ask
 

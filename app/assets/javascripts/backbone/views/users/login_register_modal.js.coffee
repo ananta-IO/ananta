@@ -8,6 +8,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 
 	events:
 		'click .fb-login-button'   		: 'facebookLogin'
+		'click #login-action'      		: 'login'
 		'click .show-email a'      		: 'expand'
 		'focus #login-password'    		: 'passwordFocus'
 		'blur #login-password'     		: 'passwordBlur'
@@ -15,14 +16,15 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 		'click .mailcheck a.domain'		: 'acceptSuggestion'
 		'keyup #login-password'    		: 'checkPassword'
 		'keyup #login-username'    		: 'checkUsername'
-		'submit form'              		: 'loginSpinner'
 		'shown'                    		: 'renderWhenReady'
 		'hidden'                   		: 'cleanUp'
 
 	initialize: (options) ->
 		_.bindAll(@, 'render', 'cleanUp')
+		options or= {}
 		@user = new Ananta.Models.User( options.user )
-		@callback = options.callback
+		@callback = options.callback or= ->
+			window.location = window.location
 		@message = options.message
 		@register = false
 		@username_pattern = /^[A-Za-z-]*$/i
@@ -83,6 +85,19 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 			@addJLabel(".string input")
 			@$('#login-password').focus()
 			@$('.facebook img').tooltip({ placement:'bottom', title:'finish registration <i class="icon-arrow-down" />' }).tooltip('show')
+
+	renderErrors: (errors) ->
+		@clearErrors()
+		if errors['error'] then @renderError(errors['error'])
+		if errors['errors']
+			for key, val of errors['errors']
+				if (['email', 'password', 'username'].some (word) -> word == key)
+					@renderError(val, key)
+
+	renderError: (error, key) ->
+		key or= ''
+		if error == 'Invalid email or password.' then error = 'Invalid password.'
+		@$(".alerts").append("<div class='alert alert-error'><a class='close' data-dismiss='alert' href='#'>&times;</a>#{key} #{error}</div>")
 
 	expand: (e) ->
 		@$('#login-action').hide()
@@ -218,11 +233,49 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 						
 
 	facebookLogin: (e) ->
-		@$('.fb-login-button img').addClass('rideSpinners')
-		@cleanUp()
-		fbLogin()
 		e.preventDefault()
 		e.stopPropagation()
+		@cleanUp()
+		@$('.fb-login-button img').addClass('rideSpinners')
+
+		callback = (response) =>
+			$.ajax
+				url: "/users/auth/facebook/callback"
+				success: (data) =>
+					user = data
+					if user["id"]?
+						@callback()
+					else
+						if window.loginModal
+							$(window.loginModal.el).modal "hide"
+							window.loginModal.remove()
+						window.loginModal = new Ananta.Views.Users.LoginRegisterModal(
+							callback: @callback
+							user: user
+						)
+						window.loginModal.render()
+
+		fbLogin(callback)
+
+	login: (e) ->
+		e.preventDefault()
+		e.stopPropagation()
+
+		@renderLoginSpinner()
+		$form = @$('form')
+		$.ajax(
+			dataType  : 'json'
+			type      : 'POST'
+			url       : $form.attr('action')
+			data      : $form.serialize()
+			success: (data) =>
+				@cleanUp()
+				@callback()
+			error: (jqXHR) =>
+				@cleanUp()
+				errors = $.parseJSON(jqXHR.responseText)
+				@renderErrors(errors)
+		)
 
 	addJLabel: (element) ->
 		$(@el).find(element).jLabel({color: "#999", yShift: '-2'})
@@ -233,8 +286,11 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 		authenticity_token = $("<div style='margin:0;padding:0;display:inline'><input name='utf8' type='hidden' value='✓'><input name='authenticity_token' type='hidden' value='#{$('meta[name="csrf-token"]').attr('content')}'></div>")
 		@$('form').prepend(authenticity_token)
 
-	loginSpinner: ->
+	renderLoginSpinner: ->
 		@$('#login-action').after '<img src="/assets/ajax-loader-black-dots.gif" class="loader" />'
+
+	clearLoginSpinner: ->
+		@$('.email img.loader').remove()
 
 	displayLogin: ->
 		@register = false
@@ -248,8 +304,13 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 	addMessage: ->
 		@$(".facebook").prepend("<h1 class='font-thin'>#{@message}</h1>")
 
+	clearErrors: ->
+		@$('.alert-error').remove()
+
 	hideTooltips: ->
 		$("#login_register_modal *").tooltip('hide')
 
 	cleanUp: ->
+		@clearErrors()
+		@clearLoginSpinner()
 		@hideTooltips()

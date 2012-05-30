@@ -5,10 +5,11 @@
 		.facebook
 			%p Sign in with
 			%a.fb-login-button{href: '#'}
-				%img{src: '/assets/facebook_circle.png', alt: 'facebook', height: 128, width: 128}
+				%img{src: '/assets/facebook-circle.png', alt: 'facebook', height: 128, width: 128}
 		.separator 
 			%span Or
 		.email
+			.alerts
 			%form.login{:action => "/users", :method => "post"}
 				%div{:class => "input string required login-email"}
 					%label{ :for => "login-email"}

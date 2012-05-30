@@ -1,4 +1,5 @@
-# # Remove flash after a few seconds
+# Remove flash after a few seconds
+# But only if the flash does not contain a link
 $(window).load () ->
 	flash = $('#flash .alert')
 	flash.show('fade', {}, 1000)
@@ -11,8 +12,6 @@ $('.dropdown input').bind 'click', (e) ->
 
 # Open login and register modal
 $('a.login').bind 'click', (e) ->
-	callback = ->
-		window.location = '/'
-	window.loginModal = new Ananta.Views.Users.LoginRegisterModal({ callback: callback })
+	window.loginModal = new Ananta.Views.Users.LoginRegisterModal()
 	window.loginModal.render()
 	e.stopPropagation()

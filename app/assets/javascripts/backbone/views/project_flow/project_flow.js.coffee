@@ -14,7 +14,6 @@ class Ananta.Views.ProjectFlow.ProjectFlowView extends Backbone.View
 		@
 
 	addProjectNameForm: ->
-		# @formView = new Ananta.Views.ProjectFlow.ProjectTagsView({collection : @collection})
 		@formView = new Ananta.Views.ProjectFlow.ProjectNameFormView({collection : @collection})
 		@formView.bind('removeProjectNameForm', @removeProjectNameForm)
 		@formView.bind('renderProjectTags', @renderProjectTags)
@@ -34,9 +33,3 @@ class Ananta.Views.ProjectFlow.ProjectFlowView extends Backbone.View
 		@tagView = new Ananta.Views.ProjectFlow.ProjectTagsView({collection : @collection})
 		$(@el).append(@tagView.render().el)
 		$(@tagView.el).addClass('animated fadeInRightBig')
-		# wait 400, () =>
-			# @formView.remove()
-			# wait 100, () =>
-			#	@addProjectNameForm().addClass('animated fadeInUp')
-			#	wait 1000, () =>
-			#		$(@formView.el).removeClass('animated fadeInUp')
