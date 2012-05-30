@@ -93,7 +93,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 			for key, val of errors['errors']
 				if (['email', 'password', 'username'].some (word) -> word == key)
 					@renderError(val, key)
-		@$('.alert').addClass('animated fadeInLeft')
+		@animateErrors()
 
 	renderError: (error, attribute) ->
 		attribute or= ''
@@ -104,8 +104,13 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 		else
 			_.each error, (error) ->
 				render(error, attribute)
-			
 
+	animateErrors: ->
+		@$(".alert").css('visibility', 'hidden')
+		@$(".alert").each (i, e) ->
+			$(@).delay(i*500).queue () ->
+				$(@).css('visibility', 'visible').addClass('animated fadeInLeft').dequeue()
+			
 	expand: (e) ->
 		@$('#login-action').hide()
 		@$('.show-email').hide()
@@ -124,12 +129,13 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 			@$('.forgot-password').fadeIn(500)
 
 	checkEmail: ->
-		if @$('#login-email').val() != @email and @$('#login-email').val() != ''
+		if @$('#login-email').val().toLowerCase() != @email and @$('#login-email').val() != ''
 			@email = @$('#login-email').val().toLowerCase()
 			@$('.login-email i.hint').tooltip('hide').remove()
 			$('.mailcheck').css('display', 'none').empty();
 			@$('#login-email').attr('disabled', 'disabled').after('<img src="/assets/ajax-loader-black-dots.gif" class="loader" />')
 			space_pattern = /\s/
+			
 			if(@email_pattern.test(@email) && space_pattern.test(@email) == false)
 				$.ajax
 					dataType : 'json'

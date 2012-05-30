@@ -121,6 +121,20 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 						@noMoreQuestions()
 
 	noMoreQuestions: ->
-		@$(".questions tr").prepend("<td><div class='span5'><div class='question wrap'><div class='outer'><div class='inner'>You have answered every question on this page. Why don't you go outside and take a break... Or go to a different page and answer more questions.</div></div></div></div></td>")
+		url = '/projects'
+		render = (url) => @$(".questions tr").prepend("<td><div class='nmqs span5'><div class='question wrap'><div class='outer'><div class='inner'>You have answered every question on this page. Why don't you go outside and take a break... Or <a href='#{url}'>go to a different page</a> and answer more questions.</div></div></div></div></td>")
+		$.ajax(
+			dataType  : 'json'
+			type      : 'GET'
+			url       : url
+			data      : {order:'r', per:1}
+			success: (data) =>
+				url = data[0]['url']
+				@$('.nmqs').remove()
+				render url
+			error: () =>
+				@$('.nmqs').remove()
+				render url
+		)
 
 _.extend(Ananta.Views.Marq.MarqView::, Ananta.Mixins.Logins)

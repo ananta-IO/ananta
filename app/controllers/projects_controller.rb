@@ -11,14 +11,23 @@ class ProjectsController < InheritedResources::Base
 	# Scopes via has_scope https://github.com/plataformatec/has_scope
 	#########################
 	has_scope :order, :only => :index do |controller, scope, value|
-		scope.order(value)
+		case value
+		when 'r'
+			scope.order("RANDOM()")
+		else
+			scope.order(value)
+		end
 	end
 	has_scope :page, :only => :index, :default => 1 do |controller, scope, value|
 		value.to_i > 0 ? scope.page(value.to_i) : scope.page(1)
 	end
 	has_scope :per, :only => :index, :default => Proc.new { |c| c.session[:projects_per] ? c.session[:projects_per] : 10 } do |controller, scope, value|
-		controller.session[:projects_per] = value.to_i if (1..100) === value.to_i
-		controller.session[:projects_per] ? scope.per(controller.session[:projects_per]) : scope.per(10)
+		if controller.request.format != 'html' # API request
+			scope.per(value.to_i) if (1..100) === value.to_i
+		else
+			controller.session[:projects_per] = value.to_i if (1..100) === value.to_i
+			controller.session[:projects_per] ? scope.per(controller.session[:projects_per]) : scope.per(10)
+		end
 	end
 
 
