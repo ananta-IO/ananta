@@ -49,20 +49,23 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 
 	renderErrors: (errors) ->
 		@clearErrors()
-		if errors['error'] then @$(".alerts .span10").append("<div class='alert alert-error'><a class='close' data-dismiss='alert' href='#'>&times;</a>#{errors['error']}</div>")
+		if errors['error'] then @renderError(errors['error'])
 		if errors['errors']
-			if errors['errors']['question']
-				_.each(errors['errors']['question'], (error) ->
-					@$(".alerts .span10").append("<div class='alert alert-error'><a class='close' data-dismiss='alert' href='#'>&times;</a>question #{error}</div>")
-				)
-			if errors['errors']['answer']
-				_.each(errors['errors']['answer'], (error) ->
-					@$(".alerts .span10").append("<div class='alert alert-error'><a class='close' data-dismiss='alert' href='#'>&times;</a>answer #{error}</div>")
-				)
+			for key, val of errors['errors']
+				if (['question', 'answer'].some (word) -> word == key)
+					@renderError(val, key)
 		@$('.alert').addClass('animated fadeInDown')
 		wait 7000, () =>
 			@$('.alert').addClass('animated fadeOutUp').delay(500).slideUp(500)
 
+	renderError: (error, attribute) ->
+		attribute or= ''
+		render = (e, a) => @$(".alerts .span10").append("<div class='alert alert-error'><a class='close' data-dismiss='alert' href='#'>&times;</a>#{a} #{e}</div>")
+		if typeof error == 'string'
+			render(error, attribute)
+		else
+			_.each error, (error) ->
+				render(error, attribute)
 	clearErrors: ->
 		@$(".alerts .span10").html('')
 

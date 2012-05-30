@@ -93,11 +93,18 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 			for key, val of errors['errors']
 				if (['email', 'password', 'username'].some (word) -> word == key)
 					@renderError(val, key)
+		@$('.alert').addClass('animated fadeInLeft')
 
-	renderError: (error, key) ->
-		key or= ''
+	renderError: (error, attribute) ->
+		attribute or= ''
 		if error == 'Invalid email or password.' then error = 'Invalid password.'
-		@$(".alerts").append("<div class='alert alert-error'><a class='close' data-dismiss='alert' href='#'>&times;</a>#{key} #{error}</div>")
+		render = (e, a) => @$(".alerts").append("<div class='alert alert-error'><a class='close' data-dismiss='alert' href='#'>&times;</a>#{a} #{e}</div>")
+		if typeof error == 'string'
+			render(error, attribute)
+		else
+			_.each error, (error) ->
+				render(error, attribute)
+			
 
 	expand: (e) ->
 		@$('#login-action').hide()
