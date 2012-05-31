@@ -129,7 +129,7 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 			url       : url
 			data      : {order:'r', per:1}
 			success: (data) =>
-				url = data[0]['url']
+				if data[0]['url'] then url = data[0]['url']
 				@$('.nmqs').remove()
 				render url
 			error: () =>

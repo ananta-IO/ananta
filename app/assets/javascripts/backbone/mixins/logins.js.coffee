@@ -1,9 +1,7 @@
 Ananta.Mixins.Logins =
 	loginModal: (options) ->
         options or= {}
-        options['message'] or= 'Sign in to continue.'
-        options['callback'] or= ->
-            window.location = '/'
+        options['message'] or= 'Would you like to continue?'
         view = new Ananta.Views.Users.LoginRegisterModal(options)
         view.render()
         return false

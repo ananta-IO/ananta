@@ -1,0 +1,32 @@
+$(document).ajaxSuccess(function(e, XHR, options){
+	$('#header [rel*=tooltip]').tooltip('hide');
+	$('#header').html('<%= escape_javascript render("application/header") %>');
+	$('#header [rel*=tooltip]').tooltip();
+	
+	if(window.loginModal){
+		$(window.loginModal.el).modal("hide");
+		window.loginModal.remove();
+	}
+
+	// Add marq to view
+	Ananta.App.marqRouter = new Ananta.Routers.MarqRouter({
+		q_controller: "<%= session[:questionable_controller] %>",
+		q_action: "<%= session[:questionable_action] %>",
+		q_sid: "<%= session[:questionable_sid] %>"
+	});
+	// Backbone.history.start();
+
+	// Open and close marq
+	$('#marq_toggle a').click(function(e) {
+		$('#marq_toggle a').toggleClass('active');
+		$('#marq').slideToggle('fast');
+		e.preventDefault();
+		e.stopPropagation();
+	});
+
+});
+$(document).ajaxError(function(e, XHR, options){
+	if (XHR.status == 401){
+		window.location.replace("<%= new_user_session_path %>");
+	}
+});

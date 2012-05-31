@@ -2,10 +2,12 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   after_filter :set_questionable, :if =>  lambda { request.format == 'html' }
 
+  # Default cancan redirect url
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_url, :alert => exception.message
   end
 
+  # Initialize cancan
   def current_ability
     @current_ability ||= Ability.new(current_user, params)
   end
@@ -34,6 +36,7 @@ class ApplicationController < ActionController::Base
     hash
   end
 
+  # Store some params about the user's current page for use with marq questions
   def set_questionable
     session[:questionable_sid] = params[:id]
     session[:questionable_controller] = params[:controller]
@@ -41,6 +44,7 @@ class ApplicationController < ActionController::Base
     session[:questionable_action] = params[:action]
   end
 
+  # Override default behavior for testing on local machine 
   def remote_ip
     if request.remote_ip == '127.0.0.1'
       # Random remote address for testing on develop

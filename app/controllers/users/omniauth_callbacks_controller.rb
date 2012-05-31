@@ -12,8 +12,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     else
       session[:facebook_user_attributes] = env["omniauth.auth"].extra.raw_info
     end
-
-    render json: @user.to_json({:only => [:id, :email, :username, :facebook_id]})
   end
 
   def passthru

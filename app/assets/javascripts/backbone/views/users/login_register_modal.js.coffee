@@ -135,7 +135,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 			$('.mailcheck').css('display', 'none').empty();
 			@$('#login-email').attr('disabled', 'disabled').after('<img src="/assets/ajax-loader-black-dots.gif" class="loader" />')
 			space_pattern = /\s/
-			
+
 			if(@email_pattern.test(@email) && space_pattern.test(@email) == false)
 				$.ajax
 					dataType : 'json'
@@ -277,13 +277,14 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 		@renderLoginSpinner()
 		$form = @$('form')
 		$.ajax(
-			dataType  : 'json'
+			# dataType  : 'json'
 			type      : 'POST'
-			url       : $form.attr('action')
+			url       : $form.attr('action')+'.js'
 			data      : $form.serialize()
 			success: (data) =>
+				console.log data
 				@cleanUp()
-				@callback()
+				# @callback()
 			error: (jqXHR) =>
 				@cleanUp()
 				errors = $.parseJSON(jqXHR.responseText)
