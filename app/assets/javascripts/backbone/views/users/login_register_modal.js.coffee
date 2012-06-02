@@ -253,7 +253,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 
 		callback = (response) =>
 			$.ajax
-				url: "/users/auth/facebook/callback.js"
+				url: "/users/auth/facebook/callback"
 				success: (data) =>
 					user = data
 					if user["id"]?
@@ -282,13 +282,12 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 			url       : $form.attr('action')+'.js'
 			data      : $form.serialize()
 			success: (data) =>
-				console.log data
-				@cleanUp()
-				# @callback()
+				@callback()
+				@close()
 			error: (jqXHR) =>
-				# @cleanUp()
-				# errors = $.parseJSON(jqXHR.responseText)
-				# @renderErrors(errors)
+				@cleanUp()
+				errors = $.parseJSON(jqXHR.responseText)
+				@renderErrors(errors)
 		)
 
 	addJLabel: (element) ->
@@ -328,3 +327,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 		@clearErrors()
 		@clearLoginSpinner()
 		@hideTooltips()
+
+	onClose: ->
+		@cleanUp()
+		$(@el).modal('hide')

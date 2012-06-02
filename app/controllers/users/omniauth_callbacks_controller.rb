@@ -12,6 +12,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     else
       session[:facebook_user_attributes] = env["omniauth.auth"].extra.raw_info
     end
+    render :facebook, formats: [:js, :json]
   end
 
   def passthru

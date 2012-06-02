@@ -19,7 +19,6 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 		@views = []
 
 	render: ->
-		# render the hamlc template
 		$(@el).html(@template())
 		
 		@questionCharCount()
@@ -34,12 +33,10 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 		@
 
 	renderQuestions: ->
+		@$(".questions tr").html("")
 		if @collection.length > 0
-			# render the question(s)
-			@$(".questions tr").html("")
 			@collection.each(@renderQuestion)
 		else
-			# render "you've answered them all hon :)"
 			@noMoreQuestions()
 			
 	renderQuestion: (question) ->
