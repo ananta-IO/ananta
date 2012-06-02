@@ -12,3 +12,8 @@ window.Ananta =
   Views: {}
   App: {}
   Mixins: {}
+
+Backbone.View::close = ->
+  @remove()
+  @unbind()
+  if @onClose then @onClose()

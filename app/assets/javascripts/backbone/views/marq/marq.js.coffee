@@ -11,10 +11,12 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 		'submit .ask form'                       : 'createQuestion'
 
 	initialize: (options) ->
-		_.bindAll(@, 'render', 'renderQuestions', 'renderQuestion', 'renderErrors', 'clearErrors', 'questionCharCount', 'addPopovers', 'createQuestion', 'fetchQuestion', 'noMoreQuestions')
+		_.bindAll(@, 'render', 'renderQuestions', 'renderQuestion', 'renderErrors', 'createQuestion', 'fetchQuestion')
+		@fetchQuestion()
 
 		@collection.bind('add', @renderQuestion)
 		@collection.bind('reset', @renderQuestions)
+		@views = []
 
 	render: ->
 		# render the hamlc template
@@ -24,6 +26,7 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 		@addPopovers()
 
 		scopeView = new Ananta.Views.Marq.ScopeView()
+		@views.push(scopeView)
 		@$(".scope").html(scopeView.render().el)
 
 		@renderQuestions()
@@ -41,11 +44,13 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 			
 	renderQuestion: (question) ->
 		view = new Ananta.Views.Marq.QuestionView({model : question, collection : @collection})
+		@views.push(view)
 		view.bind('fetchQuestion', @fetchQuestion)
 		view.bind('renderErrors', @renderErrors)
 		v = $(view.render().el)
 		@$(".questions tr").prepend(v)
 		v.addClass('animated fadeInDown')
+		@$('.nmqs').remove()
 
 	renderErrors: (errors) ->
 		@clearErrors()
@@ -66,6 +71,7 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 		else
 			_.each error, (error) ->
 				render(error, attribute)
+
 	clearErrors: ->
 		@$(".alerts .span10").html('')
 
@@ -83,7 +89,7 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 		@$(".answer .span2 h1").popover
 			placement: 'bottom'
 			title: 'About Answer'
-			content: 'Answering questions is the easiest way to impact this site and the projects on it. Answer as many questions as you want. Comments are optional. The questions on every page are unique. Go to a different page to see the questions asked on it.'
+			content: 'Answering questions is the easiest way to impact this site and the projects grown in it. Answer as many questions as you want. Comments are optional. The questions on every page are unique. Go to a different page to see the questions asked on it.'
 
 		@$(".tldr").popover
 			placement: 'bottom'
@@ -119,22 +125,30 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 					# If no question could be fetched then all questions are answered
 					if collection.length == l
 						@noMoreQuestions()
+					else
+						wait 200, () =>
+							@$('.nmqs').remove()
 
 	noMoreQuestions: ->
 		url = '/projects'
-		render = (url) => @$(".questions tr").prepend("<td><div class='nmqs span5'><div class='question wrap'><div class='outer'><div class='inner'>You have answered every question on this page. Why don't you go outside and take a break... Or <a href='#{url}'>go to a different page</a> and answer more questions.</div></div></div></div></td>")
+		render = (url) => @$(".questions tr").prepend("<td class='nmqs'><div class='span5'><div class='question wrap'><div class='outer'><div class='inner'>You have answered every question on this page. Why don't you go outside and take a break... Or <a href='#{url}'>go to a different page</a> and answer more questions.</div></div></div></div></td>")
 		$.ajax(
 			dataType  : 'json'
 			type      : 'GET'
 			url       : url
 			data      : {order:'r', per:1}
 			success: (data) =>
-				if data[0]['url'] then url = data[0]['url']
+				if data[0]? then url = data[0]['url']
 				@$('.nmqs').remove()
 				render url
 			error: () =>
 				@$('.nmqs').remove()
 				render url
 		)
+
+	onClose: ->
+		for view in @views
+			view.close()
+
 
 _.extend(Ananta.Views.Marq.MarqView::, Ananta.Mixins.Logins)

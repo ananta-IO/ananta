@@ -30,7 +30,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
     params.push "#{model.image_type}.png"
 
-    "/assets/fallback/" + params.compact.join('_')
+    "http://#{ActionMailer::Base.default_url_options[:host]}/assets/fallback/" + params.compact.join('_')
   end
 
   version :small do

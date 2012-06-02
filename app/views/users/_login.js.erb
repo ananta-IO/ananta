@@ -1,0 +1,34 @@
+$(document).ajaxSuccess(function(e, XHR, options){
+	$(Ananta.App.marqView.el).detach()
+	// Ananta.App.marqView.close()
+
+	$('#header [rel*=tooltip]').tooltip('hide');
+	$('#header').html('<%= escape_javascript render("application/header") %>');
+	$('#header [rel*=tooltip]').tooltip();
+	
+	if(window.loginModal){
+		$(window.loginModal.el).modal("hide");
+		window.loginModal.remove();
+	}
+
+	// $('#footer').append('<%= escape_javascript yield(:javascripts) %>');
+
+	$('#marq_toggle a').click(function(e) {
+		$('#marq_toggle a').toggleClass('active');
+		$('#marq').slideToggle('fast');
+		e.preventDefault();
+		e.stopPropagation();
+	});
+
+	$("#marq").html(Ananta.App.marqView.el)
+
+});
+
+$(document).ajaxError(function(e, XHR, options){
+	console.log(e)
+	console.log(XHR)
+	console.log(options)
+	if (XHR.status == 401){
+		window.location.replace("<%= new_user_session_path %>");
+	}
+});

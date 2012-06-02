@@ -13,6 +13,5 @@ class Ananta.Routers.MarqRouter extends Backbone.Router
 	#	".*" : "index"
 
 	index: ->
-		@questions.fetch success: (collection) =>
-			view = new Ananta.Views.Marq.MarqView({ collection: @questions })
-			$("#marq").html(view.render().el)
+		Ananta.App.marqView = new Ananta.Views.Marq.MarqView({ collection: @questions })
+		$("#marq").html(Ananta.App.marqView.render().el)

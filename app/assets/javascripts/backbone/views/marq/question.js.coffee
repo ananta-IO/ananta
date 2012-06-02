@@ -17,10 +17,12 @@ class Ananta.Views.Marq.QuestionView extends Backbone.View
 
 
 	initialize: (options) ->
-		_.bindAll(@, 'render', 'addPopovers', 'focusForm', 'stopPropagation', 'yes', 'no', 'dontCare', 'saveAnswer', 'removeQuestion')
+		_.bindAll(@, 'render', 'addPopovers', 'focusForm', 'stopPropagation', 'yes', 'no', 'dontCare', 'saveAnswer', 'closeQuestion')
 		@answer = new Ananta.Models.Answer
 		@answer.urlRoot = "/questions/#{@model.id}/answers"
-		@answer.bind('')
+		# @answer.bind('')
+
+		@views = []
 
 	render: ->
 		$(@el).html(@template( @model.toJSON() ))
@@ -63,7 +65,8 @@ class Ananta.Views.Marq.QuestionView extends Backbone.View
 				@model.set('just_answered', true)
 				# add the vote view
 				voteView = new Ananta.Views.Marq.VoteView({model: @model, collection: @collection})
-				voteView.bind('removeQuestion', @removeQuestion)
+				@views.push(voteView)
+				voteView.bind('closeQuestion', @closeQuestion)
 				@$(".inner").html(voteView.render().el)
 				# fetch a new question
 				@.trigger('fetchQuestion')
@@ -74,7 +77,11 @@ class Ananta.Views.Marq.QuestionView extends Backbone.View
 					@loginModal()
 		)
 
-	removeQuestion: ->
-		@remove()
+	closeQuestion: ->
+		@close()
+
+	onClose: ->
+		for view in @views
+			view.close()
 
 _.extend(Ananta.Views.Marq.QuestionView::, Ananta.Mixins.Logins)

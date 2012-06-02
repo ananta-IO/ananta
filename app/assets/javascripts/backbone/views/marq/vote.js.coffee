@@ -27,7 +27,6 @@ class Ananta.Views.Marq.VoteView extends Backbone.View
 		options =
 			width: 175
 			height: 107
-			# colors: ['#d6e9c6', '#eed3d7', '#fbeed5']
 			colors: ['#5bb65b', '#da4e49', '#999999'] 
 
 		chart = new google.visualization.PieChart(document.getElementById("marq_pie_#{@model.id}"))
@@ -54,5 +53,6 @@ class Ananta.Views.Marq.VoteView extends Backbone.View
 				@render()
 				wait 300, =>
 					@collection.remove(@model)
-					@.trigger('removeQuestion')
+					@.trigger('closeQuestion')
 			error: =>
+				console.log 'vote failed'

@@ -3,9 +3,9 @@
 		$(function() {
 			// Add marq to view
 			Ananta.App.marqRouter = new Ananta.Routers.MarqRouter({
-				q_controller: "#{session[:questionable_controller]}",
-				q_action: "#{session[:questionable_action]}",
-				q_sid: "#{session[:questionable_sid]}"
+				q_controller: "#{params[:controller]}",
+				q_action: "#{params[:action]}",
+				q_sid: "#{params[:id]}"
 			});
 			// Backbone.history.start();
 		});

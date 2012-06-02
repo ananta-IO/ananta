@@ -253,7 +253,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 
 		callback = (response) =>
 			$.ajax
-				url: "/users/auth/facebook/callback"
+				url: "/users/auth/facebook/callback.js"
 				success: (data) =>
 					user = data
 					if user["id"]?
@@ -286,9 +286,9 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 				@cleanUp()
 				# @callback()
 			error: (jqXHR) =>
-				@cleanUp()
-				errors = $.parseJSON(jqXHR.responseText)
-				@renderErrors(errors)
+				# @cleanUp()
+				# errors = $.parseJSON(jqXHR.responseText)
+				# @renderErrors(errors)
 		)
 
 	addJLabel: (element) ->

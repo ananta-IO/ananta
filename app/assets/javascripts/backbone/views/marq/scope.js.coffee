@@ -7,10 +7,11 @@ class Ananta.Views.Marq.ScopeView extends Backbone.View
 
 
 	initialize: (options) ->
-		_.bindAll(@, 'render', 'addPopovers')
+		_.bindAll(@, 'render')
 		@session =  new Ananta.Models.Session()
+		@session.fetch()
+
 		@session.bind('change', @render)
-		@session.fetch() 
 
 	render: ->
 		$(@el).html(@template( @session.toJSON() ))
@@ -21,7 +22,11 @@ class Ananta.Views.Marq.ScopeView extends Backbone.View
 		@$("i.info").popover
 			placement: 'bottom'
 			title: 'About Scope'
-			content: 'This is your scope. Think of it as a filter based on the page you are visiting. Every question you ask will automatically be linked to your scope. Every question you answer <i>probably</i> pertains to your scope. Go to a different page to change your scope and the scope of the questions you ask and answer.'
+			content: "This is your scope. A filter based on the page you are on. For example, this page: 
+				<hr/><code>#{window.location.href}</code> 
+				<hr/>has a scope of:
+				<hr/><code>#{if @session.get('questionable_controller')? then @session.get('questionable_controller') else ''}#{if @session.get('questionable_action')? then '/' + @session.get('questionable_action') else ''}#{if @session.get('questionable_sid')? then '/' + @session.get('questionable_sid') else ''}</code>
+				<hr/>Every question you ask will automatically be linked to this scope. Every question you answer will come from this scope. Go to a different page to change the scope of the questions you ask and answer."
 		@$("a.controller").tooltip
 			placement: 'right'
 			title: 'controller'	
