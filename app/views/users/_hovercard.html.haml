@@ -1,0 +1,12 @@
+- id = "user-#{model.id}-#{SecureRandom.hex(4)}"
+=content_for :javascripts do
+	:coffeescript
+		$(document).ready () ->
+			html = "<br/><p>a.k.a #{model.name}</p>"
+			$("##{id}").hovercard
+				detailsHTML: html
+				width: 300
+				cardImgSrc: "#{model.profile.avatar.image.small.url}"
+
+%label{ id: id }
+	= link_to model.username, profile_path(model.profile)
