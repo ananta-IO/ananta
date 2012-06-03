@@ -253,11 +253,13 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 
 		callback = (response) =>
 			$.ajax
-				url: "/users/auth/facebook/callback"
+				dataType  : 'json'
+				url       : "/users/auth/facebook/callback"
 				success: (data) =>
 					user = data
 					if user["id"]?
 						@callback()
+						@close()
 					else
 						if window.loginModal
 							$(window.loginModal.el).modal "hide"
@@ -277,16 +279,16 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 		@renderLoginSpinner()
 		$form = @$('form')
 		$.ajax(
-			# dataType  : 'json'
+			dataType  : 'json'
 			type      : 'POST'
-			url       : $form.attr('action')+'.js'
+			url       : $form.attr('action')
 			data      : $form.serialize()
 			success: (data) =>
 				@callback()
 				@close()
-			error: (jqXHR) =>
+			error: (data) =>
 				@cleanUp()
-				errors = $.parseJSON(jqXHR.responseText)
+				errors = $.parseJSON(data.responseText)
 				@renderErrors(errors)
 		)
 

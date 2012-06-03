@@ -1,0 +1,8 @@
+$('#flash').append('<%= escape_javascript render("application/flashes") %>');
+window.initFlashes();
+
+$('#header .user-nav [rel*=tooltip]').tooltip('hide');
+$('#header .user-nav').html('<%= escape_javascript render("application/user_nav") %>');
+$('#header .user-nav [rel*=tooltip]').tooltip();
+
+Ananta.App.marqView.collection.reset().fetch();

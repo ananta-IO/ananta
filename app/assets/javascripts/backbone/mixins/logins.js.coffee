@@ -3,6 +3,9 @@ Ananta.Mixins.Logins =
 		options or= {}
 		options['callback'] or= -> 
 			console.log 'logged in'
+			$.ajax
+				type      : 'POST'
+				url       : "/login"
 		options['message'] or= 'To continue'
 		view = new Ananta.Views.Users.LoginRegisterModal(options)
 		view.render()
