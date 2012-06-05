@@ -58,7 +58,7 @@ Ananta::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  config.action_mailer.default_url_options = { :host => 'ananta-staging.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'a-staging.herokuapp.com' }
 
   config.middleware.use ExceptionNotifier,
     sender_address: 'noreply@ananta.io',

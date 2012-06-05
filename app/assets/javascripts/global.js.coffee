@@ -19,3 +19,12 @@ $('a.login').bind 'click', (e) ->
 	window.loginModal = new Ananta.Views.Users.LoginRegisterModal()
 	window.loginModal.render()
 	e.stopPropagation()
+
+jQuery ->
+	if $('.pagination').length
+		$('#pg-scrl').scroll ->
+			url = $('.pagination .next a').attr('href')
+			if url? and $('#pg-scrl').scrollTop() > $('#wrapper').height() - $('#pg-scrl').height() - 120
+				$('.pagination').html('<li class="active"><a href="#">Loading more...</a></li>')
+				$.getScript(url)
+		$('#pg-scrl').scroll()

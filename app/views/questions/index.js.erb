@@ -1,0 +1,6 @@
+$('#questions table').append('<%= j render(@questions) %>');
+<% if @questions.current_page < @questions.num_pages %>
+	$('#questions .pagination').replaceWith('<%= j paginate(@questions) %>');
+<% else %>
+	$('#questions .pagination').html('<li class="active"><a href="#">No more questions to load</a></li>');
+<% end %>
