@@ -3,10 +3,11 @@ Ananta.Views.ProjectFlow ||= {}
 class Ananta.Views.ProjectFlow.ProjectTagsView extends Backbone.View
 	template: JST['backbone/templates/project_flow/project_tags']
 
-	className: 'project-tags span12'
+	className: 'row'
 
 	initialize: (options) ->
 		_.bindAll(@, 'render', 'renderSelectionCountdown', 'renderPreview')
+		@router = options.router
 		@tags = new Backbone.Collection()
 		@maxTags = 5
 
@@ -82,7 +83,7 @@ class Ananta.Views.ProjectFlow.ProjectTagsView extends Backbone.View
 			'icom-screw'
 			'icom-light-bulb'
 		]
-		icons = shuffle(icons)
+		icons = @shuffle(icons)
 		for icon in icons 
 			tag = new Backbone.Model({ name : icon, selected : false })
 			@tags.add tag
@@ -94,11 +95,4 @@ class Ananta.Views.ProjectFlow.ProjectTagsView extends Backbone.View
 	selectionCountdown: ->
 		@maxTags - @tags.where({ selected : true }).length
 
-	shuffle = (o) ->
-		i = o.length
-		while i
-			j = parseInt(Math.random() * i)
-			x = o[--i]
-			o[i] = o[j]
-			o[j] = x
-		o
+_.extend(Ananta.Views.ProjectFlow.ProjectTagsView::, Ananta.Mixins.Collections)

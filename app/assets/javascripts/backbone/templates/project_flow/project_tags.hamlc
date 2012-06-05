@@ -1,14 +1,15 @@
-%br
-%h2.count.remaining.pull-right
-%h2 
-	Select the five tags that relate to your project the most
-%br
-%ul.tags.thumbnails
-%hr
-.bottom
+.project-tags.span12
+	%br
 	%h2.count.remaining.pull-right
-	%ul.preview.thumbnails
-	.center
-		%button.submit-tags.btn.btn-primary{ :type => "submit" } Add Tags
-%br
-%br
+	%h2 
+		Select the five tags that relate to your project the most
+	%br
+	%ul.tags.thumbnails
+	%hr
+	.bottom
+		%h2.count.remaining.pull-right
+		%ul.preview.thumbnails
+		.center
+			%button.submit-tags.btn.btn-primary{ :type => "submit" } Add Tags
+	%br
+	%br

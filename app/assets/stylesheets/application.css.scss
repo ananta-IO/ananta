@@ -109,13 +109,16 @@ h1{
 	color: rgba(82, 96, 117, 0.5);
 }
 
-label{
+label.hc{
 	font-size: inherit;
 	font-weight: inherit;
 	line-height: inherit;
 	display: inline-block;
 	margin-bottom: inherit;
 	color: inherit;
+	&.hc-name{
+		font-weight: inherit;
+	}
 }
 
 .yield{

@@ -10,7 +10,7 @@ class Ananta.Routers.MarqRouter extends Backbone.Router
 		@index()
 
 	# routes:
-	#	".*" : "index"
+	#	"*actions" : "index"
 
 	index: ->
 		Ananta.App.marqView = new Ananta.Views.Marq.MarqView({ collection: @questions })

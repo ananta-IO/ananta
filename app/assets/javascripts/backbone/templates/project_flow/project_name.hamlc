@@ -1,0 +1,12 @@
+.project-name-form
+	.span6.center
+		%form.project{:action => "/projects", :method => "post"}
+			.input.string.required.project-name
+				%span.hint
+					%i.icom-blueprint
+				- window.a = @
+				%input{:type => "text", :name => "project[name]", :value => "#{if @project.name then @project.name else ''}", :placeholder => "What are you working on?", :title => "Name one thing you are working on.", autocomplete: "off", :autofocus => true}
+			.button.center
+				-# %button.project-action-search.btn{:name => "project-action-search", :type => "submit"} Search Projects
+				-# &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				%button.project-action-start.btn{:name => "project-action-start", :type => "submit"} Start Project

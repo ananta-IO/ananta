@@ -22,8 +22,8 @@ class UsersController < InheritedResources::Base
 		controller.session[:users_per] ? scope.per(controller.session[:users_per]) : scope.per(10)
 	end
 
-	def login
-		render 'login.js.erb'
+	def render_nav
+		render 'render_nav.js.erb'
 	end
 
 	protected

@@ -1,9 +1,9 @@
 Ananta.Views.ProjectFlow ||= {}
 
-class Ananta.Views.ProjectFlow.ProjectNameFormView extends Backbone.View
-	template: JST['backbone/templates/project_flow/project_name_form']
+class Ananta.Views.ProjectFlow.ProjectNameView extends Backbone.View
+	template: JST['backbone/templates/project_flow/project_name']
 
-	className: 'project-name-form'
+	className: 'row'
 
 	events:
 		'submit form'                   :'create'
@@ -13,8 +13,7 @@ class Ananta.Views.ProjectFlow.ProjectNameFormView extends Backbone.View
 
 	initialize: (options) ->
 		_.bindAll(@, 'render')
-		@model = new Ananta.Models.Project
-		@model.urlRoot = "/#{Ananta.App.currentUser.id}"
+		@router = options.router
 		@projectNames = [
 			'_____'
 			'baking a cake'
@@ -39,6 +38,8 @@ class Ananta.Views.ProjectFlow.ProjectNameFormView extends Backbone.View
 			'looking for test subjects'
 			'meditating'
 			'mowing the lawn'
+			'painting a portrait'
+			'paying it forward'
 			'performing an experiment'
 			'playing a game'
 			'programming this website'
@@ -60,7 +61,7 @@ class Ananta.Views.ProjectFlow.ProjectNameFormView extends Backbone.View
 		]
 
 	render: ->
-		$(@el).html(@template())
+		$(@el).html(@template( @model.toJSON() ))
 		@addTooltips()
 		@
 
@@ -91,22 +92,18 @@ class Ananta.Views.ProjectFlow.ProjectNameFormView extends Backbone.View
 		@$('input').attr('disabled', 'disabled')
 		@model.set('name', @$('input').val())
 		@model.save({}
-			success: (data) =>
-				@collection.add(@model)
-				@goToNextStep()
-			error: (data, jqXHR) =>   
-				@$('input').removeAttr('disabled')
-				errors = $.parseJSON(jqXHR.responseText)
-				if errors['error'] == "You need to sign in or sign up before continuing."
-					@goToNextStep()
-					@loginModal()
-		)
+		 	success: (data) =>
+		 		@collection.add(@model)
+		 		@hideTooltips()
+		 		@router.nextStep()
+		 	error: (data, jqXHR) =>   
+		 		@$('input').removeAttr('disabled')
+		 		errors = $.parseJSON(jqXHR.responseText)
+		 		if errors['error'] == "You need to sign in or sign up before continuing."
+		 			@hideTooltips()
+		 			@router.nextStep()
+		 			@loginModal()
+		)	
 
-	goToNextStep: ->
-		@hideTooltips()
-		@.trigger('removeProjectNameForm')
-		@.trigger('renderProjectTags')		
-
-
-_.extend(Ananta.Views.ProjectFlow.ProjectNameFormView::, Ananta.Mixins.Logins)
+_.extend(Ananta.Views.ProjectFlow.ProjectNameView::, Ananta.Mixins.Logins)
 
