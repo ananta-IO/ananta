@@ -31,6 +31,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 		@email_pattern = /^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i
 		@checkUser()
 		@mailcheckDomains = [
+			'ananta.io'
 			'att.net'
 			'comcast.net'
 			'facebook.com'
@@ -257,6 +258,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 				url       : "/users/auth/facebook/callback"
 				success: (data) =>
 					user = data
+					Ananta.App.currentUser = new Ananta.Models.User(user)
 					if user["id"]?
 						@callback()
 						@close()
@@ -284,6 +286,8 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 			url       : $form.attr('action')
 			data      : $form.serialize()
 			success: (data) =>
+				user = data
+				Ananta.App.currentUser = new Ananta.Models.User(user)
 				@callback()
 				@close()
 			error: (data) =>

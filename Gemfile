@@ -91,6 +91,7 @@ end
 group :development do
   gem 'pry'
   gem 'heroku'
+  gem 'letter_opener'
   # gem 'ruby-debug19', :require => 'ruby-debug'
 end
 
@@ -100,4 +101,9 @@ group :test do
   gem 'capybara'
   gem 'capybara-webkit'
   gem 'rake' 
+end
+
+
+group :production, :staging do
+  gem 'exception_notification'
 end

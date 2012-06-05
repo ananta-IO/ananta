@@ -1,6 +1,6 @@
 class Ananta.Routers.ProjectFlowRouter extends Backbone.Router
 	initialize: (options) ->
-		_.bindAll(@, 'render')
+		_.bindAll(@, 'navigateTo')
 		Ananta.App.currentUser = new Ananta.Models.User(options.currentUser)
 		@model = new Ananta.Models.Project()
 		@model.urlRoot = "/#{Ananta.App.currentUser.id}"
@@ -15,60 +15,65 @@ class Ananta.Routers.ProjectFlowRouter extends Backbone.Router
 		"*actions" : "name"
 
 	name: ->
-		render = =>
+		renderCallback = =>
 			@view = new Ananta.Views.ProjectFlow.ProjectNameView({ model: @model, collection: @collection, router: @ })
 			$("#project_flow").html(@view.render().el)
-		@stepTo(0, render)
+		@transitionTo(0, renderCallback)
 
 	tags: ->
-		render = =>
+		renderCallback = =>
 			@view = new Ananta.Views.ProjectFlow.ProjectTagsView({ model: @model, collection: @collection, router: @ })
 			$("#project_flow").html(@view.render().el)
-		@stepTo(1, render)
+		@transitionTo(1, renderCallback)
 
-	# Rendering / Animation
+	# Transitions / Animation
 	nextStep: ->
-		@currentPage++
-		@stepForward(@render)
+		@navigateTo(@currentPage + 1)
 
 	previousStep: ->
-		@currentPage--
-		@stepBack(@render)
-
-	stepTo: (page, render) ->
-		previousPage = @currentPage
-		@currentPage = page
-		if previousPage < page
-			@stepForward(render)
-		else if previousPage > page
-			@stepBack(render)
-		else
-			@fadeIn(render)
+		@navigateTo(@currentPage - 1)
 			
-	stepForward: (render) ->
+	stepForward: (renderCallback) ->
 		$(@view.el).addClass('animated fadeOutLeftBig')
 		wait 400, () =>
 			@view.close()
-			render()
+			renderCallback()
 			$(@view.el).addClass('animated fadeInRightBig')
 			wait 1000, () =>
 				$(@view.el).removeClass('animated fadeInRightBig')
 
-	stepBack: (render) ->
+	stepBack: (renderCallback) ->
 		$(@view.el).addClass('animated fadeOutRightBig')
 		wait 400, () =>
 			@view.close()
-			render()
+			renderCallback()
 			$(@view.el).addClass('animated fadeInLeftBig')
 			wait 1000, () =>
 				$(@view.el).removeClass('animated fadeInLeftBig')
 
-	fadeIn: (render) ->
-		render()
-		$(@view.el).hide().fadeIn(5000)
+	stepIn: (renderCallback) ->
+		if @view?
+			$(@view.el).addClass('animated fadeOutUp')
+			wait 400, () =>
+				@view.close()
+				renderCallback()
+				$(@view.el).addClass('animated fadeInUp')
+		else
+			renderCallback()
+			$(@view.el).hide().fadeIn(8000)
 
-	render: ->
-		if @currentPage < 0 then @currentPage = 0
-		if @currentPage >=  @pages.length then @currentPage = (@pages.length - 1)
-		target = @pages[@currentPage]
+	transitionTo: (page, renderCallback) ->
+		previousPage = @currentPage
+		@currentPage = page
+		if previousPage < page
+			@stepForward(renderCallback)
+		else if previousPage > page
+			@stepBack(renderCallback)
+		else
+			@stepIn(renderCallback)
+
+	navigateTo: (page) ->
+		if page < 0 then page = 0
+		if page >=  @pages.length then page = (@pages.length - 1)
+		target = @pages[page]
 		@navigate(target, {trigger: true, replace: false})

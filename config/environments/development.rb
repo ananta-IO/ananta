@@ -34,6 +34,8 @@ Ananta::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  config.action_mailer.delivery_method = :letter_opener
 end
 
 # TODO: reload! is broken with rails 3.2

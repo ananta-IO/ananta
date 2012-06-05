@@ -22,7 +22,7 @@ class Ananta.Views.Marq.ScopeView extends Backbone.View
 		@$("i.info").popover
 			placement: 'bottom'
 			title: 'About Scope'
-			content: "This is your scope. A filter based on the page you are on. For example, this page: 
+			content: "This is your scope. A filter based on the current page. For example, this page: 
 				<hr/><code>#{window.location.href}</code> 
 				<hr/>has a scope of:
 				<hr/><code>#{if @session.get('questionable_controller')? then @session.get('questionable_controller') else ''}#{if @session.get('questionable_action')? then '/' + @session.get('questionable_action') else ''}#{if @session.get('questionable_sid')? then '/' + @session.get('questionable_sid') else ''}</code>

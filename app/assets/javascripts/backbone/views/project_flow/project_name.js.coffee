@@ -43,6 +43,7 @@ class Ananta.Views.ProjectFlow.ProjectNameView extends Backbone.View
 			'performing an experiment'
 			'playing a game'
 			'programming this website'
+			'researching the mating habits of tree squirrels'
 			'reticulating splines'
 			'starting a band'
 			'starting a company'
@@ -68,6 +69,7 @@ class Ananta.Views.ProjectFlow.ProjectNameView extends Backbone.View
 	addTooltips: ->
 		@$('input').tooltip
 			placement: 'top'
+			delay: 300
 		@$('span.hint').tooltip
 			placement: 'right'
 			title: @randSugquestion()
