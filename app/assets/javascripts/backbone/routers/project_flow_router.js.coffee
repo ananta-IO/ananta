@@ -1,13 +1,16 @@
 class Ananta.Routers.ProjectFlowRouter extends Backbone.Router
 	initialize: (options) ->
 		_.bindAll(@, 'navigateTo')
-		Ananta.App.currentUser = new Ananta.Models.User(options.currentUser)
+		Ananta.App.currentUser or= new Ananta.Models.User()
+		Ananta.App.currentUser.set(options.currentUser)
 		@model = new Ananta.Models.Project()
-		@model.urlRoot = "/#{Ananta.App.currentUser.id}"
+		@setRootUrl()
 		@collection =  new Ananta.Collections.ProjectsCollection()
 		
 		@pages = ["name", "tags"]
 		@currentPage = 0
+
+		Ananta.App.currentUser.on('change:id', @setRootUrl, @)
 
 	routes:
 		"name"     : "name"
@@ -25,6 +28,10 @@ class Ananta.Routers.ProjectFlowRouter extends Backbone.Router
 			@view = new Ananta.Views.ProjectFlow.ProjectTagsView({ model: @model, collection: @collection, router: @ })
 			$("#project_flow").html(@view.render().el)
 		@transitionTo(1, renderCallback)
+
+	# Helpers
+	setRootUrl: ->
+		@model.urlRoot = "/#{Ananta.App.currentUser.id}"
 
 	# Transitions / Animation
 	nextStep: ->

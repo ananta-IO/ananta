@@ -258,7 +258,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 				url       : "/users/auth/facebook/callback"
 				success: (data) =>
 					user = data
-					Ananta.App.currentUser = new Ananta.Models.User(user)
+					Ananta.App.currentUser.set(user)
 					if user["id"]?
 						@callback()
 						@close()
@@ -287,7 +287,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 			data      : $form.serialize()
 			success: (data) =>
 				user = data
-				Ananta.App.currentUser = new Ananta.Models.User(user)
+				Ananta.App.currentUser.set(user)
 				@callback()
 				@close()
 			error: (data) =>

@@ -1,3 +1,9 @@
+                               --.-- .--.
+                    _|_          |  :    :
+ .-.  .--. .-.  .--. |  .-.      |  |    |
+(   ) |  |(   ) |  | | (   )     |  :    ;
+ `-'`-'  `-`-'`-'  `-`-'`-'`-  --'-- `--'
+
 # ananta.io
 
 A place for people and their projects. [About Ananta](http://ananta.io/about)
