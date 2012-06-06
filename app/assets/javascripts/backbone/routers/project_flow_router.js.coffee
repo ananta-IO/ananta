@@ -19,15 +19,20 @@ class Ananta.Routers.ProjectFlowRouter extends Backbone.Router
 
 	name: ->
 		renderCallback = =>
+			@currentPage = 0
 			@view = new Ananta.Views.ProjectFlow.ProjectNameView({ model: @model, collection: @collection, router: @ })
 			$("#project_flow").html(@view.render().el)
 		@transitionTo(0, renderCallback)
 
 	tags: ->
-		renderCallback = =>
-			@view = new Ananta.Views.ProjectFlow.ProjectTagsView({ model: @model, collection: @collection, router: @ })
-			$("#project_flow").html(@view.render().el)
-		@transitionTo(1, renderCallback)
+		if @model.get('name')?
+			renderCallback = =>
+				@currentPage = 1
+				@view = new Ananta.Views.ProjectFlow.ProjectTagsView({ model: @model, collection: @collection, router: @ })
+				$("#project_flow").html(@view.render().el)
+			@transitionTo(1, renderCallback)
+		else
+			@navigateTo(0)
 
 	# Helpers
 	setRootUrl: ->

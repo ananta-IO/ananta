@@ -72,9 +72,14 @@ class Ananta.Views.Marq.QuestionView extends Backbone.View
 				@.trigger('fetchQuestion')
 			error: (data, jqXHR) =>
 				errors = $.parseJSON(jqXHR.responseText)
-				@.trigger( 'renderErrors', errors ) 
-				if errors['error'] == "You need to sign in or sign up before continuing."
-					@loginModal()
+				@.trigger 'renderErrors', errors,
+					parentSelector : '.alerts .span10'
+					keysToRender   : ['answer']
+					animateIn      : true
+					animateOut     : true
+					animationIn    : 'fadeInDown'
+					animationOut   : 'fadeOutUp'
+					loginCallback  : null
 		)
 
 	closeQuestion: ->
@@ -83,5 +88,3 @@ class Ananta.Views.Marq.QuestionView extends Backbone.View
 	onClose: ->
 		for view in @views
 			view.close()
-
-_.extend(Ananta.Views.Marq.QuestionView::, Ananta.Mixins.Logins)

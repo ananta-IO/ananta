@@ -63,10 +63,9 @@ class Project < ActiveRecord::Base
   #########################
   # Validations
   #########################
-  validates :name, 
-    :presence => true, 
-    :uniqueness => {:scope => :user_id, :message => "cannot be the same as one of your other projects."},
-    :length => { :minimum => 3, :maximum => 141, :too_short => "Please say a little more. 3 characters minimum.", :too_long => "Please say a little less. 141 characters maximum." } # TODO: find out why this causes problems with migrations
+  validates :name,
+    :uniqueness => {:scope => :user_id, :message => "cannot be the same as one of your other projects"},
+    :length => { :minimum => 3, :maximum => 141, :too_short => "is too short, please say a little more", :too_long => "is too long, please say a little less (141 characters max)" } # TODO: find out why this causes problems with migrations
   validates :user_id, :presence => true
 
 

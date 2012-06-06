@@ -23,6 +23,7 @@ class Ananta.Views.ProjectFlow.ProjectNameView extends Backbone.View
 			'building a tree-house'
 			'building a website'
 			'chasing your dreams'
+			'confused'
 			'destabilizing quantum states'
 			'drawing a blank'
 			'filming a movie' 
@@ -61,6 +62,10 @@ class Ananta.Views.ProjectFlow.ProjectNameView extends Backbone.View
 			'writing a poem'
 		]
 
+		# @model.on "error", (model, error) =>
+		#	alert("Project #{error.attr} #{error.msg}")
+		#	@$('input').removeAttr('disabled').focus()
+
 	render: ->
 		$(@el).html(@template( @model.toJSON() ))
 		@addTooltips()
@@ -91,21 +96,23 @@ class Ananta.Views.ProjectFlow.ProjectNameView extends Backbone.View
 	create: (e) ->
 		e.preventDefault()
 		e.stopPropagation()
-		@$('input').attr('disabled', 'disabled')
+		@$('input').attr('disabled', 'disabled').after('<img src="/assets/ajax-loader-black-dots.gif" class="loader" />')
 		@model.set('name', @$('input').val())
 		@model.save({}
 		 	success: (data) =>
 		 		@collection.add(@model)
 		 		@hideTooltips()
 		 		@router.nextStep()
+		 		$.getScript("/render_nav")
 		 	error: (data, jqXHR) =>   
-		 		@$('input').removeAttr('disabled')
+		 		@$('input').removeAttr('disabled').focus()
+		 		@$('.loader').remove()
+		 		@hideTooltips()
 		 		errors = $.parseJSON(jqXHR.responseText)
-		 		if errors['error'] == "You need to sign in or sign up before continuing."
-		 			@hideTooltips()
-		 			@router.nextStep()
-		 			@loginModal()
+		 		@renderErrors errors,
+		 			keysToRender   : ['name']
+		 			loginCallback  : null
 		)	
 
-_.extend(Ananta.Views.ProjectFlow.ProjectNameView::, Ananta.Mixins.Logins)
+_.extend(Ananta.Views.ProjectFlow.ProjectNameView::, Ananta.Mixins.Errors)
 

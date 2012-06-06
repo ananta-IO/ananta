@@ -154,6 +154,8 @@ label.hc{
 }
 
 .alert{
+	padding: 4px 35px 4px 14px;
+	margin-bottom: 9px;
 	a.close{
 		&:active{
 		 	top: -2px;
@@ -673,6 +675,11 @@ label.hc{
 		p{
 			color: #bbb;
 		}
+		a.fb-login-button{
+			&:focus{
+				outline: 0px;
+			}
+		}
 	}
 	.show-email{
 		margin-top: 15px;
@@ -681,10 +688,6 @@ label.hc{
 		margin: 30px -15px;
 	}
 	.email{
-		.alert{
-			padding: 4px 35px 4px 14px;
-			margin-bottom: 9px;
-		}
 		input{
 			padding-right: 26px
 		}
@@ -830,6 +833,11 @@ label.hc{
 				color: gray;
 				border-bottom: 1px dashed #bbb;
 			}
+		}
+		.loader{
+			position: absolute;
+			right: 0;
+			top: 10px;
 		}
 		button{
 			margin-top: 20px;

@@ -1,6 +1,6 @@
 .modal-header
 	%a.close{"data-dismiss" => "modal"} ×
-.modal-body
+.modal-body.scrl
 	.center
 		.facebook
 			%p Sign in with

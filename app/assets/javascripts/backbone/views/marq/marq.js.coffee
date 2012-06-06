@@ -49,26 +49,6 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 		v.addClass('animated fadeInDown')
 		@$('.nmqs').remove()
 
-	renderErrors: (errors) ->
-		@clearErrors()
-		if errors['error'] then @renderError(errors['error'])
-		if errors['errors']
-			for key, val of errors['errors']
-				if (['question', 'answer'].some (word) -> word == key)
-					@renderError(val, key)
-		@$('.alert').addClass('animated fadeInDown')
-		wait 7000, () =>
-			@$('.alert').addClass('animated fadeOutUp').delay(500).slideUp(500)
-
-	renderError: (error, attribute) ->
-		attribute or= ''
-		render = (e, a) => @$(".alerts .span10").append("<div class='alert alert-error'><a class='close' data-dismiss='alert' href='#'>&times;</a>#{a} #{e}</div>")
-		if typeof error == 'string'
-			render(error, attribute)
-		else
-			_.each error, (error) ->
-				render(error, attribute)
-
 	clearErrors: ->
 		@$(".alerts .span10").html('')
 
@@ -107,9 +87,14 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 				@collection.add(data)
 			error: (data, jqXHR) =>
 				errors = $.parseJSON(jqXHR.responseText)
-				@renderErrors(errors)
-				if errors['error'] == "You need to sign in or sign up before continuing."
-					@loginModal()
+				@renderErrors errors,
+					parentSelector : '.alerts .span10'
+					keysToRender   : ['question']
+					animateIn      : true
+					animateOut     : true
+					animationIn    : 'fadeInDown'
+					animationOut   : 'fadeOutUp'
+					loginCallback  : null
 		)
 
 	fetchQuestion: ->
@@ -148,4 +133,4 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 			view.close()
 
 
-_.extend(Ananta.Views.Marq.MarqView::, Ananta.Mixins.Logins)
+_.extend(Ananta.Views.Marq.MarqView::, Ananta.Mixins.Errors)

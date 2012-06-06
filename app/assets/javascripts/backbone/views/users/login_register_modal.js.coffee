@@ -86,32 +86,9 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 			@addJLabel(".string input")
 			@$('#login-password').focus()
 			@$('.facebook img').tooltip({ placement:'bottom', title:'finish registration <i class="icon-arrow-down" />' }).tooltip('show')
-
-	renderErrors: (errors) ->
-		@clearErrors()
-		if errors['error'] then @renderError(errors['error'])
-		if errors['errors']
-			for key, val of errors['errors']
-				if (['email', 'password', 'username'].some (word) -> word == key)
-					@renderError(val, key)
-		@animateErrors()
-
-	renderError: (error, attribute) ->
-		attribute or= ''
-		if error == 'Invalid email or password.' then error = 'Invalid password.'
-		render = (e, a) => @$(".alerts").append("<div class='alert alert-error'><a class='close' data-dismiss='alert' href='#'>&times;</a>#{a} #{e}</div>")
-		if typeof error == 'string'
-			render(error, attribute)
 		else
-			_.each error, (error) ->
-				render(error, attribute)
-
-	animateErrors: ->
-		@$(".alert").css('visibility', 'hidden')
-		@$(".alert").each (i, e) ->
-			$(@).delay(i*500).queue () ->
-				$(@).css('visibility', 'visible').addClass('animated fadeInLeft').dequeue()
-			
+			@$('.fb-login-button').focus()
+	
 	expand: (e) ->
 		@$('#login-action').hide()
 		@$('.show-email').hide()
@@ -293,7 +270,9 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 			error: (data) =>
 				@cleanUp()
 				errors = $.parseJSON(data.responseText)
-				@renderErrors(errors)
+				@renderErrors errors,
+					keysToRender   : ['email', 'password', 'username']
+					loginCallback  : null
 		)
 
 	addJLabel: (element) ->
@@ -337,3 +316,5 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 	onClose: ->
 		@cleanUp()
 		$(@el).modal('hide')
+
+_.extend(Ananta.Views.Users.LoginRegisterModal::, Ananta.Mixins.Errors)

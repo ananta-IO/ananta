@@ -46,7 +46,7 @@ class ProjectsController < InheritedResources::Base
 	# Modifited Actions
 	#########################
 	def create
-		@project.location = @user.location.dup
+		@project.location ||= @user.location.dup
 		create! do |success, failure|
 			success.html do 
 				flash[:notice] = "Successfully created project. #{undo_link}"
@@ -56,6 +56,8 @@ class ProjectsController < InheritedResources::Base
 	end
 
 	def update
+		params[:project] ||= {}
+		params[:project] = pick(params[:project], :name, :description, :state_event, :tag_tokens, :cast_vote)
 		update! do |success, failure|
 			success.html do 
 				flash[:notice] = "Successfully updated project. #{undo_link}"

@@ -1,4 +1,6 @@
 #= require_self
+#= require ./mixins/collections
+#= require ./mixins/logins
 #= require_tree ./mixins
 #= require_tree ./templates
 #= require_tree ./models
