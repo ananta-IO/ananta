@@ -1,4 +1,4 @@
-- show_chart = current_user and (ans = @question.answered_by(current_user.id))
+- show_chart = (current_user and (ans = @question.answered_by(current_user.id)))
 =content_for :javascripts do
 	-if show_chart
 		:javascript
@@ -49,6 +49,7 @@
 		
 
 .answer
+	= show_chart
 	-if show_chart
 		.row
 			%h3.pull-right

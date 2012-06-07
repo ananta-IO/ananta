@@ -62,10 +62,6 @@ class Ananta.Views.ProjectFlow.ProjectNameView extends Backbone.View
 			'writing a poem'
 		]
 
-		# @model.on "error", (model, error) =>
-		#	alert("Project #{error.attr} #{error.msg}")
-		#	@$('input').removeAttr('disabled').focus()
-
 	render: ->
 		$(@el).html(@template( @model.toJSON() ))
 		@addTooltips()
@@ -97,22 +93,23 @@ class Ananta.Views.ProjectFlow.ProjectNameView extends Backbone.View
 		e.preventDefault()
 		e.stopPropagation()
 		@$('input').attr('disabled', 'disabled').after('<img src="/assets/ajax-loader-black-dots.gif" class="loader" />')
-		@model.set('name', @$('input').val())
+		@model.set({'name': @$('input').val()})
 		@model.save({}
-		 	success: (data) =>
-		 		@collection.add(@model)
-		 		@hideTooltips()
-		 		@router.nextStep()
-		 		$.getScript("/render_nav")
-		 	error: (data, jqXHR) =>   
-		 		@$('input').removeAttr('disabled').focus()
-		 		@$('.loader').remove()
-		 		@hideTooltips()
-		 		errors = $.parseJSON(jqXHR.responseText)
-		 		@renderErrors errors,
-		 			keysToRender   : ['name']
-		 			loginCallback  : null
-		)	
+			success: (data) =>
+				@collection.add(@model)
+				@hideTooltips()
+				@router.nextStep()
+				$.getScript("/render_nav")
+			error: (data, jqXHR) =>   
+				@$('input').removeAttr('disabled').focus()
+				@$('.loader').remove()
+				@hideTooltips()
+				errors = $.parseJSON(jqXHR.responseText)
+				@renderErrors errors,
+					keysToRender   : ['name']
+					loginCallback  : null
+				@router.nextStep() unless Ananta.App.currentUser.id? # let new users glimpse the tags
+		)   
 
 _.extend(Ananta.Views.ProjectFlow.ProjectNameView::, Ananta.Mixins.Errors)
 

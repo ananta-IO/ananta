@@ -78,7 +78,7 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 		e.preventDefault()
 		e.stopPropagation()
 
-		question = new Ananta.Models.Question({ question: @$(".ask input.question").val() })
+		question = new Ananta.Models.Question({ question: @$(".ask input.question").val(), questionable_url: window.location.href })
 		question.save(null
 			success: (data) =>
 				@$(".ask input.question").val('')

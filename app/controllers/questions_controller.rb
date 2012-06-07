@@ -67,10 +67,10 @@ class QuestionsController < InheritedResources::Base
 	#########################
 	def create
 		attrs = {}
-		attrs = attrs.merge pick(params[:question], :question)
+		attrs = attrs.merge pick(params[:question], :question, :questionable_url)
 		attrs[:questionable_sid]		= session[:questionable_sid]
 		attrs[:questionable_controller] = session[:questionable_controller]
-		attrs[:questionable_url]   		= session[:questionable_url]
+		attrs[:questionable_url]   		||= session[:questionable_url]
 		attrs[:questionable_action]		= session[:questionable_action]
 
 		@question = current_user.questions.new attrs

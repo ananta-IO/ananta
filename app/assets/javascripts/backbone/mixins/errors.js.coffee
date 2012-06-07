@@ -5,21 +5,22 @@ Ananta.Mixins.Errors =
 		options.parentSelector or= '.alerts'
 		options.keysToRender   or= null
 		options.animateIn      or= true unless options.animateIn  == false 
-		options.animateOut     or= true unless options.animateOut == false # dependent on amimateIn
+		options.animateOut     or= true unless options.animateOut == false # only matters if amimateIn is true
 		options.animationIn    or= 'fadeInLeft'
 		options.animationOut   or= 'fadeOutRight'
 		options.loginCallback  or= null # i.e. whatever the default is
 
 		@clearErrors(options.parentSelector)
+
 		if errors['error'] then @renderError(errors['error'], '', options.parentSelector)
-		if errors['error'] == "You need to sign in or sign up before continuing."
-			@loginModal(options.loginCallback)
+		if errors['error'] == "You need to sign in or sign up before continuing." then @loginModal(options.loginCallback)
 		if errors['errors']
 			for key, val of errors['errors']
 				if options.keysToRender? and (options.keysToRender.some (word) -> word == key)
 					@renderError(val, key, options.parentSelector)
 				else
 					@renderError(val, key, options.parentSelector)
+
 		if options.animateIn then @animateErrorsIn(options)
 
 	renderError: (error, attribute, selector) ->
@@ -37,7 +38,6 @@ Ananta.Mixins.Errors =
 		@$(".alert").each (i, e) ->
 			$(@).delay(i*300).queue () ->
 				$(@).css('visibility', 'visible').addClass("animated #{options.animationIn}").dequeue()
-				console.log options.animateOut
 				if options.animateOut then Ananta.Mixins.Errors.animateErrorOut($(@), options.animationOut)
 	
 	animateErrorOut: (el, animation) ->

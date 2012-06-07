@@ -748,17 +748,15 @@ label.hc{
 		display: block;
 		font-size: 24px;
 		text-align: center;
-		// padding: 10px;
 		.up{
 			font-size: 28px;
-			margin-bottom: 10px;
 		}
 		.count{
-			margin-left: -8px;
+			margin-left: -15px;
 		}
 		.down{
 			font-size: 28px;
-			margin-top: -5px;
+			margin-top: -3px;
 		}
 	}
 	.answer{
@@ -837,7 +835,7 @@ label.hc{
 		.loader{
 			position: absolute;
 			right: 0;
-			top: 10px;
+			top: 12px;
 		}
 		button{
 			margin-top: 20px;
@@ -848,6 +846,9 @@ label.hc{
 		a.thumbnail{
 			height: 120px;
 			color: $color-base;
+			border: 1px solid $color-background;
+			@include box-shadow(none);
+			position: relative;
 			&:hover{
 				color: $color-link;
 			}
@@ -856,9 +857,11 @@ label.hc{
 				border: 1px solid $color-highlight2;
 			}
 			i{
-				font-size: 100px;
+				font-size: 60px;
+				position: relative;
+				top: 25px;
 				&.icom-laptop{
-					margin-left: -10px;
+					margin-left: -3px;
 				}
 			}
 			@media(max-width: 1199px){
