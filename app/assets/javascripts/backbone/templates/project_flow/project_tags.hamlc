@@ -5,7 +5,6 @@
 		Select the five tags that relate to your project the most
 	%br
 	%ul.tags.thumbnails
-	%hr
 	.bottom
 		%h2.count.remaining.pull-right
 		%ul.preview.thumbnails

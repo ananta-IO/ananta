@@ -38,6 +38,7 @@ class Location < ActiveRecord::Base
   # Validations
   #########################
   validates :name, :presence => true
+  # validates :address, :presence => true
   validates :country, :presence => true
   validates :city, :presence => true, :if => Proc.new { |location| (location.latitude.blank? or location.longitude.blank?) and location.ip.nil? }
   validates :state, :presence => true, :if => Proc.new { |location| (location.latitude.blank? or location.longitude.blank?) and location.ip.nil? }

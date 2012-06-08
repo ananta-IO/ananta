@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # The Framework
-gem 'rails', '3.2.3'
+gem 'rails', '3.2.5'
 
 # The Database
 gem 'pg'
@@ -39,7 +39,7 @@ gem 'acts-as-taggable-on'
 gem 'state_machine'
 
 # Voting
-gem 'thumbs_up' #, '~> 0.4.6' # Heroku not working with 0.5.3 - bute we will try anyway # TODO: look into this more
+gem 'thumbs_up' #, '~> 0.4.6' # Heroku not working with 0.5.3 - but we will try anyway # TODO: look into this more
 
 # Pagination
 gem 'kaminari'
@@ -92,15 +92,14 @@ group :development do
   gem 'pry'
   gem 'heroku'
   gem 'letter_opener'
-  # gem 'ruby-debug19', :require => 'ruby-debug'
+  # gem 'ruby-debug19', :require => 'ruby-debug'  # NOTE: only use when needed
 end
 
 
 group :test do
   gem 'rspec-rails', '~> 2.6'
-  gem 'capybara'
   gem 'capybara-webkit'
-  gem 'rake' 
+  gem 'launchy'
 end
 
 

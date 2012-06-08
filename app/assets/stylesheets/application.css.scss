@@ -847,14 +847,12 @@ label.hc{
 			height: 120px;
 			color: $color-base;
 			border: 1px solid $color-background;
-			@include box-shadow(none);
 			position: relative;
 			&:hover{
 				color: $color-link;
 			}
 			&.selected{
 				color: $color-highlight2;
-				border: 1px solid $color-highlight2;
 			}
 			i{
 				font-size: 60px;
@@ -868,17 +866,23 @@ label.hc{
 				height: 80px;
 				min-width: 100px;
 				i{
-					font-size: 60px;
+					font-size: 36px;
+					top: 18px;
 				}
 			}
 		}
 		.bottom{
+			border-top: 1px dotted $color-background-hover;
+			padding-top: 20px;
 			position: relative;
 		}
 		.preview{
 			position: absolute;
-			top: 0;
+			top: 15px;
 			left: 0;
+			.thumbnail{
+				border: 1px solid $color-background;
+			}
 			i{
 				font-size: 33px;
 			}

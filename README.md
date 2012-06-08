@@ -4,9 +4,7 @@
 	(   ) |  |(   ) |  | | (   )     |  :    ;
 	 `-'`-'  `-`-'`-'  `-`-'`-'`-  --'-- `--'
 
-# ananta.io
-
-A place for people and their projects. [About Ananta](http://ananta.io/about)
+Ananta IO is a website designed for people and their projects. It is founded around the core belief that projects thrive in the open. Therefore it must be dead simple to share what you are working on, as well as discover what your neighbors are working on. Ananta IO addresses this problem by creating a database of projects and the humans who love them. The ananta website is open source... Voilà! And we are constantly improving our feedback tools on the website, namely Marq, so non-programmers can easily contribute as well. For more background visit the [about section](http://ananta.io/about) of the website.
 
 ************************
 DOODLY DOO... This is just a weekend hack right now. Don't expect it to do anything... yet
@@ -16,7 +14,7 @@ DOODLY DOO... This is just a weekend hack right now. Don't expect it to do anyth
 [![Dependency Status](https://gemnasium.com/ananta-IO/ananta.png?travis)](https://gemnasium.com/ananta-IO/ananta)
 
 ## Are you a user?
-Sorry, there is nothing for you yet. How did you even get here?
+Sorry, there is nothing for you yet. How did you even get here? Have you thought about developing?
 
 ## Are you a developer?
 Great! This page is for you. Read on.

@@ -44,7 +44,7 @@ class Ananta.Views.ProjectFlow.ProjectNameView extends Backbone.View
 			'performing an experiment'
 			'playing a game'
 			'programming this website'
-			'researching the mating habits of tree squirrels'
+			'researching the shopping habits of octogenarians'
 			'reticulating splines'
 			'starting a band'
 			'starting a company'
