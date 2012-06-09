@@ -83,6 +83,7 @@ end
 
 group :development, :test, :sandbox do
   gem 'rspec-rails'
+  gem "spork-rails"
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'faker'
