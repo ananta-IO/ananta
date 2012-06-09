@@ -8,7 +8,7 @@ FactoryGirl.define do
 		"person#{n}@example.com"
 	end
 	sequence :name do |n|
-		"Faker::Name.name #{n}"
+		"#{Faker::Name.name} #{n}"
 	end
 	sequence :username do |n|
 		"user-#{base_convert_i_to_s(n, '', 65, 90)}"
@@ -36,13 +36,13 @@ FactoryGirl.define do
 
 	factory :profile, aliases: [:imageable] do
 		name { generate :name }
-		after_create { |p| FactoryGirl.create(:image, image_type:'avatar', imageable:p, user:p.user) }
+		after(:create) { |p| FactoryGirl.create(:image, image_type:'avatar', imageable:p, user:p.user) }
 	end
 
 
 	factory :project do
 		name { generate :name }
-		description 'this is the best test project you will ever see'
+		description Faker::Lorem.paragraph
 		state 'planning'
 		user
 	end

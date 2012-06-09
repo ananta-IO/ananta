@@ -82,6 +82,7 @@ end
 
 
 group :development, :test, :sandbox do
+  gem 'rspec-rails'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'faker'
@@ -97,9 +98,9 @@ end
 
 
 group :test do
-  gem 'rspec-rails', '~> 2.6'
   gem 'capybara-webkit'
-  gem 'launchy'
+  gem 'poltergeist'
+  # gem 'launchy'
 end
 
 
