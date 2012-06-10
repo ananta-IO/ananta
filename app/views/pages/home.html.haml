@@ -4,7 +4,7 @@
 	:javascript
 		$(function() {
 			// Add project_flow to view
-			Ananta.App.projectFlowRouter = new Ananta.Routers.ProjectFlowRouter({ 'currentUser' : #{render("users/base.json", object: current_user)} });
+			Ananta.App.projectFlowRouter = new Ananta.Routers.ProjectFlowRouter({ 'currentUser' : #{render(partial: "users/base", formats: [:json], object: current_user)} });
 			Backbone.history.start();
 		});
 

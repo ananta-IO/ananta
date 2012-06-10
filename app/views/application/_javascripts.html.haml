@@ -2,33 +2,33 @@
 = javascript_include_tag "application"
 
 :javascript
-  $(function(){
-    // $('.modal').modal();
-    // $('.dropdown-toggle').dropdown();
-    // $('.scrollspy').scrollSpy();
-    // $('.btn').button();
-    // $('.tabs').tabs();
-    $("[rel*=tooltip]").tooltip();
-    $("[rel*=popover]").popover();
-    // $('.alert').alert();
-    // $('.collapse').collapse();
-    // $('.carousel').carousel();
-    // $('.typeahead').typeahead();
+	$(function(){
+		// $('.modal').modal();
+		// $('.dropdown-toggle').dropdown();
+		// $('.scrollspy').scrollSpy();
+		// $('.btn').button();
+		// $('.tabs').tabs();
+		$("[rel*=tooltip]").tooltip();
+		$("[rel*=popover]").popover();
+		// $('.alert').alert();
+		// $('.collapse').collapse();
+		// $('.carousel').carousel();
+		// $('.typeahead').typeahead();
 
-    // $('body').jScrollPane({autoReinitialise: true});
-  });
-      
+		// $('body').jScrollPane({autoReinitialise: true});
+	});
+			
 -#  Append your own using content_for :javascripts
 = yield :javascripts
 
 - unless Rails.env.test?
-  -# Add the google js api for goodies like charts
-  %script{ src: "https://www.google.com/jsapi" }
-  :javascript
-    google.load('visualization', '1.0', {'packages':['corechart']});
+	-# Add the google js api for goodies like charts
+	%script{ src: "https://www.google.com/jsapi" }
+	:javascript
+		google.load('visualization', '1.0', {'packages':['corechart']});
 
-  -# Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
-  -# chromium.org/developers/how-tos/chrome-frame-getting-started
-  /[if lt IE 9 ]
-    %script{ defer: true, src: "//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js" }
-    %script{ defer: true } window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})
+	-# Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
+	-# chromium.org/developers/how-tos/chrome-frame-getting-started
+	/[if lt IE 9 ]
+		%script{ defer: true, src: "//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js" }
+		%script{ defer: true } window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})

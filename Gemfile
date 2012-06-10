@@ -94,6 +94,10 @@ group :development do
   gem 'pry'
   gem 'heroku'
   gem 'letter_opener'
+  gem 'guard'
+  gem 'guard-spork'
+  gem 'guard-rspec'
+  gem 'growl', :require => false unless RUBY_PLATFORM =~ /darwin/i
   # gem 'ruby-debug19', :require => 'ruby-debug'  # NOTE: only use when needed
 end
 

@@ -26,14 +26,15 @@
 
 -# More ideas for your <head> here: h5bp.com/d/head-Tips
 
--# All JavaScript at the bottom, except this Modernizr build incl. Respond.js
--# Respond is a polyfill for min/max-width media queries. Modernizr enables HTML5 elements & feature detects;
--# for optimal performance, create your own custom Modernizr build: www.modernizr.com/download/
-= javascript_include_tag "polyfills"
-= javascript_include_tag "css_browser_selector"
-= javascript_include_tag "http://js.pusherapp.com/1.9/pusher.min.js"
--# = javascript_include_tag "http://use.typekit.com/yng4qye.js"
--# :javascript
--#   try{Typekit.load();}catch(e){}
+- unless Rails.env.test?
+	-# All JavaScript at the bottom, except this Modernizr build incl. Respond.js
+	-# Respond is a polyfill for min/max-width media queries. Modernizr enables HTML5 elements & feature detects;
+	-# for optimal performance, create your own custom Modernizr build: www.modernizr.com/download/
+	= javascript_include_tag "polyfills"
+	= javascript_include_tag "css_browser_selector"
+	= javascript_include_tag "http://js.pusherapp.com/1.9/pusher.min.js"
+	-# = javascript_include_tag "http://use.typekit.com/yng4qye.js"
+	-# :javascript
+	-#   try{Typekit.load();}catch(e){}
 
 = csrf_meta_tag

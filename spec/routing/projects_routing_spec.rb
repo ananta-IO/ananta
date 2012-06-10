@@ -5,22 +5,23 @@ describe ProjectsController do
 
     it "routes to #index" do
       get("/projects").should route_to("projects#index")
-    end
-
-    it "routes to #new" do
-      get("/username/new").should route_to("projects#new", :user_id => "username")
+      get("/projects/page/1").should route_to("projects#index", :page => '1')
     end
 
     it "routes to #show" do
       get("/username/1").should route_to("projects#show", :user_id => "username", :id => "1")
     end
 
-    it "routes to #edit" do
-      get("/username/1/edit").should route_to("projects#edit", :user_id => "username", :id => "1")
+    it "routes to #new" do
+      get("/username/new").should route_to("projects#new", :user_id => "username")
     end
 
     it "routes to #create" do
       post("/username").should route_to("projects#create", :user_id => "username")
+    end
+
+    it "routes to #edit" do
+      get("/username/1/edit").should route_to("projects#edit", :user_id => "username", :id => "1")
     end
 
     it "routes to #update" do
