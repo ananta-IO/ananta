@@ -90,6 +90,7 @@ group :development, :test, :sandbox do
   gem 'capybara-webkit'
   gem 'capybara-screenshot'
   gem 'poltergeist'
+  gem 'headless'
 end
 
 

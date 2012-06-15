@@ -11,11 +11,10 @@ class User < ActiveRecord::Base
 	after_save      	:generate_username, :unless => :username?
 
 	# Include default devise modules. Others available are:
-	# :encryptable, :confirmable
+	# :encryptable, :confirmable, :token_authenticatable
 	devise :database_authenticatable, :registerable,
-				 :recoverable, :rememberable, :trackable, :validatable,
-				 :token_authenticatable,
-				 :lockable, :timeoutable, :omniauthable
+		   :recoverable, :rememberable, :trackable, :validatable,
+		   :lockable, :timeoutable, :omniauthable
 
 	# Voting
 	acts_as_voter

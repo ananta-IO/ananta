@@ -23,7 +23,7 @@ Great! This page is for you. Read on.
 
 ### Setup
 
-NEWBS. [Read this if you are new to Rails development and need to get up and running for the first time](http://railsapps.github.com/installing-rails.html)
+NEWBS. [Read this if you are new to Rails development and need to get up and running for the first time](http://railsapps.github.com/installing-rails.html) - AND/OR - [Run this to configure your machine](https://github.com/thoughtbot/laptop) 
 
 1. [Install RVM](http://beginrescueend.com/rvm/)
 
