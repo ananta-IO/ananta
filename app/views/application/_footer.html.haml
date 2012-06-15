@@ -30,7 +30,10 @@
 					$(buttons[cur]).fadeTo(300, 0.4);
 		)
 
-.container
+.container{style:"position:relative;"}
+	%div{style:"position:absolute; bottom:0; right:0; opacity:0.0;"}
+		%a{href:"http://mixpanel.com/f/partner"}
+			%img{src:"http://mixpanel.com/site_media/images/partner/badge_light.png", alt:"Real Time Web Analytics"}
 	.center
 		ananta IO
 		= image_tag "/assets/copyleft.png", style: "height: 10px"

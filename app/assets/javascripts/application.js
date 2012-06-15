@@ -30,6 +30,7 @@
 //= require mwheelIntent
 //= require jquery.jscrollpane
 //= require jquery.hovercard
+//= require jquery.color
 //= require raphael
 //= require g.raphael-min
 //= require g.pie-min

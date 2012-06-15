@@ -165,6 +165,11 @@ label.hc{
 	}
 }
 
+.modal-header{
+	border-bottom: 0;
+	display: list-item;
+}
+
 .modal-body{
 	max-height: none;
 }
@@ -607,16 +612,24 @@ label.hc{
 									}
 								}
 								.dropdown-menu{
-									top: -67px;
+									top: -60px;
 									@include border-radius(0);
+									height: 98px;
+									right: auto;
+									&.yes{
+										left: -14px;
+									}
 									&.no{
-										left: -147px;
+										left: -161px;
+									}
+									&.dc{
+										left: -308px;
 									}
 									form{
 										margin: 10px;
 										textarea{
 											@include border-radius(0);
-											width: 400px;
+											width: 424px;
 											height: 37px;
 										}
 										button{

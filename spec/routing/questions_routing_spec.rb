@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe QuestionsController do
+describe QuestionsController, routing: true, slow: true do
   describe "routing" do
 
     it "routes to #index" do

@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe ProfilesController do
+describe ProfilesController, routing: true, slow: true do
   describe "routing" do
 
     it "routes to #show" do

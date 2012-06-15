@@ -182,17 +182,20 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 		e.stopPropagation()
 
 	checkPassword: ->
+		min_l = 8
+		secure_l = 20
 		@password = @$('#login-password').val()
-		@$('.password i.hint').tooltip('hide').remove()
+		@$('.password .hint.error').tooltip('hide').remove()
 		if @password != ''
-			@$('#login-password').after('<img src="/assets/ajax-loader-black-dots.gif" class="loader" />')
-			if @password.length < 8
-				@$('.password .loader').remove()
-				@$('#login-password').after('<i class="hint icon-remove" />')
-				@$('.password i.hint').tooltip({placement: 'top', title: "must be 8 or more characters"}).tooltip('show')
+			if @password.length < min_l
+				@$('.password .hint.success').remove()
+				@$('#login-password').after('<i class="hint icon-remove error" />')
+				@$('.password i.hint.error').tooltip({placement: 'top', title: "must be 8 or more characters"}).tooltip('show')
 			else
-				@$('.password .loader').remove()
-				@$('#login-password').after('<i class="hint icon-ok" />')
+				if @$('.password .hint.success').length == 0 then @$('#login-password').after('<i class="hint icon-ok success" /> <i class="hint icon-ok success mod" />')
+				alpha = (secure_l - @password.length) / (secure_l - min_l)
+				color = $.Color("rgba(255, 222, 0, #{if alpha < 0 then 0 else alpha})")
+				@$('.password .hint.mod').animate({'color': color}, 100)
 
 	checkUsername: ->
 		@username = @$('#login-username').val()

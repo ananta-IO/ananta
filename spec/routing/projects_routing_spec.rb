@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe ProjectsController do
+describe ProjectsController, routing: true, slow: true do
   describe "routing" do
 
     it "routes to #index" do

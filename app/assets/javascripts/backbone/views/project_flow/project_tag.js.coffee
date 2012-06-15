@@ -27,4 +27,6 @@ class Ananta.Views.ProjectFlow.ProjectTagView extends Backbone.View
 			@.trigger('renderSelectionCountdown')
 			@.trigger('renderPreview')
 		else
-			alert('max 5 tags')
+			@alert("5 tag maximum", {title:"Less is more"})
+
+_.extend(Ananta.Views.ProjectFlow.ProjectTagView::, Ananta.Mixins.Alerts)

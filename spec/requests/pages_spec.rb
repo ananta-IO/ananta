@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Pages" do
+describe "Pages", request: true, slow: true do
 	describe "home page" do
 		it "displays marq", js: true do
 			visit root_path

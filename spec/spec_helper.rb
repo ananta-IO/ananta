@@ -14,8 +14,8 @@ Spork.prefork do
 	require 'rspec/rails'
 	require 'cancan/matchers'
 	require 'capybara/poltergeist'
-	Capybara.javascript_driver = :poltergeist
-	# Capybara.javascript_driver = :webkit
+	# Capybara.javascript_driver = :poltergeist
+	Capybara.javascript_driver = :webkit
 
 	# Requires supporting ruby files with custom matchers and macros, etc,
 	# in spec/support/ and its subdirectories.
@@ -58,8 +58,11 @@ Spork.prefork do
 		# only runs tests tagged with :wip
 		# if none tagged with wip runs all
 		config.treat_symbols_as_metadata_keys_with_true_values = true
-		config.filter_run :wip => true
+		config.filter_run wip: true
 		config.run_all_when_everything_filtered = true
+
+		# Exclude slow tests by default
+		config.filter_run_excluding slow: true
 	end
 
 end

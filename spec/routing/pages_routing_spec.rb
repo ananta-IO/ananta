@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe AnswersController do
+describe AnswersController, routing: true, slow: true do
   describe "routing" do
 
     it "routes to #home" do

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # The Framework
-gem 'rails', '3.2.5'
+gem 'rails', '3.2.6'
 
 # The Database
 gem 'pg'
@@ -87,6 +87,9 @@ group :development, :test, :sandbox do
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'faker'
+  gem 'capybara-webkit'
+  gem 'capybara-screenshot'
+  gem 'poltergeist'
 end
 
 
@@ -99,13 +102,6 @@ group :development do
   gem 'guard-rspec'
   gem 'growl', :require => false unless RUBY_PLATFORM =~ /darwin/i
   # gem 'ruby-debug19', :require => 'ruby-debug'  # NOTE: only use when needed
-end
-
-
-group :test do
-  gem 'capybara-webkit'
-  gem 'poltergeist'
-  # gem 'launchy'
 end
 
 

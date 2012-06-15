@@ -5,6 +5,9 @@ class Ananta.Views.ProjectFlow.ProjectTagsView extends Backbone.View
 
 	className: 'row'
 
+	events:
+		'click .submit-tags'       : 'save'
+
 	initialize: (options) ->
 		_.bindAll(@, 'render', 'renderSelectionCountdown', 'renderPreview')
 		@router = options.router
@@ -13,8 +16,9 @@ class Ananta.Views.ProjectFlow.ProjectTagsView extends Backbone.View
 
 	render: ->
 		$(@el).html(@template())
-		@renderSelectionCountdown()
 		@renderTags()
+		@renderSelectionCountdown()
+		@renderPreview()
 		@
 
 	renderSelectionCountdown: ->
@@ -85,7 +89,9 @@ class Ananta.Views.ProjectFlow.ProjectTagsView extends Backbone.View
 		]
 		icons = @shuffle(icons)
 		for icon in icons 
-			tag = new Backbone.Model({ name : icon, selected : false })
+			tag = new Backbone.Model
+				name : icon 
+				selected : if @model.get('tag_tokens')? and icon in @model.get('tag_tokens') then true else false
 			@tags.add tag
 			view =  new Ananta.Views.ProjectFlow.ProjectTagView({ model : tag, parent : @ })
 			view.bind('renderSelectionCountdown', @renderSelectionCountdown)
@@ -95,4 +101,27 @@ class Ananta.Views.ProjectFlow.ProjectTagsView extends Backbone.View
 	selectionCountdown: ->
 		@maxTags - @tags.where({ selected : true }).length
 
+	save: ->
+		selection = new Backbone.Collection(@tags.where({ selected : true }))
+		tag_tokens = selection.pluck('name')
+		@model.set({tag_tokens: tag_tokens})
+		@model.save({}
+			success: (data) =>
+				@collection.add(@model)
+				@hideTooltips()
+				
+				$.getScript("/render_nav")
+			error: (data, jqXHR) =>   
+				if @model.get('name').length < 3
+					@router.previousStep()
+					wait 600, =>
+						@alert('Please say a little more about what you are working on.', {title:'Before you continue'})
+				else
+					errors = $.parseJSON(jqXHR.responseText)
+					@renderErrors errors,
+						loginCallback  : null
+		)
+
+_.extend(Ananta.Views.ProjectFlow.ProjectTagsView::, Ananta.Mixins.Alerts)
 _.extend(Ananta.Views.ProjectFlow.ProjectTagsView::, Ananta.Mixins.Collections)
+_.extend(Ananta.Views.ProjectFlow.ProjectTagsView::, Ananta.Mixins.Errors)

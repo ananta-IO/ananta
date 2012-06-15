@@ -36,7 +36,7 @@
             $("a.btn-facebook .loader").remove()
             user = data
             if user["id"]?
-              if window.location.pathname == '/login'then window.location.href = '/' else window.location.reload()
+              if window.location.pathname == '/login' then window.location.href = '/' else window.location.href = window.location.href
             else
               if window.loginModal
                 callback = window.loginModal.callback
