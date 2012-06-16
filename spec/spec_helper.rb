@@ -19,7 +19,7 @@ Spork.prefork do
 	Capybara.javascript_driver = :webkit
 
 	# https://github.com/thoughtbot/capybara-webkit/issues/200
-	# Headless.new(:destroy_on_exit => false)
+	headless = Headless.new(:display => Process.pid, :reuse => false)
 
 	# Requires supporting ruby files with custom matchers and macros, etc,
 	# in spec/support/ and its subdirectories.
