@@ -63,6 +63,11 @@ Spork.prefork do
 
 		# Exclude slow tests by default
 		config.filter_run_excluding slow: true
+
+		# Remove tmp uploads
+		config.after(:all) do
+			`rm -rf #{Rails.root}/tmp/uploads/*`
+		end
 	end
 
 end
