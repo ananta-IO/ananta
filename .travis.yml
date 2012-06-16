@@ -1,4 +1,6 @@
 before_script:
+  - sh -e /etc/init.d/xvfb start
+  - export DISPLAY=:99.0
   - "psql -c 'create database myapp_test;' -U postgres"
   - "bundle exec rake db:migrate"
   - "bundle exec rake db:test:prepare" 
