@@ -40,8 +40,7 @@
             else
               if window.loginModal
                 callback = window.loginModal.callback
-                $(window.loginModal.el).modal "hide"
-                window.loginModal.remove()
+                window.loginModal.close()
               window.loginModal = new Ananta.Views.Users.LoginRegisterModal(
                 callback: callback
                 user: user

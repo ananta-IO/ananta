@@ -13,13 +13,9 @@ Spork.prefork do
 	require File.expand_path("../../config/environment", __FILE__)
 	require 'rspec/rails'
 	require 'cancan/matchers'
-	# require 'headless'
 	require 'capybara/poltergeist'
 	# Capybara.javascript_driver = :poltergeist
 	Capybara.javascript_driver = :webkit
-
-	# https://github.com/thoughtbot/capybara-webkit/issues/200
-	# headless = Headless.new(:display => Process.pid, :reuse => false)
 
 	# Requires supporting ruby files with custom matchers and macros, etc,
 	# in spec/support/ and its subdirectories.

@@ -244,8 +244,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 						@close()
 					else
 						if window.loginModal
-							$(window.loginModal.el).modal "hide"
-							window.loginModal.remove()
+							window.loginModal.close()
 						window.loginModal = new Ananta.Views.Users.LoginRegisterModal(
 							callback: @callback
 							user: user

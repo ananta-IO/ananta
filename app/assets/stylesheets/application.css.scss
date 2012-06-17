@@ -202,6 +202,28 @@ label.hc{
 	-moz-animation-iteration-count: infinite;
 }
 
+span.tags{
+	.tag{
+		border: 1px solid $color-background-hover;
+		color: $color-base;
+		margin: 2px;
+		padding: 12px 8px;
+		font-size: 16px;
+		@include border-radius(2px);
+		position: relative;
+		box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+		&:hover{
+			box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+			color: $color-link;
+		}
+		i{
+			position: relative;
+			top: 5px;
+			font-size: 24px;
+		}
+	}
+}
+
 .boxed-group{
 	padding: 3px;
 	background: #EFEFEF;

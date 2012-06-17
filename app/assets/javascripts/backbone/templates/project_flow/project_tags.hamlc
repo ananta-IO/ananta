@@ -2,7 +2,7 @@
 	%br
 	%h2.count.remaining.pull-right
 	%h2 
-		Select the five tags that relate to your project the most
+		Tag it
 	%br
 	%ul.tags.thumbnails
 	.bottom

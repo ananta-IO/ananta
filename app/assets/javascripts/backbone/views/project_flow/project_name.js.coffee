@@ -47,7 +47,6 @@ class Ananta.Views.ProjectFlow.ProjectNameView extends Backbone.View
 			'planning a trip around the galaxy'
 			'playing a game'
 			'programming this website'
-			'researching the shopping habits of octogenarians'
 			'reticulating splines'
 			'shooting a movie'
 			'starting a band'

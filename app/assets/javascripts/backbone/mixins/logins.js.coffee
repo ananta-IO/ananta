@@ -5,6 +5,6 @@ Ananta.Mixins.Logins =
 			console.log 'logged in'
 			$.getScript("/render_nav")
 		options['message'] or= 'To continue'
-		view = new Ananta.Views.Users.LoginRegisterModal(options)
-		view.render()
+		window.loginModal = new Ananta.Views.Users.LoginRegisterModal(options)
+		window.loginModal.render()
 		return false

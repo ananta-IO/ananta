@@ -4,7 +4,11 @@ module ApplicationHelper
 		tb_names[name.to_s] || name.to_s
 	end
 
-	def hovercard(model)
+	def hovercard model
 		render "#{model.class.to_s.downcase.pluralize}/hovercard", model: model
+	end
+
+	def list_tags tags
+		render "tags/tags", tags: tags
 	end
 end
