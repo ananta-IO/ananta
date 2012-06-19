@@ -15,9 +15,17 @@ FactoryGirl.define do
 	end
 
 
+	factory :answer do
+		state 'yes'
+		question
+		user
+	end
+
+
 	factory :image do
 		image_type 'avatar'
 		image { fixture_file_upload("spec/fixtures/example.png", "image/png") }
+		imageable_type 'Profile'
 		user
 	end
 
@@ -44,6 +52,12 @@ FactoryGirl.define do
 		name { generate :name }
 		description Faker::Lorem.paragraph
 		state 'planning'
+		user
+	end
+
+
+	factory :question do
+		question "What is the meaning of this test suite?"
 		user
 	end
 

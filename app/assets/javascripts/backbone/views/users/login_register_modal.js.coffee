@@ -22,6 +22,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 	initialize: (options) ->
 		_.bindAll(@, 'render', 'cleanUp')
 		options or= {}
+		Ananta.App.currentUser or= new Ananta.Models.User()
 		@user = new Ananta.Models.User( options.user )
 		@callback = options.callback or= ->
 			window.location = window.location

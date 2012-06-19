@@ -101,6 +101,7 @@ group :development do
   gem 'guard-spork'
   gem 'guard-rspec'
   gem 'growl', :require => false unless RUBY_PLATFORM =~ /darwin/i
+  gem 'brakeman'
   # gem 'ruby-debug19', :require => 'ruby-debug'  # NOTE: only use when needed
 end
 

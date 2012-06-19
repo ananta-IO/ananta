@@ -36,6 +36,18 @@ GEM
       json
     bcrypt-ruby (3.0.1)
     bootstrap-sass (2.0.3.1)
+    brakeman (1.6.2)
+      activesupport
+      erubis (~> 2.6)
+      fastercsv (~> 1.5)
+      haml (~> 3.0)
+      highline (~> 1.6)
+      i18n
+      json_pure
+      ruby2ruby (~> 1.2)
+      ruby_parser (= 2.3.1)
+      sass (~> 3.0)
+      terminal-table (~> 1.4)
     builder (3.0.0)
     cancan (1.6.7)
     capybara (1.1.2)
@@ -100,6 +112,7 @@ GEM
       i18n (~> 0.4)
     faraday (0.8.1)
       multipart-post (~> 1.1)
+    fastercsv (1.5.5)
     faye-websocket (0.4.5)
       eventmachine (>= 0.12.0)
     ffi (1.0.11)
@@ -146,6 +159,7 @@ GEM
       rubyzip
     heroku-api (0.2.1)
       excon (~> 0.13.3)
+    highline (1.6.13)
     hike (1.2.1)
     http_parser.rb (0.5.3)
     httpauth (0.1)
@@ -158,6 +172,7 @@ GEM
       railties (>= 3.2.0, < 5.0)
       thor (~> 0.14)
     json (1.7.3)
+    json_pure (1.7.3)
     kaminari (0.13.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -281,6 +296,11 @@ GEM
       rspec (~> 2.10.0)
     ruby-hmac (0.4.0)
     ruby-openid (2.1.8)
+    ruby2ruby (1.3.1)
+      ruby_parser (~> 2.0)
+      sexp_processor (~> 3.0)
+    ruby_parser (2.3.1)
+      sexp_processor (~> 3.0)
     rubyzip (0.9.8)
     sass (3.1.19)
     sass-rails (3.2.5)
@@ -293,6 +313,7 @@ GEM
       libwebsocket (~> 0.1.3)
       multi_json (~> 1.0)
       rubyzip
+    sexp_processor (3.2.0)
     simple_form (2.0.2)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
@@ -307,6 +328,7 @@ GEM
       tilt (~> 1.1, != 1.3.0)
     state_machine (1.1.2)
     statistics2 (0.54)
+    terminal-table (1.4.5)
     therubyracer (0.10.1)
       libv8 (~> 3.3.10)
     thin (1.3.1)
@@ -337,6 +359,7 @@ DEPENDENCIES
   acts-as-taggable-on
   ask_geo
   bootstrap-sass (~> 2.0.2)
+  brakeman
   cancan
   capybara-screenshot
   capybara-webkit

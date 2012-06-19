@@ -108,9 +108,8 @@ class Ananta.Views.ProjectFlow.ProjectTagsView extends Backbone.View
 		@model.save({}
 			success: (data) =>
 				@collection.add(@model)
-				@hideTooltips()
-				
-				$.getScript("/render_nav")
+				window.location.href = @model.get('url')
+				# $.getScript("/render_nav")
 			error: (data, jqXHR) =>   
 				if @model.get('name').length < 3
 					@router.previousStep()
