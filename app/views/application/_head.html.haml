@@ -15,7 +15,7 @@
 
 %title
 	- title = yield :title
-	= raw("Ananta IO \&middot; " + ( !title.blank? ? title : "#{controller.controller_name.titleize} | #{controller.action_name.titleize}" ))
+	= raw("#{( !title.blank? ? title : "#{controller.controller_name.titleize} | #{controller.action_name.titleize}" )} \&middot; Ananta IO")
   
 %meta{ name: "description", content: "" }
 %meta{ name: "author", content: "" }
