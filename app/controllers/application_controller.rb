@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   # TODO: LAUNCH - remove this
-  http_basic_authenticate_with :name => "infinite", :password => "panda" if %w(production staging sandbox).include?(Rails.env)
+  # http_basic_authenticate_with :name => "infinite", :password => "panda" if %w(production staging sandbox).include?(Rails.env)
   
   protect_from_forgery
   after_filter :set_questionable, :if =>  lambda { request.format == 'html' }
