@@ -12,6 +12,7 @@ DOODLY DOO... This is just a weekend hack right now. Don't expect it to do anyth
 
 [![Build Status](https://secure.travis-ci.org/ananta-IO/ananta.png)](http://travis-ci.org/ananta-IO/ananta)
 [![Dependency Status](https://gemnasium.com/ananta-IO/ananta.png?travis)](https://gemnasium.com/ananta-IO/ananta)
+[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/ananta-IO/ananta)
 
 ## Are you a user?
 Sorry, there is nothing for you yet. How did you even get here? Have you thought about developing?

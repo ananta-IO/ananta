@@ -12,7 +12,6 @@ Spork.prefork do
 	ENV["RAILS_ENV"] ||= 'test'
 	require File.expand_path("../../config/environment", __FILE__)
 	require 'rspec/rails'
-	require 'cancan/matchers'
 	require 'capybara/poltergeist'
 	# Capybara.javascript_driver = :poltergeist
 	Capybara.javascript_driver = :webkit
@@ -43,10 +42,22 @@ Spork.prefork do
 
 		# Database Cleaner
 		config.before(:suite) do
-			DatabaseCleaner.strategy = :truncation
+			DatabaseCleaner.strategy = :transaction
+			DatabaseCleaner.clean_with(:truncation)
 		end
 
 		config.before(:each) do
+			# TODO: is this the best place for these? and why are these stubs slower than the requests?
+			# Location.stub!(:geocode)
+			# Location.stub!(:set_timezone) { self.timezone = "America/New_York" }
+			# Location.stub!(:reverse_geocode)
+			# Profile.stub!(:add_gravatar)
+
+			if Capybara.current_driver == :rack_test
+				DatabaseCleaner.strategy = :transaction
+			else
+				DatabaseCleaner.strategy = :truncation
+			end
 			DatabaseCleaner.start
 		end
 
@@ -62,7 +73,7 @@ Spork.prefork do
 		config.run_all_when_everything_filtered = true
 
 		# Exclude slow tests by default
-		config.filter_run_excluding slow: true
+		# config.filter_run_excluding slow: true
 
 		# Remove tmp uploads
 		config.after(:all) do

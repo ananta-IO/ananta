@@ -13,6 +13,9 @@ FactoryGirl.define do
 	sequence :username do |n|
 		"user-#{base_convert_i_to_s(n, '', 65, 90)}"
 	end
+	sequence :question do |n|
+		"What is the meaning of #{n}?"
+	end
 
 
 	factory :answer do
@@ -57,7 +60,7 @@ FactoryGirl.define do
 
 
 	factory :question do
-		question "What is the meaning of this test suite?"
+		question { generate :question }
 		user
 	end
 
