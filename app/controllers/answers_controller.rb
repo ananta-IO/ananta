@@ -15,16 +15,7 @@ class AnswersController < InheritedResources::Base
 	def create
 		@question = Question.find(params[:question_id])
 
-		attrs = {}
-		attrs[:state_event] = params[:answer][:state_event]
-		attrs[:user_id] = current_user ? current_user.id : nil
-		unless (params[:answer][:comment].blank? rescue true)
-			attrs[:comment_attributes] = {}
-			attrs[:comment_attributes][:comment] = params[:answer][:comment]
-			attrs[:comment_attributes][:user_id] = attrs[:user_id]	
-		end
-
-		@answer = @question.answers.new attrs
+		@answer = @question.answer params[:answer], current_user
 
 		create!
 	end

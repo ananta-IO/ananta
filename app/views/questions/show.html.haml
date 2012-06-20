@@ -1,55 +1,55 @@
 -content_for :title do "#{@question.question}" end
 
 #question
-    .page-header
-        .row
-            .span1
-                = render 'vote'
-            .span7  
-                %h2
-                    = @question.question
-                %br
-                %p
-                    Asked by
-                    = link_to @question.user.username, @question.user.profile 
-                    = time_tag @question.created_at, "#{time_ago_in_words(@question.created_at)} ago"
-            .span4
-                = render 'answer'
-    - if current_user and @question.answered_by(current_user.id)
-        .row
-            .span5
-                .sub-header 
-                    %h2 
-                        .pull-right.font-thin
-                            == #{@question.yes_count}:Y &nbsp; #{@question.no_count}:N &nbsp; #{@question.dont_care_count}:DC
-                        = pluralize(@question.answer_count, "Answer")
-                %table.table
-                    - @question.answers.each do |answer|
-                        %tr
-                            %td
-                                = answer.state.titleize
-                            %td
-                                = link_to answer.user.username, answer.user.profile
-                            %td
-                                = time_tag answer.created_at, "#{time_ago_in_words(answer.created_at)} ago"
-            .span7
-                .sub-header 
-                    %h2 
-                        = pluralize(@question.comments.count, "Comment")
-                %table.table
-                    - @question.comments.each do |comment|
-                        %tr
-                            %td
-                                %p
-                                    = comment.comment
-                                %p
-                                    = link_to comment.user.username, comment.user.profile
-                                    = raw "&middot; answered <b>#{comment.commentable.state.titleize}</b> &middot;" if comment.commentable.class.to_s == 'Answer'
-                                    = time_tag comment.created_at, "#{time_ago_in_words(comment.created_at)} ago"
-    %ul.breadcrumb
-        %li
-            = link_to "questions", questions_path
-            %span.divider /
-        %li.active
-            = link_to @question.id, @question
+	.page-header
+		.row
+			.span1
+				= render 'vote'
+			.span7  
+				%h2
+					= @question.question
+				%br
+				%p
+					Asked by
+					= link_to @question.user.username, @question.user.profile 
+					= time_tag @question.created_at, "#{time_ago_in_words(@question.created_at)} ago"
+			.span4
+				= render 'answer'
+	- if current_user and @question.answered_by(current_user.id)
+		.row
+			.span5
+				.sub-header 
+					%h2 
+						.pull-right.font-thin
+							== #{@question.yes_count}:Y &nbsp; #{@question.no_count}:N &nbsp; #{@question.dont_care_count}:DC
+						= pluralize(@question.answer_count, "Answer")
+				%table.table
+					- @question.answers.each do |answer|
+						%tr
+							%td
+								= answer.state.titleize
+							%td
+								= link_to answer.user.username, answer.user.profile
+							%td
+								= time_tag answer.created_at, "#{time_ago_in_words(answer.created_at)} ago"
+			.span7
+				.sub-header 
+					%h2 
+						= pluralize(@question.comments.count, "Comment")
+				%table.table
+					- @question.comments.each do |comment|
+						%tr
+							%td
+								%p
+									= comment.comment
+								%p
+									= link_to comment.user.username, comment.user.profile
+									= raw "&middot; answered <b>#{comment.commentable.state.titleize}</b> &middot;" if comment.commentable.class.to_s == 'Answer'
+									= time_tag comment.created_at, "#{time_ago_in_words(comment.created_at)} ago"
+	/ %ul.breadcrumb
+	/     %li
+	/         = link_to "questions", questions_path
+	/         %span.divider /
+	/     %li.active
+	/         = link_to @question.id, @question
 
