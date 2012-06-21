@@ -106,11 +106,12 @@ class Question < ActiveRecord::Base
 
 		self.answers.new attrs
 	end
+	
 
 	#########################
 	# Protected Methods
 	#########################
-	protected
+protected
 
 	# Return true if any of the answer counts change
 	def answer_counts_changed?
@@ -130,7 +131,7 @@ class Question < ActiveRecord::Base
 	#########################
 	# Private Methods
 	#########################
-	private
+private
 
 	# Same as Public Instance Methods
 

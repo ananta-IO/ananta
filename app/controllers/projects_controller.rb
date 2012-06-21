@@ -34,9 +34,6 @@ class ProjectsController < InheritedResources::Base
 	#########################
 	# Callbacks. Auth & Permissions via devise & cancan.
 	#########################
-	before_filter :populate_tags, :only => [:new, :create, :edit, :update, :destroy]
-	before_filter :populate_selected_tags, :only => [:edit, :update]
-
 	before_filter :authenticate_user!, :except => [:index, :show]
 	before_filter :cuid_to_params, :only => :update
 	load_and_authorize_resource
@@ -45,7 +42,13 @@ class ProjectsController < InheritedResources::Base
 	#########################
 	# Modifited Actions
 	#########################
+	def new
+		populate_tags @project, :tags
+		new!
+	end
+
 	def create
+		populate_tags @project, :tags
 		@project.location ||= @user.location.dup
 		create! do |success, failure|
 			success.html do 
@@ -55,7 +58,13 @@ class ProjectsController < InheritedResources::Base
 		end
 	end
 
+	def edit
+		populate_tags @project, :tags
+		edit!
+	end
+
 	def update
+		populate_tags @project, :tags
 		params[:project] ||= {}
 		params[:project] = pick(params[:project], :name, :description, :state_event, :tag_tokens, :cast_vote)
 		update! do |success, failure|
@@ -67,6 +76,7 @@ class ProjectsController < InheritedResources::Base
 	end
 
 	def destroy
+		populate_tags @project, :tags
 		destroy! do |success, failure|
 			success.html do 
 				flash[:notice] = "Successfully deleted project. #{undo_link}"
@@ -87,19 +97,6 @@ class ProjectsController < InheritedResources::Base
 
 	def cuid_to_params
 		params[:project] = add_cuid(params[:project], :cast_vote) if params[:project]
-	end
-
-	def populate_tags
-		@tags = {}
-		@tags['tags'] = Project.tag_counts_on(:tags).where("name like ?", "%#{params[:q]}%").map{|t| {:id => t.name, :name => t.name}}
-
-		@selected_tags = {}
-	end
-
-	def populate_selected_tags
-		@project = Project.find(params[:id])
-
-		@selected_tags['tags'] = @project.tags.map{|t| {:id => t.name, :name => t.name}}
 	end
 
 	def undo_link

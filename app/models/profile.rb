@@ -18,9 +18,7 @@ class Profile < ActiveRecord::Base
   #########################
   # Setup attributes (reader, accessible, protected)
   #########################
-  attr_reader :bio_tokens
-  attr_reader :skill_tokens
-  attr_reader :need_tokens
+  attr_reader :bio_tokens, :skill_tokens, :need_tokens
   attr_accessible :name, :bio_tokens, :skill_tokens, :need_tokens
 
 

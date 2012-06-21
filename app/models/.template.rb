@@ -62,7 +62,7 @@ class MyModel < ActiveRecord::Base
   #########################
   # Protected Methods
   #########################
-  protected
+protected
 
   # Same as Public Instance Methods
 
@@ -70,7 +70,7 @@ class MyModel < ActiveRecord::Base
   #########################
   # Private Methods
   #########################
-  private
+private
 
   # Same as Public Instance Methods
 
