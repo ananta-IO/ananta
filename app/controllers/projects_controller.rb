@@ -85,6 +85,10 @@ class ProjectsController < InheritedResources::Base
 		end
 	end
 
+	def random
+		@project = Project.order("RANDOM()").first
+		redirect_to([@project.user, @project])
+	end
 
 	#########################
 	# Protected Methods

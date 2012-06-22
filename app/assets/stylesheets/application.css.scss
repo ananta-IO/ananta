@@ -387,6 +387,7 @@ span.tags{
 		.dropdown{
 			.nav-header{
 				a{
+					font-size: 13px;
 					padding: 0;
 					background-color: white;
 					color: $color-base;
@@ -420,6 +421,12 @@ span.tags{
 					border-bottom: 7px solid #ccc;
 				}
 			}
+			&.user-projects{
+				.dropdown-menu{
+					min-width: 200px;
+				}
+			}
+			&.user-settings{}
 		}
 		&>li{
 			&>a{
@@ -832,7 +839,7 @@ span.tags{
 			vertical-align: top;
 			margin-top: 1px;
 			position: relative;
-			width: 125px;
+			width: 100px;
 			height: 25px;
 			a{
 				position: absolute;
@@ -845,27 +852,32 @@ span.tags{
 	.project-name-form{
 		padding-top: 181px;
 		position: relative;
+		table, tbody, tr, td.input{
+			width: 100%;
+		}
+		td.hint{
+			width: 40px;
+			padding-right: 5px
+		}
+		td.input{
+			position: relative;
+		}
+		td.action{
+			padding-left: 15px;
+		}
 		span.hint{
 			@include transition-property(all);
 			@include transition-duration(0.2s);
 			@include transition-timing-function(ease-in);
-			position: absolute;
+			position: relative;
 			font-size: 40px;
 			width: 40px;
 			height: 40px;
-			bottom: 5px;
-			left: -45px;
+			top: -4px;
 			color: #ccc;
 			overflow: hidden;
 			&:hover{
 				color: #184890;
-			}
-			.icom-blueprint{
-				position: absolute;
-				bottom: -4px;
-				right: 0;
-				width: 40px;
-				height: 40px;
 			}
 		}
 		input{
@@ -878,10 +890,12 @@ span.tags{
 			// color: #ccc;
 			border-bottom: 1px dashed #ddd;
 			@include border-radius(0px);
-			padding-bottom: 2px;
 			&:focus{
 				color: gray;
 				border-bottom: 1px dashed #bbb;
+			}
+			@media(max-width: 758px){
+				font-size: 18px;
 			}
 		}
 		.loader{
@@ -890,7 +904,9 @@ span.tags{
 			top: 12px;
 		}
 		button{
-			margin-top: 20px;
+			position: relative;
+			top: -5px;
+			width: 50px;
 			@include border-radius(0px);
 		}
 	}

@@ -112,21 +112,8 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 							@$('.nmqs').remove()
 
 	noMoreQuestions: ->
-		url = '/projects'
-		render = (url) => @$(".questions tr").prepend("<td class='nmqs'><div class='span5'><div class='question wrap'><div class='outer'><div class='inner'>You have answered every question on this page. Why don't you ask a question. Or <a href='#{url}'>go to a different page</a> and answer more questions.</div></div></div></div></td>")
-		$.ajax(
-			dataType  : 'json'
-			type      : 'GET'
-			url       : url
-			data      : {order:'r', per:1}
-			success: (data) =>
-				if data[0]? then url = data[0]['url']
-				@$('.nmqs').remove()
-				render url
-			error: () =>
-				@$('.nmqs').remove()
-				render url
-		)
+		@$('.nmqs').remove()
+		@$(".questions tr").prepend("<td class='nmqs'><div class='span5'><div class='question wrap'><div class='outer'><div class='inner'>You have answered every question on this page. Why don't you ask a question. Or <a href='/projects/random'>go to a different page</a> and answer more questions.</div></div></div></div></td>")
 
 	onClose: ->
 		for view in @views

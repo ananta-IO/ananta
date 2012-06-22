@@ -100,7 +100,7 @@ class Ability
 			can :read, Answer
 			can :read, Comment
 			can :read, Profile
-			can :read, Project
+			can [:read, :random], Project
 			can :read, Question
 		end
 

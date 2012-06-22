@@ -7,17 +7,12 @@
 		ananta IO
 		%i.icon-home
 -# Right
-/ %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
-/	%span.icon-bar
-/	%span.icon-bar
-/	%span.icon-bar
-/ .nav-collapse
 %ul.nav.pull-right
 	-if current_user
 		%li
 			= link_to current_user.profile, rel: :tooltip, 'data-placement' => 'bottom', 'data-delay' => 0, 'data-original-title' => raw( "Me<br/><img src='#{current_user.profile.avatar.image.small.url}' alt='#{current_user.username}' width=32 height=32 class='circle' />" ) do
 				%i.icon-user
-		%li.dropdown
+		%li.dropdown.user-projects
 			%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", rel: :tooltip, 'data-placement' => 'bottom', 'data-delay' => 0, 'data-original-title' => raw( "<i class='icon-chevron-down' />" )}
 				%i.icon-book
 			%ul.dropdown-menu
@@ -33,10 +28,12 @@
 							= project.name
 				%li.divider
 				%li.nav-header
+					= link_to random_projects_path, :class => 'pull-right' do
+						%i.icon-random
 					%i.icon-list-alt
 					Joined projects
 				%li.divider
-		%li.dropdown
+		%li.dropdown.user-settings
 			%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", rel: :tooltip, 'data-placement' => 'bottom', 'data-delay' => 0, 'data-original-title' => raw( "<i class='icon-chevron-down' />" )}
 				%i.icon-cogs
 			%ul.dropdown-menu

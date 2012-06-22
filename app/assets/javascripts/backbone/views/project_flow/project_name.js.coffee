@@ -10,7 +10,6 @@ class Ananta.Views.ProjectFlow.ProjectNameView extends Backbone.View
 		'click .project-action-search'  :'search'
 		'click .project-action-start'   :'create'
 		'mouseout span.hint'            :'randomizeIconTooltip'
-		'mouseout input'	            :'randomizeInputTooltip'
 
 	initialize: (options) ->
 		_.bindAll(@, 'render')
@@ -79,11 +78,10 @@ class Ananta.Views.ProjectFlow.ProjectNameView extends Backbone.View
 		@$('input').tooltip
 			placement: 'top'
 			delay: 300
-			title: ""
+			title: "Name one thing you are working on. <br/>Ananta will connect you with people who can help for free."
 		@$('span.hint').tooltip
 			placement: 'right'
 			title: ""
-		@randomizeInputTooltip()
 		@randomizeIconTooltip()
 
 	hideTooltips: ->
@@ -93,9 +91,6 @@ class Ananta.Views.ProjectFlow.ProjectNameView extends Backbone.View
 	randomizeIconTooltip: ->
 		@$('span.hint').attr('data-original-title', "Are you #{@randSugguestion()}?")
 	
-	randomizeInputTooltip: ->
-		@$('input').attr('data-original-title', "Name one thing you are working on. <br/> Even if you're just #{@randSugguestion()}, we want to hear about it.")
-
 	randSugguestion: ->
 		@projectNames[Math.floor(Math.random()*@projectNames.length)]
 
@@ -106,7 +101,7 @@ class Ananta.Views.ProjectFlow.ProjectNameView extends Backbone.View
 	create: (e) ->
 		e.preventDefault()
 		e.stopPropagation()
-		@$('input').attr('disabled', 'disabled').after('<img src="/assets/ajax-loader-black-dots.gif" class="loader" />')
+		@$('input').after('<img src="/assets/ajax-loader-black-dots.gif" class="loader" />')
 		@model.set({'name': @$('input').val()})
 		@model.save({}
 			success: (data) =>
@@ -123,7 +118,7 @@ class Ananta.Views.ProjectFlow.ProjectNameView extends Backbone.View
 					keysToRender   : ['name']
 					loginCallback  : null
 				@router.nextStep() unless Ananta.App.currentUser.id? # let new users glimpse the tags
-		)   
+		)
 
 _.extend(Ananta.Views.ProjectFlow.ProjectNameView::, Ananta.Mixins.Errors)
 

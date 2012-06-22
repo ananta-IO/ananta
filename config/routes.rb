@@ -31,7 +31,10 @@ Ananta::Application.routes.draw do
 	root :to => 'pages#home'
 
 	resources :projects, :only => [:index] do
-		get 'page/:page', :action => :index, :on => :collection
+		collection do
+			get 'page/:page', :action => :index
+			get 'random'
+		end
 	end
 	resources :profiles, :path => ''
 	resources :users, :path => '', :only => [] do

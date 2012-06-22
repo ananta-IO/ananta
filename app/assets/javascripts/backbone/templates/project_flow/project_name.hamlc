@@ -3,12 +3,19 @@
 	.span6
 		%form.project{:action => "/projects", :method => "post"}
 			.row-fluid
-				.input.string.required.project-name
-					%span.hint.span1
-						%i.icom-blueprint
-					- window.a = @
-					%input.span10{:type => "text", :name => "project[name]", :maxlength => 141, :value => "#{if @project.name then @project.name else ''}", :placeholder => "What are you working on?", autocomplete: "off", :autofocus => true}
-					%button.span1.project-action-start.btn{:name => "project-action-start", :type => "submit"} Do It
+				.span12
+					%table
+						%tbody
+							%tr
+								%td.hint
+									%span.hint
+										%i.icom-blueprint
+								%td.input
+									.input.string.required.project-name
+										%input{:type => "text", :name => "project[name]", :maxlength => 141, :value => "#{if @project.name then @project.name else ''}", :placeholder => "What are you working on?", autocomplete: "off", :autofocus => true}
+								%td.action
+									%span
+										%button.project-action-start.btn{:name => "project-action-start", :type => "submit"} Do It
 			.row-fluid
 				.span12
 					.alerts

@@ -46,10 +46,3 @@
 									= link_to comment.user.username, comment.user.profile
 									= raw "&middot; answered <b>#{comment.commentable.state.titleize}</b> &middot;" if comment.commentable.class.to_s == 'Answer'
 									= time_tag comment.created_at, "#{time_ago_in_words(comment.created_at)} ago"
-	/ %ul.breadcrumb
-	/     %li
-	/         = link_to "questions", questions_path
-	/         %span.divider /
-	/     %li.active
-	/         = link_to @question.id, @question
-
