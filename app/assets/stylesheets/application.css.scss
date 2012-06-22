@@ -72,8 +72,9 @@ body{
 		// padding-right: 20px;
 	}
 }
-.scrl{
+.mobile .scrl{
 	-webkit-overflow-scrolling: touch;
+	-webkit-transform: translate3d(0,0,0);
 }
 .chrome .scrl{
 	@include chrome-scrollbar
@@ -853,8 +854,12 @@ span.tags{
 
 #project_flow{
 	.project-name-form{
-		padding-top: 181px;
+		margin-top: 181px;
 		position: relative;
+		z-index: 1;
+		@media(max-width: 480px){
+			margin-top: 100px;
+		}
 		table, tbody, tr, td.input{
 			width: 100%;
 		}
@@ -899,6 +904,9 @@ span.tags{
 			}
 			@media(max-width: 758px){
 				font-size: 18px;
+			}
+			@media(max-width: 480px){
+				font-size: 14px;
 			}
 		}
 		.loader{

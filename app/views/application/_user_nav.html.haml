@@ -13,7 +13,7 @@
 			= link_to current_user.profile, rel: :tooltip, 'data-placement' => 'bottom', 'data-delay' => 0, 'data-original-title' => raw( "Me<br/><img src='#{current_user.profile.avatar.image.small.url}' alt='#{current_user.username}' width=32 height=32 class='circle' />" ) do
 				%i.icon-user
 		%li.dropdown.user-projects
-			%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", rel: :tooltip, 'data-placement' => 'bottom', 'data-delay' => 0, 'data-original-title' => raw( "<i class='icon-chevron-down' />" )}
+			%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
 				%i.icon-book
 			%ul.dropdown-menu
 				%li.nav-header
@@ -34,7 +34,7 @@
 					Joined projects
 				%li.divider
 		%li.dropdown.user-settings
-			%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", rel: :tooltip, 'data-placement' => 'bottom', 'data-delay' => 0, 'data-original-title' => raw( "<i class='icon-chevron-down' />" )}
+			%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
 				%i.icon-cogs
 			%ul.dropdown-menu
 				%li.nav-header
