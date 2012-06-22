@@ -52,7 +52,7 @@
 		});
 
 #edit_profile.user-edit
-	.row
+	.row-fluid
 		.span3
 			= render 'users/edit_nav', user: @profile.user, active: 'profile'
 		.span9
@@ -62,7 +62,7 @@
 				.inner
 					= simple_form_for @profile, :html => {:class => "form-horizontal"} do |f|
 
-						= f.input :name, input_html: {class: :span4}
+						= f.input :name
 						%br
 						= f.input :avatar, hint: raw('avatar will change as soon as you choose a file or <br/> drag an image onto the screen') do
 							#profile_avatar

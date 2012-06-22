@@ -3,7 +3,7 @@ Ananta.Views.ProjectFlow ||= {}
 class Ananta.Views.ProjectFlow.ProjectNameView extends Backbone.View
 	template: JST['backbone/templates/project_flow/project_name']
 
-	className: 'row'
+	className: 'row-fluid'
 
 	events:
 		'submit form'                   :'create'

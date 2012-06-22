@@ -50,7 +50,7 @@
 
 .answer
 	-if show_chart
-		.row
+		.row-fluid
 			%h3.pull-right
 				%span.font-thin Your Answer &middot;
 				= ans.state.titleize
@@ -61,7 +61,7 @@
 			Answer
 		= form_for( @question.answers.new, :url => "/questions/#{@question.id}/answers" ) do |f|
 			= text_area_tag :comment, nil, :class => "span4", :rows => 3, :placeholder => 'Comment (optional)'	
-			.row
+			.row-fluid
 				= label :state_event_ans_, 'yes', :class => 'btn btn span1'
 				= radio_button_tag :state_event, :ans_yes, false, :onclick => "$('#new_answer').submit();", :class => 'off-screen'
 				

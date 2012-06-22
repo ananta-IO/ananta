@@ -1,13 +1,14 @@
 .project-name-form
-	.span6.center
+	.span3
+	.span6
 		%form.project{:action => "/projects", :method => "post"}
-			.input.string.required.project-name
-				%span.hint
-					%i.icom-blueprint
-				- window.a = @
-				%input{:type => "text", :name => "project[name]", :maxlength => 141, :value => "#{if @project.name then @project.name else ''}", :placeholder => "What are you working on?", autocomplete: "off", :autofocus => true}
-			.alerts
-			.button.center
-				-# %button.project-action-search.btn{:name => "project-action-search", :type => "submit"} Search Projects
-				-# &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				%button.project-action-start.btn{:name => "project-action-start", :type => "submit"} Do It
+			.row-fluid
+				.input.string.required.project-name
+					%span.hint.span1
+						%i.icom-blueprint
+					- window.a = @
+					%input.span10{:type => "text", :name => "project[name]", :maxlength => 141, :value => "#{if @project.name then @project.name else ''}", :placeholder => "What are you working on?", autocomplete: "off", :autofocus => true}
+					%button.span1.project-action-start.btn{:name => "project-action-start", :type => "submit"} Do It
+			.row-fluid
+				.span12
+					.alerts

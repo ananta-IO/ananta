@@ -2,7 +2,7 @@
 
 #question
 	.page-header
-		.row
+		.row-fluid
 			.span1
 				= render 'vote'
 			.span7  
@@ -16,7 +16,7 @@
 			.span4
 				= render 'answer'
 	- if current_user and @question.answered_by(current_user.id)
-		.row
+		.row-fluid
 			.span5
 				.sub-header 
 					%h2 

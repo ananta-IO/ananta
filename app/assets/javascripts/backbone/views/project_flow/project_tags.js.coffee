@@ -3,7 +3,7 @@ Ananta.Views.ProjectFlow ||= {}
 class Ananta.Views.ProjectFlow.ProjectTagsView extends Backbone.View
 	template: JST['backbone/templates/project_flow/project_tags']
 
-	className: 'row'
+	className: 'row-fluid'
 
 	events:
 		'click .submit-tags'       : 'save'
