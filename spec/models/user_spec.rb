@@ -29,6 +29,18 @@ describe User do
 			FactoryGirl.build(:user, username: 'Susy-Some-Susy-Some-Susy-Some-Susy-Some-Susy-Some-Susy-Some-S').should be_valid
 		end
 	end
+	it 'is invalid without a valid project on creation' do
+		u = FactoryGirl.build(:user)
+		u.projects.first.name = ''
+		u.should_not be_valid
+		u.projects.delete_all
+		u.should_not be_valid
+	end
+	it 'is valid with a valid project on creation' do
+		u = FactoryGirl.build(:user)
+		u.projects.first.should be_valid
+		u.should be_valid
+	end
 
 	# Methods
 	it "sets the username to the id when blank" do

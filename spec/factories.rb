@@ -72,5 +72,6 @@ FactoryGirl.define do
 		permissions 2
 		profile
 		location
+		after(:build) { |u| u.projects.new( name: generate(:name) ) }
 	end
 end

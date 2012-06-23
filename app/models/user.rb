@@ -55,6 +55,7 @@ class User < ActiveRecord::Base
 	#########################
 	validates :username, :uniqueness => {:case_sensitive => false}, :length => 3..63, :allow_blank => true, :if => Proc.new { |user| user.username != user.id.to_s }
 	validate  :validate_username_format
+	validate  :validate_has_a_project, on: :create
 	# TODO: a user should not be able to register without a project?
 
 
@@ -164,6 +165,10 @@ class User < ActiveRecord::Base
 		unless username =~ /^[A-Za-z-]*$/i or username == id.to_s
 			errors.add(:username, "only letters and hyphens allowed")
 		end
+	end
+
+	def validate_has_a_project
+		errors.add(:projects, "cannot be 0. Please start a project.") unless self.projects.any? and self.projects.first.valid?
 	end
 
 end

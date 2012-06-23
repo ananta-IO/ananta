@@ -66,7 +66,7 @@ class Project < ActiveRecord::Base
   validates :name,
     :uniqueness => {:scope => :user_id, :message => "cannot be the same as one of your other projects"},
     :length => { :minimum => 3, :maximum => 141, :too_short => "is too short, please say a little more", :too_long => "is too long, please say a little less (141 characters max)" } # TODO: find out why this causes problems with migrations
-  validates :user_id, :presence => true
+  before_destroy :validate_not_last_project
 
 
   #########################
@@ -118,5 +118,13 @@ class Project < ActiveRecord::Base
   #########################
   private
 
+  def validate_not_last_project
+    if self.user.projects.count > 1
+      true
+    else
+      errors.add(:project, "is your last. You cannot delete this project until you create another one.")
+      false
+    end
+  end
 
 end

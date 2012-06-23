@@ -25,7 +25,17 @@ describe Project do
 			FactoryGirl.build(:project, name: '012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890').should be_valid
 		end
 	end
-	it "is invalid without a user" do
-		FactoryGirl.build(:project, user: nil).should_not be_valid
+	it "cannot be deleted if it is the user's last project" do
+		u = FactoryGirl.create(:user)
+		u.projects.count.should == 1
+		u.projects.first.destroy
+		u.projects.count.should == 1
+	end
+	it "can be deleted if the user has multiple projects" do
+		u = FactoryGirl.create(:user)
+		FactoryGirl.create(:project, user:u)
+		u.projects.count.should == 2
+		u.projects.first.destroy
+		u.projects.count.should == 1
 	end
 end

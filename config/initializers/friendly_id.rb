@@ -17,6 +17,7 @@ FriendlyId.defaults do |config|
 		blog
 		cache
 		changelog
+		chaos
 		codereview
 		compare
 		config
@@ -25,6 +26,7 @@ FriendlyId.defaults do |config|
 		create
 		data
 		delete
+		dev
 		direct_messages
 		downloads
 		edit
@@ -42,6 +44,7 @@ FriendlyId.defaults do |config|
 		help
 		home
 		hosting
+		ideas
 		index 
 		invitations
 		invite
@@ -53,6 +56,7 @@ FriendlyId.defaults do |config|
 		map
 		maps
 		mine
+		negentropy
 		new 
 		news
 		oauth
@@ -66,6 +70,7 @@ FriendlyId.defaults do |config|
 		projects
 		q
 		questions
+		random
 		register
 		remove
 		replies
@@ -82,6 +87,7 @@ FriendlyId.defaults do |config|
 		ssl
 		status
 		stories
+		style
 		styleguide
 		subscribe
 		tasks
