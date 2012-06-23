@@ -2,6 +2,7 @@ before_script:
   - sh -e /etc/init.d/xvfb start
   - export DISPLAY=:99.0
   - "psql -c 'create database myapp_test;' -U postgres"
+  - gem intsall bundler --pre # TODO: rm when bundler officialy hits 1.4.0
   - bundle exec rake db:migrate
   - bundle exec rake db:test:prepare
 language: ruby
