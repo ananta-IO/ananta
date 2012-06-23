@@ -60,6 +60,11 @@ body{
 	}
 }
 
+.mobile{
+	-webkit-transform: translate3d(0,0,0);
+	-webkit-overflow-scrolling: touch;
+}
+
 #pg-scrl{
 	width:100%; 
 	height:100%; 
@@ -72,10 +77,10 @@ body{
 		// padding-right: 20px;
 	}
 }
-.mobile .scrl{
-	-webkit-overflow-scrolling: touch;
-	-webkit-transform: translate3d(0,0,0);
-}
+// .mobile .scrl{
+//	-webkit-overflow-scrolling: touch;
+//	-webkit-transform: translate3d(0,0,0);
+// }
 .chrome .scrl{
 	@include chrome-scrollbar
 }
