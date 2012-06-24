@@ -55,6 +55,9 @@ class ProjectsController < InheritedResources::Base
 				flash[:notice] = "Successfully created project. #{undo_link}"
 				redirect_to user_project_url(@user, @project)
 			end
+			success.json do
+				flash[:notice] = "Project created."
+			end
 		end
 	end
 
@@ -71,6 +74,9 @@ class ProjectsController < InheritedResources::Base
 			success.html do 
 				flash[:notice] = "Successfully updated project. #{undo_link}"
 				redirect_to user_project_url(@user, @project)
+			end
+			success.json do
+				flash[:notice] = "Project update."
 			end
 		end
 	end

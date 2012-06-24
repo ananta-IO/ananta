@@ -287,7 +287,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 		)
 
 	addJLabel: (element) ->
-		$(@el).find(element).jLabel({color: "#999", yShift: '-2'})
+		$(@el).find(element).jLabel({color: "#acacac", opacity: 0.8, yShift: '-2'})
 		$(@el).find(element).click ->
 			$(@).parent().find('input').focus()
 
