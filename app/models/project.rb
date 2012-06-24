@@ -11,7 +11,7 @@ class Project < ActiveRecord::Base
   include Ananta::Vote
 
   has_paper_trail # TODO: add tags to versioning, exclude name (i.e. friendly_id) from version
-  acts_as_taggable_on :tags
+  acts_as_ordered_taggable_on :tags
   acts_as_voteable
 
   # Project state machine

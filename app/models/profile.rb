@@ -8,7 +8,7 @@ class Profile < ActiveRecord::Base
   #########################
   after_create :add_gravatar
 
-  acts_as_taggable_on :bio_tags, :skills, :needs
+  acts_as_ordered_taggable_on :bio_tags, :skills, :needs
 
   gravtastic :secure => false,
               :filetype => :gif,

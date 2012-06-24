@@ -13,6 +13,7 @@ class Ananta.Views.ProjectFlow.ProjectTagsView extends Backbone.View
 		@router = options.router
 		@tags = new Backbone.Collection()
 		@maxTags = 5
+		@order = 1
 
 	render: ->
 		$(@el).html(@template())
@@ -26,7 +27,8 @@ class Ananta.Views.ProjectFlow.ProjectTagsView extends Backbone.View
 
 	renderPreview: ->
 		@$('ul.preview').html('') 
-		for tag in @tags.where({ selected : true })
+		window.tags = @tags
+		for tag in @selectAndOrder(@tags)
 			@$('ul.preview').append("<li class='span1'><span class='thumbnail center'><i class='tag #{tag.get('name')}', data-tag='#{tag.get('name')}''></i></span></li>")
 
 	renderTags: ->
@@ -99,10 +101,16 @@ class Ananta.Views.ProjectFlow.ProjectTagsView extends Backbone.View
 			@$(".tags").append(view.render().el)
 
 	selectionCountdown: ->
-		@maxTags - @tags.where({ selected : true }).length
+		@maxTags - @selectAndOrder(@tags).length
+
+	nextOrder: ->
+		@order++
+
+	selectAndOrder: (tags) ->
+		tags.where({ selected : true }).sortBy((tag) -> tag.get('order'))
 
 	save: ->
-		selection = new Backbone.Collection(@tags.where({ selected : true }))
+		selection = new Backbone.Collection(@selectAndOrder(@tags))
 		tag_tokens = selection.pluck('name')
 		@model.set({tag_tokens: tag_tokens})
 		@model.save({}
