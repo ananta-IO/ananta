@@ -3,7 +3,7 @@ class Ananta.Routers.ProjectFlowRouter extends Backbone.Router
 		_.bindAll(@, 'navigateTo')
 		Ananta.App.currentUser or= new Ananta.Models.User()
 		Ananta.App.currentUser.set(options.currentUser)
-		@model = new Ananta.Models.Project()
+		Ananta.App.currentProject = @model = new Ananta.Models.Project()
 		@setRootUrl()
 		@collection =  new Ananta.Collections.ProjectsCollection()
 		

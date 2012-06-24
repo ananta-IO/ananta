@@ -25,8 +25,9 @@ class User < ActiveRecord::Base
 	# Setup attributes (reader, accessible, protected)
 	#########################
 	#attr_reader
-	attr_accessor :login
+	attr_accessor :login, :project_name
 	attr_accessible :username, :login, :email, :password, :password_confirmation, :remember_me, :facebook_id
+	attr_accessible :project_name, on: :create
 
 
 	#########################
@@ -119,6 +120,10 @@ class User < ActiveRecord::Base
 		editors = [self]
 		editors
 	end
+
+	def project_name= name
+		self.projects.new(name: name)
+	end
 	
 
 	#########################
@@ -168,7 +173,7 @@ class User < ActiveRecord::Base
 	end
 
 	def validate_has_a_project
-		errors.add(:projects, "cannot be 0. Please start a project.") unless self.projects.any? and self.projects.first.valid?
+		errors.add(:project_name, "must be between 3 and 141 characters") unless self.projects.any? and self.projects.first.valid?
 	end
 
 end

@@ -11,6 +11,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
       resource.build_profile(:name => fb_user.name) 
       resource.profile.images.new({ remote_image_url: "https://graph.facebook.com/#{fb_user.id}/picture?type=large", image_type: 'avatar' })
     end
+    if project = params[:project]
+      resource.projects.new project
+    end
 
     if resource.save
       session.delete(:facebook_user_attributes) if session[:facebook_user_attributes]

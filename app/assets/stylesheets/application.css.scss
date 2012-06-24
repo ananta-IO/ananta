@@ -763,20 +763,29 @@ span.tags{
 			position: absolute;
 			right: 152px;
 			top: 10px;
+			@media(max-width: 480px){
+				right: 38px;
+			}
 		}
 		.icon-ok{
 			position: absolute;
 			right: 152px;
-			top: 4px;
+			top: 3px;
 			color: #7EB854;
 			font-size: 18px;
+			@media(max-width: 480px){
+				right: 38px;
+			}
 		}
 		.icon-remove{
 			position: absolute;
 			right: 152px;
-			top: 4px;
+			top: 3px;
 			color: #f44;
 			font-size: 18px;
+			@media(max-width: 480px){
+				right: 38px;
+			}
 		}
 		.mailcheck{
 			margin: 0;
@@ -806,6 +815,9 @@ span.tags{
 			}
 			&:active{
 				left: auto;
+			}
+			@media(max-width: 480px){
+				right: 34px;
 			}
 		}
 	}
@@ -969,6 +981,7 @@ span.tags{
 			position: absolute;
 			top: 15px;
 			left: 0;
+			z-index: -1;
 			.thumbnail{
 				border: 1px solid $color-background;
 			}

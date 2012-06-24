@@ -16,6 +16,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 		'click .mailcheck a.domain'		: 'acceptSuggestion'
 		'keyup #login-password'    		: 'checkPassword'
 		'keyup #login-username'    		: 'checkUsername'
+		'keyup #project-name'      		: 'checkProjectName'
 		'shown'                    		: 'renderWhenReady'
 		'hidden'                   		: 'cleanUp'
 
@@ -74,6 +75,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 			@$('.separator').hide()
 			@$('.email').hide()
 			@$('.username').remove()
+			@$('.project-name').remove()
 			$('<p class="show-email"><a href="#">Don\'t have a Facebook account?</a></p>').insertAfter(@$('.facebook'))
 
 		@
@@ -129,16 +131,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 						if data.length > 0
 							@displayLogin()
 						else
-							@register = true
-							@mailcheck()
-							@$('#login-email').attr('name', 'user[email]').after('<i class="hint icon-ok" />')
-							@$('form').attr('action', '/users')
-							@$('#login-action').html("Register").show()
-							if @$('.username').length == 0
-								$('<div class="input string required username"><label for="login-username" style="display:none;"><i class="icon-pencil" />&nbsp;username</label><input id="login-username" type="text" name="user[username]" title="username" autocomplete="off" /></div>').hide().insertAfter(@.$('.password'))
-								.slideDown () =>
-									@addJLabel("#login-username")
-							@$('.forgot-password').fadeOut(500)
+							@displayRegister()
 
 			else if(@username_pattern.test(@email))
 				$.ajax
@@ -225,7 +218,22 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 						else
 							@$('#login-username').after('<i class="hint icon-remove" />')
 							@$('.username i.hint').tooltip({placement: 'top', title: "taken"}).tooltip('show')
-						
+
+	checkProjectName: ->
+		min_l = 3
+		max_l = 141
+		@projectName = @$('#project-name').val()
+		@$('.project-name i.hint').tooltip('hide').remove()
+		if @projectName != ''
+			if @projectName.length < min_l or @projectName.length > max_l
+				@$('.project-name .hint.success').remove()
+				@$('#project-name').after('<i class="hint icon-remove error" />')
+				if @projectName.length < min_l
+					@$('.project-name i.hint.error').tooltip({placement: 'top', title: "must be 3 or more characters"}).tooltip('show')
+				else if @projectName.length > max_l
+					@$('.project-name i.hint.error').tooltip({placement: 'top', title: "must be 141 or fewer characters"}).tooltip('show')
+			else
+				@$('#project-name').after('<i class="hint icon-ok" />')
 
 	facebookLogin: (e) ->
 		e.preventDefault()
@@ -264,7 +272,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 			dataType  : 'json'
 			type      : 'POST'
 			url       : $form.attr('action')
-			data      : $form.serialize()
+			data      : $form.serializeArray().add({ name:'project[tag_tokens]', value: Ananta.App.currentProject.get('tag_tokens') })
 			success: (data) =>
 				user = data
 				Ananta.App.currentUser.set(user)
@@ -301,6 +309,26 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 		if !@$('#login-password').is(':focus') then @$('.forgot-password').fadeIn(500)
 		@$('.username').slideUp () => 
 			@$('.username').remove()
+		@$('.project-name').slideUp () => 
+			@$('.project-name').remove()
+
+	displayRegister: ->
+		@register = true
+		@mailcheck()
+		@$('#login-email').attr('name', 'user[email]').after('<i class="hint icon-ok" />')
+		@$('form').attr('action', '/users')
+		@$('#login-action').html("Register").show()
+		if @$('.username').length == 0 
+			$('<div class="input string required username"><label for="login-username" style="display:none;"><i class="icon-pencil" />&nbsp;username</label><input id="login-username" type="text" name="user[username]" title="username" autocomplete="off" /></div>').hide().insertAfter(@.$('.password'))
+			.slideDown () =>
+				@addJLabel("#login-username")
+		if @$('.project-name').length == 0
+			$('<div class="input string required project-name"><label for="project-name" style="display:none;"><i class="icon-heart" />&nbsp;What are you working on?</label><input id="project-name" type="text" name="project[name]" title="What are you working on?" autocomplete="off" value="'+(if Ananta.App.currentProject.get("name") then Ananta.App.currentProject.get("name") else "")+'" /></div>').hide().insertAfter(@.$('.username'))
+			.slideDown () =>
+				@addJLabel("#project-name")
+		@checkUsername()
+		@checkProjectName()
+		@$('.forgot-password').fadeOut(500)
 
 	addMessage: ->
 		@$(".facebook").prepend("<h1 class='font-thin'>#{@message}</h1>")
