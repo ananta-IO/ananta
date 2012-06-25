@@ -1,0 +1,13 @@
+mixpanel:
+  key: <%= ENV['MIXPANEL_KEY'] %>
+# google:
+#   key: <%= ENV['GOOGLE_ANALYTICS_KEY'] %>
+# clicky:
+#   key: <%= ENV['CLICKY_KEY'] %>
+# kiss_metrics:
+#   js_url_key: //doug1izaerwt3.cloudfront.net/kiss_metrics_12345.1.js
+# chartbeat:
+#   key: chartbeat_12345
+#   domain: your.domain.com
+# optimizely:
+#   key: optimizely_12345

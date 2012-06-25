@@ -55,6 +55,8 @@ gem 'gravtastic'
 gem 'koala'
 gem 'geocoder'
 gem 'ask_geo'
+# Analytics
+gem 'analytical'
 
 # Misc
 gem 'rabl'

@@ -5,6 +5,8 @@
 	∙        (   ) |  |(   ) |  | | (   )     |  :    ;        
 	∙         `-'`-'  `-`-'`-'  `-`-'`-'`-  --'-- `--'         
 
+= raw analytical.head_prepend_javascript
+
 %meta{ charset: "utf-8" }
 
 -# Use the .htaccess and remove these lines to avoid edge case issues.
@@ -38,3 +40,6 @@
 	-#   try{Typekit.load();}catch(e){}
 
 = csrf_meta_tag
+
+- analytical.identify(current_user.id, :email=>current_user.email) if current_user
+= raw analytical.head_append_javascript

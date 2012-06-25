@@ -3,6 +3,9 @@ class ApplicationController < ActionController::Base
 	http_basic_authenticate_with :name => "infinite", :password => "panda" if Rails.env == 'production'
 	
 	protect_from_forgery
+
+	analytical :modules=>[:console, :mixpanel]
+
 	after_filter :set_questionable, :if =>  lambda { request.format == 'html' }
 
 	# Default cancan redirect url
