@@ -32,6 +32,6 @@
 					%label{ :for => "project-name"}
 						%i.icon-heart 
 						&nbsp;What are you working on?
-					%input#project-name{ :type => "text", :name => "project[name]", title: "What are you working on?", autocomplete: "off", value: "#{if Ananta.App.currentProject then Ananta.App.currentProject.get('name') else ''}" }
+					%input#project-name{ :type => "text", :name => "project[name]", title: "What are you working on?", autocomplete: "off", value: "#{if Ananta.App.currentProject and Ananta.App.currentProject.get('name') then Ananta.App.currentProject.get('name') else ''}" }
 				%div{:class => "button"}
 					%button#login-action.login-action.btn{:name => "login-action", :type => "submit"} Log in

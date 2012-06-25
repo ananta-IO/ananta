@@ -9,6 +9,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if @user.persisted? 
       sign_in @user, :event => :authentication 
+      analytical.identify(@user.id, :email=>@user.email)
+      analytical.event 'Facebook Login', with: { id: @user.id, name: @user.name, username: @user.username }
     else
       session[:facebook_user_attributes] = env["omniauth.auth"].extra.raw_info
     end
