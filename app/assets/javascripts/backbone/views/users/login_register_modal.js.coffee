@@ -323,7 +323,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 			.slideDown () =>
 				@addJLabel("#login-username")
 		if @$('.project-name').length == 0
-			$('<div class="input string required project-name"><label for="project-name" style="display:none;"><i class="icon-heart" />&nbsp;What are you working on?</label><input id="project-name" type="text" name="project[name]" title="What are you working on?" autocomplete="off" value="'+(if Ananta.App.currentProject.get("name") then Ananta.App.currentProject.get("name") else "")+'" /></div>').hide().insertAfter(@.$('.username'))
+			$('<div class="input string required project-name"><label for="project-name" style="display:none;"><i class="icon-heart" />&nbsp;What are you working on?</label><input id="project-name" type="text" name="project[name]" title="What are you working on?" autocomplete="off" value="'+(if Ananta.App.currentProject then Ananta.App.currentProject.get("name") else "")+'" /></div>').hide().insertAfter(@.$('.username'))
 			.slideDown () =>
 				@addJLabel("#project-name")
 		@checkUsername()
