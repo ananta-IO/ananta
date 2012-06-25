@@ -27,7 +27,7 @@ window.initInfiniteScroll = ->
 window.styleAmp = ->
 	foundin = $('*:contains("&")')
 	foundin.each () ->
-		if $(@).children().length < 1 and !$(@).attr('class').match(/amp/)
+		if $(@).children().length < 1 and $(@).attr('class') and !$(@).attr('class').match(/amp/)
 			$(@).html(
 				$(@).text().replace(
 					/&/
