@@ -268,11 +268,13 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 
 		@renderLoginSpinner()
 		$form = @$('form')
+		data = $form.serializeArray()
+		if Ananta.App.currentProject and Ananta.App.currentProject.get('tag_tokens') then data.add({ name:'project[tag_tokens]', value: Ananta.App.currentProject.get('tag_tokens') })
 		$.ajax(
 			dataType  : 'json'
 			type      : 'POST'
 			url       : $form.attr('action')
-			data      : $form.serializeArray().add({ name:'project[tag_tokens]', value: Ananta.App.currentProject.get('tag_tokens') })
+			data      : data
 			success: (data) =>
 				user = data
 				Ananta.App.currentUser.set(user)
