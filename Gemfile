@@ -8,7 +8,7 @@ gem 'rails', '3.2.6'
 gem 'pg'
 
 # The Server
-gem 'thin'
+gem 'unicorn'
 
 
 # Authentications & Permissions
