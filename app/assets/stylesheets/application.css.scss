@@ -939,6 +939,11 @@ span.tags{
 		}
 	}
 	.project-tags{
+		.count.remaining{
+			position: fixed;
+			right: 36px;
+			z-index: 100;
+		}
 		.thumbnails{
 			li.span2:nth-child(6n + 7){
 				margin-left: 0;
