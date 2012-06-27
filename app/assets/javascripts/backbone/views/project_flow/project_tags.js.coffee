@@ -91,9 +91,16 @@ class Ananta.Views.ProjectFlow.ProjectTagsView extends Backbone.View
 		]
 		icons = @shuffle(icons)
 		for icon in icons 
+			if @model.get('tag_tokens')? and icon in @model.get('tag_tokens') then selected = true else selected = false
+			if selected
+				order = @model.get('tag_tokens').indexOf(icon) + 1 
+				@nextOrder()
+			else 
+				order = 9000
 			tag = new Backbone.Model
 				name : icon 
-				selected : if @model.get('tag_tokens')? and icon in @model.get('tag_tokens') then true else false
+				selected : selected
+				order : order
 			@tags.add tag
 			view =  new Ananta.Views.ProjectFlow.ProjectTagView({ model : tag, parent : @ })
 			view.bind('renderSelectionCountdown', @renderSelectionCountdown)
