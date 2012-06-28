@@ -93,6 +93,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 			@$('.fb-login-button').focus()
 	
 	expand: (e) ->
+		Analytical.event('Login Modal - Click To Expand Form', { with: { message: @message, location: window.location.href } } )
 		@$('#login-action').hide()
 		@$('.show-email').hide()
 		@$('.separator').slideDown()
@@ -238,6 +239,8 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 	facebookLogin: (e) ->
 		e.preventDefault()
 		e.stopPropagation()
+		Analytical.event('Login Modal - Click Facebook', { with: { message: @message, location: window.location.href, register: @register } } )
+
 		@cleanUp()
 		@$('.fb-login-button img').addClass('rideSpinners')
 
@@ -265,6 +268,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 	login: (e) ->
 		e.preventDefault()
 		e.stopPropagation()
+		Analytical.event('Login Modal - Click Login', { with: { message: @message, location: window.location.href, register: @register } } )
 
 		@renderLoginSpinner()
 		$form = @$('form')

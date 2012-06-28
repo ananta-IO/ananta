@@ -9,11 +9,14 @@ class Ananta.Views.ProjectFlow.ProjectNameView extends Backbone.View
 		'submit form'                   :'create'
 		'click .project-action-search'  :'search'
 		'click .project-action-start'   :'create'
-		'mouseout span.hint'            :'randomizeIconTooltip'
+		'mouseenter span.hint'          :'mouseenterHint'
+		'mouseleave span.hint'          :'mouseleaveHint'
 
 	initialize: (options) ->
 		_.bindAll(@, 'render')
 		@router = options.router
+		@hintHoverStartTime = 0
+		@hintHoverEndTime = 0
 		@projectNames = [
 			'_____'
 			'baking a cake'
@@ -88,6 +91,15 @@ class Ananta.Views.ProjectFlow.ProjectNameView extends Backbone.View
 		@$('input').tooltip('hide')
 		@$('span.hint').tooltip('hide')
 
+	mouseenterHint: ->
+		@hintHoverStartTime = new Date().getTime()
+
+	mouseleaveHint: ->
+		@hintHoverEndTime = new Date().getTime()
+		duration = @hintHoverEndTime - @hintHoverStartTime
+		Analytical.event('Project Flow - Blueprint Hint Hover', { with: { hint: @$('span.hint').attr('data-original-title'), hoverDuration: duration, model: @model.toJSON(), location: window.location.href } } )
+		@randomizeIconTooltip()
+
 	randomizeIconTooltip: ->
 		@$('span.hint').attr('data-original-title', "Are you #{@randSugguestion()}?")
 	
@@ -103,6 +115,7 @@ class Ananta.Views.ProjectFlow.ProjectNameView extends Backbone.View
 		e.stopPropagation()
 		@$('input').after('<img src="/assets/ajax-loader-black-dots.gif" class="loader" />')
 		@model.set({'name': @$('input').val()})
+		Analytical.event('Create Project', { with: { model: @model.toJSON(), location: window.location.href } } )
 		@model.save({}
 			success: (data) =>
 				@collection.add(@model)

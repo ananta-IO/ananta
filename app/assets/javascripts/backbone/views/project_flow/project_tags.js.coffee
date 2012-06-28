@@ -116,10 +116,13 @@ class Ananta.Views.ProjectFlow.ProjectTagsView extends Backbone.View
 	selectAndOrder: (tags) ->
 		tags.where({ selected : true }).sortBy((tag) -> tag.get('order'))
 
-	save: ->
+	save: (e) ->
+		e.preventDefault()
+		e.stopPropagation()
 		selection = new Backbone.Collection(@selectAndOrder(@tags))
 		tag_tokens = selection.pluck('name')
 		@model.set({tag_tokens: tag_tokens})
+		Analytical.event('Create Project', { with: { model: @model.toJSON(), location: window.location.href } } )
 		@model.save({}
 			success: (data) =>
 				@collection.add(@model)

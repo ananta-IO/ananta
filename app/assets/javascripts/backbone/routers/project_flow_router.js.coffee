@@ -23,6 +23,7 @@ class Ananta.Routers.ProjectFlowRouter extends Backbone.Router
 			@view = new Ananta.Views.ProjectFlow.ProjectNameView({ model: @model, collection: @collection, router: @ })
 			$("#project_flow").html(@view.render().el)
 		@transitionTo(0, renderCallback)
+		Analytical.track(window.location.href)
 
 	tags: ->
 		if @model.get('name')?
@@ -33,6 +34,7 @@ class Ananta.Routers.ProjectFlowRouter extends Backbone.Router
 			@transitionTo(1, renderCallback)
 		else
 			@navigateTo(0)
+		Analytical.track(window.location.href)
 
 	# Helpers
 	setRootUrl: ->
