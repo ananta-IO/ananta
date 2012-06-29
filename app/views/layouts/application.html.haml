@@ -7,24 +7,24 @@
 	%body{ class: "#{ controller.controller_name }" }
 		= raw analytical.body_prepend_javascript
 
-		#pg-scrl.scrl
-			= render "facebook"
+		-# #pg-scrl.scrl
+		= render "facebook"
 
-			#wrapper
-				%header#header
-					= render "header"
+		#wrapper
+			%header#header
+				= render "header"
 
-				#main{ role: "main" }
-					.container-fluid
-						.content
-							#flash
-								= render "flashes"
-							#yield
-								= yield
+			#main{ role: "main" }
+				.container-fluid
+					.content
+						#flash
+							= render "flashes"
+						#yield
+							= yield
 
-				#layout_footer      
-			%footer#footer
-				= render "footer"
+			#layout_footer      
+		%footer#footer
+			= render "footer"
 
 
 		-# Javascript at the bottom for fast page loading

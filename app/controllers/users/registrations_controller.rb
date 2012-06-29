@@ -17,7 +17,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     if resource.save
       analytical.identify(resource.id, { name: resource.username } )
-      analytical.event 'Create User', with: { id: resource.id, name: resource.name, email: resource.email, username: resource.username }
+      analytical.event 'Successful User Registration', { email: resource.email, username: resource.username }
       session.delete(:facebook_user_attributes) if session[:facebook_user_attributes]
       if resource.active_for_authentication?
         set_flash_message(:notice, :signed_up)

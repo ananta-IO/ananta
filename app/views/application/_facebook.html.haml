@@ -1,49 +1,52 @@
 #fb-root
 :coffeescript
-  window.fbAsyncInit = ->
-    FB.init
-      appId: "#{Facebook::APP_ID}"
-      status: true
-      cookie: true
-      oauth: true
-      frictionlessRequests: true
-      xfbml: true
+	window.fbAsyncInit = ->
+		FB.init
+			appId: "#{Facebook::APP_ID}"
+			status: true
+			cookie: true
+			oauth: true
+			frictionlessRequests: true
+			xfbml: true
 
-  ((d) ->
-    js = undefined
-    id = "facebook-jssdk"
-    return  if d.getElementById(id)
-    js = d.createElement("script")
-    js.id = id
-    js.async = true
-    js.src = "//connect.facebook.net/en_US/all.js"
-    d.getElementsByTagName("head")[0].appendChild js
-  ) document
+	((d) ->
+		js = undefined
+		id = "facebook-jssdk"
+		return  if d.getElementById(id)
+		js = d.createElement("script")
+		js.id = id
+		js.async = true
+		js.src = "//connect.facebook.net/en_US/all.js"
+		d.getElementsByTagName("head")[0].appendChild js
+	) document
 
-  window.fbLogin = (callback) ->
-    FB.login ((response) ->
-      if response.authResponse then login response 
-    ),
-      scope: "#{Facebook::SCOPE}"
-    login = (response) ->
-      if callback
-        callback response
-      else
-        $("a.btn-facebook").append "<img src=\"assets/ajax-loader-black-dots.gif\" class=\"loader\"/>"
-        $.ajax
-          url: "#{user_omniauth_callback_path(:facebook)}"
-          success: (data) ->
-            $("a.btn-facebook .loader").remove()
-            user = data
-            if user["id"]?
-              console.log 'logged in'
-              window.location.href = '/'
-            else
-              if window.loginModal
-                callback = window.loginModal.callback
-                window.loginModal.close()
-              window.loginModal = new Ananta.Views.Users.LoginRegisterModal(
-                callback: callback
-                user: user
-              )
-              window.loginModal.render()
+	window.fbLogin = (callback) ->
+		login = (response) ->
+			if callback
+				callback response
+			else
+				$("a.btn-facebook").append "<img src=\"assets/ajax-loader-black-dots.gif\" class=\"loader\"/>"
+				$.ajax
+					url: "#{user_omniauth_callback_path(:facebook)}"
+					success: (data) ->
+						$("a.btn-facebook .loader").remove()
+						user = data
+						if user["id"]?
+							console.log 'logged in'
+							window.location.href = '/'
+						else
+							if window.loginModal
+								callback = window.loginModal.callback
+								window.loginModal.close()
+							window.loginModal = new Ananta.Views.Users.LoginRegisterModal(
+								callback: callback
+								user: user
+							)
+							window.loginModal.render()
+							
+		FB.login ((response) ->
+			console.log response
+			if response.authResponse then login response 
+		),
+			scope: "#{Facebook::SCOPE}"
+			

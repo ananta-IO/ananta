@@ -41,7 +41,7 @@ $('.dropdown input').bind 'click', (e) ->
 
 # Open login and register modal
 $('a.login').bind 'click', (e) ->
-	Analytical.event('Manually Open Login Modal', { with: { location: window.location.href } } )
 	window.loginModal = new Ananta.Views.Users.LoginRegisterModal()
 	window.loginModal.render()
+	Analytical.event('Manually Open Login Modal', { location: window.location.href } )
 	e.stopPropagation()

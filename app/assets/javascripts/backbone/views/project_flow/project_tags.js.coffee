@@ -26,10 +26,10 @@ class Ananta.Views.ProjectFlow.ProjectTagsView extends Backbone.View
 		@$('.count.remaining').html(@selectionCountdown())
 
 	renderPreview: ->
-		@$('ul.preview').html('') 
+		@$('div.preview').html('') 
 		window.tags = @tags
 		for tag in @selectAndOrder(@tags)
-			@$('ul.preview').append("<li class='span1'><span class='thumbnail center'><i class='tag #{tag.get('name')}', data-tag='#{tag.get('name')}''></i></span></li>")
+			@$('div.preview').append("<div class='center'><i class='tag #{tag.get('name')}', data-tag='#{tag.get('name')}''></i></div></li>")
 
 	renderTags: ->
 		icons = [
@@ -122,7 +122,7 @@ class Ananta.Views.ProjectFlow.ProjectTagsView extends Backbone.View
 		selection = new Backbone.Collection(@selectAndOrder(@tags))
 		tag_tokens = selection.pluck('name')
 		@model.set({tag_tokens: tag_tokens})
-		Analytical.event('Create Project', { with: { model: @model.toJSON(), location: window.location.href } } )
+		Analytical.event('Project Flow - Submit Project Tags', { project_name: @model.get('name'), location: window.location.href } )
 		@model.save({}
 			success: (data) =>
 				@collection.add(@model)

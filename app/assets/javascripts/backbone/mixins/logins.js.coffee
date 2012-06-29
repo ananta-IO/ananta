@@ -1,6 +1,5 @@
 Ananta.Mixins.Logins =
 	loginModal: (options) ->
-		Analytical.event('Programmatically Open Login Modal', { with: { location: window.location.href } } )
 		options or= {}
 		options['callback'] or= -> 
 			console.log 'logged in'
@@ -8,4 +7,5 @@ Ananta.Mixins.Logins =
 		options['message'] or= 'To continue'
 		window.loginModal = new Ananta.Views.Users.LoginRegisterModal(options)
 		window.loginModal.render()
+		Analytical.event('Open Login Modal From Mixin', { location: window.location.href } )
 		return false

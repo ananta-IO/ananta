@@ -4,7 +4,7 @@ class Users::SessionsController < Devise::SessionsController
 		set_flash_message(:notice, :signed_in)
 		sign_in(resource_name, resource)
 		analytical.identify( resource.id, { name: resource.username })
-		analytical.event 'Form Login', with: { id: resource.id, name: resource.name, username: resource.username }
+		analytical.event 'Successful Email & Password Login', { username: resource.username }
 		@user = resource
 		respond_with @user, :location => after_sign_in_path_for(@user)
 	end

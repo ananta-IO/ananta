@@ -23,12 +23,12 @@ Ananta.Mixins.Errors =
 
 		if options.animateIn then @animateErrorsIn(options)
 
-		Analytical.event('Render Errors', { with: { location: window.location.href, errors: errors, options: options } } )
-
 	renderError: (error, attribute, selector) ->
 		attribute or= ''
 		if error == 'Invalid email or password.' then error = 'Invalid password.' # Special case for login_register_modal. Maybe refactor our of here?
-		render = (e, a) => @$(selector).append("<div class='alert alert-error'><a class='close' data-dismiss='alert' href='#'>&times;</a>#{a} #{e}</div>")
+		render = (e, a) => 
+			@$(selector).append("<div class='alert alert-error'><a class='close' data-dismiss='alert' href='#'>&times;</a>#{a} #{e}</div>")
+			Analytical.event('Render Error', { error: e, attribute: a, location: window.location.href } )
 		if typeof error == 'string'
 			render(error, attribute)
 		else

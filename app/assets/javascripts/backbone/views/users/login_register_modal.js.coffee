@@ -93,13 +93,13 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 			@$('.fb-login-button').focus()
 	
 	expand: (e) ->
-		Analytical.event('Login Modal - Click To Expand Form', { with: { message: @message, location: window.location.href } } )
 		@$('#login-action').hide()
 		@$('.show-email').hide()
 		@$('.separator').slideDown()
 		@$('.email').slideDown () =>
 			@addJLabel(".string input")
 			@$('#login-email').focus()
+		Analytical.event('Login Modal - Click To Expand Login Form', { message: @message, location: window.location.href } )
 		e.preventDefault()
 		e.stopPropagation()
 
@@ -239,7 +239,6 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 	facebookLogin: (e) ->
 		e.preventDefault()
 		e.stopPropagation()
-		Analytical.event('Login Modal - Click Facebook', { with: { message: @message, location: window.location.href, register: @register } } )
 
 		@cleanUp()
 		@$('.fb-login-button img').addClass('rideSpinners')
@@ -264,11 +263,12 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 						window.loginModal.render()
 
 		fbLogin(callback)
+		
+		Analytical.event('Login Modal - Click Facebook', { message: @message, location: window.location.href, register: @register } )
 
 	login: (e) ->
 		e.preventDefault()
 		e.stopPropagation()
-		Analytical.event('Login Modal - Click Login', { with: { message: @message, location: window.location.href, register: @register } } )
 
 		@renderLoginSpinner()
 		$form = @$('form')
@@ -291,6 +291,8 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 					keysToRender   : ['email', 'password', 'username']
 					loginCallback  : null
 		)
+
+		Analytical.event('Login Modal - Click Login', { message: @message, location: window.location.href, register: @register } )
 
 	addJLabel: (element) ->
 		$(@el).find(element).jLabel({color: "#acacac", opacity: 0.8, yShift: '-2'})

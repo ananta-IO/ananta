@@ -60,10 +60,10 @@ body{
 	}
 }
 
-.mobile{
-	-webkit-transform: translate3d(0,0,0);
-	-webkit-overflow-scrolling: touch;
-}
+// .mobile{
+//	-webkit-transform: translate3d(0,0,0);
+//	-webkit-overflow-scrolling: touch;
+// }
 
 #pg-scrl{
 	width:100%; 
@@ -77,10 +77,6 @@ body{
 		// padding-right: 20px;
 	}
 }
-// .mobile .scrl{
-//	-webkit-overflow-scrolling: touch;
-//	-webkit-transform: translate3d(0,0,0);
-// }
 .chrome .scrl{
 	@include chrome-scrollbar
 }
@@ -939,10 +935,14 @@ span.tags{
 		}
 	}
 	.project-tags{
+		h2{
+			font-weight: 200;
+		}
 		.count.remaining{
 			position: fixed;
 			right: 36px;
 			z-index: 100;
+			font-weight: 200;
 		}
 		.thumbnails{
 			li.span2:nth-child(6n + 7){
@@ -983,23 +983,21 @@ span.tags{
 			position: relative;
 		}
 		.preview{
-			position: absolute;
-			top: 15px;
-			left: 0;
-			z-index: -1;
-			.thumbnail{
-				border: 1px solid $color-background;
+			position: fixed;
+			right: 22px;
+			top: 103px;
+			z-index: 100;
+			width: 40px;
+			div{
+				margin: 10px auto;
 			}
 			i{
-				font-size: 33px;
+				font-size: 20px;
 			}
 			@media(max-width: 1199px){
 				i{
-					font-size: 20px;
+					font-size: 18px;
 				}
-			}
-			@media(max-width: 758px){
-				position: relative;
 			}
 		}
 	}
