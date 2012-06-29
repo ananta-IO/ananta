@@ -8,3 +8,5 @@ $('#header .user-nav').html('<%= j render("application/user_nav") %>');
 $('#header .user-nav [rel*=tooltip]').tooltip();
 
 Ananta.App.marqView.collection.reset().fetch();
+
+$('body').append('<%= j raw(analytical.body_append_javascript) %>');

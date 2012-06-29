@@ -45,8 +45,6 @@
 							window.loginModal.render()
 							
 		FB.login ((response) ->
-			console.log response
 			if response.authResponse then login response 
 		),
 			scope: "#{Facebook::SCOPE}"
-			
