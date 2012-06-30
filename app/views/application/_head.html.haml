@@ -42,5 +42,5 @@
 = csrf_meta_tag
 
 - analytical.identify( current_user.id, { name: current_user.username } ) if current_user
-- analytical.set( { id: current_user.id, created_at: current_user.created_at, sign_in_count: current_user.sign_in_count, last_sign_in_at: current_user.last_sign_in_at } ) if current_user
+- analytical.set( { user_id: current_user.id, user_created_at: current_user.created_at, user_sign_in_count: current_user.sign_in_count, user_last_sign_in_at: current_user.last_sign_in_at, username: current_user.username } ) if current_user
 = raw analytical.head_append_javascript

@@ -9,11 +9,14 @@ class Ananta.Views.ProjectFlow.ProjectTagsView extends Backbone.View
 		'click .submit-tags'       : 'save'
 
 	initialize: (options) ->
-		_.bindAll(@, 'render', 'renderSelectionCountdown', 'renderPreview')
+		_.bindAll(@, 'render', 'renderSelectionCountdown', 'renderPreview', 'deselectTag')
 		@router = options.router
 		@tags = new Backbone.Collection()
 		@maxTags = 5
 		@order = 1
+
+		@tags.bind('change', @renderSelectionCountdown)
+		@tags.bind('change', @renderPreview)
 
 	render: ->
 		$(@el).html(@template())
@@ -29,7 +32,8 @@ class Ananta.Views.ProjectFlow.ProjectTagsView extends Backbone.View
 		@$('div.preview').html('') 
 		window.tags = @tags
 		for tag in @selectAndOrder(@tags)
-			@$('div.preview').append("<div class='center'><i class='tag #{tag.get('name')}', data-tag='#{tag.get('name')}''></i></div></li>")
+			@$('div.preview').append("<div class='center'><a href='#' class='tag' data-tag='#{tag.get('name')}'><i class='#{tag.get('name')}'></i></a></div></li>")
+		@$('.preview a.tag').click(@deselectTag)
 
 	renderTags: ->
 		icons = [
@@ -103,8 +107,6 @@ class Ananta.Views.ProjectFlow.ProjectTagsView extends Backbone.View
 				order : order
 			@tags.add tag
 			view =  new Ananta.Views.ProjectFlow.ProjectTagView({ model : tag, parent : @ })
-			view.bind('renderSelectionCountdown', @renderSelectionCountdown)
-			view.bind('renderPreview', @renderPreview)
 			@$(".tags").append(view.render().el)
 
 	selectionCountdown: ->
@@ -115,6 +117,12 @@ class Ananta.Views.ProjectFlow.ProjectTagsView extends Backbone.View
 
 	selectAndOrder: (tags) ->
 		tags.where({ selected : true }).sortBy((tag) -> tag.get('order'))
+
+	deselectTag: (e) ->
+		e.preventDefault()
+		e.stopPropagation()
+		name = $(e.target).attr('class')
+		@tags.where({ selected : true, name : name })[0].set({selected : false})
 
 	save: (e) ->
 		e.preventDefault()

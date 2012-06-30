@@ -940,9 +940,36 @@ span.tags{
 		}
 		.count.remaining{
 			position: fixed;
-			right: 36px;
+			right: 22px;
 			z-index: 100;
 			font-weight: 200;
+		}
+		.preview{
+			position: fixed;
+			right: 8px;
+			margin-top: 30px;
+			z-index: 100;
+			width: 40px;
+			div{
+				margin: 10px auto;
+			}
+			a{
+				@include transition-property(all);
+				@include transition-duration(0.2s);
+				@include transition-timing-function(ease-out);
+				color: $color-base;
+				&:hover{
+					color: #ccc;
+				}
+			}
+			i{
+				font-size: 20px;
+			}
+			@media(max-width: 1199px){
+				i{
+					font-size: 18px;
+				}
+			}
 		}
 		.thumbnails{
 			li.span2:nth-child(6n + 7){
@@ -981,24 +1008,6 @@ span.tags{
 			border-top: 1px dotted $color-background-hover;
 			padding-top: 20px;
 			position: relative;
-		}
-		.preview{
-			position: fixed;
-			right: 22px;
-			top: 103px;
-			z-index: 100;
-			width: 40px;
-			div{
-				margin: 10px auto;
-			}
-			i{
-				font-size: 20px;
-			}
-			@media(max-width: 1199px){
-				i{
-					font-size: 18px;
-				}
-			}
 		}
 	}
 }

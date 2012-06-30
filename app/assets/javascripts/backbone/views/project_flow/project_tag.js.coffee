@@ -24,8 +24,6 @@ class Ananta.Views.ProjectFlow.ProjectTagView extends Backbone.View
 		e.stopPropagation()
 		if @parent.selectionCountdown() > 0 or @model.get('selected')
 			@model.set({ 'selected' : !@model.get('selected'), 'order' : @parent.nextOrder() })
-			@.trigger('renderSelectionCountdown')
-			@.trigger('renderPreview')
 		else
 			@alert("5 tags max", {title:"Less is more"})
 
