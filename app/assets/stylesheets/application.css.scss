@@ -390,6 +390,24 @@ span.tags{
 	}
 	.nav{
 		.dropdown{
+			.dropdown-toggle{
+				position: relative;
+				.icon-chevron-down{
+					@include transition-property(all);
+					@include transition-duration(0.5s);
+					@include transition-timing-function(ease-in);
+					opacity: 0;
+					position: absolute;
+					bottom: -20px;
+					pointer-events: none;
+					color: #999;
+				}
+				&:hover{
+					.icon-chevron-down{
+					 	opacity: 1;
+					}	
+				}
+			}
 			.nav-header{
 				a{
 					font-size: 13px;
@@ -417,7 +435,7 @@ span.tags{
 			}
 			&.open{
 				.dropdown-toggle{
-					color: $color-base
+					color: $color-base;
 				}
 				.caret{
 				 	border-top-color: $color-base;
