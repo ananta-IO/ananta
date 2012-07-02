@@ -3,7 +3,8 @@
 	%h2.count.remaining
 	.preview
 	%h2 
-		Tag it
+		Tag:
+		= @project.name
 	%br
 	%ul.tags.thumbnails
 	.bottom

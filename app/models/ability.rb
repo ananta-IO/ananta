@@ -102,7 +102,7 @@ class Ability
 			can :read, Profile
 			can [:read, :random], Project
 			can :read, Question
-		end
+		end 
 
 		# Users
 		cannot :destroy, User

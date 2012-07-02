@@ -1031,7 +1031,11 @@ span.tags{
 }
 
 #about{
+	margin-top: 150px;
 	text-align: justify;
+	@media (max-width: 767px){
+		margin-top: 50px;
+	}
 }
 
 

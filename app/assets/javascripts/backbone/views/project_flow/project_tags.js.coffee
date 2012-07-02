@@ -19,7 +19,7 @@ class Ananta.Views.ProjectFlow.ProjectTagsView extends Backbone.View
 		@tags.bind('change', @renderPreview)
 
 	render: ->
-		$(@el).html(@template())
+		$(@el).html(@template(@model.toJSON()))
 		@renderTags()
 		@renderSelectionCountdown()
 		@renderPreview()
