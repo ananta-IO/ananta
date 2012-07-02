@@ -47,7 +47,7 @@ FactoryGirl.define do
 
 	factory :profile, aliases: [:imageable] do
 		name { generate :name }
-		after(:create) { |p| FactoryGirl.create(:image, image_type:'avatar', imageable:p, user:p.user) }
+		# after(:create) { |p| FactoryGirl.create(:image, image_type:'avatar', imageable:p, user:p.user) }
 	end
 
 

@@ -5,10 +5,15 @@ class User < ActiveRecord::Base
 	#########################
 	# Callbacks & Misc method calls (e.g. devise for, acts_as_whatever )
 	#########################
-	after_validation	:validate_username_reserved
-	before_create   	:before_create
-	after_save      	:sync_slug, :if => Proc.new { |user| user.username != user.profile.slug }
-	after_save      	:generate_username, :unless => :username?
+	after_validation    :validate_username_reserved
+	before_create do
+		initialize_profile
+		initialize_permissions      
+	end
+	after_save do   
+		sync_slug if username != profile.slug
+		generate_username unless username?
+	end
 
 	# Include default devise modules. Others available are:
 	# :encryptable, :confirmable, :token_authenticatable
@@ -34,18 +39,18 @@ class User < ActiveRecord::Base
 	# Associations
 	#########################
 	extend FriendlyId
-	friendly_id		:username
-	has_one    		:profile, :dependent => :destroy
-	has_one    		:location, :as => :locatable, :dependent => :destroy
-	# has_one  		:account, :dependent => :destroy				# TODO: ?
-	has_many   		:projects
-	# has_many 		:project_memberships
-	# has_many 		:joined_projects, :class_name => 'Project', :through => :project_memberships
-	# has_many 		:team_memberships                    		# TODO: ?
-	# has_many 		:teams, :through => :team_memberships		# TODO: ?
-	has_many   		:images
-	has_many   		:questions
-	has_many   		:answers
+	friendly_id     :username
+	has_one         :profile, :dependent => :destroy
+	has_one         :location, :as => :locatable, :dependent => :destroy
+	# has_one       :account, :dependent => :destroy                # TODO: ?
+	has_many        :projects
+	# has_many      :project_memberships
+	# has_many      :joined_projects, :class_name => 'Project', :through => :project_memberships
+	# has_many      :team_memberships                           # TODO: ?
+	# has_many      :teams, :through => :team_memberships       # TODO: ?
+	has_many        :images
+	has_many        :questions
+	has_many        :answers
 
 	accepts_nested_attributes_for :profile
 	accepts_nested_attributes_for :location
@@ -124,6 +129,10 @@ class User < ActiveRecord::Base
 	def project_name= name
 		self.projects.new(name: name)
 	end
+
+	def email_to_name
+		email.split("@").first.split(/[\-\_\.]/).reduce{ |full_name, name| full_name = "#{full_name} #{name}" }.titleize rescue ""
+	end
 	
 
 	#########################
@@ -137,10 +146,6 @@ class User < ActiveRecord::Base
 	#########################
 	private
 
-	def email_to_name
-		email.split("@").first.split(/[\-\_\.]/).reduce{ |full_name, name| full_name = "#{full_name} #{name}" }.titleize rescue ""
-	end
-
 	def validate_username_reserved
 		if errors[:friendly_id].present?
 			errors[:username] = "is reserved. Please choose something else."
@@ -148,13 +153,15 @@ class User < ActiveRecord::Base
 		end
 	end
 
-	def before_create
+	def initialize_profile
 		if profile.blank?
 			build_profile(:name => email_to_name) 
 		elsif profile.name.blank?
 			profile.name = email_to_name
 		end
+	end
 
+	def initialize_permissions
 		self.permissions = 2 
 	end
 
@@ -163,7 +170,7 @@ class User < ActiveRecord::Base
 	end
 
 	def generate_username
-		self.update_attribute(:username, self.id.to_s)	
+		self.update_attribute(:username, self.id.to_s)  
 	end
 
 	def validate_username_format

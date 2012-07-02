@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Project do
+describe Project, slow: true do
 	# Factory
 	it 'has a valid factory' do
 		FactoryGirl.create(:project).should be_valid

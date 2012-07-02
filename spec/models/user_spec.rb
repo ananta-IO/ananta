@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe User do
+describe User, slow: true do
 	# Factory
 	it 'has a valid factory' do
 		FactoryGirl.create(:user).should be_valid

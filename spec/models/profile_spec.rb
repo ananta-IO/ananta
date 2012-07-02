@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Profile do
+describe Profile, slow: true do
 	# Factory
 	it 'has a valid factory' do
 		FactoryGirl.create(:profile).should be_valid

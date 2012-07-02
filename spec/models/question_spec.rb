@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Question do
+describe Question, slow: true do
 	# Factory
 	it 'has a valid factory' do
 		FactoryGirl.create(:question).should be_valid

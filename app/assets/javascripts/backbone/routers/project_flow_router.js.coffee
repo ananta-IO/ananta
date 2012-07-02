@@ -74,7 +74,7 @@ class Ananta.Routers.ProjectFlowRouter extends Backbone.Router
 				$(@view.el).addClass('animated fadeInUp')
 		else
 			renderCallback()
-			$(@view.el).hide().fadeIn(8000)
+			# $(@view.el).hide().fadeIn(3000)
 
 	transitionTo: (page, renderCallback) ->
 		previousPage = @currentPage
