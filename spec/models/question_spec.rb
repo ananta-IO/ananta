@@ -6,6 +6,11 @@ describe Question, slow: true do
 		FactoryGirl.create(:question).should be_valid
 	end
 
+	# Associations
+	it { should belong_to(:user) }
+	it { should have_many(:answers) }
+	it { should have_many(:comments).through(:answers) }
+
 	# Validations
 	context 'question' do
 		it "is invalid when nil or blank" do

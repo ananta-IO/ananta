@@ -6,6 +6,11 @@ describe Answer, slow: true do
 		FactoryGirl.create(:answer).should be_valid
 	end
 
+	# Associations
+	it { should belong_to(:user) }
+	it { should belong_to(:question) }
+	it { should have_one(:comment) }
+
 	# Validations
 	context 'state' do
 		it "is invalid when nil" do

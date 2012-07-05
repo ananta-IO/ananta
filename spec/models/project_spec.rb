@@ -6,6 +6,13 @@ describe Project, slow: true do
 		FactoryGirl.create(:project).should be_valid
 	end
 
+	# Associations
+	it { should belong_to(:user) }
+	it { should have_one(:location) }
+	it { should have_many(:images) }
+	it { should have_many(:avatars) }
+	it { should have_many(:pictures) }
+
 	# Validations
 	context 'name' do
 		it "is invalid when nil or blank" do

@@ -1,4 +1,4 @@
-%span.tags
+.tag-list
 	- tags.each do |tag|
 		= link_to( "/?tag=#{tag.name}", class: 'tag' ) do
 			%i{ class: tag.name }

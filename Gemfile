@@ -97,6 +97,7 @@ group :development, :test do
   gem 'capybara-webkit'
   gem 'capybara-screenshot'
   gem 'poltergeist'
+  gem 'shoulda-matchers'
 end
 
 

@@ -6,6 +6,14 @@ describe User, slow: true do
 		FactoryGirl.create(:user).should be_valid
 	end
 
+	# Associations
+	it { should have_one(:profile) }
+	it { should have_one(:location) }
+	it { should have_many(:projects) }
+	it { should have_many(:images) }
+	it { should have_many(:questions) }
+	it { should have_many(:answers) }
+
 	# Validations
 	context 'username' do
 		it "is invalid when nil or blank" do

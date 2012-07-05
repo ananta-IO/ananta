@@ -1,0 +1,8 @@
+%li.span3
+	.thumbnail
+		= link_to user_projects_path([project.user, project]) do image_tag project.avatar.image.medium end
+		%h2.name= link_to project.name, user_projects_path([project.user, project])
+		%p.description= project.description
+		.tags= list_tags project.tags
+		%p.state= project.state
+		%p.user= hovercard project.user
