@@ -109,6 +109,7 @@ group :development do
   gem 'guard-spork'
   gem 'guard-rspec'
   gem 'brakeman'
+  gem 'foreman'
   # gem 'growl'
   # gem 'ruby-debug19', :require => 'ruby-debug'  # NOTE: only use when needed
 end
