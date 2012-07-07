@@ -6,6 +6,7 @@ jQuery ->
 window.initUI = ->
 	window.initFlashes()
 	window.initInfiniteScroll()
+	window.initBootstrap()
 	window.styleAmp()
 
 window.initFlashes = ->
@@ -23,6 +24,21 @@ window.initInfiniteScroll = ->
 				$('.pagination').html('<li class="active"><a href="#">Loading more...</a></li>')
 				$.getScript(url)
 		$('#pg-scrl').scroll()
+
+window.initBootstrap = ->
+	# $('.modal').modal();
+	# $('.dropdown-toggle').dropdown();
+	# $('.scrollspy').scrollSpy();
+	# $('.btn').button();
+	# $('.tabs').tabs();
+	$("[rel*=tooltip]").tooltip();
+	$("[rel*=popover]").popover();
+	# $('.alert').alert();
+	# $('.collapse').collapse();
+	# $('.carousel').carousel();
+	# $('.typeahead').typeahead();
+
+	# $('body').jScrollPane({autoReinitialise: true});
 
 window.styleAmp = ->
 	foundin = $('*:contains("&")')

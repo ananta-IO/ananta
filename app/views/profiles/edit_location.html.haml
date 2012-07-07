@@ -1,0 +1,16 @@
+=content_for :javascripts do
+	:coffeescript
+		$(() ->
+			window.userAddressForm = new Ananta.Views.Locations.AddressFormView()
+			window.userAddressForm.render()
+		)
+
+#edit_profile.user-edit
+	.row-fluid
+		.span3
+			= render 'users/edit_nav', user: @profile.user, active: 'location'
+		.span9
+			.boxed-group
+				%h3
+					Location
+				.inner

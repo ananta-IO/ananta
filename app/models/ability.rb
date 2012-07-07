@@ -53,7 +53,7 @@ class Ability
 			end
 
 			# Profiles
-			can [:update], Profile do |profile|
+			can [:update, :edit_location], Profile do |profile|
 				profile.user == user
 			end
 

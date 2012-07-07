@@ -45,37 +45,39 @@ ActiveRecord::Schema.define(:version => 20120426015522) do
     t.string   "imageable_type"
     t.string   "image"
     t.string   "image_type",     :default => "picture"
-    t.string   "description"
-    t.float    "latitude"
-    t.float    "longitude"
+    t.string   "name"
+    t.float    "lat"
+    t.float    "lon"
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
   end
 
   add_index "images", ["image_type"], :name => "index_images_on_image_type"
   add_index "images", ["imageable_id", "imageable_type"], :name => "index_images_on_imageable_id_and_imageable_type"
-  add_index "images", ["latitude", "longitude"], :name => "index_images_on_latitude_and_longitude"
+  add_index "images", ["lat", "lon"], :name => "index_images_on_lat_and_lon"
   add_index "images", ["user_id"], :name => "index_images_on_user_id"
 
   create_table "locations", :force => true do |t|
     t.integer  "locatable_id"
     t.string   "locatable_type"
     t.string   "name",           :default => "default"
+    t.string   "address"
     t.string   "street"
     t.string   "city"
     t.string   "state"
     t.string   "zipcode"
+    t.string   "country"
     t.string   "timezone"
-    t.string   "country",        :default => "US"
-    t.float    "latitude"
-    t.float    "longitude"
+    t.float    "lat"
+    t.float    "lon"
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
   end
 
+  add_index "locations", ["address"], :name => "index_locations_on_address"
   add_index "locations", ["city", "state"], :name => "index_locations_on_city_and_state"
   add_index "locations", ["country"], :name => "index_locations_on_country"
-  add_index "locations", ["latitude", "longitude"], :name => "index_locations_on_latitude_and_longitude"
+  add_index "locations", ["lat", "lon"], :name => "index_locations_on_lat_and_lon"
   add_index "locations", ["locatable_id", "locatable_type"], :name => "index_locations_on_locatable_id_and_locatable_type"
   add_index "locations", ["zipcode"], :name => "index_locations_on_zipcode"
 
@@ -99,11 +101,11 @@ ActiveRecord::Schema.define(:version => 20120426015522) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.string   "timezone"
-    t.float    "latitude"
-    t.float    "longitude"
+    t.float    "lat"
+    t.float    "lon"
   end
 
-  add_index "projects", ["latitude", "longitude"], :name => "index_projects_on_latitude_and_longitude"
+  add_index "projects", ["lat", "lon"], :name => "index_projects_on_lat_and_lon"
   add_index "projects", ["name"], :name => "index_projects_on_name"
   add_index "projects", ["slug"], :name => "index_projects_on_slug", :unique => true
   add_index "projects", ["state"], :name => "index_projects_on_state"
@@ -191,13 +193,13 @@ ActiveRecord::Schema.define(:version => 20120426015522) do
     t.string   "username"
     t.string   "slug"
     t.string   "timezone"
-    t.float    "latitude"
-    t.float    "longitude"
+    t.float    "lat"
+    t.float    "lon"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["facebook_id"], :name => "index_users_on_facebook_id"
-  add_index "users", ["latitude", "longitude"], :name => "index_users_on_latitude_and_longitude"
+  add_index "users", ["lat", "lon"], :name => "index_users_on_lat_and_lon"
   add_index "users", ["permissions"], :name => "index_users_on_permissions"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["slug"], :name => "index_users_on_slug", :unique => true

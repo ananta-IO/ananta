@@ -36,7 +36,11 @@ Ananta::Application.routes.draw do
 			get 'random'
 		end
 	end
-	resources :profiles, :path => ''
+	resources :profiles, :path => '' do
+		member do
+			get :edit_location
+		end
+	end
 	resources :users, :path => '', :only => [] do
 		resources :projects, :path => '', :except => [:index]
 	end

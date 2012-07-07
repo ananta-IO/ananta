@@ -1,27 +1,13 @@
 -# Add the application js
 = javascript_include_tag "application"
-
-:javascript
-	$(function(){
-		// $('.modal').modal();
-		// $('.dropdown-toggle').dropdown();
-		// $('.scrollspy').scrollSpy();
-		// $('.btn').button();
-		// $('.tabs').tabs();
-		$("[rel*=tooltip]").tooltip();
-		$("[rel*=popover]").popover();
-		// $('.alert').alert();
-		// $('.collapse').collapse();
-		// $('.carousel').carousel();
-		// $('.typeahead').typeahead();
-
-		// $('body').jScrollPane({autoReinitialise: true});
-	});
 			
 -#  Append your own using content_for :javascripts
 = yield :javascripts
 
 - unless Rails.env.test?
+	-# Google Maps
+	%script{ src: "http://maps.googleapis.com/maps/api/js?key=#{Rails.env == 'development' ? 'AIzaSyCDoOtoUcsKP8lyeMZtpy5lCs0GcEPP6C8' : ENV['GOOGLE_API_KEY']}&sensor=false"}
+	
 	-# Add the google js api for goodies like charts
 	%script{ src: "https://www.google.com/jsapi" }
 	:javascript

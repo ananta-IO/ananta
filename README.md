@@ -34,5 +34,5 @@ NEWBS. [Read this if you are new to Rails development and need to get up and run
 
 4. run ``bundle``
 
-5. start the server ``foreman start -p 3000`` and or run the tests ``rake spec``
+5. start the server ``./s`` and or run the tests ``./t``
 

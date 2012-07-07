@@ -35,13 +35,13 @@ FactoryGirl.define do
 
 	factory :location do
 		name 'NYC'
-		country 'US'
-		city 'New York'
-		state 'New York'
-		zipcode 10001
-		latitude 40.71435280
-		longitude -74.00597309999999
-		timezone 'America/New_York'
+		address 'New York, New York, 10001'
+		# city 'New York'
+		# state 'New York'
+		# zipcode 10001
+		lat 40.71435280
+		lng -74.00597309999999
+		# timezone 'America/New_York'
 	end
 
 

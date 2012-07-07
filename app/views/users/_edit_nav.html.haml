@@ -8,6 +8,10 @@
 				%i.icon-user
 				Profile
 		%li
+			= link_to edit_location_profile_path(user.profile), :class => (active == 'location' ? 'active' : '') do
+				%i.icon-map-marker
+				Location
+		%li
 			= link_to "/users/edit", :class => (active == 'account settings' ? 'active' : '') do
 				%i.icon-key
 				Account Settings
