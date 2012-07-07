@@ -9,7 +9,7 @@
 								%i.icon-map-marker
 						%td.input
 							.input.string.required.address
-								%input{:type => "text", :name => "location[address]", :maxlength => 200, :value => "#{if @location.address then @location.address else ''}", :placeholder => "Start typing your address", autocomplete: "off", :autofocus => false}
+								%input{:type => "text", :name => "location[address]", :maxlength => 200, :value => "#{if @model.get('address') then @model.get('address') else ''}", :placeholder => "Start typing your address", autocomplete: "off", :autofocus => false}
 								.suggested-locations
 									%ul
 						%td.action

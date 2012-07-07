@@ -6,7 +6,7 @@ class Ananta.Views.Locations.AddressFormView extends Backbone.View
 	className: 'address-form'
 
 	events:
-		'keyup input.address'              : 'suggestLocations'
+		'keyup .address input'		: 'suggestLocations'
 
 	initialize: (options) ->
 		_.bindAll(@, 'render')
@@ -15,9 +15,10 @@ class Ananta.Views.Locations.AddressFormView extends Backbone.View
 		@geocoder = new google.maps.Geocoder()
 
 	render: ->
-		$(@el).html(@template( @model.toJSON() ))
+		$(@el).html(@template(@))
 
-	suggestLocations: (value) ->
+	suggestLocations: ->
+		value = @$(".address input").val()
 		@$(".suggested-locations ul").empty()
 		@geocoder.geocode( { 'address': value }, (result, status) =>
 			if status == google.maps.GeocoderStatus.OK
