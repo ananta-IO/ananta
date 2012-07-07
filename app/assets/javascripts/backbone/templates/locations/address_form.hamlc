@@ -1,3 +1,20 @@
-%input.address{:type => "text", :name => "address", :autocomplete => "off"}
-.suggested-locations
-    %ul
+%form.location{:action => "/locations", :method => "post"}
+	.row-fluid
+		.span12
+			%table
+				%tbody
+					%tr
+						%td.hint
+							%span.hint
+								%i.icon-map-marker
+						%td.input
+							.input.string.required.address
+								%input{:type => "text", :name => "location[address]", :maxlength => 200, :value => "#{if @location.address then @location.address else ''}", :placeholder => "Start typing your address", autocomplete: "off", :autofocus => false}
+								.suggested-locations
+									%ul
+						%td.action
+							%span
+								%button.location-action-save.btn{:name => "location-action-save", :type => "submit"} Save Location
+	.row-fluid
+		.span12
+			.alerts

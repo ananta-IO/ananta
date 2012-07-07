@@ -2,10 +2,10 @@
 	:coffeescript
 		$(() ->
 			window.userAddressForm = new Ananta.Views.Locations.AddressFormView()
-			window.userAddressForm.render()
+			$("#edit_profile_location .boxed-group .inner").html(window.userAddressForm.render().el)
 		)
 
-#edit_profile.user-edit
+#edit_profile_location.user-edit
 	.row-fluid
 		.span3
 			= render 'users/edit_nav', user: @profile.user, active: 'location'

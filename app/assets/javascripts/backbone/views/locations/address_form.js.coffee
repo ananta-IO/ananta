@@ -1,6 +1,6 @@
 Ananta.Views.Locations ||= {}
 
-class Ananta.Views.Locations.AddressForm extends Backbone.View
+class Ananta.Views.Locations.AddressFormView extends Backbone.View
 	template: JST['backbone/templates/locations/address_form']
 
 	className: 'address-form'
@@ -9,7 +9,13 @@ class Ananta.Views.Locations.AddressForm extends Backbone.View
 		'keyup input.address'              : 'suggestLocations'
 
 	initialize: (options) ->
+		_.bindAll(@, 'render')
+		options or= {}
+		@model or= new Ananta.Models.Location(options.location)
 		@geocoder = new google.maps.Geocoder()
+
+	render: ->
+		$(@el).html(@template( @model.toJSON() ))
 
 	suggestLocations: (value) ->
 		@$(".suggested-locations ul").empty()
