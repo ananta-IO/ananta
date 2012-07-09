@@ -1,3 +1,12 @@
+GIT
+  remote: git://github.com/softa/activerecord-postgres-hstore.git
+  revision: 93c6c88a506970204965f3902e19d18d65b05e09
+  specs:
+    activerecord-postgres-hstore (0.4.0)
+      pg
+      rails
+      rake
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -362,6 +371,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-postgres-hstore!
   acts-as-taggable-on
   analytical
   ask_geo

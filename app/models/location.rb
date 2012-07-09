@@ -5,28 +5,29 @@ class Location < ActiveRecord::Base
 	#########################
 	# Callbacks & Misc method calls (e.g. devise for, acts_as_whatever )
 	#########################
-	geocoded_by :address
-	reverse_geocoded_by :lat, :lng do |obj,results|
-		if geo = results.first
-			obj.city    = geo.city
-			obj.state   = geo.state
-			obj.zipcode = geo.postal_code
-			obj.country = geo.country_code
-		end
-	end
+	serialize :data, ActiveRecord::Coders::Hstore
+	
+	geocoded_by :geocode_address
+	# reverse_geocoded_by :lat, :lng do |obj,results|
+	#	if geo = results.first
+	#		obj.data.city    = geo.city
+	#		obj.data.state   = geo.state
+	#		obj.data.zipcode = geo.postal_code
+	#		obj.data.country = geo.country_code
+	#	end
+	# end
 
-	after_validation :geocode, :if => Proc.new { |location| (!location.ip.nil? and location.address.blank?) or 
-															(location.address_changed? and !(location.lat_changed? or location.lon_changed?)) }
-	# after_validation :set_timezone, :if => Proc.new { |location| (location.timezone.blank? or location.lat_changed? or location.lon_changed?) }
-	before_save :reverse_geocode, :if => Proc.new { |location| (location.lat_changed? or location.lon_changed?) and !(location.street_changed? or location.city_changed? or location.state_changed? or location.zipcode_changed? or location.country_changed?) }
-	after_save :sync_locatable, :if => Proc.new { |location| location.locatable and (location.lat_changed? or location.lon_changed? or location.timezone_changed?) }
+	after_validation :geocode, :if => Proc.new { |location| (location.address.blank? and location.ip) }
+	# after_validation :set_timezone, :if => Proc.new { |location| (location.timezone.blank? or location.lat_changed? or location.lng_changed?) }
+	# before_save :reverse_geocode, :if => Proc.new { |location| (location.lat_changed? or location.lng_changed?) and !(location.street_changed? or location.city_changed? or location.state_changed? or location.zipcode_changed? or location.country_changed?) }
+	after_save :sync_locatable, :if => Proc.new { |location| location.locatable and (location.lat_changed? or location.lng_changed? or location.timezone_changed?) }
 
 
 	#########################
 	# Setup attributes (reader, accessible, protected)
 	#########################
 	attr_accessor :ip
-	attr_accessible :name, :address, :lat, :lng
+	attr_accessible :name, :address, :lat, :lng, :data
 
 
 	#########################
@@ -56,6 +57,10 @@ class Location < ActiveRecord::Base
 	#########################
 	# Public Instance Methods ( def method_name )
 	#########################
+
+	def geocode_address
+		ip || address
+	end
 
 	def map_url
 		"http://maps.google.com/maps?q=#{self.address}&hl=en"

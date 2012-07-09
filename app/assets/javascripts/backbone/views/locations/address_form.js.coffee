@@ -61,15 +61,29 @@ class Ananta.Views.Locations.AddressFormView extends Backbone.View
 		else
 			$li = $(e.target).parent()
 
-		@model.set({ lat: $li.attr("data-lat"), lng: $li.attr("data-lng"), address: $li.find(".address").text() })
+		@model.set(
+			lat: $li.attr("data-lat")
+			lng: $li.attr("data-lng")
+			address: $li.attr("data-address") 
+			data:
+				geocoder: 'google' 
+				geocoder_response: $li.attr("data-data") #TODO: maybe don't save this
+		)
+
 		@$(".suggested-locations").slideUp()
 
 	suggestLocations: ->
-		value = @$(".address input").val()
+		partial_address = @$(".address input").val()
 		@$(".suggested-locations ul").empty()
-		@geocoder.geocode( { 'address': value }, (result, status) =>
+		@geocoder.geocode( { 'address': partial_address }, (result, status) =>
 			if status == google.maps.GeocoderStatus.OK
 				result.each (location) =>
-					@$(".suggested-locations ul").append("<li data-lat='"+location.geometry.location.$a+"' data-lng='"+location.geometry.location.ab+"'><div class='address'><i class='icon-map-marker'></i> "+location.formatted_address+"</div></li>")
+					$li = $("<li 
+						data-lat='#{location.geometry.location.$a}' 
+						data-lng='#{location.geometry.location.ab}' 
+						data-address='#{location.formatted_address}' 
+						data-data='#{JSON.stringify(location)}'>
+						<div class='address'><i class='icon-map-marker'></i> #{location.formatted_address}</div></li>")
+					@$(".suggested-locations ul").append($li)
 				@$(".suggested-locations").slideDown()
 		)
