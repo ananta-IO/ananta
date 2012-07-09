@@ -46,6 +46,10 @@
 						%i.icon-cog
 						profile
 				%li
+					= link_to edit_location_profile_path(current_user.profile) do
+						%i.icon-cog
+						location
+				%li
 					= link_to "/users/edit" do
 						%i.icon-cog
 						account
