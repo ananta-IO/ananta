@@ -1,7 +1,9 @@
 =content_for :javascripts do
 	:coffeescript
 		$(() ->
-			window.userAddressForm = new Ananta.Views.Locations.AddressFormView()
+			window.userAddressForm = new Ananta.Views.Locations.AddressFormView(
+				location: #{ render("locations/base.json", object: @profile.user.location) }
+			)
 			$("#edit_profile_location .boxed-group .inner").html(window.userAddressForm.render())
 		)
 

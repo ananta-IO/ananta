@@ -10,45 +10,36 @@ Ananta.Mixins.Errors =
 		options.animationOut   or= 'fadeOutRight'
 		options.loginCallback  or= null # i.e. whatever the default is
 
-		@clearErrors(options.parentSelector)
+		messages = []
 
-		if errors['error'] then @renderError(errors['error'], '', options.parentSelector)
+		if errors['error'] then messages = @parseError(errors['error'], '', messages)
 		if errors['error'] == "You need to sign in or sign up before continuing." then @loginModal(options.loginCallback)
 		if errors['errors']
 			for key, val of errors['errors']
 				if options.keysToRender? and (options.keysToRender.some (word) -> word == key)
-					@renderError(val, key, options.parentSelector)
+					messages = @parseError(val, key, messages)
 				else
-					@renderError(val, key, options.parentSelector)
+					messages = @parseError(val, key, messages)
 
-		if options.animateIn then @animateErrorsIn(options)
+		@renderFlashes(messages, 'error', options)
 
-	renderError: (error, attribute, selector) ->
+	parseError: (error, attribute, messages) ->
 		attribute or= ''
-		if error == 'Invalid email or password.' then error = 'Invalid password.' # Special case for login_register_modal. Maybe refactor our of here?
-		render = (e, a) => 
-			@$(selector).append("<div class='alert alert-error'><a class='close' data-dismiss='alert' href='#'>&times;</a>#{a} #{e}</div>")
-			Analytical.event('Render Error', { error: e, attribute: a, location: window.location.href } )
+		messages or= []
+		Analytical.event('Render Error', { error: error, attribute: attribute, location: window.location.href } )
+
+		if error == 'Invalid email or password.' then error = 'Invalid password.' # Special case for login_register_modal. Maybe refactor out of here?
+		
+		format = (e, a) -> 
+			"#{a} #{e}"
+			
 		if typeof error == 'string'
-			render(error, attribute)
+			messages.add format(error, attribute)
 		else
 			_.each error, (error) ->
-				render(error, attribute)
+				messages.add format(error, attribute)
 
-	animateErrorsIn: (options) ->
-		@$(".alert").css('visibility', 'hidden')
-		@$(".alert").each (i, e) ->
-			$(@).delay(i*300).queue () ->
-				$(@).css('visibility', 'visible').addClass("animated #{options.animationIn}").dequeue()
-				if options.animateOut then Ananta.Mixins.Errors.animateErrorOut($(@), options.animationOut)
-	
-	animateErrorOut: (el, animation) ->
-		wait 7000, =>
-			el.addClass("animated #{animation}").delay(500).slideUp 700, =>
-				wait 2000, =>
-					el.remove()
+		messages
 
-	clearErrors: (selector) ->
-		@$(selector).html('')
-
+Ananta.Mixins.Errors = $.extend(Ananta.Mixins.Errors, Ananta.Mixins.Flashes)
 Ananta.Mixins.Errors = $.extend(Ananta.Mixins.Errors, Ananta.Mixins.Logins)

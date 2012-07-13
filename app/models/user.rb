@@ -25,6 +25,9 @@ class User < ActiveRecord::Base
 	acts_as_voter
 	has_karma(:projects, :as => :user, :weight => 1.0) # votable, foreign_key, weight
 
+	# Geocoder
+	geocoded_by nil, :latitude => :lat, :longitude => :lng
+	
 
 	#########################
 	# Setup attributes (reader, accessible, protected)
@@ -41,19 +44,18 @@ class User < ActiveRecord::Base
 	extend FriendlyId
 	friendly_id     :username
 	has_one         :profile, :dependent => :destroy
-	has_one         :location, :as => :locatable, :dependent => :destroy
 	# has_one       :account, :dependent => :destroy                # TODO: ?
-	has_many        :projects
+	has_many        :locations, :as => :locatable, :dependent => :destroy
+	has_many        :projects, :dependent => :destroy
 	# has_many      :project_memberships
 	# has_many      :joined_projects, :class_name => 'Project', :through => :project_memberships
 	# has_many      :team_memberships                           # TODO: ?
 	# has_many      :teams, :through => :team_memberships       # TODO: ?
-	has_many        :images
-	has_many        :questions
-	has_many        :answers
+	has_many        :images, :dependent => :destroy
+	has_many        :questions, :dependent => :destroy
+	has_many        :answers, :dependent => :destroy
 
 	accepts_nested_attributes_for :profile
-	accepts_nested_attributes_for :location
 
 
 	#########################
@@ -62,7 +64,6 @@ class User < ActiveRecord::Base
 	validates :username, :uniqueness => {:case_sensitive => false}, :length => 3..63, :allow_blank => true, :if => Proc.new { |user| user.username != user.id.to_s }
 	validate  :validate_username_format
 	validate  :validate_has_a_project, on: :create
-	# TODO: a user should not be able to register without a project?
 
 
 	#########################
@@ -119,6 +120,16 @@ class User < ActiveRecord::Base
 
 	def last_name
 		self.name.split(" ").last
+	end
+
+	# Current location
+	def location
+		current_location = locations.last
+		current_location ? current_location : nil
+	end
+
+	def address
+		location.address if location
 	end
 
 	def editors

@@ -7,7 +7,7 @@ class CreateLocations < ActiveRecord::Migration
 			t.string :timezone    
 			t.float  :lat
 			t.float  :lng
-			t.hstore :data
+			t.text	 :data
 
 			t.timestamps
 		end

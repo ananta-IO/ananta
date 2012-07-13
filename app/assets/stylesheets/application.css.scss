@@ -1124,21 +1124,16 @@ label.hc{
 		}
 		li{
 			list-style: none;
-			padding: 10px 15px;
+			padding: 10px;
 			cursor: pointer;
 			position: relative;
 			&.selected{
 				background-color: $color-link;
 				color: white;
 			}
-			&.new{
-				line-height: 16px;
-				padding: 12px 20px;
-				border-top: 1px solid #e7e7e7;
-			}
 		}
 		.address{
-			font-size: 12px;
+			font-size: 15px;
 			line-height: 16px;
 		}
 	}

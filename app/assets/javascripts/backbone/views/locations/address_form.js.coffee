@@ -6,13 +6,14 @@ class Ananta.Views.Locations.AddressFormView extends Backbone.View
 	className: 'address-form'
 
 	events:
-		'keyup form'                        		: 'keyup'
+		'keydown form'                      		: 'keydown'
 		'mouseenter .suggested-locations li'		: 'hoverLocation'
 		'mouseleave .suggested-locations li'		: 'unhoverLocation'
 		'click .suggested-locations li'     		: 'selectLocation'
+		'submit form'                       		: 'save'
 
 	initialize: (options) ->
-		_.bindAll(@, 'render', 'keyup')
+		_.bindAll(@, 'render', 'keydown')
 		options or= {}
 		@model or= new Ananta.Models.Location(options.location)
 		@geocoder = new google.maps.Geocoder()
@@ -22,7 +23,7 @@ class Ananta.Views.Locations.AddressFormView extends Backbone.View
 	render: ->
 		$(@el).html(@template(@))
 
-	keyup: (e) ->
+	keydown: (e) ->
 		if e.keyCode == 40
 			if @$(".suggested-locations").is(":visible")
 				selected = @$(".suggested-locations ul li.selected")
@@ -62,12 +63,14 @@ class Ananta.Views.Locations.AddressFormView extends Backbone.View
 			$li = $(e.target).parent()
 
 		@model.set(
+			name: 'default'
 			lat: $li.attr("data-lat")
 			lng: $li.attr("data-lng")
 			address: $li.attr("data-address") 
 			data:
-				geocoder: 'google' 
-				geocoder_response: $li.attr("data-data") #TODO: maybe don't save this
+				gateway: 'google'
+				gateway_version: 'js 3.0' 
+				gateway_response: jQuery.parseJSON( $li.attr("data-data") )
 		)
 
 		@$(".suggested-locations").slideUp()
@@ -87,3 +90,18 @@ class Ananta.Views.Locations.AddressFormView extends Backbone.View
 					@$(".suggested-locations ul").append($li)
 				@$(".suggested-locations").slideDown()
 		)
+
+	save: (e) ->
+		e.preventDefault()
+		e.stopPropagation()
+		@model.save(null
+			success: (data) =>
+				@renderFlashes ['location saved successfully']
+			error: (data, jqXHR) =>
+				errors = $.parseJSON(jqXHR.responseText)
+				@renderErrors errors
+		)
+
+
+_.extend(Ananta.Views.Locations.AddressFormView::, Ananta.Mixins.Flashes)
+_.extend(Ananta.Views.Locations.AddressFormView::, Ananta.Mixins.Errors)

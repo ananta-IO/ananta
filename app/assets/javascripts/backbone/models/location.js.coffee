@@ -2,7 +2,7 @@ class Ananta.Models.Location extends Backbone.Model
 	urlRoot: '/locations'
 	
 	defaults:
-		name: null
+		name: 'default'
 		# address: null
 		# street: null
 		# city: null

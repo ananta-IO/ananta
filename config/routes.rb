@@ -5,6 +5,7 @@ Ananta::Application.routes.draw do
 	resources :sessions, :only => [:index]
 
 	resources :comments, :only => [:index, :create, :update]
+	resources :locations, :only => [:create, :update]
 
 	resources :questions, :only => [:index, :show, :create, :update] do
 		get 'page/:page', :action => :index, :on => :collection

@@ -52,6 +52,13 @@ class Ability
 				end
 			end
 
+
+			# Locations
+			can [:create, :update], Location do |location|
+				location.locatable.editors.include? user
+			end
+
+
 			# Profiles
 			can [:update, :edit_location], Profile do |profile|
 				profile.user == user

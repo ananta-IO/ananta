@@ -5,9 +5,9 @@ class Location < ActiveRecord::Base
 	#########################
 	# Callbacks & Misc method calls (e.g. devise for, acts_as_whatever )
 	#########################
-	serialize :data, ActiveRecord::Coders::Hstore
+	serialize :data
 	
-	geocoded_by :geocode_address
+	geocoded_by :geocode_address, :latitude => :lat, :longitude => :lng
 	# reverse_geocoded_by :lat, :lng do |obj,results|
 	#	if geo = results.first
 	#		obj.data.city    = geo.city
@@ -27,7 +27,7 @@ class Location < ActiveRecord::Base
 	# Setup attributes (reader, accessible, protected)
 	#########################
 	attr_accessor :ip
-	attr_accessible :name, :address, :lat, :lng, :data
+	attr_accessible :name, :address, :lat, :lng, :data, :locatable, :locatable_id, :locatable_type
 
 
 	#########################
@@ -40,7 +40,6 @@ class Location < ActiveRecord::Base
 	# Validations
 	#########################
 	validates :name, :presence => true
-	# validates :address, :presence => true, :if => Proc.new { |location| location.ip.nil? and (location.lat.blank? or location.lng.blank?) }
 
 
 	#########################
@@ -59,7 +58,7 @@ class Location < ActiveRecord::Base
 	#########################
 
 	def geocode_address
-		ip || address
+		self.ip || self.address
 	end
 
 	def map_url
@@ -97,7 +96,7 @@ class Location < ActiveRecord::Base
 		%w(lat lng timezone).each do |a|
 			obj[a.to_sym] = self[a.to_sym]
 		end
-		obj.save
+		obj.save!
 	end
 
 end

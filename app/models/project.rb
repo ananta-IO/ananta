@@ -15,6 +15,7 @@ class Project < ActiveRecord::Base
   acts_as_voteable
 
   # Project state machine
+  # TODO: Remove State Machine from the whole app.
   state_machine :initial => :planning do
     event :work do
       transition :planning => :working
@@ -36,6 +37,9 @@ class Project < ActiveRecord::Base
       transition [:planning, :working, :completing] => :killed
     end
   end
+
+  # Geocoder
+  geocoded_by nil, :latitude => :lat, :longitude => :lng
 
 
   #########################

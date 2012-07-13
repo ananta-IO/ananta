@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(:version => 20120426015522) do
     t.string   "timezone"
     t.float    "lat"
     t.float    "lng"
-    t.hstore   "data"
+    t.text     "data"
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
   end
