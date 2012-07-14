@@ -60,7 +60,8 @@ Ananta::Application.configure do
 
   config.action_mailer.default_url_options = { :host => 'a-staging.herokuapp.com' }
 
-  config.middleware.use ExceptionNotifier,
-    sender_address: 'noreply@ananta.io',
-    exception_recipients: 'developers@ananta.io'
+  # TODO: uncomment when sendgrid is added 
+  # config.middleware.use ExceptionNotifier,
+  #   sender_address: 'noreply@ananta.io',
+  #   exception_recipients: 'developers@ananta.io'
 end
