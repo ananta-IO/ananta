@@ -81,7 +81,7 @@ class Ananta.Views.ProjectFlow.ProjectNameView extends Backbone.View
 		@$('input').tooltip
 			placement: 'top'
 			delay: 300
-			title: "Name one thing you are working on. <br/>Ananta will connect you with people who can help for free."
+			title: "Name something you are working on. <br/>And get connected with people who share your interest."
 		@$('span.hint').tooltip
 			placement: 'right'
 			title: ""

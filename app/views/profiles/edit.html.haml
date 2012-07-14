@@ -3,18 +3,18 @@
 =content_for :javascripts do
 	:javascript
 		//
-		window.bio_tags = #{raw  @tags['bio_tags'].to_json}
-		window.skills = #{raw  @tags['skills'].to_json}
-		window.needs = #{raw  @tags['needs'].to_json}
+		window.bio = #{raw  @tags['bio'].to_json}
+		window.seeking = #{raw  @tags['seeking'].to_json}
+		window.offering = #{raw  @tags['offering'].to_json}
 		//
-		window.selected_bio_tags = #{raw @selected_tags['bio_tags'].to_json}
-		window.selected_skills = #{raw @selected_tags['skills'].to_json}
-		window.selected_needs = #{raw @selected_tags['needs'].to_json}
+		window.selected_bio = #{raw @selected_tags['bio'].to_json}
+		window.selected_seeking = #{raw @selected_tags['seeking'].to_json}
+		window.selected_offering = #{raw @selected_tags['offering'].to_json}
 		//
 		$(document).ready(function() {
-			$('#profile_bio_tokens').tokenInput(window.bio_tags, { theme : 'facebook', preventDuplicates: true, tokenLimit: 100, prePopulate: window.selected_bio_tags, createTokenFromQuery: true } );
-			$('#profile_skill_tokens').tokenInput(window.skills, { theme : 'facebook', preventDuplicates: true, tokenLimit: 100, prePopulate: window.selected_skills, createTokenFromQuery: true } );
-			$('#profile_need_tokens').tokenInput(window.needs, { theme : 'facebook', preventDuplicates: true, tokenLimit: 100, prePopulate: window.selected_needs, createTokenFromQuery: true } );
+			$('#profile_bio_tokens').tokenInput(window.bio, { theme : 'facebook', preventDuplicates: true, tokenLimit: 100, prePopulate: window.selected_bio, createTokenFromQuery: true } );
+			$('#profile_seeking_tokens').tokenInput(window.seeking, { theme : 'facebook', preventDuplicates: true, tokenLimit: 100, prePopulate: window.selected_seeking, createTokenFromQuery: true } );
+			$('#profile_offering_tokens').tokenInput(window.offering, { theme : 'facebook', preventDuplicates: true, tokenLimit: 100, prePopulate: window.selected_offering, createTokenFromQuery: true } );
 		});
 		//
 		$(function () {
@@ -70,11 +70,11 @@
 								.new-image
 									= f.file_field :avatar, name: :image, id: :avatar_file
 						%br
-						= f.input :bio_tokens, label: "Bio Tags"
+						= f.input :bio_tokens, label: "Bio", hint: 'Name a few notable events in your life.'
 						%br
-						= f.input :skill_tokens, label: "Skills"
+						= f.input :seeking_tokens, label: "Seeking", hint: 'What do you want?'
 						%br
-						= f.input :need_tokens, label: "Needs"
+						= f.input :offering_tokens, label: "Offering", hint: 'What are you willing to give?'
 						%br
 						.form-actions
 							= f.button :submit, :class => "btn-primary"

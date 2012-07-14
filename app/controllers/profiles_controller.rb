@@ -7,12 +7,12 @@ class ProfilesController < InheritedResources::Base
 	load_and_authorize_resource
 
 	def edit
-		populate_tags @profile, :bio_tags, :skills, :needs
+		populate_tags @profile, :bio, :seeking, :offering
 		edit!
 	end
 
 	def update
-		populate_tags @profile, :bio_tags, :skills, :needs
+		populate_tags @profile, :bio, :seeking, :offering
 		update!
 	end
 end

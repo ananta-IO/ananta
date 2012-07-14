@@ -3,7 +3,7 @@ ul.token-input-list-facebook {
     overflow: hidden; 
     height: auto !important; 
     height: 1%;
-    max-width: 370px;
+    /*max-width: 370px;*/
     min-width: 100px;
     border: 1px solid #8496ba;
     cursor: text;
@@ -73,7 +73,8 @@ li.token-input-input-token-facebook {
 
 div.token-input-dropdown-facebook {
     position: absolute;
-    max-width: 370px;
+    /*max-width: 370px;*/
+    /*width: 100%;*/
     min-width: 100px;
     background-color: #fff;
     overflow: hidden;

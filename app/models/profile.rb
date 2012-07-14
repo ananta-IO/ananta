@@ -8,7 +8,7 @@ class Profile < ActiveRecord::Base
   #########################
   after_create :add_gravatar
 
-  acts_as_ordered_taggable_on :bio_tags, :skills, :needs
+  acts_as_ordered_taggable_on :bio, :seeking, :offering
 
   gravtastic :secure => false,
               :filetype => :gif,
@@ -18,8 +18,8 @@ class Profile < ActiveRecord::Base
   #########################
   # Setup attributes (reader, accessible, protected)
   #########################
-  attr_reader :bio_tokens, :skill_tokens, :need_tokens
-  attr_accessible :name, :bio_tokens, :skill_tokens, :need_tokens
+  attr_reader :bio_tokens, :seeking_tokens, :offering_tokens
+  attr_accessible :name, :bio_tokens, :seeking_tokens, :offering_tokens
 
 
   #########################
@@ -88,17 +88,17 @@ class Profile < ActiveRecord::Base
 
   # Helper for token_autocomplete
   def bio_tokens= ids
-    self.bio_tag_list = ids
+    self.bio_list = ids
   end
 
   # Helper for token_autocomplete
-  def skill_tokens= ids
-    self.skill_list = ids
+  def seeking_tokens= ids
+    self.seeking_list = ids
   end
 
   # Helper for token_autocomplete
-  def need_tokens= ids
-    self.need_list = ids
+  def offering_tokens= ids
+    self.offering_list = ids
   end
 
   # The users who may modify this model

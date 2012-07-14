@@ -20,25 +20,25 @@
 					Bio
 			.span9
 				%p
-					= @profile.bio_tag_list
+					= list_tags @profile.bio
 					&nbsp;
 		.row-fluid
 			.span3
 				%h4 
 					%i.icon-tags
-					Skills
+					Seeking
 			.span9
 				%p
-					= @profile.skill_list
+					= list_tags @profile.seeking
 					&nbsp;
 		.row-fluid
 			.span3
 				%h4 
 					%i.icon-tags
-					Needs
+					Offering
 			.span9
 				%p
-					= @profile.need_list
+					= list_tags @profile.offering
 					&nbsp;
 	.span8
 		.sub-header 
