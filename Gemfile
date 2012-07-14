@@ -6,8 +6,6 @@ gem 'rails', '3.2.6'
 
 # The Database
 gem 'pg'
-# HStore adapter
-gem 'activerecord-postgres-hstore', git: 'git://github.com/softa/activerecord-postgres-hstore.git'
 
 # The Server
 gem 'unicorn'
