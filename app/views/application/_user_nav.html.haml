@@ -18,6 +18,16 @@
 				%i.icon-chevron-down
 			%ul.dropdown-menu
 				%li.nav-header
+					= link_to random_projects_path, :class => 'pull-right' do
+						%i.icon-random
+					%i.icon-list-alt
+					All projects
+				%li
+					= link_to projects_path do
+						%i.icon-th
+						Explore
+				%li.divider
+				%li.nav-header
 					= link_to new_user_project_path(current_user), :class => 'pull-right' do
 						%i.icon-plus
 					%i.icon-list-alt
@@ -29,8 +39,6 @@
 							= project.name
 				%li.divider
 				%li.nav-header
-					= link_to random_projects_path, :class => 'pull-right' do
-						%i.icon-random
 					%i.icon-list-alt
 					Joined projects
 				%li.divider
@@ -39,20 +47,10 @@
 				%i.icon-cogs
 				%i.icon-chevron-down
 			%ul.dropdown-menu
-				%li.nav-header
-					Settings
 				%li
 					= link_to edit_profile_path(current_user.profile) do
 						%i.icon-cog
-						profile
-				%li
-					= link_to edit_location_profile_path(current_user.profile) do
-						%i.icon-cog
-						location
-				%li
-					= link_to "/users/edit" do
-						%i.icon-cog
-						account
+						settings
 				%li.divider
 				%li
 					= link_to "/logout" do

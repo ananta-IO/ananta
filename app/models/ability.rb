@@ -34,23 +34,21 @@ class Ability
 
 
 			# Images
-			can [:create], Image do |image|
-				# Requires all imageable models to implement an editors method
-				# which returns a list of users who can edit it
+			can [:create, :update], Image do |image|
 				image.imageable.editors.include? user rescue false
 			end
 
-			can [:update], Image do |image|
-				if image.user_id 
-					user.id == image.user_id 
-				elsif image.imageable
-					image.imageable.editors.include? user rescue false	
-				elsif image.imageable_id == nil && image.imageable_type != nil
-					image.imageable_type.classify.constantize.find(params[:image][:imageable_id]).editors.include? user rescue false
-				else
-					false
-				end
-			end
+			# can [:update], Image do |image|
+			#	if image.user_id 
+			#		user.id == image.user_id 
+			#	elsif image.imageable
+			#		image.imageable.editors.include? user rescue false	
+			#	elsif image.imageable_id == nil && image.imageable_type != nil
+			#		image.imageable_type.classify.constantize.find(params[:image][:imageable_id]).editors.include? user rescue false
+			#	else
+			#		false
+			#	end
+			# end
 
 
 			# Locations

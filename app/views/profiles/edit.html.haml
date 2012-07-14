@@ -16,40 +16,6 @@
 			$('#profile_seeking_tokens').tokenInput(window.seeking, { theme : 'facebook', preventDuplicates: true, tokenLimit: 100, prePopulate: window.selected_seeking, createTokenFromQuery: true } );
 			$('#profile_offering_tokens').tokenInput(window.offering, { theme : 'facebook', preventDuplicates: true, tokenLimit: 100, prePopulate: window.selected_offering, createTokenFromQuery: true } );
 		});
-		//
-		$(function () {
-			// Initialize the jQuery File Upload widget:
-			$("#profile_avatar").fileupload({
-				namespace: "file_upload_profile_avatar",
-				url: "/images.json",
-				method: "PUT",
-				autoUpload: true,
-				maxFileSize: 5000000,
-				acceptFileTypes: /(\.|\/)(gif|jpg|jpeg|png)$/i,
-				formData: [
-					{
-						name: "imageable_type",
-						value: "Profile"
-					}, {
-						name: "imageable_id",
-						value: #{@profile.id}
-					}, {
-						name: "image_type",
-						value: "avatar"
-					}
-				],
-				add: function(e, data){
-					$('.new-image').prepend('<img src="/assets/ajax-loader-white-bg.gif" class="loader" />')
-					$('.new-image input').attr('disabled', 'disabled')
-					data.submit();
-				},
-				done: function(e, data){
-					$('.new-image img').remove()
-					$('.new-image input').removeAttr('disabled')
-					$('#profile_avatar > img').attr('src', data.result[0].medium_url)
-				}
-			});
-		});
 
 #edit_profile.user-edit
 	.row-fluid
@@ -62,13 +28,13 @@
 				.inner
 					= simple_form_for @profile, :html => {:class => "form-horizontal"} do |f|
 
-						= f.input :name
+						= f.input :name, :html => { :class => 'span8' }
 						%br
-						= f.input :avatar, hint: raw('avatar will change as soon as you choose a file or <br/> drag an image onto the screen') do
-							#profile_avatar
-								= image_tag(@profile.avatar.image.medium.url, :class => 'circle')
-								.new-image
-									= f.file_field :avatar, name: :image, id: :avatar_file
+						= render 'images/filepicker', image: @profile.avatar, element: '#profile_avatar', ratio: '1:1'
+						= f.input :avatar do
+							#profile_avatar.span6
+								= image_tag(@profile.avatar.image.large.url, :class => 'circle')
+								.btn.btn-info.choose-file Choose Image
 						%br
 						= f.input :bio_tokens, label: "Bio", hint: 'Name a few notable events in your life.'
 						%br

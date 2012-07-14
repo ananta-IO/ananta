@@ -38,9 +38,4 @@
 //= require wait
 //= require date
 
-// Jquery FileUpload
-//= require 'jQUpload/load-image.js'
-//= require 'jQUpload/jquery.iframe-transport.js'
-//= require 'jQUpload/jquery.fileupload.js'
-
 //= require_tree .

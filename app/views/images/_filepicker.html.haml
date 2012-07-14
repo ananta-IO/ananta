@@ -1,0 +1,50 @@
+=content_for :javascripts do
+	<script src="https://api.filepicker.io/v0/filepicker.js"></script>
+	<script type="text/javascript" src="http://feather.aviary.com/js/feather.js"></script>
+	:coffeescript
+		image = #{image.to_json}
+		filepicker.setKey('veke2AECTZum_cOLPXW1') # TODO: put this in config file
+		featherEditor = new Aviary.Feather
+			apiKey: 'deb22802b' # TODO: put this in config file
+			apiVersion: 2
+			appendTo: ""
+			cropPresets: ["#{ratio}"]
+			fileFormat: "png"
+			initTool: 'crop'
+			minimumStyling: true
+			# postUrl: "?"
+			# postData: "?"
+			onSave: (imageID, newURL) ->
+				featherEditor.close()
+				$('#{element} img').animate({opacity: 0.1}, 3000)
+				$.ajax(
+					dataType : 'json'
+					url: '/images'
+					type : 'POST'
+					data: 
+						image: 
+							remote_image_url : newURL
+							image_type       : image.image_type
+							imageable_id     : image.imageable_id
+							imageable_type   : image.imageable_type
+				).done (data) =>
+					$('#{element} img').attr('src', data.large_url)
+					wait 2000, () ->
+						$('#{element} img').animate({opacity: 1}, 1000)
+		#
+		$("#{element} .choose-file").live "click", ->
+			filepicker.getFile(
+				filepicker.MIMETYPES.IMAGES, 
+				{
+					'modal': true,
+					'services': ['My Computer', 'Facebook', 'Images', 'URL', 'Webcam', 'Gmail', 'Dropbox']
+				},
+				(url, token, data) ->
+					img = $('<img id="#editimage"/>')
+					img.attr("src", url)
+					featherEditor.launch({
+						image: img[0],
+						url: url
+					})
+			)
+			return false
