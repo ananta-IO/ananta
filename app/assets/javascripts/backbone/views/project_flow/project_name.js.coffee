@@ -77,8 +77,6 @@ class Ananta.Views.ProjectFlow.ProjectNameView extends Backbone.View
 	render: ->
 		$(@el).html(@template( @model.toJSON() ))
 		@addTooltips()
-		wait 0, =>
-			@addJLabel('#project-name')
 		@
 
 	addTooltips: ->
@@ -90,13 +88,6 @@ class Ananta.Views.ProjectFlow.ProjectNameView extends Backbone.View
 			placement: 'right'
 			title: ""
 		@randomizeIconTooltip()
-
-	addJLabel: (element) ->
-		$(@el).find(element).jLabel({color: "#acacac", opacity: 0.8, yShift: '0'})
-		wait 800, =>
-			$(@el).find(element).css({'position':'absolute'})
-		$(@el).find(element).click ->
-			$(@).parent().find('input').focus()
 
 	hideTooltips: ->
 		@$('input').tooltip('hide')
