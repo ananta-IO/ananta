@@ -28,9 +28,9 @@ class Ability
 
 			# Comments
 			can [:create], Comment
-			# can [:update], Comment do |comment|
-
-			# end
+			can [:update, :destroy], Comment do |comment|
+				comment.created_at + 15.minutes > DateTime.now.utc and comment.editors.include? user
+			end
 
 
 			# Images

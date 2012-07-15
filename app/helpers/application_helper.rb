@@ -11,4 +11,9 @@ module ApplicationHelper
 	def list_tags tags
 		render "tags/tags", tags: tags
 	end
+
+	def markdown(text)
+		text ||= '' # markdown barfs on nil
+		raw $markdown.render(text)
+	end
 end

@@ -36,13 +36,6 @@
 				.sub-header 
 					%h2 
 						= pluralize(@question.comments.count, "Comment")
-				%table.table
-					- @question.comments.each do |comment|
-						%tr
-							%td
-								%p
-									= comment.comment
-								%p
-									= link_to comment.user.username, comment.user.profile
-									= raw "&middot; answered <b>#{comment.commentable.state.titleize}</b> &middot;" if comment.commentable.class.to_s == 'Answer'
-									= time_tag comment.created_at, "#{time_ago_in_words(comment.created_at)} ago"
+
+				- @question.comments.each do |comment|
+					= render 'comments/comment', comment: comment

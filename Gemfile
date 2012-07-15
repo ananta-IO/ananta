@@ -33,14 +33,17 @@ gem 'has_scope'
 # gem 'searchlogic'
 # gem 'meta_search'
 
+# Markdown
+gem 'redcarpet'
+
 # Tagging
 gem 'acts-as-taggable-on'
 
 # State Machine
-gem 'state_machine'
+gem 'state_machine' # TODO: remove
 
 # Voting
-gem 'thumbs_up' #, '~> 0.4.6' # Heroku not working with 0.5.3 - but we will try anyway # TODO: look into this more
+gem 'thumbs_up' # TODO: replace with https://github.com/twitter/activerecord-reputation-system
 
 # Pagination
 gem 'kaminari'

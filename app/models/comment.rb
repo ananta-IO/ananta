@@ -7,6 +7,7 @@ class Comment < ActiveRecord::Base
   # Callbacks & Misc method calls (e.g. devise for, acts_as_whatever )
   #########################
   acts_as_voteable
+  acts_as_taggable
 
 
   #########################
@@ -28,6 +29,9 @@ class Comment < ActiveRecord::Base
   #########################
   # Validations
   #########################
+  # validates :user_id, :presence => true
+  # validates :commentable_id, :presence => true
+  # validates :commentable_type, :presence => true
   validates :comment, :presence => true, :length => { :in => 1..65535 }
 
 
@@ -52,11 +56,10 @@ class Comment < ActiveRecord::Base
   # Public Instance Methods ( def method_name )
   #########################
 
-  ## One line description
-  ## maybe two
-  #def my_method
-  #
-  #end
+  def editors
+    editors = [self.user]
+    editors
+  end
 
 
   #########################

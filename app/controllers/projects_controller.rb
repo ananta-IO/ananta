@@ -35,7 +35,7 @@ class ProjectsController < InheritedResources::Base
 	# Callbacks. Auth & Permissions via devise & cancan.
 	#########################
 	before_filter :authenticate_user!, :except => [:index, :show, :random]
-	before_filter :cuid_to_params, :only => :update
+	before_filter :cuid_to_params, :only => :update # TODO: REFACTOR: this is complicated
 	load_and_authorize_resource
 
 

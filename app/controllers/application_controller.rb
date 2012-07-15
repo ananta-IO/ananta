@@ -8,7 +8,8 @@ class ApplicationController < ActionController::Base
 	analytical use_session_store: true, modules: [:console, :mixpanel]	if Rails.env == 'staging'
 	analytical use_session_store: true, modules: [:mixpanel]          	if Rails.env == 'production'
 
-	after_filter :set_questionable, :if =>  lambda { request.format == 'html' }
+	before_filter :set_markdown
+	after_filter  :set_questionable, :if =>  lambda { request.format == 'html' }
 
 	# Default cancan redirect url
 	rescue_from CanCan::AccessDenied do |exception|
@@ -42,6 +43,13 @@ class ApplicationController < ActionController::Base
 			hash[key][:cuid] = (current_user.id rescue nil) if hash[key]
 		end
 		hash
+	end
+
+	def set_markdown
+		unless $markdown
+			rndr = Redcarpet::Render::HTML.new(filter_html: true)
+			$markdown = Redcarpet::Markdown.new(rndr, autolink: true, space_after_headers: false, strikethrough: true, superscript: true)
+		end
 	end
 
 	# Store some params about the user's current page for use with marq questions

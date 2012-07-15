@@ -115,11 +115,11 @@ class User < ActiveRecord::Base
 	end
 
 	def first_name
-		self.name.split(" ").first
+		name.split(" ").first
 	end
 
 	def last_name
-		self.name.split(" ").last
+		name.split(" ").last
 	end
 
 	# Current location
@@ -130,6 +130,10 @@ class User < ActiveRecord::Base
 
 	def address
 		location.address if location
+	end
+
+	def avatar
+		profile.avatar
 	end
 
 	def editors

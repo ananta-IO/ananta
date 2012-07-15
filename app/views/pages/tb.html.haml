@@ -128,4 +128,46 @@
 		%br
 		%br
 
+.row
+	.span12
+		%br
+		%br
+		%br
+		%br
+
+		#epiceditor
+		= content_for :javascripts do
+			:javascript
+				var opts = {
+					container: 'epiceditor',
+					basePath: '/assets',
+					localStorageName: 'epiceditor',
+					parser: marked,
+					file: {
+						name: 'epiceditor',
+						defaultContent: '',
+						autoSave: 100
+					},
+					theme: {
+						base:'/themes/base/epiceditor.css',
+						preview:'/themes/preview/github.css',
+						editor:'/themes/editor/epic-dark.css'
+					},
+					focusOnLoad: false,
+					shortcut: {
+						modifier: 18,
+						fullscreen: 70,
+						preview: 80,
+						edit: 79
+					}
+				}
+				var editor = new EpicEditor(opts);
+				editor.load();
+				window.e = editor
+
+		%br
+		%br
+		%br
+		%br
+
 
