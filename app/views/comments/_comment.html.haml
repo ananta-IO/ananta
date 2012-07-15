@@ -23,3 +23,8 @@
 					&middot;
 				- if can? :destroy, comment
 					= link_to "Delete", "#"
+	.row-fluid.comments
+		.span1
+		.span11
+			- comment.comments.each do |child_comment|
+				= render 'comments/comment', comment: child_comment
