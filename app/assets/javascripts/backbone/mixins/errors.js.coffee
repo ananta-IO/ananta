@@ -30,6 +30,9 @@ Ananta.Mixins.Errors =
 
 		if error == 'Invalid email or password.' then error = 'Invalid password.' # Special case for login_register_modal. Maybe refactor out of here?
 		
+		switch attribute
+			when 'friendly_id' then attribute = 'phrase'
+
 		format = (e, a) -> 
 			"#{a} #{e}"
 			

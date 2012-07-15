@@ -726,12 +726,11 @@ label.hc{
 			}
 		}
 		.tldr{
-			width: 13px;
-			height: 13px;
 			position: absolute;
 			bottom: 30px;
 			left: 20px;
-			background-color: darken($color-background-hover, 5%);
+			font-size: 30px;
+			color: #ccc;
 			display: block;
 			@media (max-width: 767px){
 				bottom: 10px;

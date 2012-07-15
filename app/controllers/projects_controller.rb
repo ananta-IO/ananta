@@ -52,7 +52,7 @@ class ProjectsController < InheritedResources::Base
 		@project.location ||= @user.location.dup
 		create! do |success, failure|
 			success.html do 
-				flash[:notice] = "Successfully created project. #{undo_link}"
+				# flash[:notice] = "Successfully created project. #{undo_link}" # TODO: enable undo/redo eventually
 				redirect_to user_project_url(@user, @project)
 			end
 			success.json do
@@ -72,7 +72,7 @@ class ProjectsController < InheritedResources::Base
 		params[:project] = pick(params[:project], :name, :description, :state_event, :tag_tokens, :cast_vote)
 		update! do |success, failure|
 			success.html do 
-				flash[:notice] = "Successfully updated project. #{undo_link}"
+				# flash[:notice] = "Successfully updated project. #{undo_link}"
 				redirect_to user_project_url(@user, @project)
 			end
 			success.json do
@@ -85,7 +85,7 @@ class ProjectsController < InheritedResources::Base
 		populate_tags @project, :tags
 		destroy! do |success, failure|
 			success.html do 
-				flash[:notice] = "Successfully deleted project. #{undo_link}"
+				# flash[:notice] = "Successfully deleted project. #{undo_link}"
 				redirect_to profile_url(@user)
 			end
 		end
@@ -109,7 +109,7 @@ class ProjectsController < InheritedResources::Base
 		params[:project] = add_cuid(params[:project], :cast_vote) if params[:project]
 	end
 
-	def undo_link
-		view_context.link_to("undo", revert_version_path(@project.versions.scoped.last), :method => :post)
-	end
+	# def undo_link
+	#	view_context.link_to("undo", revert_version_path(@project.versions.scoped.last), :method => :post)
+	# end
 end

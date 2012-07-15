@@ -6,6 +6,7 @@ FriendlyId.defaults do |config|
 		account
 		add
 		admin
+		answer
 		answers
 		api
 		app
@@ -62,13 +63,17 @@ FriendlyId.defaults do |config|
 		oauth
 		oauth_clients
 		openid
+		organization
 		organizations
 		plans
 		popular
 		privacy
+		profile
 		profiles
+		project
 		projects
 		q
+		question
 		questions
 		random
 		register
@@ -94,6 +99,7 @@ FriendlyId.defaults do |config|
 		terms
 		todo
 		tour
+		translation
 		translations
 		trends
 		unfollow

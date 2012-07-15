@@ -55,6 +55,8 @@ class Ananta.Views.ProjectFlow.ProjectNameView extends Backbone.View
 			'programming this website'
 			'raising a family'
 			'reticulating splines'
+			'searching for your soulmate'
+			'seeking enlightenment'
 			'shooting a movie'
 			'starting a band'
 			'starting a company'
@@ -75,17 +77,26 @@ class Ananta.Views.ProjectFlow.ProjectNameView extends Backbone.View
 	render: ->
 		$(@el).html(@template( @model.toJSON() ))
 		@addTooltips()
+		wait 0, =>
+			@addJLabel('#project-name')
 		@
 
 	addTooltips: ->
 		@$('input').tooltip
 			placement: 'top'
 			delay: 300
-			title: "Name something you are working on. <br/>And get connected with people who share your interest."
+			title: "Name one thing you are working on. <br/>The simple act of writing your goals down and sharing them is proven to make you more likely to succeed."
 		@$('span.hint').tooltip
 			placement: 'right'
 			title: ""
 		@randomizeIconTooltip()
+
+	addJLabel: (element) ->
+		$(@el).find(element).jLabel({color: "#acacac", opacity: 0.8, yShift: '0'})
+		wait 800, =>
+			$(@el).find(element).css({'position':'absolute'})
+		$(@el).find(element).click ->
+			$(@).parent().find('input').focus()
 
 	hideTooltips: ->
 		@$('input').tooltip('hide')
