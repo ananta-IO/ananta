@@ -1,30 +1,32 @@
 = div_for comment do
-	.row-fluid.top
+	%br
+	.row-fluid
 		.span1
-			= image_tag comment.user.avatar.image.small.url
-		.span7
-			= raw "<strong>#{hovercard comment.user}</strong> commented"
-		.span4
-			.pull-right
-				= "#{distance_of_time_in_words_to_now comment.created_at} ago"
-
-	.row-fluid.middle
-		.span12
-			= markdown comment.comment
-
-	.row-fluid.bottom
-		.span12
-			.pull-right
-				= link_to "Reply", "#"
-				- if can? :update, comment
-					&middot;
-					= link_to "Edit", "#"
-				- if can? :update, comment and can? :destroy, comment
-					&middot;
-				- if can? :destroy, comment
-					= link_to "Delete", "#"
-	.row-fluid.comments
-		.span1
+			= image_tag comment.user.avatar.image.small.url, :class => 'circle'
 		.span11
-			- comment.comments.each do |child_comment|
-				= render 'comments/comment', comment: child_comment
+			.boxed-group
+				.inner
+					.row-fluid.top
+						.span8
+							= raw "<strong>#{hovercard comment.user}</strong> commented"
+						.span4
+							.pull-right
+								= "#{distance_of_time_in_words_to_now comment.created_at} ago"
+
+					.row-fluid.middle
+						.span12
+							= markdown comment.comment
+
+					.row-fluid.bottom
+						.span12
+							.pull-right
+								= link_to "Reply", "#"
+								- if can? :update, comment
+									&middot;
+									= link_to "Edit", "#"
+								- if can? :update, comment and can? :destroy, comment
+									&middot;
+								- if can? :destroy, comment
+									= link_to "Delete", "#"
+			
+			= render 'comments/comments', commentable: comment
