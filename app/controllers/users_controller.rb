@@ -1,5 +1,5 @@
 class UsersController < InheritedResources::Base
-	respond_to :json
+	respond_to :html, :json
 	actions :index
 
 	has_scope :email, :only => :index do |controller, scope, value|
@@ -24,6 +24,11 @@ class UsersController < InheritedResources::Base
 
 	def render_nav
 		render 'render_nav.js.erb'
+	end
+
+	def random
+		@user = User.order("RANDOM()").first
+		redirect_to @user.profile
 	end
 
 	protected

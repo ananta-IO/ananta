@@ -17,7 +17,11 @@ Ananta::Application.routes.draw do
 	resources :images, :only => [:create, :update, :destroy]
 
 	match '/render_nav' => 'users#render_nav' # ujs render user_nav. generally called after ajax login
-	resources :users, :only => [:index]
+	resources :users, :only => [:index] do
+		collection do
+			get 'random'
+		end
+	end
 	devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "users/registrations", :sessions => "users/sessions" }
 	devise_scope :user do
 		get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'

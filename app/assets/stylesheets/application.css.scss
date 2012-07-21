@@ -224,6 +224,7 @@ label.hc{
 		margin: 2px;
 		padding: 6px 8px;
 		font-size: 16px;
+		line-height: 16px;
 		@include border-radius(2px);
 		position: relative;
 		box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
@@ -234,7 +235,8 @@ label.hc{
 		i{
 			// position: relative;
 			// top: 5px;
-			font-size: 24px;
+			font-size: 14px;
+			line-height: 14px;
 		}
 	}
 }

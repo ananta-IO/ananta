@@ -17,12 +17,22 @@
 				%li.nav-header
 					= link_to random_projects_path, :class => 'pull-right' do
 						%i.icon-random
-					%i.icon-list-alt
+					%i.icon-wrench
 					All projects
 				%li
 					= link_to projects_path do
 						%i.icon-th
-						Explore
+						Explore projects
+				%li.divider
+				%li.nav-header
+					= link_to random_users_path, :class => 'pull-right' do
+						%i.icon-random
+					%i.icon-group
+					All people
+				%li
+					= link_to users_path do
+						%i.icon-th
+						Explore people
 		%li.dropdown.projects
 			%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
 				%i.icon-book
@@ -48,7 +58,9 @@
 				%i.icon-chevron-down
 			%ul.dropdown-menu
 				%li.nav-header
-					= image_tag current_user.profile.avatar.image.small.url, width: 24, height: 24, class: 'circle'
+					%span.display-inline-block
+						= link_to current_user.profile do
+							= image_tag current_user.profile.avatar.image.small.url, width: 24, height: 24, class: 'circle'
 					= current_user.username
 				%li
 					= link_to current_user.profile do

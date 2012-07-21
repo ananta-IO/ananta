@@ -128,7 +128,7 @@ class Ananta.Views.ProjectFlow.ProjectTagsView extends Backbone.View
 		e.preventDefault()
 		e.stopPropagation()
 		selection = new Backbone.Collection(@selectAndOrder(@tags))
-		tag_tokens = selection.pluck('name')
+		tag_tokens = selection.pluck('name').map((t) -> t.remove('icom-'))
 		@model.set({tag_tokens: tag_tokens})
 		Analytical.event('Project Flow - Submit Project Tags', { project_name: @model.get('name'), location: window.location.href } )
 		@model.save({}
