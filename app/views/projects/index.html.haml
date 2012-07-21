@@ -5,10 +5,13 @@
 		%h1 
 			Explore Projects
 	.row-fluid
-		.span12
-			%ul.thumbnails
+		.span9
+			.row-fluid.project-list
 				= render @projects
 			= paginate @projects
+		.span3
+			.well
+				filters
 
 
 / = link_to 'New Project', new_project_path

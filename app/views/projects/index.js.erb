@@ -1,4 +1,4 @@
-$('#projects ul.thumbnails').append('<%= j render(@projects) %>');
+$('#projects .project-list').append('<%= j render(@projects) %>');
 <% if @projects.current_page < @projects.num_pages %>
 	$('#projects .pagination').replaceWith('<%= j paginate(@projects) %>');
 <% else %>

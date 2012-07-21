@@ -1046,30 +1046,70 @@ label.hc{
 }
 
 #projects{
-	.thumbnails{
-		li.span3:nth-child(4n + 5){
+	.project-list{
+		.span4:nth-child(3n + 4){
 			margin-left: 0;
 		}
-	}
-	.name{
-		height: 1.5em;
-		overflow: hidden;
-	}
-	.description{
-		height: 3em;
-		overflow: hidden;
-	}
-	.tags{
-		height: 3.3em;
-		overflow: hidden;
-	}
-	.state{
-		height: 1.5em;
-		overflow: hidden;
-	}
-	.user{
-		height: 1.5em;
-		// overflow: hidden;
+
+		.project{
+			overflow: hidden;
+			position: relative;
+			border: 1px solid #ddd;
+			margin-bottom: 24px;
+			@include transition-property(all);
+			@include transition-duration(0.3s);
+			@include transition-timing-function(ease-out);
+			.image{
+				padding: 10px;
+				box-sizing:border-box;
+				-moz-box-sizing:border-box;
+				-webkit-box-sizing:border-box;
+			}
+			.info{
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 70%;
+				background: rgba(255, 255, 255, 0.8);
+				padding: 10px;
+				padding-top: 0;
+				box-sizing:border-box;
+				-moz-box-sizing:border-box;
+				-webkit-box-sizing:border-box;
+			}
+			&:hover{
+				.info{
+					top: 0;
+					background: rgba(255, 255, 255, 1.0);
+				}
+			}
+
+			.name{
+				// padding: 0 10px;
+				height: 3em;
+				overflow: hidden;
+			}
+			.description{
+				// padding: 0 10px;
+				height: 4.5em;
+				overflow: hidden;
+			}
+			.bottom{
+				position: absolute;
+				bottom: 0;
+				padding-bottom: 10px;
+				background: $color-background;
+				.tags{
+					height: 2.5em;
+					overflow: hidden;
+				}
+			}
+			.user{
+				position: absolute;
+				bottom: 10px;
+				right: 10px;
+			}
+		}
 	}
 }
 
