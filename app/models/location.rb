@@ -8,18 +8,19 @@ class Location < ActiveRecord::Base
 	serialize :data
 	
 	geocoded_by :geocode_address, :latitude => :lat, :longitude => :lng
-	# reverse_geocoded_by :lat, :lng do |obj,results|
-	#	if geo = results.first
-	#		obj.data.city    = geo.city
-	#		obj.data.state   = geo.state
-	#		obj.data.zipcode = geo.postal_code
-	#		obj.data.country = geo.country_code
-	#	end
-	# end
+	reverse_geocoded_by :lat, :lng do |obj,results|
+		if geo = results.first
+			obj.address = geo.address
+			# obj.data.city    = geo.city
+			# obj.data.state   = geo.state
+			# obj.data.zipcode = geo.postal_code
+			# obj.data.country = geo.country_code
+		end
+	end
 
 	after_validation :geocode, :if => Proc.new { |location| (location.address.blank? and location.ip) }
 	# after_validation :set_timezone, :if => Proc.new { |location| (location.timezone.blank? or location.lat_changed? or location.lng_changed?) }
-	# before_save :reverse_geocode, :if => Proc.new { |location| (location.lat_changed? or location.lng_changed?) and !(location.street_changed? or location.city_changed? or location.state_changed? or location.zipcode_changed? or location.country_changed?) }
+	before_save :reverse_geocode, :if => Proc.new { |location| (location.address.blank? and location.ip) }
 	after_save :sync_locatable, :if => Proc.new { |location| location.locatable and (location.lat_changed? or location.lng_changed? or location.timezone_changed?) }
 
 

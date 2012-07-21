@@ -11,9 +11,9 @@ class Profile < ActiveRecord::Base
   acts_as_ordered_taggable_on :bio, :seeking, :offering
 
   gravtastic :secure => false,
-              :filetype => :gif,
+              :filetype => :jpg,
               :default => :identicon,
-              :size => 512
+              :size => 1024
 
   #########################
   # Setup attributes (reader, accessible, protected)

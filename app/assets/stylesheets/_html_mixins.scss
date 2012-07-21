@@ -4,6 +4,10 @@
 	font-weight: normal;
 }
 
+.box-shadow{
+	@include box-shadow(0 0 0 4px rgba(224, 222, 215, 0.5));
+}
+
 .clearfix{
 	@include clearfix;
 }

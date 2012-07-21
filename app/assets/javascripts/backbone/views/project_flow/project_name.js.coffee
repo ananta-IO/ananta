@@ -83,7 +83,7 @@ class Ananta.Views.ProjectFlow.ProjectNameView extends Backbone.View
 		@$('input').tooltip
 			placement: 'top'
 			delay: 300
-			title: "Name one thing you are working on. <br/>The simple act of writing your goals down and sharing them is proven to make you more likely to succeed."
+			title: "Name one thing you are working on. <br/>Sharing your goals increases their likelihood of success."
 		@$('span.hint').tooltip
 			placement: 'right'
 			title: ""

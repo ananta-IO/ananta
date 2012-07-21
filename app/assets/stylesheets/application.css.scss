@@ -115,7 +115,7 @@ input{
 }
 
 h1{
-	color: rgba(82, 96, 117, 0.5);
+	// color: rgba(82, 96, 117, 0.5);
 }
 
 label.hc{
@@ -137,7 +137,7 @@ label.hc{
 // webkit browsers only
 .webkit {
 	h1{
-		@include inset-text();
+		// @include inset-text();
 	}
 }
 
@@ -198,6 +198,11 @@ label.hc{
 
 .circle{
 	@include border-radius(500px);
+}
+
+.ananta-a{
+	@include border-radius(500px);
+	@include border-bottom-right-radius(250px);
 }
 
 @-webkit-keyframes rotate{from{-webkit-transform:rotate(0deg)}to{-webkit-transform:rotate(360deg)}}

@@ -2,7 +2,8 @@
 	%br
 	.row-fluid
 		.span1
-			= image_tag comment.user.avatar.image.small.url, :class => 'circle'
+			= link_to comment.user.profile do
+				= image_tag comment.user.avatar.image.small.url, :class => 'circle'
 		.span11
 			.boxed-group
 				.inner

@@ -9,12 +9,9 @@
 -# Right
 %ul.nav.pull-right
 	-if current_user
-		%li
-			= link_to current_user.profile, rel: :tooltip, 'data-placement' => 'bottom', 'data-delay' => 0, 'data-original-title' => raw( "Me<br/><img src='#{current_user.profile.avatar.image.small.url}' alt='#{current_user.username}' width=32 height=32 class='circle' />" ) do
-				%i.icon-user
-		%li.dropdown.user-projects
+		%li.dropdown.search
 			%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-				%i.icon-book
+				%i.icon-search
 				%i.icon-chevron-down
 			%ul.dropdown-menu
 				%li.nav-header
@@ -26,7 +23,11 @@
 					= link_to projects_path do
 						%i.icon-th
 						Explore
-				%li.divider
+		%li.dropdown.projects
+			%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+				%i.icon-book
+				%i.icon-chevron-down
+			%ul.dropdown-menu
 				%li.nav-header
 					= link_to new_user_project_path(current_user), :class => 'pull-right' do
 						%i.icon-plus
@@ -35,23 +36,28 @@
 				- current_user.projects.each do |project|
 					%li
 						= link_to [current_user, project] do
-							%i.icon-play
+							%i.icon-wrench
 							= project.name
 				%li.divider
 				%li.nav-header
 					%i.icon-list-alt
 					Joined projects
-				%li.divider
-		%li.dropdown.user-settings
+		%li.dropdown.user
 			%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-				%i.icon-cogs
+				%i.icon-user
 				%i.icon-chevron-down
 			%ul.dropdown-menu
+				%li.nav-header
+					= image_tag current_user.profile.avatar.image.small.url, width: 24, height: 24, class: 'circle'
+					= current_user.username
+				%li
+					= link_to current_user.profile do
+						%i.icon-sign-blank
+						profile
 				%li
 					= link_to edit_profile_path(current_user.profile) do
-						%i.icon-cog
+						%i.icon-cogs
 						settings
-				%li.divider
 				%li
 					= link_to "/logout" do
 						%i.icon-signout
