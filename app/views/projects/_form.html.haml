@@ -16,7 +16,7 @@
 			%br
 			-if params[:action] == 'edit'
 
-				= render 'images/filepicker', image: @project.avatar, element: '#project_avatar', ratio: '16:9'
+				= render 'images/filepicker', image: @project.avatar, element: '#project_avatar', ratio: '4:3'
 				= f.input :avatar do
 					#project_avatar.span6
 						= image_tag(@project.avatar.image.large.url)

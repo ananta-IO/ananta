@@ -26,7 +26,7 @@ class Ananta.Views.Marq.QuestionView extends Backbone.View
 
 	render: ->
 		$(@el).html(@template( @model.toJSON() ))
-		@addPopovers()
+		# @addPopovers()
 		@addEpicEditors()
 		wait 500, () ->
 			window.styleAmp()

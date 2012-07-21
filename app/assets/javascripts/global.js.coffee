@@ -1,5 +1,3 @@
-# Remove flash after a few seconds
-# But only if the flash does not contain a link
 jQuery ->
 	window.initUI()
 
@@ -9,6 +7,8 @@ window.initUI = ->
 	window.initBootstrap()
 	window.styleAmp()
 
+# Remove flash after a few seconds
+# But only if the flash does not contain a link
 window.initFlashes = ->
 	flash = $('#flash .alert')
 	flash.show('fade', {}, 1000)
@@ -17,13 +17,13 @@ window.initFlashes = ->
 			flash.remove()
 
 window.initInfiniteScroll = ->
-	if $('.pagination').length
-		$('#pg-scrl').scroll ->
+	if $('.pagination').length > 0
+		$(window).scroll ->
 			url = $('.pagination .next a').attr('href')
-			if url? and $('#pg-scrl').scrollTop() > $('#wrapper').height() - $('#pg-scrl').height() - 120
+			if url? and $('body').scrollTop() > $('#wrapper').height() - $('body').height() - 120
 				$('.pagination').html('<li class="active"><a href="#">Loading more...</a></li>')
 				$.getScript(url)
-		$('#pg-scrl').scroll()
+		$(window).scroll()
 
 window.initBootstrap = ->
 	# $('.modal').modal();
