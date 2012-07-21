@@ -1056,9 +1056,6 @@ label.hc{
 			position: relative;
 			border: 1px solid #ddd;
 			margin-bottom: 24px;
-			@include transition-property(all);
-			@include transition-duration(0.3s);
-			@include transition-timing-function(ease-out);
 			.image{
 				padding: 10px;
 				box-sizing:border-box;
@@ -1066,6 +1063,9 @@ label.hc{
 				-webkit-box-sizing:border-box;
 			}
 			.info{
+				@include transition-property(all);
+				@include transition-duration(0.3s);
+				@include transition-timing-function(ease-out);
 				position: absolute;
 				width: 100%;
 				height: 100%;
@@ -1079,11 +1079,10 @@ label.hc{
 			}
 			&:hover{
 				.info{
-					top: 0;
+					top: 0%;
 					background: rgba(255, 255, 255, 1.0);
 				}
 			}
-
 			.name{
 				// padding: 0 10px;
 				height: 3em;
