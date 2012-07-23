@@ -111,6 +111,18 @@ class Project < ActiveRecord::Base
     editors
   end
 
+  def energy
+    999
+  end
+
+  def views
+    999
+  end
+
+  def lovers
+    999
+  end
+
   #########################
   # Protected Methods
   #########################

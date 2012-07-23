@@ -1057,25 +1057,18 @@ label.hc{
 			border: 1px solid #ddd;
 			margin-bottom: 24px;
 			.image{
-				padding: 10px;
-				box-sizing:border-box;
-				-moz-box-sizing:border-box;
-				-webkit-box-sizing:border-box;
+				// padding: 2px;
 			}
 			.info{
+				@include transition-delay(0.3s);
 				@include transition-property(all);
 				@include transition-duration(0.3s);
 				@include transition-timing-function(ease-out);
 				position: absolute;
 				width: 100%;
 				height: 100%;
-				top: 70%;
-				background: rgba(255, 255, 255, 0.8);
-				padding: 10px;
-				padding-top: 0;
-				box-sizing:border-box;
-				-moz-box-sizing:border-box;
-				-webkit-box-sizing:border-box;
+				top: 80%;
+				background: rgba(255, 255, 255, 0.85);
 			}
 			&:hover{
 				.info{
@@ -1084,30 +1077,43 @@ label.hc{
 				}
 			}
 			.name{
-				// padding: 0 10px;
-				height: 3em;
+				padding: 0 10px;
+				height: 1.5em;
+				margin-bottom: 10px;
 				overflow: hidden;
+				font-weight: 200;
 			}
 			.description{
-				// padding: 0 10px;
+				padding: 0 10px;
 				height: 4.5em;
 				overflow: hidden;
 			}
 			.bottom{
-				position: absolute;
-				bottom: 0;
-				padding-bottom: 10px;
-				background: $color-background;
-				.tags{
-					height: 2.5em;
-					overflow: hidden;
-				}
-			}
-			.user{
-				position: absolute;
-				bottom: 10px;
-				right: 10px;
-			}
+			 	position: absolute;
+			 	bottom: 0;
+			 	background: $color-background;
+			 	.tags{
+			 		height: 2.5em;
+			 		overflow: hidden;
+			 	}
+			 	.span3{
+			 		float: left;
+			 		display: block;
+			 		width: 22.404%;
+			 		margin-left: 2.128%;
+			 	}
+			 	.energy{
+			 		border-right: 1px solid $color-border;
+			 	}
+			 	.views{
+			 		border-right: 1px solid $color-border;
+			 	}
+			 	.lovers{
+			 	}
+			 	.user{
+			 		max-width: 50px;
+			 	}
+			}		
 		}
 	}
 }
