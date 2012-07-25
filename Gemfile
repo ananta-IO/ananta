@@ -13,7 +13,7 @@ gem 'unicorn'
 
 # Authentications & Permissions
 gem 'devise'
-gem 'omniauth-facebook'
+gem 'omniauth-facebook', '1.4.0' # TODO: remove explicit version when CSRF bug is fixed http://stackoverflow.com/questions/11597130/omniauth-facebook-keeps-reporting-invalid-credentials
 gem 'omniauth-openid'
 gem 'cancan'
 

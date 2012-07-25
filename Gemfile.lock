@@ -175,8 +175,8 @@ GEM
       thor (~> 0.14)
     json (1.7.3)
     json_pure (1.7.3)
-    jwt (0.1.4)
-      json (>= 1.2.4)
+    jwt (0.1.5)
+      multi_json (>= 1.0)
     kaminari (0.13.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -218,9 +218,9 @@ GEM
     omniauth (1.1.0)
       hashie (~> 1.2)
       rack
-    omniauth-facebook (1.4.1)
-      omniauth-oauth2 (~> 1.1.0)
-    omniauth-oauth2 (1.1.0)
+    omniauth-facebook (1.4.0)
+      omniauth-oauth2 (~> 1.0.2)
+    omniauth-oauth2 (1.0.3)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
     omniauth-openid (1.0.1)
@@ -401,7 +401,7 @@ DEPENDENCIES
   kaminari
   koala
   letter_opener
-  omniauth-facebook
+  omniauth-facebook (= 1.4.0)
   omniauth-openid
   paper_trail
   pg
