@@ -3,8 +3,8 @@
 	%h2.count.remaining
 	.preview
 	%h2 
-		Tag:
-		= @project.name
+		%b Add tags to:
+		= (if @project.name == '' then 'your project' else @project.name)
 	%br
 	%ul.tags.thumbnails
 	.bottom
