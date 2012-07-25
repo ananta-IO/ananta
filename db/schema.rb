@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120426015522) do
+ActiveRecord::Schema.define(:version => 20120725030632) do
 
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
@@ -78,8 +78,9 @@ ActiveRecord::Schema.define(:version => 20120426015522) do
     t.string   "name"
     t.string   "slug"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.integer  "view_count", :default => 0
   end
 
   add_index "profiles", ["name"], :name => "index_profiles_on_name"
@@ -91,11 +92,12 @@ ActiveRecord::Schema.define(:version => 20120426015522) do
     t.text     "description"
     t.string   "state"
     t.string   "slug"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
     t.string   "timezone"
     t.float    "lat"
     t.float    "lng"
+    t.integer  "view_count",  :default => 0
   end
 
   add_index "projects", ["lat", "lng"], :name => "index_projects_on_lat_and_lng"
@@ -122,6 +124,7 @@ ActiveRecord::Schema.define(:version => 20120426015522) do
     t.integer  "score",                   :default => 1000
     t.datetime "created_at",                                :null => false
     t.datetime "updated_at",                                :null => false
+    t.integer  "view_count",              :default => 0
   end
 
   add_index "questions", ["answer_count"], :name => "index_questions_on_answer_count"
@@ -209,6 +212,19 @@ ActiveRecord::Schema.define(:version => 20120426015522) do
   end
 
   add_index "versions", ["item_type", "item_id"], :name => "index_versions_on_item_type_and_item_id"
+
+  create_table "views", :force => true do |t|
+    t.integer  "viewable_id"
+    t.string   "viewable_type"
+    t.integer  "user_id"
+    t.string   "ip"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "views", ["ip"], :name => "index_views_on_ip"
+  add_index "views", ["user_id"], :name => "index_views_on_user_id"
+  add_index "views", ["viewable_id", "viewable_type"], :name => "index_views_on_viewable_id_and_viewable_type"
 
   create_table "votes", :force => true do |t|
     t.boolean  "vote",          :default => false

@@ -28,9 +28,10 @@ class Profile < ActiveRecord::Base
   extend FriendlyId
   friendly_id :slug #, :use => :slugged
   belongs_to :user
-  has_many   :images,   :as => :imageable, :dependent => :destroy
-  has_many   :avatars,  :as => :imageable, :source => :images, :class_name => "Image", :conditions => ["image_type = ?", "avatar"]
-  has_many   :pictures, :as => :imageable, :source => :images, :class_name => "Image", :conditions => ["image_type = ?", "picture"]
+  has_many :images,   :as => :imageable, :dependent => :destroy
+  has_many :avatars,  :as => :imageable, :source => :images, :class_name => "Image", :conditions => ["image_type = ?", "avatar"]
+  has_many :pictures, :as => :imageable, :source => :images, :class_name => "Image", :conditions => ["image_type = ?", "picture"]
+  has_many :views, :as => :viewable, :dependent => :destroy
 
 
 

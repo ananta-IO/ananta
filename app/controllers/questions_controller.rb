@@ -65,6 +65,11 @@ class QuestionsController < InheritedResources::Base
 	#########################
 	# Modifited Actions
 	#########################
+	def show
+		@question.views.create({user: current_user, ip: remote_ip})
+		show!
+	end
+
 	def create
 		attrs = {}
 		attrs = attrs.merge pick(params[:question], :question, :questionable_url)

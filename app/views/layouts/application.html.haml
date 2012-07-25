@@ -11,14 +11,16 @@
 		= render "facebook"
 
 		#wrapper
+		
+			#flash
+				= render "flashes"
+
 			%header#header
 				= render "header"
 
 			#main{ role: "main" }
 				.container-fluid
 					.content
-						#flash
-							= render "flashes"
 						#yield
 							= yield
 

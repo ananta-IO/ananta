@@ -42,6 +42,12 @@ class ProjectsController < InheritedResources::Base
 	#########################
 	# Modifited Actions
 	#########################
+
+	def show
+		@project.views.create({user: current_user, ip: remote_ip})
+		show!
+	end
+
 	def new
 		populate_tags @project, :tags
 		new!

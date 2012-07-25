@@ -49,7 +49,8 @@ class Question < ActiveRecord::Base
 	#########################
 	belongs_to :user 
 	has_many :answers, :dependent => :destroy
-	has_many :comments, :through => :answers, :source => :comment
+	has_many :comments, :through => :answers, :source => :comment, :dependent => :destroy
+	has_many :views, :as => :viewable, :dependent => :destroy
 
 
 	#########################

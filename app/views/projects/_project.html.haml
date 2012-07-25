@@ -22,10 +22,10 @@
 							%i.icon-bolt
 							%p.visible-desktop volts
 						.span3.views.center
-							%strong= project.views
+							%strong= project.view_count
 							%b.hidden-desktop
 							%i.icon-eye-open
-							%p.visible-desktop views
+							%p.visible-desktop= project.view_count == 1 ? 'view' : 'views'
 						.span3.lovers.center
 							%strong= project.lovers
 							%b.hidden-desktop

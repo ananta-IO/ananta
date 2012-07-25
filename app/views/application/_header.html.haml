@@ -29,11 +29,10 @@
 
 -# Top Nav
 .navbar
-	.navbar-inner
-		.container-fluid
-			.user-nav
-				= render 'user_nav'  
-			-# Center
-			%ul.nav.center
-				%li#marq_toggle
-					= link_to "?", "#"
+	.container-fluid
+		.user-nav
+			= render 'user_nav'  
+		-# Center
+		%ul.nav.center
+			%li#marq_toggle
+				= link_to "?", "#"

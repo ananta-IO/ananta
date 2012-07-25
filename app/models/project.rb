@@ -60,6 +60,7 @@ class Project < ActiveRecord::Base
   has_many   :images,   :as => :imageable, :dependent => :destroy
   has_many   :avatars,  :as => :imageable, :source => :images, :class_name => "Image", :conditions => ["image_type = ?", "avatar"]
   has_many   :pictures, :as => :imageable, :source => :images, :class_name => "Image", :conditions => ["image_type = ?", "picture"]
+  has_many   :views,    :as => :viewable,  :dependent => :destroy
 
   accepts_nested_attributes_for :location
 
@@ -112,10 +113,6 @@ class Project < ActiveRecord::Base
   end
 
   def energy
-    999
-  end
-
-  def views
     999
   end
 
