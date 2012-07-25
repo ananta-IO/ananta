@@ -61,14 +61,12 @@ class QuestionsController < InheritedResources::Base
 	before_filter :cuid_to_params, :only => :update
 	load_and_authorize_resource
 
+	after_filter :track_view, :only => [:show]
+
 
 	#########################
 	# Modifited Actions
 	#########################
-	def show
-		@question.views.create({user: current_user, ip: remote_ip})
-		show!
-	end
 
 	def create
 		attrs = {}
@@ -87,7 +85,7 @@ class QuestionsController < InheritedResources::Base
 	#########################
 	# Protected Methods
 	#########################
-	protected
+protected
 
 	def collection
 		@questions ||= apply_scopes(end_of_association_chain)
@@ -95,5 +93,9 @@ class QuestionsController < InheritedResources::Base
 
 	def cuid_to_params
 		params[:question] = add_cuid(params[:question], :cast_vote) if params[:question]
+	end
+
+	def track_view
+		@question.views.create({user: current_user, ip: remote_ip})
 	end
 end

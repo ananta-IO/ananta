@@ -38,15 +38,12 @@ class ProjectsController < InheritedResources::Base
 	before_filter :cuid_to_params, :only => :update # TODO: REFACTOR: this is complicated
 	load_and_authorize_resource
 
+	after_filter :track_view, :only => [:show]
+
 
 	#########################
 	# Modifited Actions
 	#########################
-
-	def show
-		@project.views.create({user: current_user, ip: remote_ip})
-		show!
-	end
 
 	def new
 		populate_tags @project, :tags
@@ -105,7 +102,7 @@ class ProjectsController < InheritedResources::Base
 	#########################
 	# Protected Methods
 	#########################
-	protected
+protected
 
 	def collection
 		@projects ||= apply_scopes(end_of_association_chain)
@@ -118,4 +115,9 @@ class ProjectsController < InheritedResources::Base
 	# def undo_link
 	#	view_context.link_to("undo", revert_version_path(@project.versions.scoped.last), :method => :post)
 	# end
+
+	def track_view
+		@project.views.create({user: current_user, ip: remote_ip})
+	end
+
 end

@@ -6,10 +6,7 @@ class ProfilesController < InheritedResources::Base
 	before_filter :authenticate_user!, :except => [:index, :show]
 	load_and_authorize_resource
 
-	def show
-		@profile.views.create({user: current_user, ip: remote_ip})
-		show!
-	end
+	after_filter :track_view, :only => [:show]
 
 	def edit
 		populate_tags @profile, :bio, :seeking, :offering
@@ -20,4 +17,11 @@ class ProfilesController < InheritedResources::Base
 		populate_tags @profile, :bio, :seeking, :offering
 		update!
 	end
+
+protected
+
+	def track_view
+		@profile.views.create({user: current_user, ip: remote_ip})
+	end
+
 end

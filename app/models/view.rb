@@ -73,7 +73,7 @@ protected
 	#########################
 private
 	def increment_viewable_view_count
-		viewable.update_attribute(:view_count, viewable.view_count + 1)
+		viewable.update_attribute(:view_count, (viewable.view_count.to_i + 1))
 	end
 	
 	def presence_of_ip_or_user
