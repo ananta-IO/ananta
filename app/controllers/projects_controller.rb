@@ -52,7 +52,7 @@ class ProjectsController < InheritedResources::Base
 
 	def create
 		populate_tags @project, :tags
-		@project.location ||= @user.location.dup
+		@project.location ||= @user.location.dup rescue nil
 		create! do |success, failure|
 			success.html do 
 				# flash[:notice] = "Successfully created project. #{undo_link}" # TODO: enable undo/redo eventually
