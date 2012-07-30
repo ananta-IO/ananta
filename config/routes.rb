@@ -1,6 +1,6 @@
 Ananta::Application.routes.draw do
 
-	post "versions/:id/revert" => "versions#revert", :as => "revert_version"
+	post 'versions/:id/revert' => 'versions#revert', :as => 'revert_version'
 	
 	resources :sessions, :only => [:index]
 
@@ -22,7 +22,7 @@ Ananta::Application.routes.draw do
 			get 'random'
 		end
 	end
-	devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "users/registrations", :sessions => "users/sessions" }
+	devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks', :registrations => 'users/registrations', :sessions => 'users/sessions' }
 	devise_scope :user do
 		get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
 		get '/login' => 'devise/sessions#new'
@@ -32,7 +32,9 @@ Ananta::Application.routes.draw do
 
 	match '/tb' => 'pages#tb' if Rails.env == 'development'
 	match '/about' => 'pages#about'
+	match '/robots.txt' => 'pages#robots'
 
+	# TODO: should this be the last route?
 	root :to => 'pages#home'
 
 	resources :projects, :only => [:index] do
