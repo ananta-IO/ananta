@@ -1,17 +1,27 @@
 -content_for :title do "projects" end
 
-#projects
-	.page-header
-		%h1 
-			Explore Projects
-	.row-fluid
-		.span9
-			.row-fluid.project-list
-				= render @projects
-			= paginate @projects
-		.span3
-			.well
-				filters
+=content_for :javascripts do
+	:coffeescript
+		$('#project-grid').isotope(
+			itemSelector: '.project'
+			layoutMode:	'fitRows'
+			animationOptions:
+				duration: 750
+				easing: 'linear'
+				queue: false
+		)
+
+.container-fluid
+	.content
+		#projects
+			.page-header
+				%h1 
+					Explore Projects
+			.row-fluid
+				.span12
+					#project-grid
+						= render @projects
+					= paginate @projects
 
 
-/ = link_to 'New Project', new_project_path
+		=# link_to 'New Project', new_project_path

@@ -1,62 +1,64 @@
 -content_for :title do "#{@profile.user.username.possessive} profile" end
 
-.page-header
-	%h1 
-		= @profile.user.username
-		-if can? :edit, @profile
-			.display-inline-block
-				%p.m0 
-					= link_to 'Edit Profile', edit_profile_path(@profile)
-.row-fluid
-	.span4
-		.row-fluid
-			.span12
-				= image_tag(@profile.avatar.image.medium.url, :class => 'circle box-shadow')
-		%br
-		.row-fluid
-			.span3
-				%h4 
-					%i.icon-tags
-					Bio
-			.span9
-				%p
-					= list_tags @profile.bio
-					&nbsp;
-		.row-fluid
-			.span3
-				%h4 
-					%i.icon-tags
-					Seeking
-			.span9
-				%p
-					= list_tags @profile.seeking
-					&nbsp;
-		.row-fluid
-			.span3
-				%h4 
-					%i.icon-tags
-					Offering
-			.span9
-				%p
-					= list_tags @profile.offering
-					&nbsp;
-	.span8
-		.sub-header 
-			%h2 
-				Projects
+.container-fluid
+	.content
+		.page-header
+			%h1 
+				= @profile.user.username
 				-if can? :edit, @profile
-					.pull-right 
-						= link_to "New Project", new_user_project_path(@profile.user)
-		%table.table
-			- @profile.user.projects.each do |project|
-				%tr
-					%td
-						.pull-left
-							= image_tag(project.avatar.image.small.url)
-						%h3
-							= link_to project.name, [@profile.user, project]
-							.pull-right
-								= project.votes_for
-								%i.icon-heart
+					.display-inline-block
+						%p.m0 
+							= link_to 'Edit Profile', edit_profile_path(@profile)
+		.row-fluid
+			.span4
+				.row-fluid
+					.span12
+						= image_tag(@profile.avatar.image.medium.url, :class => 'circle box-shadow')
+				%br
+				.row-fluid
+					.span3
+						%h4 
+							%i.icon-tags
+							Bio
+					.span9
 						%p
-							= project.state.titleize
+							= list_tags @profile.bio
+							&nbsp;
+				.row-fluid
+					.span3
+						%h4 
+							%i.icon-tags
+							Seeking
+					.span9
+						%p
+							= list_tags @profile.seeking
+							&nbsp;
+				.row-fluid
+					.span3
+						%h4 
+							%i.icon-tags
+							Offering
+					.span9
+						%p
+							= list_tags @profile.offering
+							&nbsp;
+			.span8
+				.sub-header 
+					%h2 
+						Projects
+						-if can? :edit, @profile
+							.pull-right 
+								= link_to "New Project", new_user_project_path(@profile.user)
+				%table.table
+					- @profile.user.projects.each do |project|
+						%tr
+							%td
+								.pull-left
+									= image_tag(project.avatar.image.small.url)
+								%h3
+									= link_to project.name, [@profile.user, project]
+									.pull-right
+										= project.votes_for
+										%i.icon-heart
+								%p
+									= project.state.titleize

@@ -1,173 +1,175 @@
-%br
-%br
-%br
-%br
-%br
-.row
-	.span12
-		%h1.center
-			This is the bootstrap test page
-%br
-%br
-
-%section#extended-icons.row
-	.span12
-		%h1 Extended Icons
-		%p
-			But wait, there's more! Font Awesome also includes this set of ever-expanding extra-awesome pictograms.
-	.span3
-		%ul.the-icons
-			%li.icon-camera-retro
-			%li.icon-bar-chart
-			%li.icon-cogs
-			%li.icon-external-link
-			%li.icon-pushpin
-	.span3
-		%ul.the-icons
-			%li.icon-facebook-sign
-			%li.icon-twitter-sign
-			%li.icon-linkedin-sign
-			%li.icon-github-sign
-			%li.icon-key
-	.span3
-		%ul.the-icons
-			%li.icon-thumbs-up
-			%li.icon-thumbs-down
-			%li.icon-comments
-			%li.icon-trophy
-			%li.icon-upload-alt
-	.span3
-		%ul.the-icons
-			%li.icon-signin
-			%li.icon-signout
-			%li.icon-star-half
-			%li.icon-heart-empty
-			%li.icon-lemon
-
-%br
-%br
-
-.row
-	.span2
+.container-fluid
+	.content
+		%br
+		%br
+		%br
+		%br
+		%br
+		.row
+			.span12
+				%h1.center
+					This is the bootstrap test page
 		%br
 		%br
 
-		%a{"title" => "hello", :href => "#", :rel => "tooltip", 'data-placement' => 'right'} tooltip
+		%section#extended-icons.row
+			.span12
+				%h1 Extended Icons
+				%p
+					But wait, there's more! Font Awesome also includes this set of ever-expanding extra-awesome pictograms.
+			.span3
+				%ul.the-icons
+					%li.icon-camera-retro
+					%li.icon-bar-chart
+					%li.icon-cogs
+					%li.icon-external-link
+					%li.icon-pushpin
+			.span3
+				%ul.the-icons
+					%li.icon-facebook-sign
+					%li.icon-twitter-sign
+					%li.icon-linkedin-sign
+					%li.icon-github-sign
+					%li.icon-key
+			.span3
+				%ul.the-icons
+					%li.icon-thumbs-up
+					%li.icon-thumbs-down
+					%li.icon-comments
+					%li.icon-trophy
+					%li.icon-upload-alt
+			.span3
+				%ul.the-icons
+					%li.icon-signin
+					%li.icon-signout
+					%li.icon-star-half
+					%li.icon-heart-empty
+					%li.icon-lemon
 
 		%br
 		%br
 
-		%span{ rel: :popover, 'data-placement' => 'right', 'data-content' => "cat" } popover
+		.row
+			.span2
+				%br
+				%br
 
-		%br
-		%br
+				%a{"title" => "hello", :href => "#", :rel => "tooltip", 'data-placement' => 'right'} tooltip
 
-		%a.btn{"data-toggle" => "modal", :href => "#myModal"} Launch Modal
+				%br
+				%br
 
-		#myModal.modal.fade
-			.modal-header
-				%a.close{"data-dismiss" => "modal"} ×
-				%h3
-					Modal Heading     
-			.modal-body
-				%p One fine body…
-			.modal-footer
-				%a.btn-primary.btn{:href => "#"} Primary
-				%a.btn{:href => "#"} Secondary
-			
-		%br
-		%br
+				%span{ rel: :popover, 'data-placement' => 'right', 'data-content' => "cat" } popover
 
-	.span4
-		%ul.nav.nav-pills
-			%li.active
-				%a{:href => "#"} Regular link
-			%li#menu1.dropdown
-				%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#menu1"}
-					Dropdown
-					%b.caret
-				%ul.dropdown-menu
-					%li
-						%a{:href => "#"} Action
-					%li
-						%a{:href => "#"} Another action
-					%li
-						%a{:href => "#"} Something else here
-					%li.divider
-					%li
-						%a{:href => "#"} Separated link
+				%br
+				%br
 
-	.span3
-		.btn-group
-			%a.btn{:href => "#"} Action
-			%a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-				%span.caret
-			%ul.dropdown-menu
-				%li
-					%a{:href => "#"} Action
-				%li
-					%a{:href => "#"} Another action
-				%li
-					%a{:href => "#"} Something else here
-				%li.divider
-				%li
-					%a{:href => "#"} Separated link
-			
-		%br
-		%br
+				%a.btn{"data-toggle" => "modal", :href => "#myModal"} Launch Modal
 
-	.span3
-		- if !user_signed_in?
-			= link_to "Sign up", "/users/sign_up", :class => "btn success large", "data-loading-text" => "loading..."
-			%br
-			%br
-			= link_to "Connect with Facebook", user_omniauth_authorize_path(:facebook), :class => "btn-auth btn-facebook"
+				#myModal.modal.fade
+					.modal-header
+						%a.close{"data-dismiss" => "modal"} ×
+						%h3
+							Modal Heading     
+					.modal-body
+						%p One fine body…
+					.modal-footer
+						%a.btn-primary.btn{:href => "#"} Primary
+						%a.btn{:href => "#"} Secondary
+					
+				%br
+				%br
 
-		%br
-		%br
-		%br
-		%br
+			.span4
+				%ul.nav.nav-pills
+					%li.active
+						%a{:href => "#"} Regular link
+					%li#menu1.dropdown
+						%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#menu1"}
+							Dropdown
+							%b.caret
+						%ul.dropdown-menu
+							%li
+								%a{:href => "#"} Action
+							%li
+								%a{:href => "#"} Another action
+							%li
+								%a{:href => "#"} Something else here
+							%li.divider
+							%li
+								%a{:href => "#"} Separated link
 
-.row
-	.span12
-		%br
-		%br
-		%br
-		%br
+			.span3
+				.btn-group
+					%a.btn{:href => "#"} Action
+					%a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+						%span.caret
+					%ul.dropdown-menu
+						%li
+							%a{:href => "#"} Action
+						%li
+							%a{:href => "#"} Another action
+						%li
+							%a{:href => "#"} Something else here
+						%li.divider
+						%li
+							%a{:href => "#"} Separated link
+					
+				%br
+				%br
 
-		#epiceditor
-		= content_for :javascripts do
-			:javascript
-				var opts = {
-					container: 'epiceditor',
-					basePath: '/assets',
-					localStorageName: 'epiceditor',
-					parser: marked,
-					file: {
-						name: 'epiceditor',
-						defaultContent: '',
-						autoSave: 100
-					},
-					theme: {
-						base:'/themes/base/epiceditor.css',
-						preview:'/themes/preview/github.css',
-						editor:'/themes/editor/epic-dark.css'
-					},
-					focusOnLoad: false,
-					shortcut: {
-						modifier: 18,
-						fullscreen: 70,
-						preview: 80,
-						edit: 79
-					}
-				}
-				var editor = new EpicEditor(opts);
-				editor.load();
-				window.e = editor
+			.span3
+				- if !user_signed_in?
+					= link_to "Sign up", "/users/sign_up", :class => "btn success large", "data-loading-text" => "loading..."
+					%br
+					%br
+					= link_to "Connect with Facebook", user_omniauth_authorize_path(:facebook), :class => "btn-auth btn-facebook"
 
-		%br
-		%br
-		%br
-		%br
+				%br
+				%br
+				%br
+				%br
+
+		.row
+			.span12
+				%br
+				%br
+				%br
+				%br
+
+				#epiceditor
+				= content_for :javascripts do
+					:javascript
+						var opts = {
+							container: 'epiceditor',
+							basePath: '/assets',
+							localStorageName: 'epiceditor',
+							parser: marked,
+							file: {
+								name: 'epiceditor',
+								defaultContent: '',
+								autoSave: 100
+							},
+							theme: {
+								base:'/themes/base/epiceditor.css',
+								preview:'/themes/preview/github.css',
+								editor:'/themes/editor/epic-dark.css'
+							},
+							focusOnLoad: false,
+							shortcut: {
+								modifier: 18,
+								fullscreen: 70,
+								preview: 80,
+								edit: 79
+							}
+						}
+						var editor = new EpicEditor(opts);
+						editor.load();
+						window.e = editor
+
+				%br
+				%br
+				%br
+				%br
 
 

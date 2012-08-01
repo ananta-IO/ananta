@@ -1,27 +1,46 @@
 -content_for :title do "#{@project.name}" end
 
 #project
-	.page-header
-		%h1 
-			.pull-right
-				= render "vote"
-			= link_to @user.username, profile_path(@user.profile), rel: :tooltip, title: 'the creator', 'data-placement' => 'bottom'
-			\/
-			= link_to @project.name, user_project_path(@user, @project), rel: :tooltip, title: 'the project', 'data-placement' => 'bottom'
-	.row-fluid
-		.span12
-			%p
-			= link_to 'Edit', edit_user_project_path(@user, @project)
-			%p
-				%b Name:
-				= @project.name
-			= image_tag(@project.avatar.image.small.url)
-			%p
-				%b Description:
-				= @project.description
-			%p
-				%b Tags:
-				= list_tags @project.tags
-			%p
-				%b State:
-				= @project.state
+	.container-fluid
+		.row-fluid
+			.span12.page-header
+				- if can? :update, @project
+					.row-fluid
+						.span12
+							.pull-right
+								= link_to edit_user_project_path(@user, @project) do
+									Edit
+									%i.icon-edit
+				.row-fluid
+					.span12
+						%h1.center 
+							= link_to @project.name, user_project_path(@user, @project)
+				.row-fluid
+					.span12
+						%p.center
+							by
+							= link_to @user.username, profile_path(@user.profile)
+				.row-fluid
+					.span12
+						.pull-right
+							= render "vote"
+	.container-fluid
+		.content.box-shadow
+			.row-fluid
+				.span12
+					.container-fluid
+						.row-fluid
+							.span8
+								.row-fluid
+									.span12
+										= image_tag(@project.avatar.image.large.url)
+								.row-fluid
+									.span12
+										= markdown @project.description
+							.span4
+								.row-fluid
+									.span12
+										= @project.state
+								.row-fluid
+									.span12
+										= list_tags @project.tags

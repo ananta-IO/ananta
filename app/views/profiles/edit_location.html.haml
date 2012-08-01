@@ -7,17 +7,19 @@
 			$("#edit_profile_location .boxed-group .inner").html(window.userAddressForm.render())
 		)
 
-#edit_profile_location.user-edit
-	.row-fluid
-		.span3
-			= render 'users/edit_nav', user: @profile.user, active: 'location'
-		.span9
-			.boxed-group
-				%h3
-					Location
-				.inner
-					.center
-						%br
-						= image_tag "ajax-loader-white-bg.gif"
-						%br
-						%br
+.container-fluid
+	.content
+		#edit_profile_location.user-edit
+			.row-fluid
+				.span3
+					= render 'users/edit_nav', user: @profile.user, active: 'location'
+				.span9
+					.boxed-group
+						%h3
+							Location
+						.inner
+							.center
+								%br
+								= image_tag "ajax-loader-white-bg.gif"
+								%br
+								%br

@@ -17,31 +17,33 @@
 			$('#profile_offering_tokens').tokenInput(window.offering, { theme : 'facebook', preventDuplicates: true, tokenLimit: 100, prePopulate: window.selected_offering, createTokenFromQuery: true } );
 		});
 
-#edit_profile.user-edit
-	.row-fluid
-		.span3
-			= render 'users/edit_nav', user: @profile.user, active: 'profile'
-		.span9
-			.boxed-group
-				%h3
-					Profile
-				.inner
-					= simple_form_for @profile, :html => {:class => "form-horizontal"} do |f|
+.container-fluid
+	.content
+		#edit_profile.user-edit
+			.row-fluid
+				.span3
+					= render 'users/edit_nav', user: @profile.user, active: 'profile'
+				.span9
+					.boxed-group
+						%h3
+							Profile
+						.inner
+							= simple_form_for @profile, :html => {:class => "form-horizontal"} do |f|
 
-						= f.input :name, :html => { :class => 'span8' }
-						%br
-						= render 'images/filepicker', image: @profile.avatar, element: '#profile_avatar', ratio: '1:1'
-						= f.input :avatar do
-							#profile_avatar.span6
-								= image_tag(@profile.avatar.image.large.url, :class => 'circle')
-								.btn.btn-info.choose-file Choose Image
-						%br
-						= f.input :bio_tokens, label: "Bio", hint: 'Name a few notable events in your life.'
-						%br
-						= f.input :seeking_tokens, label: "Seeking", hint: 'What do you want?'
-						%br
-						= f.input :offering_tokens, label: "Offering", hint: 'What are you willing to give?'
-						%br
-						.form-actions
-							= f.button :submit, :class => "btn-primary"
-							= link_to 'Cancel', @profile, :class => "btn btn-danger"
+								= f.input :name, :html => { :class => 'span8' }
+								%br
+								= render 'images/filepicker', image: @profile.avatar, element: '#profile_avatar', ratio: '1:1'
+								= f.input :avatar do
+									#profile_avatar.span6
+										= image_tag(@profile.avatar.image.large.url, :class => 'circle')
+										.btn.btn-info.choose-file Choose Image
+								%br
+								= f.input :bio_tokens, label: "Bio", hint: 'Name a few notable events in your life.'
+								%br
+								= f.input :seeking_tokens, label: "Seeking", hint: 'What do you want?'
+								%br
+								= f.input :offering_tokens, label: "Offering", hint: 'What are you willing to give?'
+								%br
+								.form-actions
+									= f.button :submit, :class => "btn-primary"
+									= link_to 'Cancel', @profile, :class => "btn btn-danger"

@@ -40,6 +40,9 @@
 // Animate.css http://daneden.me/animate/
 @import "animate";
 
+// Isotope 
+@import "isotope";
+
 // Scrollbar mixins
 @import "scrollbars";
 
@@ -366,9 +369,9 @@ label.hc{
 	margin-bottom: 0px;
 	// border-bottom: 1px solid $color-border;
 	height: 40px;
-	margin-bottom: 40px;
+	// margin-bottom: 40px;
 	@include border-radius(0);
-	@include box-shadow($color-background 0 0 0);
+	// @include box-shadow($color-background 0 0 0);
 	background: $color-background;
 	.container-fluid{
 		@extend .container-fluid;
@@ -467,6 +470,7 @@ label.hc{
 		}
 		&>li{
 			&>a{
+				padding-bottom:	10px;
 				@include transition-property(all);
 				@include transition-duration(0.5s);
 				@include transition-timing-function(ease-in);
@@ -1055,16 +1059,17 @@ label.hc{
 }
 
 #projects{
-	.project-list{
-		.span4:nth-child(3n + 4){
-			margin-left: 0;
-		}
+	#project-grid{
+		// .span4:nth-child(3n + 4){
+		//	margin-left: 0;
+		// }
 
 		.project{
+			width: 300px;
+			margin:	10px;
 			overflow: hidden;
 			position: relative;
 			border: 1px solid #ddd;
-			margin-bottom: 24px;
 			.image{
 				// padding: 2px;
 			}
@@ -1125,6 +1130,7 @@ label.hc{
 		}
 	}
 }
+
 
 .address-form{
 	position: relative;
@@ -1203,6 +1209,17 @@ label.hc{
 		.inner{
 			padding-top: 20px;
 		}
+	}
+}
+
+#project{
+	background: #F2F0E9;
+	border-top: 1px solid #CCC;
+	border-bottom: 1px solid #CCC;
+	.content{
+		background: $color-background;
+		margin-bottom: 80px;
+		border: 1px solid #CCC;
 	}
 }
 

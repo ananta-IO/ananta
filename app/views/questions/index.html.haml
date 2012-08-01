@@ -1,39 +1,41 @@
 -content_for :title do "questions" end
 
-#questions
-	.page-header
-		%h1 
-			Questions 
-			%span{rel: 'tooltip', 'data-placement' => 'top', 'data-delay' => 500, 'data-original-title' => "ô_o"} I've 
-			Answered
-	.row-fluid
-		.span12
-			.pull-right
-				= "? #{request.query_string.split('&').join(' .. ')}"
-			%table.table
-				%tr
-					%th Question
-					%th{rel: 'tooltip', 'data-placement' => 'bottom', 'data-original-title' => "answer count"} ANS
-					%th{rel: 'tooltip', 'data-placement' => 'bottom', 'data-original-title' => "yes count"} Y
-					%th{rel: 'tooltip', 'data-placement' => 'bottom', 'data-original-title' => "no count"} N
-					%th{rel: 'tooltip', 'data-placement' => 'bottom', 'data-original-title' => "don't care count"} DC
-					%th Date
-					%th Controller
-					%th Action
-					%th Id
-					%th Url
-					%th Votes
-					%th Activity
-				= render @questions
+.container-fluid
+	.content
+		#questions
+			.page-header
+				%h1 
+					Questions 
+					%span{rel: 'tooltip', 'data-placement' => 'top', 'data-delay' => 500, 'data-original-title' => "ô_o"} I've 
+					Answered
+			.row-fluid
+				.span12
+					.pull-right
+						= "? #{request.query_string.split('&').join(' .. ')}"
+					%table.table
+						%tr
+							%th Question
+							%th{rel: 'tooltip', 'data-placement' => 'bottom', 'data-original-title' => "answer count"} ANS
+							%th{rel: 'tooltip', 'data-placement' => 'bottom', 'data-original-title' => "yes count"} Y
+							%th{rel: 'tooltip', 'data-placement' => 'bottom', 'data-original-title' => "no count"} N
+							%th{rel: 'tooltip', 'data-placement' => 'bottom', 'data-original-title' => "don't care count"} DC
+							%th Date
+							%th Controller
+							%th Action
+							%th Id
+							%th Url
+							%th Votes
+							%th Activity
+						= render @questions
 
-			.pull-right
-				-# TODO make a session variable for question_per and use it to set the default if per is ever changed
-				-# remove per from query string and optionally add an ampersand
-				- query_string = request.query_string.gsub(/(&per|per)=([0-9][0-9][0-9]|[0-9][0-9]|[0-9])/, '')
-				- query_string += "\&" unless query_string.blank?
-				= link_to 10, "/questions?#{query_string}per=10"
-				&middot;
-				= link_to 30, "/questions?#{query_string}per=30"
-				&middot;
-				= link_to 100, "/questions?#{query_string}per=100"
-			= paginate @questions
+					.pull-right
+						-# TODO make a session variable for question_per and use it to set the default if per is ever changed
+						-# remove per from query string and optionally add an ampersand
+						- query_string = request.query_string.gsub(/(&per|per)=([0-9][0-9][0-9]|[0-9][0-9]|[0-9])/, '')
+						- query_string += "\&" unless query_string.blank?
+						= link_to 10, "/questions?#{query_string}per=10"
+						&middot;
+						= link_to 30, "/questions?#{query_string}per=30"
+						&middot;
+						= link_to 100, "/questions?#{query_string}per=100"
+					= paginate @questions

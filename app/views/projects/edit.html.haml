@@ -1,6 +1,8 @@
-.page-header
-	%h1 Editing project
+.container-fluid
+	.content
+		.page-header
+			%h1 Editing project
 
-= render 'form'
+		= render 'form'
 
-= link_to "Delete this project", user_project_path(@user, @project), :method => :delete
+		= link_to "Delete this project", user_project_path(@user, @project), :method => :delete

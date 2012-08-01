@@ -19,10 +19,7 @@
 				= render "header"
 
 			#main{ role: "main" }
-				.container-fluid
-					.content
-						#yield
-							= yield
+				= yield
 
 			#layout_footer      
 		%footer#footer
