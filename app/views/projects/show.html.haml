@@ -20,10 +20,7 @@
 						%p.center
 							by
 							= link_to @user.username, profile_path(@user.profile)
-				.row-fluid
-					.span12
-						.pull-right
-							= render "vote"
+						
 	.container-fluid
 		.content.box-shadow
 			.row-fluid
@@ -34,13 +31,27 @@
 								.row-fluid
 									.span12
 										= image_tag(@project.avatar.image.large.url)
+										%hr
+								.row-fluid
+									.span12
+										.pull-right
+											= render "vote"
+										%h2 share links
+										%hr
 								.row-fluid
 									.span12
 										= markdown @project.description
+										%hr
+								.row-fluid
+									.span12
+										%h2 comments
+										%hr
 							.span4
 								.row-fluid
 									.span12
 										= @project.state
+										%hr
 								.row-fluid
 									.span12
 										= list_tags @project.tags
+										%hr

@@ -379,13 +379,13 @@ label.hc{
 	}
 	.brand{
 		// font-family: 'Futura';
-		// padding-left: 0;
 		font-weight: 200;
 		@include transition-property(all);
 		@include transition-duration(0.5s);
 		@include transition-timing-function(ease-in);
 		letter-spacing: 0.05em;
 		color: #999;
+		padding: 8px 20px;
 		&:hover{
 			color: $color-highlight;
 			i{
@@ -1066,6 +1066,7 @@ label.hc{
 
 		.project{
 			width: 300px;
+			height: 225px;
 			margin:	10px;
 			overflow: hidden;
 			position: relative;
@@ -1216,10 +1217,22 @@ label.hc{
 	background: #F2F0E9;
 	border-top: 1px solid #CCC;
 	border-bottom: 1px solid #CCC;
+	>.container-fluid{
+		@media(max-width: 480px){
+		 	padding-left: 5px;
+		 	padding-right: 5px;
+		}	
+	}
 	.content{
+		padding-top: 40px;
+		padding-bottom: 40px;
 		background: $color-background;
 		margin-bottom: 80px;
 		border: 1px solid #CCC;
+		@media(max-width: 768px){
+			padding-top: 20px;
+			padding-bottom: 20px;
+		}
 	}
 }
 
