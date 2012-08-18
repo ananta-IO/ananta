@@ -1,4 +1,4 @@
-$('#projects .project-list').append('<%= j render(@projects) %>');
+$('#project-grid').isotope('insert', $('<%= j render(@projects) %>'));
 <% if @projects.current_page < @projects.num_pages %>
 	$('#projects .pagination').replaceWith('<%= j paginate(@projects) %>');
 <% else %>

@@ -41,6 +41,9 @@ class Project < ActiveRecord::Base
   # Geocoder
   geocoded_by nil, :latitude => :lat, :longitude => :lng
 
+  # Callbacks
+  after_create :after_create
+
 
   #########################
   # Setup attributes (reader, accessible, protected)
@@ -116,10 +119,6 @@ class Project < ActiveRecord::Base
     999
   end
 
-  def lovers
-    999
-  end
-
   #########################
   # Protected Methods
   #########################
@@ -138,6 +137,10 @@ class Project < ActiveRecord::Base
       errors.add(:project, "is your last. You cannot delete this project until you create another one.")
       false
     end
+  end
+
+  def after_create
+    self.user.vote_exclusively_for(self)
   end
 
 end

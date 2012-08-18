@@ -35,7 +35,7 @@
 						Explore people
 		%li.dropdown.projects
 			%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-				%i.icon-book
+				%i.icon-briefcase
 				%i.icon-chevron-down
 			%ul.dropdown-menu
 				%li.nav-header
@@ -64,8 +64,12 @@
 					= current_user.username
 				%li
 					= link_to current_user.profile do
-						%i.icon-sign-blank
+						%i.icon-user
 						profile
+				%li
+					= link_to current_user.profile do
+						%i.icon-bullhorn
+						notifications
 				%li
 					= link_to edit_profile_path(current_user.profile) do
 						%i.icon-cogs

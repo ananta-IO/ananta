@@ -193,7 +193,7 @@ label.hc{
 	right: 0;
 	z-index: 1000;
 	padding: 0 40px;
-	margin-top: 50px;
+	margin-top: 43px;
 	margin-bottom: 10px;
 	@media(max-width: 768px){
 		padding: 0 20px;
@@ -1097,6 +1097,8 @@ label.hc{
 				margin-bottom: 5px;
 				overflow: hidden;
 				font-weight: 200;
+				// white-space: nowrap;
+				// text-overflow: ellipsis;
 			}
 			.description{
 				padding: 0 10px;
@@ -1214,7 +1216,7 @@ label.hc{
 }
 
 #project{
-	background: #F2F0E9;
+	background: $color-background-hover;
 	border-top: 1px solid #CCC;
 	border-bottom: 1px solid #CCC;
 	>.container-fluid{

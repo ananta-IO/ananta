@@ -71,7 +71,9 @@ FactoryGirl.define do
 		password '12345678'
 		permissions 2
 		profile
-		location
-		after(:build) { |u| u.projects.new( name: generate(:name) ) }
+		after(:build) do |u|
+			FactoryGirl.build(:location, locatable: u)
+			u.projects.new( name: generate(:name) ) 
+		end
 	end
 end

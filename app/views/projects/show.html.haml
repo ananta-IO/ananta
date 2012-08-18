@@ -36,7 +36,7 @@
 									.span12
 										.pull-right
 											= render "vote"
-										%h2 share links
+										%h2 <<< share links >>>
 										%hr
 								.row-fluid
 									.span12
@@ -44,12 +44,30 @@
 										%hr
 								.row-fluid
 									.span12
-										%h2 comments
+										%h2 <<< comments >>>
 										%hr
 							.span4
 								.row-fluid
 									.span12
-										= @project.state
+										%h2
+											%span.pull-right= pluralize @project.energy, 'volt'
+											%i.icon-bolt
+										%hr
+								.row-fluid
+									.span12
+										%h2
+											%span.pull-right= pluralize @project.view_count, 'view'
+											%i.icon-eye-open
+										%hr
+								.row-fluid
+									.span12
+										%h2
+											%span.pull-right= pluralize @project.votes_for, 'lover'
+											%i.icon-heart
+										%hr
+								.row-fluid
+									.span12
+										%h2= @project.state
 										%hr
 								.row-fluid
 									.span12

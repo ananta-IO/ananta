@@ -95,7 +95,7 @@ class Ananta.Views.ProjectFlow.ProjectTagsView extends Backbone.View
 		]
 		icons = @shuffle(icons)
 		for icon in icons 
-			if @model.get('tag_tokens')? and icon in @model.get('tag_tokens') then selected = true else selected = false
+			if @model.get('tag_tokens')? and icon.remove('icom-') in @model.get('tag_tokens') then selected = true else selected = false
 			if selected
 				order = @model.get('tag_tokens').indexOf(icon) + 1 
 				@nextOrder()
