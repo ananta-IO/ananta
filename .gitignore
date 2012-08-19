@@ -20,3 +20,5 @@ public/uploads
 /.idea
 
 /brakeman.html
+
+/.env
