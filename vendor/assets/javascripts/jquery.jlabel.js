@@ -129,14 +129,14 @@
         // Private: Toggle label opacity on input focus
         function focus($input) {
             if ($input.val() == '') {
-                getState($input).label.stop().fadeTo(opts.speed, opts.opacity);
+                getState($input).label.stop().fadeTo(opts.speed, opts.opacity).css({'display':'inline-block'});
 			};
         };
 
         // Private: Toggle label opacity on input blur
         function blur($input) {
             if ($input.val() == '') {
-                getState($input).label.stop().fadeTo(opts.speed, 1);
+                getState($input).label.stop().fadeTo(opts.speed, opts.opacity).css({'display':'inline-block'});
 			};
         };
 
@@ -145,7 +145,7 @@
 			var $label = getState($input).label;
 			
 			if ($input.val() == '') {
-            	$label.stop().fadeTo(opts.speed, opts.opacity);
+            	$label.stop().fadeTo(opts.speed, opts.opacity).css({'display':'inline-block'});
 			} else {
 				if ($label.is(":visible")) $label.stop().fadeTo(opts.speed, 0, function() { $label.hide(); });
 			};

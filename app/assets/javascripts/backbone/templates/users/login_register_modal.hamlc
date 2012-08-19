@@ -20,7 +20,7 @@
 				%div{:class => "input string required password"}
 					%label{ :for => "login-password"}
 						%i.icon-key 
-						&nbsp;password
+						&nbsp;passphrase
 					%input#login-password{ :type => "password", :name => "user[password]", title: "password", autocomplete: "on"}
 					%a.forgot-password{href: '/users/password/new' } Forgot?
 				%div{:class => "input string required username"}

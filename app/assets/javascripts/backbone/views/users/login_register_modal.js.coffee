@@ -78,6 +78,8 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 			@$('.project-name').remove()
 			$('<p class="show-email"><a href="#">Don\'t have a Facebook account?</a></p>').insertAfter(@$('.facebook'))
 
+			@expand()
+
 		@
 
 	renderWhenReady: ->
