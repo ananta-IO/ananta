@@ -16,6 +16,9 @@ class Question < ActiveRecord::Base
 	# Vote
 	acts_as_voteable 
 
+	# Versioning
+	has_paper_trail
+
 	# TODOooooooooo: add relevance. to be queried in a 0-1000 range slider after every answer is submited. saved as question_relevance on answer and averaged in a worker and stored on quesiton as avg_relevance. bias the ui to users with really nice track pads ;) and increase relevence by the durration and vigor with which a user rubs an answered question, make the question heat up (dark to red) as the user rubs. AND HAVE SPARKS COME OUT WHEN A QUESTION GETS RED HOT! Do not count the relevance of the user who created the question towards the average
 
 	# Question state machine

@@ -7,6 +7,9 @@ class Answer < ActiveRecord::Base
   # Callbacks & Misc method calls (e.g. devise for, acts_as_whatever )
   #########################
 
+  # Versioning
+  has_paper_trail
+
   # Answer state machine
   state_machine :initial => :unanswered do
     event :ans_yes do

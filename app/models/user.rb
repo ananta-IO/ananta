@@ -27,6 +27,9 @@ class User < ActiveRecord::Base
 
 	# Geocoder
 	geocoded_by nil, :latitude => :lat, :longitude => :lng
+
+	# Versioning
+	has_paper_trail
 	
 
 	#########################

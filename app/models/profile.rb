@@ -15,6 +15,9 @@ class Profile < ActiveRecord::Base
               :default => :identicon,
               :size => 1024
 
+  # Versioning
+  has_paper_trail
+
   #########################
   # Setup attributes (reader, accessible, protected)
   #########################

@@ -9,6 +9,9 @@ class Comment < ActiveRecord::Base
   acts_as_voteable
   acts_as_taggable
 
+  # Versioning
+  has_paper_trail
+
 
   #########################
   # Setup attributes (reader, accessible, protected)

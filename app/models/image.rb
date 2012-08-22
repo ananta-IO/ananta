@@ -29,7 +29,7 @@ class Image < ActiveRecord::Base
   # Validations
   #########################
   # validates :user_id, :presence => true
-  validates :imageable_id, :presence => true
+  # validates :imageable_id, :presence => true
   validates :imageable_type, :presence => true
   validates :image_type, :presence => true
   validates :image,

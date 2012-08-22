@@ -18,6 +18,9 @@ class Location < ActiveRecord::Base
 		end
 	end
 
+	# Versioning
+	has_paper_trail
+
 	after_validation :geocode, :if => Proc.new { |location| (location.address.blank? and location.ip) }
 	# after_validation :set_timezone, :if => Proc.new { |location| (location.timezone.blank? or location.lat_changed? or location.lng_changed?) }
 	before_save :reverse_geocode, :if => Proc.new { |location| (location.address.blank? and location.ip) }
