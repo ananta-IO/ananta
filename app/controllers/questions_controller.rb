@@ -16,8 +16,9 @@ class QuestionsController < InheritedResources::Base
 			# Way to go! No scope for you!
 			scope
 		else
-			controller.current_user ? scope.answered_by(controller.current_user.id) : scope.answered_by(0)
-			# value != "me" ? scope.answered_by(value) : (controller.current_user ? scope.answered_by(controller.current_user.id) : scope)
+			# Just hide the answers in the view
+			scope
+			# controller.current_user ? scope.answered_by(controller.current_user.id) : scope.answered_by(0)
 		end
 	end
 	has_scope :unanswered, :type => :boolean, :only => :index

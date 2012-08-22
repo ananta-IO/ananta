@@ -1,29 +1,58 @@
-%tr
-	%td
-		= link_to truncate(question.question, :length => 30), question, :rel => 'tooltip', 'data-placement' => 'right', 'data-original-title' => question.question
-	%td
-		= question.answer_count
-	%td
-		= question.yes_count
-	%td
-		= question.no_count
-	%td
-		= question.dont_care_count
-	%td
-		= time_tag question.created_at, "#{time_ago_in_words(question.created_at)} ago"
-	%td
-		= link_to question.questionable_controller, "/questions?q_controller=#{question.questionable_controller}"
-	%td
-		= link_to question.questionable_action, "/questions?q_action=#{question.questionable_action}"
-	%td
-		- if question.questionable_sid
-			= link_to question.questionable_sid, "/questions?q_sid=#{question.questionable_sid}"
-		- else
-			none
-	%td
-		= link_to truncate(question.questionable_url, :length => 30), "/questions?q_url=#{question.questionable_url.html_safe}", :rel => 'tooltip', 'data-placement' => 'bottom', 'data-original-title' => question.questionable_url
-	%td
-		= question.plusminus
-	%td
-		-# TODO: make this work. up, right, down arrow for activity up, sideways, down 
-		%i.icon-arrow-right
+- if question.answered_by current_user
+	%tr
+		%td
+			= link_to truncate(question.question, :length => 30), question, :rel => 'tooltip', 'data-placement' => 'right', 'data-original-title' => question.question
+		%td
+			= question.answer_count
+		%td
+			= question.yes_count
+		%td
+			= question.no_count
+		%td
+			= question.dont_care_count
+		%td
+			= time_tag question.created_at, "#{time_ago_in_words(question.created_at)} ago"
+		%td
+			= link_to question.questionable_controller, "/questions?q_controller=#{question.questionable_controller}"
+		%td
+			= link_to question.questionable_action, "/questions?q_action=#{question.questionable_action}"
+		%td
+			- if question.questionable_sid
+				= link_to question.questionable_sid, "/questions?q_sid=#{question.questionable_sid}"
+			- else
+				none
+		%td
+			= link_to truncate(question.questionable_url, :length => 30), "/questions?q_url=#{question.questionable_url.html_safe}", :rel => 'tooltip', 'data-placement' => 'bottom', 'data-original-title' => question.questionable_url
+		%td
+			= question.plusminus
+		%td
+			-# TODO: make this work. up, right, down arrow for activity up, sideways, down 
+			%i.icon-arrow-right
+		%td
+			yes
+- else
+	-# TODO: add ajax answering right here with Y, N and DC buttons
+	%tr
+		%td
+			= link_to truncate(question.question, :length => 30), question, :rel => 'tooltip', 'data-placement' => 'right', 'data-original-title' => question.question
+		%td
+		%td
+		%td
+		%td
+		%td
+			= time_tag question.created_at, "#{time_ago_in_words(question.created_at)} ago"
+		%td
+			= link_to question.questionable_controller, "/questions?q_controller=#{question.questionable_controller}"
+		%td
+			= link_to question.questionable_action, "/questions?q_action=#{question.questionable_action}"
+		%td
+			- if question.questionable_sid
+				= link_to question.questionable_sid, "/questions?q_sid=#{question.questionable_sid}"
+			- else
+				none
+		%td
+			= link_to truncate(question.questionable_url, :length => 30), "/questions?q_url=#{question.questionable_url.html_safe}", :rel => 'tooltip', 'data-placement' => 'bottom', 'data-original-title' => question.questionable_url
+		%td
+		%td
+		%td
+			no

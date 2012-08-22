@@ -190,7 +190,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 				@$('.password i.hint.error').tooltip({placement: 'top', title: "must be 8 or more characters"}).tooltip('show')
 			else
 				if @$('.password .hint.success').length == 0 then @$('#login-password').after('<i class="hint icon-ok success" /> <i class="hint icon-ok success mod" />')
-				if @password.length < 20 then @$('.password i.hint.success').tooltip({placement: 'top', title: "that's good enough <br/> but longer is better"}).tooltip('show')
+				if @password.length < 20 then @$('.password i.hint.success').tooltip({placement: 'top', title: "That's good enough, but longer is better.<br/>A whole sentence is generally best,<br/>and probably easier to remember."}).tooltip('show')
 				alpha = (secure_l - @password.length) / (secure_l - min_l)
 				color = $.Color("rgba(255, 222, 0, #{if alpha < 0 then 0 else alpha})")
 				@$('.password .hint.mod').animate({'color': color}, 100)
