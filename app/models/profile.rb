@@ -22,7 +22,7 @@ class Profile < ActiveRecord::Base
   # Setup attributes (reader, accessible, protected)
   #########################
   attr_reader :bio_tokens, :seeking_tokens, :offering_tokens
-  attr_accessible :name, :bio_tokens, :seeking_tokens, :offering_tokens
+  attr_accessible :name, :bio_tokens, :seeking_tokens, :offering_tokens, :gender, :date_of_birth
 
 
   #########################

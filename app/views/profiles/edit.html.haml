@@ -38,6 +38,10 @@
 										= image_tag(@profile.avatar.image.large.url, :class => 'circle')
 										.btn.btn-info.choose-file Choose Image
 								%br
+								= f.input :gender, collection: ['female', 'male']
+								%br
+								= f.input :date_of_birth, :as => :date, :start_year => Date.today.year - 90, :end_year => Date.today.year - 12, :discard_day => false, :order => [:month, :day, :year]
+								%br
 								= f.input :bio_tokens, label: "Bio", hint: 'Name a few notable events in your life.'
 								%br
 								= f.input :seeking_tokens, label: "Seeking", hint: 'What do you want?'

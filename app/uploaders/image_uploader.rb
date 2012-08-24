@@ -33,20 +33,55 @@ class ImageUploader < CarrierWave::Uploader::Base
     "http://#{ActionMailer::Base.default_url_options[:host]}/assets/fallback/" + params.compact.join('_')
   end
 
+  process :convert => 'png'
+
   version :small do
-    process :resize_to_fit => [128, 128]
-    process :quality => 60
+    process :small_process
   end
 
   version :medium do
-    process :resize_to_fit => [512, 512]
-    process :quality => 70
+    process :medium_process
   end
 
   version :large do
-    process :resize_to_fit => [1024, 1024]
-    process :quality => 80
+    process :large_process
+  end
+
+  def small_process
+    case [model.imageable_type, model.image_type]
+    when ['Profile', 'avatar'] then
+      resize_to_fill 128, 128 # 1x1
+    when ['Project', 'avatar'] then
+      resize_to_fill 128, 72 # 16x9
+    else
+      resize_to_fit 128, 128 # 1x1
+    end
+    quality 60
   end 
+
+  def medium_process
+    case[model.imageable_type, model.image_type]
+    when ['Profile', 'avatar'] then
+      resize_to_fill 512, 512
+    when ['Project', 'avatar'] then
+      resize_to_fill 512, 288
+    else
+      resize_to_fit 512, 512
+    end
+    quality 70
+  end
+
+  def large_process
+    case [model.imageable_type, model.image_type]
+    when ['Profile', 'avatar'] then 
+      resize_to_fill 1024, 1024
+    when ['Project', 'avatar'] then
+      resize_to_fill 1024, 576
+    else
+      resize_to_fit 1024, 1024
+    end
+    quality 80
+  end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
@@ -58,7 +93,7 @@ class ImageUploader < CarrierWave::Uploader::Base
     @name ||= "#{secure_token}.#{file.extension}" if original_filename
   end
 
-  private
+private
 
   def secure_token
     ivar = "@#{mounted_as}_secure_token"

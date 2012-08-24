@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120725030632) do
+ActiveRecord::Schema.define(:version => 20120822210026) do
 
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
@@ -78,11 +78,15 @@ ActiveRecord::Schema.define(:version => 20120725030632) do
     t.string   "name"
     t.string   "slug"
     t.integer  "user_id"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-    t.integer  "view_count", :default => 0
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.integer  "view_count",    :default => 0
+    t.string   "gender"
+    t.datetime "date_of_birth"
   end
 
+  add_index "profiles", ["date_of_birth"], :name => "index_profiles_on_date_of_birth"
+  add_index "profiles", ["gender"], :name => "index_profiles_on_gender"
   add_index "profiles", ["name"], :name => "index_profiles_on_name"
   add_index "profiles", ["slug"], :name => "index_profiles_on_slug", :unique => true
 

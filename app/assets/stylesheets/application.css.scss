@@ -151,6 +151,7 @@ label.hc{
 	width: auto;
 	height: auto;
 	line-height: inherit;
+	-webkit-font-smoothing: antialiased;
 }
 
 .tooltip-inner {
@@ -385,7 +386,8 @@ label.hc{
 		@include transition-timing-function(ease-in);
 		letter-spacing: 0.05em;
 		color: #999;
-		padding: 8px 20px;
+		font-size: 24px;
+		padding: 7px 20px;
 		&:hover{
 			color: $color-highlight;
 			i{
@@ -394,7 +396,7 @@ label.hc{
 		}
 		i{
 			color: $color-base;
-			font-size: 16px;
+			font-size: 18px;
 			@include transition-property(all);
 			@include transition-duration(0.5s);
 			@include transition-timing-function(ease-in);
