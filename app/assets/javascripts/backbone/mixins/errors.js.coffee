@@ -12,6 +12,8 @@ Ananta.Mixins.Errors =
 
 		messages = []
 
+		Analytical.event('Render Error', { error: JSON.stringify(errors), location: window.location.href } )
+
 		if errors['error'] then messages = @parseError(errors['error'], '', messages)
 		if errors['error'] == "You need to sign in or sign up before continuing." then @loginModal(options.loginCallback)
 		if errors['errors']
@@ -26,7 +28,6 @@ Ananta.Mixins.Errors =
 	parseError: (error, attribute, messages) ->
 		attribute or= ''
 		messages or= []
-		Analytical.event('Render Error', { error: error, attribute: attribute, location: window.location.href } )
 
 		if error == 'Invalid email or password.' then error = 'Invalid password.' # Special case for login_register_modal. Maybe refactor out of here?
 		

@@ -4,14 +4,16 @@
 			= link_to truncate(question.question, :length => 30), question, :rel => 'tooltip', 'data-placement' => 'right', 'data-original-title' => question.question
 		%td
 			= question.answer_count
-		%td
+		%td.color-yes
 			= question.yes_count
-		%td
+		%td.color-no
 			= question.no_count
-		%td
+		%td.color-dont-care
 			= question.dont_care_count
 		%td
-			= time_tag question.created_at, "#{time_ago_in_words(question.created_at)} ago"
+			= hovercard question.user
+		%td
+			= time_tag question.created_at, "#{time_ago_in_words(question.created_at)} ago"	
 		%td
 			= link_to question.questionable_controller, "/questions?q_controller=#{question.questionable_controller}"
 		%td
@@ -22,14 +24,17 @@
 			- else
 				none
 		%td
-			= link_to truncate(question.questionable_url, :length => 30), "/questions?q_url=#{question.questionable_url.html_safe}", :rel => 'tooltip', 'data-placement' => 'bottom', 'data-original-title' => question.questionable_url
+			- if question.questionable_url
+				= link_to truncate(question.questionable_url, :length => 30), "/questions?q_url=#{question.questionable_url.html_safe}", :rel => 'tooltip', 'data-placement' => 'bottom', 'data-original-title' => question.questionable_url
+			- else
+				none
 		%td
 			= question.plusminus
 		%td
 			-# TODO: make this work. up, right, down arrow for activity up, sideways, down 
 			%i.icon-arrow-right
 		%td
-			yes
+			%i.icon-check
 - else
 	-# TODO: add ajax answering right here with Y, N and DC buttons
 	%tr
@@ -40,6 +45,8 @@
 		%td
 		%td
 		%td
+			= hovercard question.user
+		%td
 			= time_tag question.created_at, "#{time_ago_in_words(question.created_at)} ago"
 		%td
 			= link_to question.questionable_controller, "/questions?q_controller=#{question.questionable_controller}"
@@ -51,8 +58,13 @@
 			- else
 				none
 		%td
-			= link_to truncate(question.questionable_url, :length => 30), "/questions?q_url=#{question.questionable_url.html_safe}", :rel => 'tooltip', 'data-placement' => 'bottom', 'data-original-title' => question.questionable_url
+			- if question.questionable_url
+				= link_to truncate(question.questionable_url, :length => 30), "/questions?q_url=#{question.questionable_url.html_safe}", :rel => 'tooltip', 'data-placement' => 'bottom', 'data-original-title' => question.questionable_url
+			- else
+				none
 		%td
+			= question.plusminus
 		%td
+			-# TODO: make this work. up, right, down arrow for activity up, sideways, down 
+			%i.icon-arrow-right
 		%td
-			no

@@ -58,7 +58,7 @@ class Project < ActiveRecord::Base
   #########################
   extend FriendlyId
   friendly_id :name, :use => :slugged
-  belongs_to :user
+  belongs_to :user, :counter_cache => true
   has_one    :location, :as => :locatable, :dependent => :destroy
   has_many   :images,   :as => :imageable, :dependent => :destroy
   has_many   :avatars,  :as => :imageable, :source => :images, :class_name => "Image", :conditions => ["image_type = ?", "avatar"]
@@ -119,11 +119,12 @@ class Project < ActiveRecord::Base
     999
   end
 
+
   #########################
   # Protected Methods
   #########################
   protected
-
+  
 
   #########################
   # Private Methods

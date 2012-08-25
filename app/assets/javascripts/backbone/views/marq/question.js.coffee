@@ -109,6 +109,7 @@ class Ananta.Views.Marq.QuestionView extends Backbone.View
 				# add the data from the server to the question
 				@model.set(data['attributes']['question'])
 				@model.set('just_answered', true)
+				Analytical.event('Marq - Successfully answer a question', { answer: data.get('state'), question: @model.get('question'), location: window.location.href } )
 				# add the vote view
 				voteView = new Ananta.Views.Marq.VoteView({model: @model, collection: @collection})
 				@views.push(voteView)
@@ -118,6 +119,7 @@ class Ananta.Views.Marq.QuestionView extends Backbone.View
 				@.trigger('fetchQuestion')
 			error: (data, jqXHR) =>
 				errors = $.parseJSON(jqXHR.responseText)
+				Analytical.event('Marq - Unsuccessfully answer a question', { errors: JSON.stringify(errors), answer: data.get('state'), question: @model.get('question'), location: window.location.href } )
 				@.trigger 'renderErrors', errors,
 					parentSelector : '.alerts .span10'
 					keysToRender   : ['answer']

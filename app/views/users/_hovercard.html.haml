@@ -2,7 +2,8 @@
 =content_for :javascripts do
 	:coffeescript
 		$(document).ready () ->
-			html = "<p>a.k.a #{model.name}</p>"
+			html = "<h4>#{model.name}</h4>
+			<p>#{pluralize(model.projects_count, 'project')}</p>"
 			$("##{id}").hovercard
 				detailsHTML: html
 				width: 300

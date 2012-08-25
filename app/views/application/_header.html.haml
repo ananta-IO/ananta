@@ -13,7 +13,11 @@
 		$('#marq_toggle a').click(function(e) {
 			$('#marq_toggle a').toggleClass('active');
 			$('#marq').slideToggle('fast');
-			Analytical.event('Manually Open Marq', { location: window.location.href } );
+			if($('#marq_toggle a.active').length > 0){
+				Analytical.event('Manually Open Marq', { location: window.location.href } );
+			}else{
+				Analytical.event('Manually Close Marq', { location: window.location.href } );
+			};
 			e.preventDefault();
 			e.stopPropagation();
 		});

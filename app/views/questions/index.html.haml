@@ -9,7 +9,16 @@
 			.row-fluid
 				.span12
 					.pull-right
+						-# TODO make a session variable for question_per and use it to set the default if per is ever changed
+						-# remove per from query string and optionally add an ampersand
+						- query_string = request.query_string.gsub(/(&per|per)=([0-9][0-9][0-9]|[0-9][0-9]|[0-9])/, '')
+						- query_string += "\&" unless query_string.blank?
+						= link_to 10, "/questions?#{query_string}per=10"
+						&middot;
+						= link_to 30, "/questions?#{query_string}per=30"
+					.pull-right
 						= "? #{request.query_string.split('&').join(' .. ')}"
+						&middot;&nbsp;
 					%table.table
 						%tr
 							%th Question
@@ -17,6 +26,7 @@
 							%th{rel: 'tooltip', 'data-placement' => 'bottom', 'data-original-title' => "yes count"} Y
 							%th{rel: 'tooltip', 'data-placement' => 'bottom', 'data-original-title' => "no count"} N
 							%th{rel: 'tooltip', 'data-placement' => 'bottom', 'data-original-title' => "don't care count"} DC
+							%th Asked By
 							%th Date
 							%th Controller
 							%th Action
@@ -31,14 +41,4 @@
 									%i.icon-user 
 						= render @questions
 
-					.pull-right
-						-# TODO make a session variable for question_per and use it to set the default if per is ever changed
-						-# remove per from query string and optionally add an ampersand
-						- query_string = request.query_string.gsub(/(&per|per)=([0-9][0-9][0-9]|[0-9][0-9]|[0-9])/, '')
-						- query_string += "\&" unless query_string.blank?
-						= link_to 10, "/questions?#{query_string}per=10"
-						&middot;
-						= link_to 30, "/questions?#{query_string}per=30"
-						&middot;
-						= link_to 100, "/questions?#{query_string}per=100"
 					= paginate @questions

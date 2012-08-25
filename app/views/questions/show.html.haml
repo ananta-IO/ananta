@@ -13,7 +13,7 @@
 						%br
 						%p
 							Asked by
-							= link_to @question.user.username, @question.user.profile 
+							= hovercard @question.user
 							= time_tag @question.created_at, "#{time_ago_in_words(@question.created_at)} ago"
 					.span4
 						= render 'answer'
@@ -31,7 +31,7 @@
 									%td
 										= answer.state.titleize
 									%td
-										= link_to answer.user.username, answer.user.profile
+										= hovercard answer.user
 									%td
 										= time_tag answer.created_at, "#{time_ago_in_words(answer.created_at)} ago"
 					.span7

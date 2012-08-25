@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120822210026) do
+ActiveRecord::Schema.define(:version => 20120824120425) do
 
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
@@ -195,12 +195,16 @@ ActiveRecord::Schema.define(:version => 20120822210026) do
     t.string   "timezone"
     t.float    "lat"
     t.float    "lng"
+    t.integer  "projects_count",         :default => 0
+    t.integer  "joined_projects_count",  :default => 0
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["facebook_id"], :name => "index_users_on_facebook_id"
+  add_index "users", ["joined_projects_count"], :name => "index_users_on_joined_projects_count"
   add_index "users", ["lat", "lng"], :name => "index_users_on_lat_and_lng"
   add_index "users", ["permissions"], :name => "index_users_on_permissions"
+  add_index "users", ["projects_count"], :name => "index_users_on_projects_count"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["slug"], :name => "index_users_on_slug", :unique => true
   add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true

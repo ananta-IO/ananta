@@ -81,12 +81,14 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 		question = new Ananta.Models.Question({ question: @$(".ask input.question").val(), questionable_url: window.location.href })
 		question.save(null
 			success: (data) =>
+				Analytical.event('Marq - Successfully ask a question', { question: data.get('question'), location: window.location.href } )
 				@$(".ask input.question").val('')
 				@questionCharCount()
 				@clearErrors()
 				@collection.add(data)
 			error: (data, jqXHR) =>
 				errors = $.parseJSON(jqXHR.responseText)
+				Analytical.event('Marq - Unsuccessfully ask a question', { error: JSON.stringify(errors), question: data.get('question'), location: window.location.href } )
 				@renderErrors errors,
 					parentSelector : '.alerts .span10'
 					keysToRender   : ['question']

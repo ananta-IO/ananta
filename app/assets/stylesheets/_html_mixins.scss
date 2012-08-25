@@ -8,15 +8,19 @@
 	@include box-shadow(0 0 0 4px rgba(224, 222, 215, 0.5));
 }
 
-.clearfix{
-	@include clearfix;
-}
-
 .center{
 	float: none;
 	text-align: center;
 	margin: 0 auto;
 }
+
+.clearfix{
+	@include clearfix;
+}
+
+.color-yes{color: $color-yes;}
+.color-no{color: $color-no;}
+.color-dont-care{color: $color-dont-care;}
 
 .display-block{
 	display: block;
