@@ -16,9 +16,22 @@ class Project < ActiveRecord::Base
 
   # Project state machine
   # TODO: Remove State Machine from the whole app.
-  state_machine :initial => :planning do
-    event :work do
-      transition :planning => :working
+  state_machine :initial => :draft do
+
+    event :validate do # Is this project worth pursuing?
+      transition :draft => :validating
+    end
+
+    event :learn do # What do I need to know about this project to make it a success?
+      transition :validating => :learning
+    end
+
+    event :design do # Who do I need on my team? What is our plan? What are our expectations?
+      transition :learning => :designing 
+    end
+
+    event :work do # If communications is key, are we communicating enough?
+      transition :designing => :working
     end
 
     event :check_complete do
@@ -34,7 +47,7 @@ class Project < ActiveRecord::Base
     end
 
     event :kill do
-      transition [:planning, :working, :completing] => :killed
+      transition [:draft, :validating, :learning, :designing, :working, :completing] => :killed
     end
   end
 

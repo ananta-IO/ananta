@@ -1,5 +1,16 @@
 -content_for :title do "#{@profile.user.username.possessive} profile" end
 
+=content_for :javascripts do
+	:coffeescript
+		$('#project-grid').isotope(
+			itemSelector: '.project'
+			layoutMode:	'fitRows'
+			animationOptions:
+				duration: 750
+				easing: 'linear'
+				queue: false
+		)
+
 .container-fluid
 	.content
 		.page-header
@@ -45,20 +56,10 @@
 			.span8
 				.sub-header 
 					%h2 
+						/ = @profile.user.username.titleize.possessive
 						Projects
 						-if can? :edit, @profile
 							.pull-right 
 								= link_to "New Project", new_user_project_path(@profile.user)
-				%table.table
-					- @profile.user.projects.each do |project|
-						%tr
-							%td
-								.pull-left
-									= image_tag(project.avatar.image.small.url)
-								%h3
-									= link_to project.name, [@profile.user, project]
-									.pull-right
-										= project.votes_for
-										%i.icon-heart
-								%p
-									= project.state.titleize
+				#project-grid
+					= render @profile.user.projects

@@ -11,6 +11,8 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 		'click #login-action'      		: 'login'
 		'click .show-email a'      		: 'expand'
 		'focus #login-password'    		: 'passwordFocus'
+		'blur #project-name'       		: 'projectNameBlur'
+		'blur #login-username'     		: 'usernameBlur'
 		'blur #login-password'     		: 'passwordBlur'
 		'blur #login-email'        		: 'checkEmail'
 		'click .mailcheck a.domain'		: 'acceptSuggestion'
@@ -110,8 +112,15 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 		@$('.forgot-password').fadeOut(500)
 
 	passwordBlur: ->
+		@$('.password .hint').tooltip('hide')
 		if @$('#login-password').val() == '' and @register == false
 			@$('.forgot-password').fadeIn(500)
+
+	usernameBlur: ->
+		@$('.username .hint').tooltip('hide')
+
+	projectNameBlur: ->
+		@$('.project-name .hint').tooltip('hide')
 
 	checkEmail: ->
 		if @$('#login-email').val().toLowerCase() != @email and @$('#login-email').val() != ''
@@ -335,7 +344,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 			.slideDown () =>
 				@addJLabel("#login-username")
 		if @$('.project-name').length == 0
-			$('<div class="input string required project-name"><label for="project-name" style="display:none;"><i class="icon-heart" />&nbsp;What are you working on?</label><input id="project-name" type="text" name="project[name]" title="What are you working on?" autocomplete="off" value="'+(if Ananta.App.currentProject and Ananta.App.currentProject.get('name') then Ananta.App.currentProject.get("name") else "")+'" /></div>').hide().insertAfter(@.$('.username'))
+			$('<div class="input string required project-name"><label for="project-name" style="display:none;"><i class="icon-heart" />&nbsp;What do you want most?</label><input id="project-name" type="text" name="project[name]" title="This will be your first project.<br/>Make it a good one." autocomplete="off" value="'+(if Ananta.App.currentProject and Ananta.App.currentProject.get('name') then Ananta.App.currentProject.get("name") else "")+'" /></div>').hide().insertAfter(@.$('.username'))
 			.slideDown () =>
 				@addJLabel("#project-name")
 		@checkUsername()

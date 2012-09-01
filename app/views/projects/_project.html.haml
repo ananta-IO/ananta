@@ -9,6 +9,9 @@
 					%h2.name= link_to project.name, user_projects_path([project.user, project])
 			.row-fluid
 				.span12
+					%p.state= project.state
+			.row-fluid
+				.span12
 					%p.description= project.description
 			.row-fluid
 				.span12.bottom
