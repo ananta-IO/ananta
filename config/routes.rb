@@ -30,6 +30,7 @@ Ananta::Application.routes.draw do
 		get '/register' => 'devise/registrations#new'
 	end
 
+	match '/me' => 'pages#me' 
 	match '/tb' => 'pages#tb' if Rails.env == 'development'
 	match '/about' => 'pages#about'
 	match '/robots.txt' => 'pages#robots'

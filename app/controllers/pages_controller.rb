@@ -10,4 +10,12 @@ class PagesController < ApplicationController
 			render :text => "User-agent: *\nDisallow: /", :layout => false, :content_type => "text/plain"
 		end
 	end
+
+	def me
+		if current_user
+			redirect_to current_user.profile	
+		else
+			redirect_to root_url
+		end
+	end
 end

@@ -28,7 +28,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 		Ananta.App.currentUser or= new Ananta.Models.User()
 		@user = new Ananta.Models.User( options.user )
 		@callback = options.callback or= ->
-			window.location = window.location
+			window.location = "#{window.location.origin}/me"
 		@message = options.message
 		@register = false
 		@username_pattern = /^[A-Za-z-]*$/i
@@ -70,6 +70,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 		@addCSRF()
 		if @message then @addMessage()
 		@$('label').hide()
+		@$('#project-name').tooltip()
 
 		unless @register
 			@$('#login-email').attr('name', 'user[login]')
@@ -91,7 +92,9 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 			@$('.forgot-password').hide()
 			@$('.separator span').hide()
 			@addJLabel(".string input")
-			@$('#login-password').focus()
+			@$('#project-name').focus()
+			wait 300, () =>
+				@$('#login-password').focus()
 			@$('.facebook img').tooltip({ placement:'bottom', title:'finish registration <i class="icon-arrow-down" />' }).tooltip('show')
 		else
 			@$('.fb-login-button').focus()
@@ -349,6 +352,7 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 				@addJLabel("#project-name")
 		@checkUsername()
 		@checkProjectName()
+		@$('#project-name').tooltip()
 		@$('.forgot-password').fadeOut(500)
 
 	addMessage: ->
