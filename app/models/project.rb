@@ -22,24 +22,24 @@ class Project < ActiveRecord::Base
       transition :draft => :validating
     end
 
-    event :learn do # What do I need to know about this project to make it a success?
-      transition :validating => :learning
-    end
+    # event :learn do # What do I need to know about this project to make it a success?
+    #   transition :validating => :learning
+    # end
 
     event :design do # Who do I need on my team? What is our plan? What are our expectations?
-      transition :learning => :designing 
+      transition :validating => :designing 
     end
 
-    event :work do # If communications is key, are we communicating enough?
-      transition :designing => :working
+    event :build do # If communications is key, are we communicating enough?
+      transition :designing => :building
     end
 
     event :check_complete do
-      transition :working => :completing
+      transition :building => :completing
     end
 
     event :not_complete do
-      transition :completing => :working
+      transition :completing => :building
     end
 
     event :complete do
@@ -47,7 +47,7 @@ class Project < ActiveRecord::Base
     end
 
     event :kill do
-      transition [:draft, :validating, :learning, :designing, :working, :completing] => :killed
+      transition [:draft, :validating, :learning, :designing, :building, :completing] => :killed
     end
   end
 

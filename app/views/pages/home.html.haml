@@ -1,14 +1,121 @@
 -content_for :title do "Ananta IO · Realize Your Dreams" end
 
-=content_for :javascripts do
-	:javascript
-		$(function() {
-			// Add project_flow to view
-			Ananta.App.projectFlowRouter = new Ananta.Routers.ProjectFlowRouter({ 'currentUser' : #{render(partial: "users/base", formats: [:json], locals: { object: current_user } )} });
-			Backbone.history.start();
-		});
-
 .container-fluid
 	.content
 		#home
-			#project_flow
+		%br
+		%br
+		%br
+		%br
+		%br
+		.row-fluid
+			.span12.center
+				.brand{style: "font-size: 60px; font-weight: 200;"}
+					ananta IO
+		%br
+		.row-fluid
+			.span12.center
+				%h1.tag-line
+					Work Smarter
+		%br
+		%br
+		.row-fluid
+			.span12.center
+				%h2.short-value-proposition
+					Get your ideas out of your head and into the world faster than ever before.
+		%br
+		.row-fluid
+			.span12.center
+				%a.login.btn.btn-large.btn-success{style: "font-weight: 800;"}
+					Realize Your Dreams
+		%br
+		%br
+		.row-fluid
+			.span1
+			.span10
+				%h2
+					Our Process
+		.row-fluid
+			.span12
+				%hr
+		.row-fluid
+			.span1
+			.span2
+				.row-fluid
+					.span11
+						%h3
+							1. Validate
+						%p
+							Is your idea worth pursuing? Find out faster if this idea is worth your time or if you should move on to your next big idea. We will prompt you to ask the right questions and connect you with people who can answer them. 
+					.span1
+						%h3.hidden-phone
+							%i.icon-arrow-right
+			.span2
+				.row-fluid
+					.span11
+						%h3
+							3. Design
+						%p
+							Who do I need on my team? What is our plan? What are our expectations? Use the relationships you have already formed and form new ones to build a team and a community to be accounable to. 
+					.span1
+						%h3.hidden-phone
+							%i.icon-arrow-right
+			.span2
+				.row-fluid
+					.span11
+						%h3
+							4. Build
+						%p
+							Manifest your idea and track your progress along the way. We will help you keep your team and your community in sync and informed along the way 
+					.span1
+						%h3.hidden-phone
+							%i.icon-arrow-right
+			.span2
+				.row-fluid
+					.span11
+						%h3
+							5. Learn
+						%p
+							Our goal at ananta IO is to optimize your workflow so that more of your ideas resolve quickly in either success or failure so that you can learn and itterate more quickly
+					.span1
+						%h3.hidden-phone
+							%i.icon-arrow-right
+			.span2
+				.row-fluid
+					.span11
+						%h3
+							6. Itterate
+						%p
+							Take the lessons you learned and regardless of success or failure translate the ashes of your last project into the birth of your next project
+		%br
+		%br
+		%br
+		.row-fluid
+			.span1
+			.span10
+				%h2
+					Explore Projects
+		.row-fluid
+			.span12
+				%hr
+		.row-fluid
+			.span1
+			- @projects.each do |project|
+				.span2
+					= link_to user_projects_path([project.user, project]) do image_tag project.avatar.image.medium, rel: 'tooltip', 'data-original-title' => "#{project.name}<br/>by<br/>#{project.user.username}" end
+
+
+
+-#
+	=content_for :javascripts do
+		:javascript
+			$(function() {
+				// Add project_flow to view
+				Ananta.App.projectFlowRouter = new Ananta.Routers.ProjectFlowRouter({ 'currentUser' : #{render(partial: "users/base", formats: [:json], locals: { object: current_user } )} });
+				Backbone.history.start();
+			});
+
+	.container-fluid
+		.content
+			#home
+				#project_flow

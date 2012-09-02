@@ -30,7 +30,8 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 		@callback = options.callback or= ->
 			window.location = "#{window.location.origin}/me"
 		@message = options.message
-		@register = false
+		@register = options.register
+		@register or= false
 		@username_pattern = /^[A-Za-z-]*$/i
 		@email_pattern = /^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i
 		@checkUser()

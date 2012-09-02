@@ -2,6 +2,10 @@ class PagesController < ApplicationController
 	def show
 	end
 
+	def home
+		@projects = Project.limit(5)
+	end
+
 	def robots
 		if Rails.env.production?
 			robots = File.read Rails.root.join('config', 'robots.txt')
