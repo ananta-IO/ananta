@@ -106,7 +106,7 @@ class Ability
 			can :read, Comment
 			can :read, Profile
 			can [:read, :random], Project
-			can :read, Question
+			can [:read, :random_unanswered], Question
 		end 
 
 		# Users

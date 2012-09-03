@@ -8,7 +8,10 @@ Ananta::Application.routes.draw do
 	resources :locations, :only => [:create, :update]
 
 	resources :questions, :only => [:index, :show, :create, :update] do
-		get 'page/:page', :action => :index, :on => :collection
+		collection do
+			get 'page/:page', :action => :index
+			get 'random_unanswered'
+		end
 		resources :answers, :only => [:index, :show, :create, :update] do
 			resources :comments, :only => [:create]
 		end

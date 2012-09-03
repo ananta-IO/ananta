@@ -115,7 +115,7 @@ class Ananta.Views.Marq.MarqView extends Backbone.View
 
 	noMoreQuestions: ->
 		@$('.nmqs').remove()
-		@$(".questions tr").prepend("<td class='nmqs'><div class='span5'><div class='question wrap'><div class='outer'><div class='inner'>You have answered every question on this page. Why don't you ask a question. Or <a href='/projects/random'>go to a different page</a> and answer more questions.</div></div></div></div></td>")
+		@$(".questions tr").prepend("<td class='nmqs'><div class='span5'><div class='question wrap'><div class='outer'><div class='inner'>You have answered every question on this page. Why don't you ask a question. Or <a href='/questions/random_unanswered'>go to a different page</a> and answer more questions.</div></div></div></div></td>")
 
 	onClose: ->
 		for view in @views

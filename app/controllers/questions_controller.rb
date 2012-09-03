@@ -75,6 +75,11 @@ class QuestionsController < InheritedResources::Base
 		create!
 	end
 
+	def random_unanswered
+		question = Question.unanswered_by(current_user.id).where("questionable_action = 'show' OR questionable_action = 'index' OR questionable_action = 'home' OR questionable_action = 'about'").order("RANDOM()").first 
+		question ||= Question.order("RANDOM()").first 
+		redirect_to question.questionable_url
+	end
 
 	#########################
 	# Protected Methods

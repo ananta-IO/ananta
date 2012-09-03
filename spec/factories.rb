@@ -5,13 +5,13 @@ include ActionDispatch::TestProcess
 
 FactoryGirl.define do
 	sequence :email do |n|
-		"person#{n}@example.com"
+		"person#{n}-#{Faker::Name.first_name}@example.com"
 	end
 	sequence :name do |n|
 		"#{Faker::Name.name} #{n}"
 	end
 	sequence :username do |n|
-		"user-#{base_convert_i_to_s(n, '', 65, 90)}"
+		"user-#{base_convert_i_to_s(n, '', 65, 90)}-#{Faker::Name.first_name}"
 	end
 	sequence :question do |n|
 		"What is the meaning of #{n}?"
@@ -54,7 +54,7 @@ FactoryGirl.define do
 	factory :project do
 		name { generate :name }
 		description Faker::Lorem.paragraph
-		state 'planning'
+		state 'draft'
 		user
 	end
 
