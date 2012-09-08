@@ -59,7 +59,7 @@ gem 'koala'
 gem 'geocoder'
 gem 'ask_geo'
 # Analytics
-gem 'analytical', git: 'git://github.com/macreery/analytical.git' #TODO: revert to generic analytical gem once it supports the mixpanel async api
+gem 'analytical', git: 'git://github.com/kelkoo-services/analytical.git' #TODO: revert to generic analytical gem once it supports the mixpanel async api
 
 # Misc
 gem 'rabl'

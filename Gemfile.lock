@@ -1,6 +1,6 @@
 GIT
-  remote: git://github.com/macreery/analytical.git
-  revision: a406cbc0e5bb7533c1af62a66578090c90cf4356
+  remote: git://github.com/kelkoo-services/analytical.git
+  revision: e3198f0df18399048d44ddd261ec1e11ebd342c1
   specs:
     analytical (3.0.12)
 
