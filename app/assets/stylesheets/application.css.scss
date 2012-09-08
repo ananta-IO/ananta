@@ -372,8 +372,10 @@ label.hc{
 	height: 40px;
 	// margin-bottom: 40px;
 	@include border-radius(0);
-	// @include box-shadow($color-background 0 0 0);
-	background: $color-background;
+	@include box-shadow(rgba(0, 0, 0, 0.075) 0 2px 0);
+	// box-shadow: 0 2px 15px rgba(0, 0, 0, 0.075);
+	// border-bottom: 2px solid rgba(0, 0, 0, 0.075);
+	background: darken($color-background, 1%);
 	.container-fluid{
 		@extend .container-fluid;
 		position: relative;

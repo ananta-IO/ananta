@@ -67,6 +67,7 @@ gem 'jquery-rails'
 gem 'haml-rails'
 gem 'coffee-filter'
 gem 'simple_form'
+gem 'chronic'
 
 # Really Misc
 gem 'possessive' 

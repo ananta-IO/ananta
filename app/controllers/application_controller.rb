@@ -4,9 +4,9 @@ class ApplicationController < ActionController::Base
 	
 	protect_from_forgery
 
-	analytical use_session_store: true, modules: [:console]           	if %w(development sandbox test).include?(Rails.env)
-	analytical use_session_store: true, modules: [:console, :mixpanel]	if Rails.env == 'staging'
-	analytical use_session_store: true, modules: [:mixpanel]          	if Rails.env == 'production'
+	analytical use_session_store: true, modules: [:console]                   	if %w(development sandbox test).include?(Rails.env)
+	analytical use_session_store: true, modules: [:console, :mixpanel]        	if Rails.env == 'staging'
+	analytical use_session_store: true, modules: [:mixpanel, :google, :clicky]	if Rails.env == 'production'
 
 	before_filter :set_markdown
 	after_filter  :set_questionable, :if =>  lambda { request.format == 'html' }
