@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/macreery/analytical.git
+  revision: a406cbc0e5bb7533c1af62a66578090c90cf4356
+  specs:
+    analytical (3.0.12)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -31,7 +37,6 @@ GEM
     acts-as-taggable-on (2.3.1)
       rails (~> 3.0)
     addressable (2.3.2)
-    analytical (3.0.12)
     arel (3.0.2)
     ask_geo (0.1.0)
       json
@@ -368,7 +373,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on
-  analytical
+  analytical!
   ask_geo
   bootstrap-sass (~> 2.0.2)
   brakeman
