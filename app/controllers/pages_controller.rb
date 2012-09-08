@@ -3,7 +3,7 @@ class PagesController < ApplicationController
 	end
 
 	def home
-		@projects = Project.limit(5)
+		@projects = Project.limit(6)
 	end
 
 	def robots
