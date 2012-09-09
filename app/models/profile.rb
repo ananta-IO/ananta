@@ -126,7 +126,10 @@ class Profile < ActiveRecord::Base
 
   # Adds a gravatar if no avatar exists
   def add_gravatar
-    images.create({ remote_image_url: gravatar_url, image_type: 'avatar', user_id: user.id }) if avatars.count == 0 rescue false
+    if avatars && avatars.count == 0
+      image = images.create({ image_type: 'avatar', user_id: user.id }) 
+      image.update_attributes({ remote_image_url: gravatar_url, image_type: 'avatar', user_id: user.id })
+    end
   end
 
 

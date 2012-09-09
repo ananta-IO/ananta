@@ -38,6 +38,8 @@ gem 'redcarpet'
 
 # Tagging
 gem 'acts-as-taggable-on'
+# Hashtagging
+gem 'twitter-text'
 
 # State Machine
 gem 'state_machine' # TODO: remove

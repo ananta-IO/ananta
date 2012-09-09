@@ -350,6 +350,8 @@ GEM
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
+    twitter-text (1.5.0)
+      activesupport
     tzinfo (0.3.33)
     uglifier (1.2.6)
       execjs (>= 0.3.0)
@@ -423,5 +425,6 @@ DEPENDENCIES
   state_machine
   therubyracer
   thumbs_up
+  twitter-text
   uglifier (>= 1.0.3)
   unicorn

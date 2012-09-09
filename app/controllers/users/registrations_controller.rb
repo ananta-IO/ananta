@@ -9,7 +9,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if fb_user = session[:facebook_user_attributes]
       resource.facebook_id = fb_user.id  #, locale: fb_user.locale, facebook_verified: fb_user.verified 
       resource.build_profile(:name => fb_user.name) 
-      resource.profile.images.new({ remote_image_url: "https://graph.facebook.com/#{fb_user.id}/picture?type=large", image_type: 'avatar' })
+      image = resource.profile.images.new({ image_type: 'avatar' })
+      image.update_attributes({ remote_image_url: "https://graph.facebook.com/#{fb_user.id}/picture?type=large", image_type: 'avatar' })
     end
     if project = params[:project]
       resource.projects.new project
