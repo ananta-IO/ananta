@@ -65,7 +65,7 @@ class User < ActiveRecord::Base
 	#########################
 	# Validations
 	#########################
-	validates :username, :uniqueness => {:case_sensitive => false}, :length => 3..63, :allow_blank => true, :if => Proc.new { |user| user.username != user.id.to_s }
+	validates :username, :uniqueness => {:case_sensitive => false}, :length => 1..20, :allow_blank => true, :if => Proc.new { |user| user.username != user.id.to_s }
 	validate  :validate_username_format
 	validate  :validate_has_a_project, on: :create
 
@@ -193,8 +193,8 @@ class User < ActiveRecord::Base
 	end
 
 	def validate_username_format
-		unless username =~ /^[A-Za-z-]*$/i or username == id.to_s
-			errors.add(:username, "only letters and hyphens allowed")
+		unless username =~ /^[a-zA-Z][a-zA-Z0-9_]*$/ or username == id.to_s
+			errors.add(:username, "may only contain letters, numbers and underscores")
 		end
 	end
 

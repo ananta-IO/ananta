@@ -32,7 +32,8 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 		@message = options.message
 		@register = options.register
 		@register or= false
-		@username_pattern = /^[A-Za-z-]*$/i
+		@username_start_pattern = /^[a-zA-Z].+.*$/i
+		@username_pattern = /^[a-zA-Z][a-zA-Z0-9_]*$/i
 		@email_pattern = /^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i
 		@checkUser()
 		@mailcheckDomains = [
@@ -214,14 +215,14 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 		@$('.username i.hint').tooltip('hide').remove()
 		if @username != ''
 			@$('#login-username').after('<img src="/assets/ajax-loader-black-dots.gif" class="loader" />')
-			if @username.length < 3
+			if !@username_start_pattern.test(@username)
 				@$('.username .loader').remove()
 				@$('#login-username').after('<i class="hint icon-remove" />')
-				@$('.username i.hint').tooltip({placement: 'top', title: "must be 3 or more letters"}).tooltip('show')
+				@$('.username i.hint').tooltip({placement: 'top', title: "must start with a letter"}).tooltip('show')
 			else if !@username_pattern.test(@username)
 				@$('.username .loader').remove()
 				@$('#login-username').after('<i class="hint icon-remove" />')
-				@$('.username i.hint').tooltip({placement: 'top', title: "letters and hyphens only"}).tooltip('show')
+				@$('.username i.hint').tooltip({placement: 'top', title: "letters, numbers and underscores only"}).tooltip('show')
 			else
 				$.ajax
 					dataType : 'json'
