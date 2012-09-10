@@ -3,6 +3,7 @@ class ProfilesController < InheritedResources::Base
 	defaults :route_prefix => ''
 	actions :show, :edit, :update, :edit_location
 	
+	before_filter :find_users_profile, :only => [:show]
 	before_filter :authenticate_user!, :except => [:index, :show]
 	load_and_authorize_resource
 
@@ -19,6 +20,10 @@ class ProfilesController < InheritedResources::Base
 	end
 
 protected
+
+	def find_users_profile
+		@profile = User.find(params[:id]).profile
+	end
 
 	def track_view
 		@profile.views.create({user: current_user, ip: remote_ip})
