@@ -1,105 +1,106 @@
 -content_for :title do "#{@project.name}" end
 
-= div_for @project do
-	.container-fluid
-		.row-fluid
-			.span12.page-header
-				- if can? :update, @project
+#project
+	= div_for @project, class: 'project' do
+		.container-fluid
+			.row-fluid
+				.span12.page-header
+					- if can? :update, @project
+						.row-fluid
+							.span12
+								.pull-right
+									= link_to edit_user_project_path(@user, @project) do
+										Edit
+										%i.icon-edit
 					.row-fluid
 						.span12
-							.pull-right
-								= link_to edit_user_project_path(@user, @project) do
-									Edit
-									%i.icon-edit
+							%h1.center 
+								= link_to @project.name, user_project_path(@user, @project)
+					.row-fluid
+						.span12
+							%p.center
+								by
+								= link_to @user.username, profile_path(@user.profile)
+							
+		.container-fluid
+			.content.box-shadow
 				.row-fluid
 					.span12
-						%h1.center 
-							= link_to @project.name, user_project_path(@user, @project)
-				.row-fluid
-					.span12
-						%p.center
-							by
-							= link_to @user.username, profile_path(@user.profile)
-						
-	.container-fluid
-		.content.box-shadow
-			.row-fluid
-				.span12
-					.container-fluid
-						.row-fluid
-							.span8
-								.row-fluid
-									.span12
-										= image_tag(@project.avatar.image.large.url)
-										%hr
-								.row-fluid
-									.span12
-										.row-fluid
-											.span3
-												= render "vote"
-											.span6
-												.pull-left.addthis_toolbox.addthis_default_style
-													%a.addthis_button_facebook_like{"fb:like:layout" => "button_count"}
-													%a.addthis_button_tweet
-													%a.addthis_button_google_plusone{"g:plusone:size" => "medium"}
-												%script{:src => "http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4e07edfe1206c99f", :type => "text/javascript"}
-											.span3
-												%h2 <<< link >>>
-										%hr
-								.row-fluid
-									.span12
-										= markdown @project.description
-										%hr
-								.row-fluid
-									.span12
-										= render 'comments/comments', commentable: @project
-										%hr
-							.span4
-								.row-fluid
-									.span12
-										%h2
-											%span.pull-right= pluralize @project.energy, 'volt'
-											%i.icon-bolt
-										%hr
-								.row-fluid
-									.span12
-										%h2
-											%span.pull-right= pluralize @project.view_count, 'view'
-											%i.icon-eye-open
-										%hr
-								.row-fluid
-									.span12
-										%h2
-											%span.pull-right= pluralize @project.votes_for, 'lover'
-											%i.icon-heart
-										%hr
-								.row-fluid
-									.span12
-										%h2
-											%span.pull-right= @project.state
-											State:
-										%hr
-								.row-fluid
-									.span12
-										= list_tags @project.tags
-										%hr
-								.row-fluid
-									.span12
-										.row-fluid
-											.span8
-												%h3 Created by:
-												%h2= link_to @project.user.username, @project.user.profile
-											.span4
-												= link_to @project.user.profile do 
-													= image_tag @project.user.profile.avatar.image.medium, class: "circle"
-										%hr
-								.row-fluid
-									.span12
-										%h2 <<< members >>>
-										%hr	
-								.row-fluid
-									.span12
-										%h2 <<< lovers >>>
-										%hr
+						.container-fluid
+							.row-fluid
+								.span8
+									.row-fluid
+										.span12
+											= image_tag(@project.avatar.image.large.url)
+											%hr
+									.row-fluid
+										.span12
+											.row-fluid
+												.span3
+													= render "vote"
+												.span6
+													.pull-left.addthis_toolbox.addthis_default_style
+														%a.addthis_button_facebook_like{"fb:like:layout" => "button_count"}
+														%a.addthis_button_tweet
+														%a.addthis_button_google_plusone{"g:plusone:size" => "medium"}
+													%script{:src => "http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4e07edfe1206c99f", :type => "text/javascript"}
+												.span3
+													%h2 <<< link >>>
+											%hr
+									.row-fluid
+										.span12
+											= markdown @project.description
+											%hr
+									.row-fluid
+										.span12
+											= render 'comments/comments', commentable: @project
+											%hr
+								.span4
+									.row-fluid
+										.span12
+											%h2
+												%span.pull-right= pluralize @project.energy, 'volt'
+												%i.icon-bolt
+											%hr
+									.row-fluid
+										.span12
+											%h2
+												%span.pull-right= pluralize @project.view_count, 'view'
+												%i.icon-eye-open
+											%hr
+									.row-fluid
+										.span12
+											%h2
+												%span.pull-right= pluralize @project.votes_for, 'lover'
+												%i.icon-heart
+											%hr
+									.row-fluid
+										.span12
+											%h2
+												%span.pull-right= @project.state
+												State:
+											%hr
+									.row-fluid
+										.span12
+											= list_tags @project.tags
+											%hr
+									.row-fluid
+										.span12
+											.row-fluid
+												.span8
+													%h3 Created by:
+													%h2= link_to @project.user.username, @project.user.profile
+												.span4
+													= link_to @project.user.profile do 
+														= image_tag @project.user.profile.avatar.image.medium, class: "circle"
+											%hr
+									.row-fluid
+										.span12
+											%h2 <<< members >>>
+											%hr	
+									.row-fluid
+										.span12
+											%h2 <<< lovers >>>
+											%hr
 
 

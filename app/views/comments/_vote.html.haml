@@ -1,38 +1,18 @@
 .comment-vote
     - if current_user  
-        .up        
+        %span.up        
             - if current_user.voted_for? comment
                 = link_to comment_url(comment, comment: {cast_vote: {vote: :cancel}}), method: :put, remote: :true do
-                    %i.icon-chevron-up
+                    %i.icon-arrow-up
             - else
                 = link_to comment_url(comment, comment: {cast_vote: {vote: :for}}), method: :put, remote: :true do
-                    %i.icon-chevron-up.opacity4
-            &nbsp;
-        
-        .count
-            = comment.plusminus
+                    %i.icon-arrow-up.opacity3
+        %span.count
+            = pluralize comment.plusminus, 'vote'
 
-        -#
-            .down
-                - if current_user.voted_against? comment            
-                    = link_to comment_url(comment, comment: {cast_vote: {vote: :cancel}}), method: :put, remote: :true do
-                        %i.icon-chevron-down
-                - else
-                    = link_to comment_url(comment, comment: {cast_vote: {vote: :against}}), method: :put, remote: :true do
-                        %i.icon-chevron-down.opacity4
-                &nbsp;
-
-    - else  
-        .up       
+    - else 
+        %span.up       
             = link_to comment_url(comment, comment: {cast_vote: {vote: :for}}), method: :put do
-                %i.icon-chevron-up.opacity4
-            &nbsp;
-        
-        .count
-            = comment.plusminus
-
-        -#
-            .down
-                = link_to comment_url(comment, comment: {cast_vote: {vote: :against}}), method: :put do
-                    %i.icon-chevron-down.opacity4
-                &nbsp;
+                %i.icon-arrow-up.opacity3
+        %span.count
+            = pluralize comment.plusminus, 'vote' 
