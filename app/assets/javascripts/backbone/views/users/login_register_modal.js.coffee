@@ -215,7 +215,11 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 		@$('.username i.hint').tooltip('hide').remove()
 		if @username != ''
 			@$('#login-username').after('<img src="/assets/ajax-loader-black-dots.gif" class="loader" />')
-			if !@username_start_pattern.test(@username)
+			if @username.length < 3
+				@$('.username .loader').remove()
+				@$('#login-username').after('<i class="hint icon-remove" />')
+				@$('.username i.hint').tooltip({placement: 'top', title: "must be 3 or more characters"}).tooltip('show')
+			else if !@username_start_pattern.test(@username)
 				@$('.username .loader').remove()
 				@$('#login-username').after('<i class="hint icon-remove" />')
 				@$('.username i.hint').tooltip({placement: 'top', title: "must start with a letter"}).tooltip('show')
@@ -345,16 +349,17 @@ class Ananta.Views.Users.LoginRegisterModal extends Backbone.View
 		@$('form').attr('action', '/users')
 		@$('#login-action').html("Register").show()
 		if @$('.username').length == 0 
-			$('<div class="input string required username"><label for="login-username" style="display:none;"><i class="icon-pencil" />&nbsp;username</label><input id="login-username" type="text" name="user[username]" title="username" autocomplete="off" /></div>').hide().insertAfter(@.$('.password'))
+			$('<div class="input string required username"><label for="login-username" style="display:none;"><i class="icon-pencil" />&nbsp;&nbsp;username</label><input id="login-username" type="text" name="user[username]" title="username" autocomplete="off" /></div>').hide().insertAfter(@.$('.password'))
 			.slideDown () =>
 				@addJLabel("#login-username")
 		if @$('.project-name').length == 0
-			$('<div class="input string required project-name"><label for="project-name" style="display:none;"><i class="icon-heart" />&nbsp;What do you want most?</label><input id="project-name" type="text" name="project[name]" title="This will be your first project.<br/>Make it a good one." autocomplete="off" value="'+(if Ananta.App.currentProject and Ananta.App.currentProject.get('name') then Ananta.App.currentProject.get("name") else "")+'" /></div>').hide().insertAfter(@.$('.username'))
+			$('<div class="input string required project-name"><label for="project-name" title="This will be your first project.<br/>Choose something you really want to do." style="display:none;"><i class="icon-briefcase" />&nbsp;&nbsp;your first project</label><input id="project-name" type="text" name="project[name]" title="This will be your first project.<br/>Choose something you really want to do." autocomplete="off" value="'+(if Ananta.App.currentProject and Ananta.App.currentProject.get('name') then Ananta.App.currentProject.get("name") else "")+'" /></div>').hide().insertAfter(@.$('.username'))
 			.slideDown () =>
 				@addJLabel("#project-name")
 		@checkUsername()
 		@checkProjectName()
 		@$('#project-name').tooltip()
+		@$('.project-name label').tooltip()
 		@$('.forgot-password').fadeOut(500)
 
 	addMessage: ->

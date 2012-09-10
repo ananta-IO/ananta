@@ -4,6 +4,11 @@
 	.content
 		#about
 			.row-fluid
+				.span12.center
+					%h2 We want to rid the world of the phrase
+					%h2 "I can't do it."
+					%br
+			.row-fluid
 				.span4
 				.span4
 					%h2
@@ -11,7 +16,12 @@
 						&nbsp;
 						What
 					%p
-						Ananta IO is a project database. It's a tool for doers. We make it easy for you to: <em>share what you're working on, get feedback, build teams, achieve your goals, and gloat.</em> 
+						Ananta IO is a project database. It's a tool for doers. We make it easy for you to: <em>share what you're working on, get feedback, build teams, achieve your goals, and gloat.</em> If you want to do something
+						- if current_user
+							= link_to 'sign up and create a project', new_user_project_path(current_user)
+						- else
+							= link_to 'sign up and create a project', "#", class: 'login' 
+						and we will help you figure out how to do it.
 			.row-fluid
 				.span4
 				.span4

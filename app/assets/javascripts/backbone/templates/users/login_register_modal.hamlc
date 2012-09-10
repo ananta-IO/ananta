@@ -29,9 +29,9 @@
 						&nbsp;username
 					%input#login-username{ :type => "text", :name => "user[username]", title: "username", autocomplete: "off", value: "#{if @username then @username else ''}" }
 				%div{:class => "input string required project-name"}
-					%label{ :for => "project-name"}
+					%label{ :for => "project-name", title: "This will be your first project.<br/>Choose something you really want to do." }
 						%i.icon-briefcase 
-						&nbsp;your first project
-					%input#project-name{ :type => "text", :name => "project[name]", title: "This will be your first project.<br/>Make it a good one.", autocomplete: "off", value: "#{if Ananta.App.currentProject and Ananta.App.currentProject.get('name') then Ananta.App.currentProject.get('name') else ''}" }
+						&nbsp;name of your first project
+					%input#project-name{ :type => "text", :name => "project[name]", title: "This will be your first project.<br/>Make it a good one.<br/>Try choosing something you really want to do.", autocomplete: "off", value: "#{if Ananta.App.currentProject and Ananta.App.currentProject.get('name') then Ananta.App.currentProject.get('name') else ''}" }
 				%div{:class => "button"}
 					%button#login-action.login-action.btn{:name => "login-action", :type => "submit"} Log in
