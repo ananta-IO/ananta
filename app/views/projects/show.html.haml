@@ -87,20 +87,39 @@
 									.row-fluid
 										.span12
 											.row-fluid
-												.span8
-													%h3 Created by:
-													%h2= link_to @project.user.username, @project.user.profile
 												.span4
 													= link_to @project.user.profile do 
 														= image_tag @project.user.profile.avatar.image.medium, class: "circle"
+												.span8
+													%h6 Created by:
+													%h3= link_to @project.user.username, @project.user.profile
+													%h4
+														= @project.user.projects.count
+														%i.icon-briefcase
+														= @project.user.projects.count == 1 ? 'project' : 'projects'
+													%h4
+														= @project.user.reputation 
+														%i.icon-certificate
+														reputation
+												
 											%hr
 									.row-fluid
 										.span12
-											%h2 <<< members >>>
-											%hr	
+											%h2 
+												%i.icon-group
+												<<< members >>>
+											%hr 
 									.row-fluid
 										.span12
-											%h2 <<< lovers >>>
+											%h2 
+												%i.icon-comment
+												<<< participants >>>
+											%hr 
+									.row-fluid
+										.span12
+											%h2 
+												%i.icon-star
+												<<< followers >>>
 											%hr
 
 

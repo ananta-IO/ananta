@@ -156,6 +156,11 @@ class User < ActiveRecord::Base
 	def email_to_name
 		email.split("@").first.split(/[\-\_\.]/).reduce{ |full_name, name| full_name = "#{full_name} #{name}" }.titleize rescue ""
 	end
+
+	# TODO: implement reputation
+	def reputation
+		7
+	end
 	
 
 	#########################

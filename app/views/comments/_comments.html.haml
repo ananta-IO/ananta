@@ -4,5 +4,6 @@
 		.sub-header 
 			%h2 
 				= pluralize(commentable.comments.count, "Comment")
+				%i.icon-comments
 	- commentable.comments.each do |comment|
 		= render 'comments/comment', comment: comment
