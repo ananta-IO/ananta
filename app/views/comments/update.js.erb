@@ -1,0 +1,3 @@
+$("#comment_<%= @comment.id %> .comment-vote [rel*=tooltip]").tooltip('hide');
+$("#comment_<%= @comment.id %> .comment-vote").replaceWith('<%= escape_javascript render("vote", comment: @comment) %>');
+$("#comment_<%= @comment.id %> .comment-vote [rel*=tooltip]").tooltip();

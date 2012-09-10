@@ -77,6 +77,7 @@ class Project < ActiveRecord::Base
   has_many   :avatars,  :as => :imageable, :source => :images, :class_name => "Image", :conditions => ["image_type = ?", "avatar"]
   has_many   :pictures, :as => :imageable, :source => :images, :class_name => "Image", :conditions => ["image_type = ?", "picture"]
   has_many   :views,    :as => :viewable,  :dependent => :destroy
+  has_many   :comments, :as => :commentable, :dependent => :destroy
 
   accepts_nested_attributes_for :location
 

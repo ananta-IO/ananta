@@ -1,0 +1,1 @@
+$('#<%= @comment.commentable.class.to_s.downcase %>_<%= @comment.commentable.id %>_comments').prepend('<%= escape_javascript render("comments/comment", comment: @comment) %>');

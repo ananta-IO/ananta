@@ -1,3 +1,3 @@
-$('#project .vote [rel*=tooltip]').tooltip('hide');
-$('#project .vote').replaceWith('<%= escape_javascript render("vote") %>');
-$('#project .vote [rel*=tooltip]').tooltip();
+$('#project_<%= @project.id %> .project-vote [rel*=tooltip]').tooltip('hide');
+$('#project_<%= @project.id %> .project-vote').replaceWith('<%= escape_javascript render("vote") %>');
+$('#project_<%= @project.id %> .project-vote [rel*=tooltip]').tooltip();

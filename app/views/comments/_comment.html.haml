@@ -1,5 +1,4 @@
 = div_for comment do
-	%br
 	.row-fluid
 		.span1
 			= link_to comment.user.profile do
@@ -29,5 +28,8 @@
 									&middot;
 								- if can? :destroy, comment
 									= link_to "Delete", "#"
-			
-			= render 'comments/comments', commentable: comment
+							= render 'comments/vote', comment: comment
+.row-fluid
+	.span1          
+	.span11         
+		= render 'comments/comments', commentable: comment

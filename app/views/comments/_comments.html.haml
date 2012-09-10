@@ -1,2 +1,8 @@
-- commentable.comments.each do |comment|
-	= render 'comments/comment', comment: comment
+%div{ id: "#{commentable.class.to_s.downcase}_#{commentable.id}_comments"}
+	= render 'comments/form', commentable: commentable
+	- unless commentable.comments.blank?
+		.sub-header 
+			%h2 
+				= pluralize(commentable.comments.count, "Comment")
+	- commentable.comments.each do |comment|
+		= render 'comments/comment', comment: comment

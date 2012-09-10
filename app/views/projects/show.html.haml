@@ -1,6 +1,6 @@
 -content_for :title do "#{@project.name}" end
 
-#project
+= div_for @project do
 	.container-fluid
 		.row-fluid
 			.span12.page-header
@@ -52,7 +52,7 @@
 										%hr
 								.row-fluid
 									.span12
-										%h2 <<< comments >>>
+										= render 'comments/comments', commentable: @project
 										%hr
 							.span4
 								.row-fluid

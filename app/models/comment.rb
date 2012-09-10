@@ -6,6 +6,8 @@ class Comment < ActiveRecord::Base
   #########################
   # Callbacks & Misc method calls (e.g. devise for, acts_as_whatever )
   #########################
+  include Ananta::Vote
+  
   acts_as_voteable
   acts_as_taggable
 
@@ -19,7 +21,7 @@ class Comment < ActiveRecord::Base
   #attr_reader
   #attr_accessor
   # Make sure all controllers that create comments define user_id = current_user.id
-  attr_accessible :comment, :user_id, :on => :create
+  attr_accessible :comment, :commentable_id, :commentable_type, :cast_vote, :on => :create
 
 
   #########################

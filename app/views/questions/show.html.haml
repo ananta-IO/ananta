@@ -35,9 +35,4 @@
 									%td
 										= time_tag answer.created_at, "#{time_ago_in_words(answer.created_at)} ago"
 					.span7
-						.sub-header 
-							%h2 
-								= pluralize(@question.comments.count, "Comment")
-
-						- @question.comments.each do |comment|
-							= render 'comments/comment', comment: comment
+						= render 'comments/comments', commentable: @question
