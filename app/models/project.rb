@@ -130,7 +130,7 @@ class Project < ActiveRecord::Base
   end
 
   def energy
-    999
+    3
   end
 
 

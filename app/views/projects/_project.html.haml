@@ -32,8 +32,8 @@
 						.span3.lovers.center
 							%strong= project.votes_for
 							%b.hidden-desktop
-							%i.icon-heart
-							%p.visible-desktop= project.votes_for == 1 ? 'lover' : 'lovers'
+							%i.icon-star
+							%p.visible-desktop= project.votes_for == 1 ? 'star' : 'stars'
 						.span3.user
 							= link_to project.user.profile do
 								= image_tag project.user.avatar.image.small, class: 'circle', alt: project.user.username, title: project.user.username
