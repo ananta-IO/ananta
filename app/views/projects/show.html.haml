@@ -93,14 +93,17 @@
 												.span8
 													%h6 Created by:
 													%h3= link_to @project.user.username, @project.user.profile
-													%h4
+													%h4= @project.user.name
+													%h6
 														= @project.user.projects.count
-														%i.icon-briefcase
 														= @project.user.projects.count == 1 ? 'project' : 'projects'
-													%h4
-														= @project.user.reputation 
-														%i.icon-certificate
+														&nbsp;
+														%i.icon-briefcase
+													%h6
+														= @project.user.reputation
 														reputation
+														&nbsp;
+														%i.icon-certificate
 												
 											%hr
 									.row-fluid

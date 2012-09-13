@@ -1,18 +1,37 @@
 .comment-vote
     - if current_user  
+        %span.count
+            = pluralize comment.votes_for, 'upvote'
+        &middot;
         %span.up        
             - if current_user.voted_for? comment
                 = link_to comment_url(comment, comment: {cast_vote: {vote: :cancel}}), method: :put, remote: :true do
-                    %i.icon-arrow-up
+                    %i.icon-arrow-up.color-yes
             - else
                 = link_to comment_url(comment, comment: {cast_vote: {vote: :for}}), method: :put, remote: :true do
-                    %i.icon-arrow-up.opacity3
-        %span.count
-            = pluralize comment.plusminus, 'vote'
+                    %i.icon-arrow-up.color-dont-care
+        &middot;
+        %span.down       
+            - if current_user.voted_against? comment
+                = link_to comment_url(comment, comment: {cast_vote: {vote: :cancel}}), method: :put, remote: :true do
+                    %i.icon-arrow-down.color-no
+            - else
+                = link_to comment_url(comment, comment: {cast_vote: {vote: :against}}), method: :put, remote: :true do
+                    %i.icon-arrow-down.color-dont-care
 
     - else 
+        %span.count
+            = pluralize comment.votes_for, 'upvote' 
+        &middot;
         %span.up       
             = link_to comment_url(comment, comment: {cast_vote: {vote: :for}}), method: :put do
-                %i.icon-arrow-up.opacity3
-        %span.count
-            = pluralize comment.plusminus, 'vote' 
+                %i.icon-arrow-up.color-dont-care
+        &middot;
+        %span.down       
+            = link_to comment_url(comment, comment: {cast_vote: {vote: :against}}), method: :put do
+                %i.icon-arrow-down.color-dont-care
+
+
+
+
+
