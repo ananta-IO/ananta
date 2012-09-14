@@ -1,9 +1,14 @@
 %div{ id: "#{commentable.class.to_s.downcase}_#{commentable.id}_comments"}
-	= render 'comments/form', commentable: commentable
-	- unless commentable.comments.blank?
-		.sub-header 
-			%h2 
-				= pluralize(commentable.comments.count, "Comment")
-				%i.icon-comments
-	- commentable.comments.each do |comment|
-		= render 'comments/comment', comment: comment
+	
+	- unless commentable.comments.blank? 
+		%h6 
+			= pluralize(commentable.comments.count, "Comment")
+			%i.icon-comments
+		%br
+	
+	.comments
+		- commentable.comments.each do |comment|
+			= render 'comments/comment', comment: comment
+	
+	- unless commentable.class.to_s == 'Comment'
+		= render 'comments/form', commentable: commentable

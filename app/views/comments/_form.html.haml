@@ -1,5 +1,19 @@
-= simple_form_for Comment.new, remote: true do |f|
-	= f.hidden_field :commentable_id, value: commentable.id
-	= f.hidden_field :commentable_type, value: commentable.class.to_s
-	= f.input :comment, input_html: { rows: "1", style: "width: 100%;", placeholder: "Post a comment" }
-	= f.button :submit, 'Post Comment', :class => 'btn-primary'
+.comment
+	.row-fluid
+		.span12.comment-content
+			- if current_user
+				.comment-avatar
+					= link_to current_user.profile do
+						= image_tag current_user.avatar.image.small.url, :class => 'circle', width: 40
+				.comment-text
+					= simple_form_for Comment.new, remote: true do |f|
+						= f.hidden_field :commentable_id, value: commentable.id
+						= f.hidden_field :commentable_type, value: commentable.class.to_s
+						= f.input :comment, input_html: { rows: "3", style: "width: 99%;", placeholder: "comment" }
+						= f.button :submit, 'Post Comment', :class => 'btn-primary'
+			- else
+				= simple_form_for Comment.new do |f|
+					= f.hidden_field :commentable_id, value: commentable.id
+					= f.hidden_field :commentable_type, value: commentable.class.to_s
+					= f.input :comment, input_html: { rows: "1", style: "width: 99%;", placeholder: "comment" }
+					= f.button :submit, 'Post Comment', :class => 'btn-primary'

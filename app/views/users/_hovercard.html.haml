@@ -9,7 +9,9 @@
 				detailsHTML: html
 				width: 300
 				cardImgSrc: "#{model.profile.avatar.image.small.url}"
+				openOnTop: true
+				delay: 500
 
 -# TODO: make the image a circle
 %label.hc{ id: id }
-	= link_to model.username, profile_path(model.profile)
+	= link_to model.username, profile_path(model.profile), class: 'color-base'

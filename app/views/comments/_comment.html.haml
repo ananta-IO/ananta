@@ -1,17 +1,16 @@
 = div_for comment do
 	.row-fluid
-		.span1
-			= link_to comment.user.profile do
-				= image_tag comment.user.avatar.image.small.url, :class => 'circle'
-		.span11
-			.boxed-group
+		.span12.comment-content
+			.comment-avatar
+				= link_to comment.user.profile do
+					= image_tag comment.user.avatar.image.small.url, :class => 'circle', width: 40
+			.comment-text
 				.inner
 					.row-fluid.top
-						.span8
-							= raw "<strong>#{hovercard comment.user}</strong> commented"
-						.span4
-							.pull-right
-								= "#{distance_of_time_in_words_to_now comment.created_at} ago"
+						.span12
+							= raw "<strong>#{hovercard comment.user}</strong>"
+							&middot;
+							%h6.display-inline-block= "#{distance_of_time_in_words_to_now comment.created_at} ago"
 
 					.row-fluid.middle
 						.span12
@@ -19,17 +18,19 @@
 
 					.row-fluid.bottom
 						.span12
-							.pull-right
-								= link_to "Reply", "#"
-								- if can? :update, comment
-									&middot;
-									= link_to "Edit", "#"
-								- if can? :update, comment and can? :destroy, comment
-									&middot;
-								- if can? :destroy, comment
-									= link_to "Delete", "#"
 							= render 'comments/vote', comment: comment
-.row-fluid
-	.span1          
-	.span11         
-		= render 'comments/comments', commentable: comment
+							&middot;
+							= link_to "Reply", "#"
+							- if can? :update, comment
+								&middot;
+								= link_to "Edit", "#"
+							- if can? :update, comment and can? :destroy, comment
+								&middot;
+							- if can? :destroy, comment
+								= link_to "Delete", "#"
+			%hr
+- unless comment.comments.blank?
+	.row-fluid
+		.span1          
+		.span11         
+			= render 'comments/comments', commentable: comment
