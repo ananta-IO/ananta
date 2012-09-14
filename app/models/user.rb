@@ -98,6 +98,7 @@ class User < ActiveRecord::Base
 		elsif user = User.find_by_email(fb_user.email.downcase)
 			user.update_attribute(:facebook_id, fb_user.id)
 			if user.profile.avatars.count == 0
+				# TODO: UNHACK: This is a hack. I don't know how to store the model's attributes before processing the image in the uploader. This proccesses twice, the first time with no image. 
 				image = user.profile.images.new({ image_type: 'avatar' })
 				image.update_attributes({ remote_image_url: "https://graph.facebook.com/#{fb_user.id}/picture?type=large", image_type: 'avatar' })
 			end

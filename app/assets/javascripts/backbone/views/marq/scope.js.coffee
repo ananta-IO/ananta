@@ -8,7 +8,7 @@ class Ananta.Views.Marq.ScopeView extends Backbone.View
 
 	initialize: (options) ->
 		_.bindAll(@, 'render')
-		@session =  new Ananta.Models.Session()
+		@session = new Ananta.Models.Session()
 		@session.fetch()
 
 		@session.bind('change', @render)

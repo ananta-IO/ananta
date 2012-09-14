@@ -42,7 +42,7 @@ gem 'acts-as-taggable-on'
 gem 'twitter-text'
 
 # State Machine
-gem 'state_machine' # TODO: remove
+gem 'state_machine' # TODO: REMOVE: The callbacks in this are really hard to test without including rails
 
 # Voting
 gem 'thumbs_up' # TODO: replace with https://github.com/twitter/activerecord-reputation-system

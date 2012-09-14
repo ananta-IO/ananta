@@ -127,6 +127,7 @@ class Profile < ActiveRecord::Base
   # Adds a gravatar if no avatar exists
   def add_gravatar
     if avatars && avatars.count == 0
+      # TODO: UNHACK: This is a hack. I don't know how to store the model's attributes before processing the image in the uploader. This proccesses twice, the first time with no image. 
       image = images.create({ image_type: 'avatar', user_id: user.id }) 
       image.update_attributes({ remote_image_url: gravatar_url, image_type: 'avatar', user_id: user.id })
     end

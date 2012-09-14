@@ -9,30 +9,12 @@
 -# Right
 %ul.nav.pull-right
 	-if current_user
-		%li.dropdown.search
-			%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-				%i.icon-search
-				%i.icon-chevron-down
-			%ul.dropdown-menu
-				%li.nav-header
-					= link_to random_projects_path, :class => 'pull-right' do
-						%i.icon-random
-					%i.icon-wrench
-					All projects
-				%li
-					= link_to projects_path do
-						%i.icon-th
-						Explore projects
-				%li.divider
-				%li.nav-header
-					= link_to random_users_path, :class => 'pull-right' do
-						%i.icon-random
-					%i.icon-group
-					All people
-				%li
-					= link_to users_path do
-						%i.icon-th
-						Explore people
+		-#
+			%li
+				%a.search
+					%i.icon-search
+					%i.icon-chevron-left
+				
 		%li.dropdown.projects
 			%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
 				%i.icon-briefcase
@@ -52,6 +34,17 @@
 				%li.nav-header
 					%i.icon-list-alt
 					Joined projects
+				%li.divider
+				%li.nav-header
+					= link_to random_projects_path, :class => 'pull-right' do
+						%i.icon-random
+					%i.icon-wrench
+					All projects
+				%li
+					= link_to projects_path do
+						%i.icon-th
+						Explore projects
+						
 		%li.dropdown.user
 			%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
 				%i.icon-user
@@ -65,11 +58,7 @@
 				%li
 					= link_to current_user.profile do
 						%i.icon-user
-						profile
-				%li
-					= link_to current_user.profile do
-						%i.icon-bullhorn
-						notifications
+						my profile
 				%li
 					= link_to edit_profile_path(current_user.profile) do
 						%i.icon-cogs
@@ -78,7 +67,25 @@
 					= link_to "/logout" do
 						%i.icon-signout
 						logout
+				%li.divider
+				%li.nav-header
+					%i.icon-bullhorn
+					notifications
+				%li.divider
+				%li.nav-header
+					= link_to random_users_path, :class => 'pull-right' do
+						%i.icon-random
+					%i.icon-group
+					All people
+				%li
+					= link_to users_path do
+						%i.icon-th
+						Explore people
+				
 	-else
+		%li
+			= link_to projects_path do
+				%i.icon-th
 		%li
 			%a.login
 				%i.icon-signin
