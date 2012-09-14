@@ -3,7 +3,7 @@
 .modal-body.scrl
 	.center
 		.facebook
-			%p Sign in with
+			%p Sign Up or Sign In with
 			%a.fb-login-button{href: '#'}
 				%img{src: '/assets/facebook-circle.png', alt: 'facebook', height: 128, width: 128}
 		.separator 
