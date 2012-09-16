@@ -1106,7 +1106,7 @@ label.hc{
 		}
 		.comment-text{
 			position: relative;
-			border-left: 2px solid $color-background-hover;
+			border-left: 1px solid $color-background-hover;
 			border-bottom: 1px solid $color-background-hover;
 			padding-left: 7px;
 			margin-bottom: 10px;
@@ -1114,7 +1114,7 @@ label.hc{
 			.arrow-left {
 				position: absolute;
 				top: 15px;
-				left: -8px;
+				left: -7px;
 				width: 0;
 				height: 0;
 				border-top: 5px solid transparent;
@@ -1123,7 +1123,7 @@ label.hc{
 				.mini-arrow-left {
 					position: absolute;
 					top: -5px;
-					left: 3px;
+					left: 2px;
 					width: 0;
 					height: 0;
 					border-top: 5px solid transparent;
