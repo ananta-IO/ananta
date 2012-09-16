@@ -1105,21 +1105,38 @@ label.hc{
 			position: absolute;
 		}
 		.comment-text{
+			position: relative;
 			border-left: 3px solid $color-background-hover;
 			border-bottom: 1px solid $color-background-hover;
 			padding-left: 7px;
 			margin-bottom: 10px;
 			margin-left: 50px;
+			.arrow-left {
+				position: absolute;
+				top: 15px;
+				left: -8px;
+				width: 0;
+				height: 0;
+				border-top: 6px solid transparent;
+				border-bottom: 6px solid transparent;
+				border-right: 5px solid $color-background-hover;
+			}
 		}
 	}
 	&.by-commentable{
 		.comment-text{
 			border-left: 3px solid $color-highlight;
+			.arrow-left {
+				border-right: 5px solid $color-highlight;
+			}
 		}
 	}
 	&.by-me{
 		.comment-text{
 			border-left: 3px solid $color-highlight2;
+			.arrow-left {
+				border-right: 5px solid $color-highlight2;
+			}
 		}
 	}
 }
