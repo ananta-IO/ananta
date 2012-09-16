@@ -1103,6 +1103,10 @@ label.hc{
 	.comment-content{
 		.comment-avatar{
 			position: absolute;
+			width: 50px;
+			@media(max-width: 480px){
+				width: 30px;
+			}
 		}
 		.comment-text{
 			position: relative;
@@ -1110,16 +1114,22 @@ label.hc{
 			border-bottom: 1px solid $color-background-hover;
 			padding-left: 7px;
 			margin-bottom: 10px;
-			margin-left: 50px;
+			margin-left: 60px;
+			@media(max-width: 480px){
+				margin-left: 40px;
+			}
 			.arrow-left {
 				position: absolute;
-				top: 15px;
+				top: 20px;
 				left: -7px;
 				width: 0;
 				height: 0;
 				border-top: 5px solid transparent;
 				border-bottom: 5px solid transparent;
 				border-right: 6px solid $color-background-hover;
+				@media(max-width: 480px){
+					top: 10px;
+				}
 				.mini-arrow-left {
 					position: absolute;
 					top: -5px;

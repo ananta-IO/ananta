@@ -10,7 +10,7 @@ class Comment < ActiveRecord::Base
 	include Twitter::Extractor
 	
 	acts_as_voteable
-	acts_as_taggable
+	acts_as_ordered_taggable
 
 	# Versioning
 	has_paper_trail
@@ -94,13 +94,8 @@ protected
 
 	def extract_tags
 		if comment_changed?
-			old_tags = extract_hashtags(changes[:comment][0]).uniq
-			new_tags = extract_hashtags(changes[:comment][1]).uniq
-			
-			puts ">>>>>>>> tags"
-			puts old_tags.inspect
-			puts new_tags.inspect
-			# TODO
+			tags = extract_hashtags(self.comment).uniq
+			self.tag_list = tags.reverse.join(',')
 		end
 	end
 

@@ -25,13 +25,13 @@ module ApplicationHelper
 		usernames = extract_mentioned_screen_names(text).uniq
 		tags = extract_hashtags(text).uniq
 
-		usernames.each { |u, i| text = text.gsub(/@#{u}/, "ausrname#{i}") }
-		tags.each { |t, i| text = text.gsub(/##{t}/, "ahshtag#{i}") }
+		usernames.each_with_index { |u, i| text = text.gsub(/@#{u}/, "ausrname#{i}") }
+		tags.each_with_index { |t, i| text = text.gsub(/##{t}/, "ahshtag#{i}") }
 
 		text = markdown text
 
-		usernames.each { |u, i| text = text.gsub(/ausrname#{i}/, "<a href='#{root_url}#{u}'>@#{u}</a>") }
-		tags.each { |t, i| text = text.gsub(/ahshtag#{i}/, "<a href='#{root_url}tags/#{t}'>##{t}</a>") }
+		usernames.each_with_index { |u, i| text = text.gsub(/ausrname#{i}/, "<a href='#{root_url}#{u}'>@#{u}</a>") }
+		tags.each_with_index { |t, i| text = text.gsub(/ahshtag#{i}/, "<a href='#{root_url}tags/#{t}'>##{t}</a>") }
 
 		raw text
 	end
