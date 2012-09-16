@@ -54,7 +54,6 @@
 									.row-fluid
 										.span12
 											= render 'comments/comments', commentable: @project
-											%hr
 								.span4
 									.row-fluid
 										.span12
@@ -86,12 +85,12 @@
 											%hr
 									.row-fluid
 										.span12
+											%h6 Created by:
 											.row-fluid
 												.span4
 													= link_to @project.user.profile do 
 														= image_tag @project.user.profile.avatar.image.medium, class: "circle"
 												.span8
-													%h6 Created by:
 													%h3= link_to @project.user.username, @project.user.profile
 													%h4= @project.user.name
 													%h6

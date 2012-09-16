@@ -29,11 +29,10 @@ class Ability
 			# Comments
 			can [:create], Comment
 			can [:update], Comment do |comment|
-				(comment.created_at + 15.minutes > DateTime.now.utc and comment.editors.include? user) or
 				(params[:comment] ? (params[:comment][:cast_vote] && params[:comment][:cast_vote][:cuid] && params[:comment].size == 1) : false)
 			end
-			can [:update], Comment do |comment|
-				comment.created_at + 15.minutes > DateTime.now.utc and comment.editors.include? user
+			can [:update, :destroy], Comment do |comment|
+				(comment.created_at + 15.minutes > DateTime.now.utc) and comment.editors.include?(user)
 			end
 
 

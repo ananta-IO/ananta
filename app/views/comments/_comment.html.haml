@@ -1,4 +1,4 @@
-= div_for comment do
+= div_for comment, class: "#{current_user == comment.user ? 'by-me' : ''} #{comment.user == comment.commentable.user ? 'by-commentable' : ''}" do
 	.row-fluid
 		.span12.comment-content
 			.comment-avatar
@@ -9,9 +9,7 @@
 					.row-fluid.top
 						.span12
 							= raw "<strong>#{hovercard comment.user}</strong>"
-							&middot;
-							%h6.display-inline-block= "#{distance_of_time_in_words_to_now comment.created_at} ago"
-
+							
 					.row-fluid.middle
 						.span12
 							= markdown comment.comment
@@ -21,14 +19,17 @@
 							= render 'comments/vote', comment: comment
 							&middot;
 							= link_to "Reply", "#"
-							- if can? :update, comment
+							- if can?(:destroy, comment)
 								&middot;
-								= link_to "Edit", "#"
-							- if can? :update, comment and can? :destroy, comment
+								= link_to "Edit", "/comments/#{comment.id}/edit", remote: true
 								&middot;
-							- if can? :destroy, comment
-								= link_to "Delete", "#"
-			%hr
+								= link_to "Delete", comment, method: :delete, remote: true, confirm: "Are you sure?"
+							&middot;
+							%h6.display-inline-block= "#{distance_of_time_in_words_to_now comment.created_at} ago"
+							- if can?(:destroy, comment)
+								&middot;
+								%p.display-inline-block= "(#{distance_of_time_in_words(comment.created_at + 15.minutes - DateTime.now.utc)} left to make changes)"
+
 - unless comment.comments.blank?
 	.row-fluid
 		.span1          

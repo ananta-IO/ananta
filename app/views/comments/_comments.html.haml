@@ -4,11 +4,10 @@
 		%h6 
 			= pluralize(commentable.comments.count, "Comment")
 			%i.icon-comments
-		%br
 	
 	.comments
 		- commentable.comments.each do |comment|
 			= render 'comments/comment', comment: comment
 	
 	- unless commentable.class.to_s == 'Comment'
-		= render 'comments/form', commentable: commentable
+		= render 'comments/form', comment: commentable.comments.new

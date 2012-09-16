@@ -1100,14 +1100,27 @@ label.hc{
 }
 
 .comment{
+	&.by-commentable{
+		.comment-text{
+			border-left: 3px solid $color-highlight;
+		}
+	}
+	&.by-me{
+		.comment-text{
+			border-left: 3px solid $color-highlight2;
+		}
+	}
 	.comment-content{
-		margin-bottom: 10px;
-	}
-	.comment-avatar{
-		position: absolute;
-	}
-	.comment-text{
-		margin-left: 50px;
+		.comment-avatar{
+			position: absolute;
+		}
+		.comment-text{
+			border-left: 3px solid $color-background-hover;
+			border-bottom: 1px solid $color-background-hover;
+			padding-left: 7px;
+			margin-bottom: 10px;
+			margin-left: 50px;
+		}
 	}
 }
 

@@ -4,7 +4,7 @@ Ananta::Application.routes.draw do
 	
 	resources :sessions, :only => [:index]
 
-	resources :comments, :only => [:index, :show, :create, :update, :destroy]
+	resources :comments, :only => [:index, :show, :create, :edit, :update, :destroy]
 	resources :locations, :only => [:create, :update]
 
 	resources :questions, :only => [:index, :show, :create, :update] do
