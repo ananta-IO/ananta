@@ -6,6 +6,7 @@
 					= image_tag comment.user.avatar.image.small.url, :class => 'circle', width: 40
 			.comment-text
 				.arrow-left
+					.mini-arrow-left
 				.inner
 					.row-fluid.top
 						.span12
@@ -13,7 +14,7 @@
 							
 					.row-fluid.middle
 						.span12
-							= markdown comment.comment
+							= tagged_markdown comment.comment
 
 					.row-fluid.bottom
 						.span12
@@ -31,8 +32,8 @@
 								&middot;
 								%p.display-inline-block= "(#{distance_of_time_in_words(comment.created_at + 15.minutes - DateTime.now.utc)} left to make changes)"
 
-- unless comment.comments.blank?
-	.row-fluid
-		.span1          
-		.span11         
-			= render 'comments/comments', commentable: comment
+	- unless comment.comments.blank?
+		.row-fluid
+			.span1          
+			.span11         
+				= render 'comments/comments', commentable: comment
