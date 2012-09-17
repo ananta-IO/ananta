@@ -36,16 +36,17 @@
 									.row-fluid
 										.span12
 											.row-fluid
-												.span3
-													= render "vote"
-												.span6
-													.pull-left.addthis_toolbox.addthis_default_style
-														%a.addthis_button_facebook_like{"fb:like:layout" => "button_count"}
-														%a.addthis_button_tweet
-														%a.addthis_button_google_plusone{"g:plusone:size" => "medium"}
-													%script{:src => "http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4e07edfe1206c99f", :type => "text/javascript"}
-												.span3
-													%h2 <<< link >>>
+												.span12
+													.pull-right.display-inline-block= render "vote"
+													.display-inline-block.addthis_toolbox.addthis_default_style.addthis_32x32_style{style: 'width: 250px; margin-right: 20px; margin-top: 13px;'}
+														%a.addthis_button_preferred_1
+														%a.addthis_button_preferred_2
+														%a.addthis_button_preferred_3
+														%a.addthis_button_preferred_4
+														%a.addthis_button_compact
+														%a.addthis_counter.addthis_bubble_style
+													%script{:src => "http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4e07edfe1206c99f", :type => "text/javascript"}
+													-# %h6.center <<< link >>>
 											%hr
 									.row-fluid
 										.span12

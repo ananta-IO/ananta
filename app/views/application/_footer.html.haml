@@ -49,7 +49,10 @@
 			%a.addthis_button_facebook_like{"fb:like:layout" => "button_count"}
 			%a.addthis_button_tweet
 			%a.addthis_button_google_plusone{"g:plusone:size" => "medium"}
-		%script{:src => "http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4e07edfe1206c99f", :type => "text/javascript"}
+			%a.addthis_button_pinterest_pinit{"p:pinit:size" => "medium"}
+		:javascript
+			var addthis_config = {"data_track_addressbar":true};
+		%script{:src => "http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4e07edfe1206c99f", :type => "text/javascript"}
 	
 		- if Rails.env == 'staging'
 			<a href="https://mixpanel.com/f/partner"><img src="https://mixpanel.com/site_media/images/partner/badge_light.png" alt="Mobile and Web Analytics" /></a>

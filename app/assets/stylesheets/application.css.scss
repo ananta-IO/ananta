@@ -1110,9 +1110,7 @@ label.hc{
 		}
 		.comment-text{
 			position: relative;
-			border-left: 1px solid $color-background-hover;
-			border-bottom: 1px solid $color-background-hover;
-			padding-left: 7px;
+			border: 1px solid $color-background-hover;
 			margin-bottom: 15px;
 			margin-left: 60px;
 			@media(max-width: 480px){
@@ -1137,6 +1135,24 @@ label.hc{
 					border-bottom: 5px solid transparent;
 					border-right: 6px solid $color-background;	
 				}
+			}
+			.top{
+				padding-top: 4px;
+				padding-left: 9px;
+			}
+			.middle{
+				&>.span12{
+					background-color: $color-background-hover;
+					padding: 9px 13px;
+					box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+				}
+				p{
+					margin: 0 0 3px;
+				}
+			}
+			.bottom{
+				padding-top: 7px;
+				padding-left: 9px;
 			}
 		}
 	}
