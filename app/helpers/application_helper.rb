@@ -37,6 +37,11 @@ module ApplicationHelper
 	end
 
 	def toggle_sort attribute, display_name, path, model_name
+		if request.path != path
+			session["#{model_name.downcase}_sort_attribute"] = nil
+			session["#{model_name.downcase}_sort_direction"] = nil
+		end
+		
 		current_sort_attribute = session["#{model_name.downcase}_sort_attribute"]
 		current_sort_direction = session["#{model_name.downcase}_sort_direction"]
 
