@@ -9,18 +9,18 @@
 						.row-fluid
 							.span12
 								.pull-right
-									= link_to edit_user_project_path(@user, @project) do
+									= link_to edit_user_project_path(@project.user, @project) do
 										Edit
 										%i.icon-edit
 					.row-fluid
 						.span12
 							%h1.center 
-								= link_to @project.name, user_project_path(@user, @project)
+								= link_to @project.name, user_project_path(@project.user, @project)
 					.row-fluid
 						.span12
 							%p.center
 								by
-								= link_to @user.username, profile_path(@user.profile)
+								= link_to @project.user.username, profile_path(@project.user.profile)
 							
 		.container-fluid
 			.content.box-shadow

@@ -17,6 +17,14 @@ Ananta::Application.routes.draw do
 		end
 	end
 
+	resources :projects, :only => [:index, :show] do
+		collection do
+			get 'page/:page', :action => :index
+			get 'random'
+		end
+		resources :comments, :only => [:index]
+	end
+
 	resources :images, :only => [:create, :update, :destroy]
 
 	match '/render_nav' => 'users#render_nav' # ujs render user_nav. generally called after ajax login
@@ -38,15 +46,8 @@ Ananta::Application.routes.draw do
 	match '/about' => 'pages#about'
 	match '/robots.txt' => 'pages#robots'
 
-	# TODO: should this be the last route?
 	root :to => 'pages#home'
 
-	resources :projects, :only => [:index] do
-		collection do
-			get 'page/:page', :action => :index
-			get 'random'
-		end
-	end
 	resources :profiles, :path => '' do
 		member do
 			get :edit_location

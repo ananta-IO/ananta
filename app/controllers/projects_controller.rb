@@ -4,8 +4,7 @@ class ProjectsController < InheritedResources::Base
 	#########################
 	respond_to :js, :html, :json
 	belongs_to :user, :optional => true
-	defaults :route_prefix => ''
-
+	
 
 	#########################
 	# Scopes via has_scope https://github.com/plataformatec/has_scope

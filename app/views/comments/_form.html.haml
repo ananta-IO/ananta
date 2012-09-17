@@ -11,12 +11,12 @@
 						= f.hidden_field :commentable_type, value: comment.commentable_type
 						= f.input :comment, label: false, input_html: { rows: "3", style: "width: 99%;", placeholder: "comment" }
 						- if comment.id
-							= f.button :submit, 'Save Comment', :class => 'btn-primary'
+							= f.button :submit, 'Save Comment', :class => 'btn-success'
 						- else
-							= f.button :submit, 'Post Comment', :class => 'btn-primary'
+							= f.button :submit, 'Comment', :class => 'btn-success'
 			- else
 				= simple_form_for comment do |f|
 					= f.hidden_field :commentable_id, value: comment.commentable_id
 					= f.hidden_field :commentable_type, value: comment.commentable_type
 					= f.input :comment, label: false, input_html: { rows: "1", style: "width: 99%;", placeholder: "comment" }
-					= f.button :submit, 'Post Comment', :class => 'btn-primary'
+					= f.button :submit, 'Comment', :class => 'btn-success'

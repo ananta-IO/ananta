@@ -35,4 +35,24 @@ module ApplicationHelper
 
 		raw text
 	end
+
+	def toggle_sort attribute, display_name, path, model_name
+		current_sort_attribute = session["#{model_name.downcase}_sort_attribute"]
+		current_sort_direction = session["#{model_name.downcase}_sort_direction"]
+
+		if attribute != current_sort_attribute
+			new_sort_direction = 'desc'
+			arrow = ""
+		elsif current_sort_direction == 'asc'
+			new_sort_direction = 'desc'
+			arrow = " <i class='icon-chevron-up'></i>"
+		elsif current_sort_direction == 'desc'
+			new_sort_direction = 'asc'
+			arrow = " <i class='icon-chevron-down'></i>"
+		end
+
+		query = "?sort=#{attribute}&direction=#{new_sort_direction}"
+
+		raw "#{link_to display_name, path + query, remote: true}#{arrow}" 
+	end
 end

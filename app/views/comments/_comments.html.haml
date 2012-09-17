@@ -1,12 +1,21 @@
+- comments = @comments ||= commentable.comments
 %div{ id: "#{commentable.class.to_s.downcase}_#{commentable.id}_comments"}
 	
-	- unless commentable.comments.blank? 
+	- unless comments.blank? 
 		%h6 
-			= pluralize(commentable.comments.count, "Comment")
+			= pluralize(comments.count, "Comment")
 			%i.icon-comments
+			.pull-right
+				sort by
+				&middot; 
+				= toggle_sort 'created_at', 'date', send("#{commentable.class.to_s.downcase}_comments_path", commentable), 'comment'
+				-#
+					&middot;
+					= toggle_sort 'vote_count', 'votes', send("#{commentable.class.to_s.downcase}_comments_path", commentable), 'comment'
+
 	
 	.comments
-		- commentable.comments.each do |comment|
+		- comments.each do |comment|
 			= render 'comments/comment', comment: comment
 	
 	- unless commentable.class.to_s == 'Comment'

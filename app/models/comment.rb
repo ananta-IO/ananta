@@ -49,7 +49,7 @@ class Comment < ActiveRecord::Base
 	#########################
 	# Scopes
 	#########################
-	default_scope :order => 'created_at ASC'
+	default_scope :order => 'created_at asc'
 
 	#scope :red, where(:color => 'red')
 

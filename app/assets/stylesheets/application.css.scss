@@ -1113,23 +1113,20 @@ label.hc{
 			border-left: 1px solid $color-background-hover;
 			border-bottom: 1px solid $color-background-hover;
 			padding-left: 7px;
-			margin-bottom: 10px;
+			margin-bottom: 15px;
 			margin-left: 60px;
 			@media(max-width: 480px){
 				margin-left: 40px;
 			}
 			.arrow-left {
 				position: absolute;
-				top: 20px;
+				top: 10px;
 				left: -7px;
 				width: 0;
 				height: 0;
 				border-top: 5px solid transparent;
 				border-bottom: 5px solid transparent;
 				border-right: 6px solid $color-background-hover;
-				@media(max-width: 480px){
-					top: 10px;
-				}
 				.mini-arrow-left {
 					position: absolute;
 					top: -5px;
