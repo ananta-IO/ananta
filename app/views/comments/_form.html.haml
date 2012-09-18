@@ -1,35 +1,39 @@
-.comment
+.comment.by-me
 	.row-fluid
 		.span12.comment-content
-			- if current_user
-				.comment-avatar
+			.comment-avatar
+				- if current_user
 					= link_to current_user.profile do
 						= image_tag current_user.avatar.image.small.url, :class => 'circle'
-				.comment-text
-					.arrow-left
-						.mini-arrow-left
-					.inner
+				- else
+					= image_tag Profile.new.avatar.image.small.url, :class => 'circle'
+			.comment-text
+				.arrow-left
+					.mini-arrow-left
+				.inner
+					= simple_form_for comment, (current_user ? {remote: true} : {remote: false}) do |f|
+						= f.hidden_field :commentable_id, value: comment.commentable_id
+						= f.hidden_field :commentable_type, value: comment.commentable_type
 						.row-fluid.top
 							.span12
-								= hovercard current_user
-								- if current_user == comment.commentable.user
-									&middot;
-									%h5.display-inline-block
-										%i.icon-wrench
+								- if current_user
+									= hovercard current_user
+									- if current_user == comment.commentable.user
+										&middot;
+										%h5.display-inline-block
+											%i.icon-wrench
+								- else
+									%h5 me
 								
 						.row-fluid.middle
 							.span12
-								= simple_form_for comment, remote: true do |f|
-									= f.hidden_field :commentable_id, value: comment.commentable_id
-									= f.hidden_field :commentable_type, value: comment.commentable_type
-									= f.input :comment, label: false, input_html: { class: 'span12', rows: "3", placeholder: "comment" }
-									- if comment.id
-										= f.button :submit, 'Save Comment', :class => 'btn-success'
-									- else
-										= f.button :submit, 'Comment', :class => 'btn-success'
-			- else
-				= simple_form_for comment do |f|
-					= f.hidden_field :commentable_id, value: comment.commentable_id
-					= f.hidden_field :commentable_type, value: comment.commentable_type
-					= f.input :comment, label: false, input_html: { rows: "1", style: "width: 99%;", placeholder: "comment" }
-					= f.button :submit, 'Comment', :class => 'btn-success'
+								= f.input :comment, label: false, input_html: { class: 'span12', rows: "3", placeholder: "New comment" }
+									
+						.row-fluid.bottom{style: "margin-bottom: -11px;"}
+							.span12
+								- if comment.id
+									= f.button :submit, 'Save Comment', :class => 'btn-success btn-large'
+								- else
+									= f.button :submit, 'Post Comment', :class => 'btn-success btn-large'
+								&middot;
+								%h6.display-inline-block= "just now"

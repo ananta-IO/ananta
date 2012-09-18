@@ -3,7 +3,11 @@ class PagesController < ApplicationController
 	end
 
 	def home
-		@projects = Project.limit(6)
+		if current_user
+			redirect_to current_user.profile # TODO: create a dashboard
+		else
+			@projects = Project.limit(6)
+		end
 	end
 
 	def robots

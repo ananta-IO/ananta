@@ -21,11 +21,9 @@
 			e.preventDefault();
 			e.stopPropagation();
 		});
-
-	- if params[:controller] == 'projects' and params[:action] == 'show' 
-		:javascript
-			$('#marq_toggle a').toggleClass('active');
-			$('#marq').slideToggle('fast');
+		// Auto open marq
+		$('#marq_toggle a').toggleClass('active');
+		$('#marq').slideToggle('fast');
 
 -# Marq slide down container
 -# Starts as display:none

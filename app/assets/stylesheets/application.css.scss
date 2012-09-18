@@ -1199,6 +1199,10 @@ label.hc{
 		// overflow: hidden;
 		position: relative;
 		border: 1px solid #ddd;
+		@media(max-width: 480px){
+			margin-left: 0;
+			margin-right: 0;
+		}
 		.image{
 			// padding: 2px;
 		}

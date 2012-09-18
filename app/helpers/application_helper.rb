@@ -41,19 +41,19 @@ module ApplicationHelper
 			session["#{model_name.downcase}_sort_attribute"] = nil
 			session["#{model_name.downcase}_sort_direction"] = nil
 		end
-		
+
 		current_sort_attribute = session["#{model_name.downcase}_sort_attribute"]
 		current_sort_direction = session["#{model_name.downcase}_sort_direction"]
 
 		if attribute != current_sort_attribute
 			new_sort_direction = 'desc'
-			arrow = ""
+			arrow = " <i class='icon-sort'></i>"
 		elsif current_sort_direction == 'asc'
 			new_sort_direction = 'desc'
-			arrow = " <i class='icon-chevron-up'></i>"
+			arrow = " <i class='icon-sort-up'></i>"
 		elsif current_sort_direction == 'desc'
 			new_sort_direction = 'asc'
-			arrow = " <i class='icon-chevron-down'></i>"
+			arrow = " <i class='icon-sort-down'></i>"
 		end
 
 		query = "?sort=#{attribute}&direction=#{new_sort_direction}"

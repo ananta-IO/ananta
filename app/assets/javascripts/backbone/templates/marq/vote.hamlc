@@ -1,10 +1,12 @@
 .string.pull-left
-	%a.up{href: '#'}
-		%i.icon-chevron-up
-	%span.vote-count
-		= @question['vote_count']
-	%a.down{href: '#'}
-		%i.icon-chevron-down
+	Was this a good question?
+	%a.up.btn.btn-mini.btn-success{href: '#'}
+		YES
+	%a.down.btn.btn-mini.btn-danger{href: '#'}
+		NO
+	-#
+		%span.vote-count
+			= @question['vote_count']
 	%p
 		= @question['question']
 

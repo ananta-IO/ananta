@@ -14,7 +14,10 @@
 				%a.search
 					%i.icon-search
 					%i.icon-chevron-left
-				
+		%li
+			= link_to random_unanswered_questions_path do
+				%i.icon-random
+
 		%li.dropdown.projects
 			%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
 				%i.icon-briefcase
@@ -83,6 +86,9 @@
 						Explore people
 				
 	-else
+		%li
+			= link_to random_unanswered_questions_path do
+				%i.icon-random
 		%li
 			= link_to projects_path do
 				%i.icon-th
