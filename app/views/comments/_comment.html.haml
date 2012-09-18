@@ -38,15 +38,15 @@
 								&middot;
 								%p.display-inline-block= "(#{distance_of_time_in_words(comment.created_at + 15.minutes - DateTime.now.utc)} left to make changes)"
 							&middot;
-							%a{:href => "http://api.addthis.com/oexchange/0.8/forward/facebook/offer?pco=tbxnj-1.0&url=#{comment_url}&pubid=ra-4e07edfe1206c99f", :target => "_blank"}
+							%a.opacity5{:href => "http://api.addthis.com/oexchange/0.8/forward/facebook/offer?pco=tbxnj-1.0&url=#{comment_url}&pubid=ra-4e07edfe1206c99f", :target => "_blank"}
 								%img{:alt => "Facebook", :border => "0", :src => "http://cache.addthiscdn.com/icons/v1/thumbs/facebook.gif"}/
-							%a{:href => "http://api.addthis.com/oexchange/0.8/forward/twitter/offer?pco=tbxnj-1.0&url=#{comment_url}&pubid=ra-4e07edfe1206c99f", :target => "_blank"}
+							%a.opacity5{:href => "http://api.addthis.com/oexchange/0.8/forward/twitter/offer?pco=tbxnj-1.0&url=#{comment_url}&pubid=ra-4e07edfe1206c99f", :target => "_blank"}
 								%img{:alt => "Twitter", :border => "0", :src => "http://cache.addthiscdn.com/icons/v1/thumbs/twitter.gif"}/
-							%a{:href => "http://www.addthis.com/bookmark.php?source=tbxnj-1.0&=300&pubid=ra-4e07edfe1206c99f&url=#{comment_url}", :target => "_blank"}
+							%a.opacity5{:href => "http://www.addthis.com/bookmark.php?source=tbxnj-1.0&=300&pubid=ra-4e07edfe1206c99f&url=#{comment_url}", :target => "_blank"}
 								%img{:alt => "More...", :border => "0", :src => "http://cache.addthiscdn.com/icons/v1/thumbs/more.gif"}/
 
 	- unless comment.comments.blank?
 		.row-fluid
-			.span1          
-			.span11         
+			.span1
+			.span11
 				= render 'comments/comments', commentable: comment

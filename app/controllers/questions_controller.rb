@@ -51,7 +51,7 @@ class QuestionsController < InheritedResources::Base
 	#########################
 	# Callbacks. Auth & Permissions via devise & cancan.
 	#########################
-	before_filter :authenticate_user!, :except => [:index, :show]
+	before_filter :authenticate_user!, :except => [:index, :show, :random_unanswered]
 	before_filter :cuid_to_params, :only => :update
 	load_and_authorize_resource
 
@@ -76,7 +76,7 @@ class QuestionsController < InheritedResources::Base
 	end
 
 	def random_unanswered
-		question = Question.unanswered_by(current_user.id).where("questionable_action = 'show' OR questionable_action = 'index' OR questionable_action = 'home' OR questionable_action = 'about'").order("RANDOM()").first 
+		question = Question.unanswered_by(current_user.id).where("questionable_action = 'show' OR questionable_action = 'index' OR questionable_action = 'home' OR questionable_action = 'about'").order("RANDOM()").first if current_user
 		question ||= Question.order("RANDOM()").first 
 		redirect_to question.questionable_url
 	end

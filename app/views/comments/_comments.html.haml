@@ -1,7 +1,9 @@
-- comments = @comments ||= commentable.comments
+- comments = @comments 
+- comments ||= commentable.comments
+
 %div{ id: "#{commentable.class.to_s.downcase}_#{commentable.id}_comments"}
 	
-	- unless comments.blank? 
+	- unless commentable.class.to_s == 'Comment'
 		%h6 
 			= pluralize(comments.count, "Comment")
 			%i.icon-comments
@@ -12,11 +14,10 @@
 				-#
 					&middot;
 					= toggle_sort 'vote_count', 'votes', send("#{commentable.class.to_s.downcase}_comments_path", commentable), 'comment'
-
-	
+					
 	.comments
 		- comments.each do |comment|
 			= render 'comments/comment', comment: comment
-	
+
 	- unless commentable.class.to_s == 'Comment'
 		= render 'comments/form', comment: commentable.comments.new
