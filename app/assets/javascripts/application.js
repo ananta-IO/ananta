@@ -37,6 +37,6 @@
 //= require jquery.mailcheck
 //= require wait
 //= require date
-//= require js/epiceditor
+//= require jquery.autosize
 
 //= require_tree .

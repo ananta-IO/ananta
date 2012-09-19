@@ -6,6 +6,7 @@ window.initUI = ->
 	window.initInfiniteScroll()
 	window.initBootstrap()
 	window.styleAmp()
+	window.autosizeTextareas()
 
 # Remove flash after a few seconds
 # But only if the flash does not contain a link
@@ -50,6 +51,9 @@ window.styleAmp = ->
 					"<span class='amp'>&</span>"
 				)
 			)
+
+window.autosizeTextareas = ->
+	$('textarea').autosize()
 
 # Stop dropdowns from closing when input field clicked
 $('.dropdown input').bind 'click', (e) ->

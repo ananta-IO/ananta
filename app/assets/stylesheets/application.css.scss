@@ -1137,8 +1137,11 @@ label.hc{
 				}
 			}
 			.top{
-				padding-top: 4px;
-				padding-left: 9px;
+				&>.span12{
+					padding-top: 2px;
+					padding-left: 9px;
+					padding-right: 9px;
+				}
 			}
 			.middle{
 				&>.span12{
@@ -1151,8 +1154,11 @@ label.hc{
 				}
 			}
 			.bottom{
-				padding-top: 7px;
-				padding-left: 9px;
+				&>.span12{
+					padding-top: 3px;
+					padding-left: 9px;
+					padding-right: 9px;
+				}
 			}
 		}
 	}

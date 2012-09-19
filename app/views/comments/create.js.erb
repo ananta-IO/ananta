@@ -1,2 +1,2 @@
 $('#<%= @comment.commentable.class.to_s.downcase %>_<%= @comment.commentable.id %>_comments>.comments').append('<%= escape_javascript render("comments/comment", comment: @comment) %>');
-$('#new_comment textarea').val('').focus();
+$('#new_comment textarea').val('').css("height", '').focus();
