@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
 
 	def set_markdown
 		unless $markdown
-			rndr = Redcarpet::Render::HTML.new(filter_html: true)
+			rndr = Redcarpet::Render::HTML.new(filter_html: true, hard_wrap: true)
 			$markdown = Redcarpet::Markdown.new(rndr, autolink: true, space_after_headers: false, strikethrough: true, superscript: true)
 		end
 	end
