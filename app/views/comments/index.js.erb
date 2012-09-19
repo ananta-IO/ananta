@@ -1,1 +1,2 @@
 $("#<%= @comments.first.commentable.class.to_s.downcase %>_<%= @comments.first.commentable.id %>_comments").replaceWith('<%= escape_javascript render("comments/comments", commentable: @comments.first.commentable) %>');
+window.initUI();

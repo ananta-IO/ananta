@@ -197,20 +197,12 @@ label.hc{
 	margin-top: 43px;
 	margin-bottom: 10px;
 	@media(max-width: 768px){
-		padding: 0 20px;
-	}
-}
-
-.popover{
-	width: 100px;
-	height: 100px;
-	.content{
-		padding: 0;
+		padding: 0 10px;
 	}
 }
 
 .circle{
-	@include border-radius(500px);
+	@include border-radius(1000px);
 }
 
 .ananta-a{
@@ -409,6 +401,7 @@ label.hc{
 		}
 	}
 	.nav{
+		margin: 0;
 		.search{
 			.icon-chevron-left{
 			 	@include transition-property(all);
@@ -493,7 +486,8 @@ label.hc{
 		}
 		&>li{
 			&>a{
-				padding-bottom:	10px;
+				color: #999;
+				padding: 9px 10px;
 				@include transition-property(all);
 				@include transition-duration(0.5s);
 				@include transition-timing-function(ease-in);
@@ -738,7 +732,7 @@ label.hc{
 								.btn{
 									@include border-radius(0);
 									&.state-event{
-										width: 7em;
+										width: 6em;
 										// @media(max-width: 1199px){
 										//	width: 4.7em;
 										// }
@@ -1365,7 +1359,7 @@ label.hc{
 	background: $color-background-hover;
 	border-top: 1px solid #CCC;
 	border-bottom: 1px solid #CCC;
-	>.container-fluid{
+	.container-fluid{
 		@media(max-width: 480px){
 		 	padding-left: 5px;
 		 	padding-right: 5px;

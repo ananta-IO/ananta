@@ -16,8 +16,7 @@
 						= f.hidden_field :commentable_type, value: comment.commentable_type
 						.row-fluid.top
 							.span12
-								.pull-right
-									%i.icon-info-sign{rel: 'popover', 'data-placement' => 'top', 'data-trigger' => 'hover', 'data-title' => 'Options', 'data-content' => '@mentions, #tags, markdown'}
+								%i.pull-right.icon-info-sign{style: 'font-size: 18px; color: #999;', rel: 'popover', 'data-placement' => 'top', 'data-trigger' => 'hover', 'data-title' => 'Options', 'data-content' => '@mentions, #tags, markdown'}
 								- if current_user
 									= hovercard current_user
 									- if current_user == comment.commentable.user
@@ -29,7 +28,7 @@
 								
 						.row-fluid.middle
 							.span12
-								= f.input :comment, label: false, input_html: { class: 'span12', rows: "1", placeholder: "New comment" }
+								= f.input :comment, label: false, input_html: { class: 'span12', rows: "1", placeholder: "New comment", style: 'margin: 0;' }
 									
 						.row-fluid.bottom{style: "margin-bottom: -11px; margin-top: 4px;"}
 							.span12

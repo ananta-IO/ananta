@@ -1,10 +1,11 @@
 - id = "user-#{model.id}-#{SecureRandom.hex(4)}"
 =content_for :javascripts do
 	:coffeescript
+		# TODO: Move to data attributes and make a window.initHovercards function in global.js
 		$(document).ready () ->
-			html = "<h5 style='padding-top: 5px;'>#{model.name}</h5>
-			<h6>#{pluralize(model.projects_count, 'project')} &nbsp;<i class='icon-briefcase'></i></h6>
-			<h6>#{model.reputation} reputation &nbsp;<i class='icon-certificate'></i></h6>"
+			html = "<div style='padding-top: 5px;'>#{model.name}</div>
+			<div>#{pluralize(model.projects_count, 'project')} &nbsp;<i class='icon-briefcase'></i></div>
+			<div>#{model.reputation} reputation &nbsp;<i class='icon-certificate'></i></div>"
 			$("##{id}").hovercard
 				detailsHTML: html
 				width: 300
@@ -14,4 +15,4 @@
 
 -# TODO: make the image a circle
 %label.hc{ id: id }
-	%h5= link_to model.username, profile_path(model.profile), class: 'color-base'
+	= link_to model.username, profile_path(model.profile)
