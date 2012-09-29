@@ -117,10 +117,6 @@ input{
 	}
 }
 
-h1{
-	// color: rgba(82, 96, 117, 0.5);
-}
-
 label.hc{
 	font-size: inherit;
 	font-weight: inherit;
@@ -531,9 +527,9 @@ label.hc{
 
 .page-header{
 	margin-top: 36px;
-	&h1{
-		line-height: 1.2em;
-	}
+}
+h1.page-header{
+	line-height: 1.2em;
 }
 
 .sub-header{
