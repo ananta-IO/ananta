@@ -39,4 +39,4 @@
 //= require date
 //= require jquery.autosize
 
-//= require_tree .
+//= require global

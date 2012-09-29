@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
 	# TODO: LAUNCH - remove this
-	http_basic_authenticate_with :name => "infinite", :password => "panda" if Rails.env == 'production'
+	http_basic_authenticate_with :name => "infinite", :password => "panda" if %w(production sandbox).include?(Rails.env)
 	
 	protect_from_forgery
 
@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
 	analytical use_session_store: true, modules: [:console, :mixpanel]        	if Rails.env == 'staging'
 	analytical use_session_store: true, modules: [:mixpanel, :google, :clicky]	if Rails.env == 'production'
 
+	before_filter :miniprofiler
 	before_filter :set_markdown
 	after_filter  :set_questionable, :if =>  lambda { request.format == 'html' }
 
@@ -78,4 +79,11 @@ class ApplicationController < ActionController::Base
 			@selected_tags[tag.to_s] = model.send(tag.to_sym).map{|t| {:id => t.name, :name => t.name}}
 		end
 	end
+
+
+private
+	def miniprofiler
+		Rack::MiniProfiler.authorize_request if current_user and current_user.admin?
+	end
+
 end

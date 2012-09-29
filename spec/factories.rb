@@ -1,6 +1,6 @@
 require File.join(Rails.root, 'lib/ananta/string')
 include Ananta::String
-include ActionDispatch::TestProcess
+# include ActionDispatch::TestProcess  # TODO: is this needed? it causes this issue --- https://github.com/gregbell/active_admin/issues/512 --- with active admin
 
 
 FactoryGirl.define do

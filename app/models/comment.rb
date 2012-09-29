@@ -1,6 +1,8 @@
 # One or two line description of what the model represents
 #
 #
+require File.join(Rails.root, 'lib/ananta/vote')
+
 class Comment < ActiveRecord::Base
 
 	#########################

@@ -10,6 +10,8 @@ gem 'pg'
 # The Server
 gem 'unicorn'
 
+# Administration
+gem 'activeadmin'
 
 # Authentications & Permissions
 gem 'devise'
@@ -49,6 +51,9 @@ gem 'thumbs_up' # TODO: replace with https://github.com/twitter/activerecord-rep
 
 # Pagination
 gem 'kaminari'
+
+# Profiling
+gem 'rack-mini-profiler'
 
 # Images and Uploads
 gem 'carrierwave'

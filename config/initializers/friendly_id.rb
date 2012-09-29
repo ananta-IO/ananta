@@ -50,6 +50,7 @@ FriendlyId.defaults do |config|
 		invitations
 		invite
 		jobs
+		koosalagoopagoop
 		lists
 		login
 		logout

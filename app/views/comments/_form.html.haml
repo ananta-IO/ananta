@@ -34,6 +34,6 @@
 								- if comment.id
 									= f.button :submit, 'Save Comment', :class => 'btn-success btn-large'
 								- else
-									= f.button :submit, 'Post Comment', :class => 'btn-success btn-large'
+									%a.btn-success.btn-large.login Post Comment
 								&middot;
 								%h6.display-inline-block= "right now"

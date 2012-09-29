@@ -13,7 +13,7 @@ module Ananta
 			when 'cancel'
 				vote = "unvote_for"
 			end
-			puts User.find(opts[:cuid]).send(vote, self).inspect rescue nil
+			User.find(opts[:cuid]).send(vote, self) rescue nil
 		end 
 
 	end

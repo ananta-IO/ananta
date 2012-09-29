@@ -162,18 +162,22 @@ class User < ActiveRecord::Base
 	def reputation
 		7
 	end
+
+	def admin?
+		self.permissions >= 1024
+	end
 	
 
 	#########################
 	# Protected Methods
 	#########################
-	protected
+protected
 
 
 	#########################
 	# Private Methods
 	#########################
-	private
+private
 
 	def validate_username_reserved
 		if errors[:friendly_id].present?

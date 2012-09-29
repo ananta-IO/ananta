@@ -1,5 +1,8 @@
 Ananta::Application.routes.draw do
 
+	ActiveAdmin.routes(self)
+	devise_for :admin_users, ActiveAdmin::Devise.config
+
 	post 'versions/:id/revert' => 'versions#revert', :as => 'revert_version'
 	
 	resources :sessions, :only => [:index]
