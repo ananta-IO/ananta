@@ -11,10 +11,10 @@ class Location < ActiveRecord::Base
 	reverse_geocoded_by :lat, :lng do |obj,results|
 		if geo = results.first
 			obj.address = geo.address
-			# obj.data.city    = geo.city
-			# obj.data.state   = geo.state
-			# obj.data.zipcode = geo.postal_code
-			# obj.data.country = geo.country_code
+			obj.administrative_area_level_2 = geo.city
+			obj.administrative_area_level_1 = geo.state
+			obj.postal_code = geo.postal_code
+			obj.country = geo.country_code
 		end
 	end
 
@@ -31,7 +31,7 @@ class Location < ActiveRecord::Base
 	# Setup attributes (reader, accessible, protected)
 	#########################
 	attr_accessor :ip
-	attr_accessible :name, :address, :lat, :lng, :data, :locatable, :locatable_id, :locatable_type
+	attr_accessible :name, :address, :lat, :lng, :data, :locatable, :locatable_id, :locatable_type, :administrative_area_level_1, :administrative_area_level_2, :country, :postal_code
 
 
 	#########################

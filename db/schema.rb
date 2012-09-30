@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120928204033) do
+ActiveRecord::Schema.define(:version => 20120929222749) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -93,19 +93,27 @@ ActiveRecord::Schema.define(:version => 20120928204033) do
   create_table "locations", :force => true do |t|
     t.integer  "locatable_id"
     t.string   "locatable_type"
-    t.string   "name",           :default => "default"
+    t.string   "name",                        :default => "default"
     t.string   "address"
     t.string   "timezone"
     t.float    "lat"
     t.float    "lng"
     t.text     "data"
-    t.datetime "created_at",                            :null => false
-    t.datetime "updated_at",                            :null => false
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
+    t.integer  "postal_code"
+    t.string   "country"
+    t.string   "administrative_area_level_1"
+    t.string   "administrative_area_level_2"
   end
 
   add_index "locations", ["address"], :name => "index_locations_on_address"
+  add_index "locations", ["administrative_area_level_1"], :name => "index_locations_on_administrative_area_level_1"
+  add_index "locations", ["administrative_area_level_2"], :name => "index_locations_on_administrative_area_level_2"
+  add_index "locations", ["country"], :name => "index_locations_on_country"
   add_index "locations", ["lat", "lng"], :name => "index_locations_on_lat_and_lng"
   add_index "locations", ["locatable_id", "locatable_type"], :name => "index_locations_on_locatable_id_and_locatable_type"
+  add_index "locations", ["postal_code"], :name => "index_locations_on_postal_code"
 
   create_table "profiles", :force => true do |t|
     t.string   "name"

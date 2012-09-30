@@ -67,6 +67,10 @@ class Ananta.Views.Locations.AddressFormView extends Backbone.View
 			lat: $li.attr("data-lat")
 			lng: $li.attr("data-lng")
 			address: $li.attr("data-address") 
+			administrative_area_level_1: $li.attr("data-administrative_area_level_1") 
+			administrative_area_level_2: $li.attr("data-administrative_area_level_2") 
+			country: $li.attr("data-country") 
+			postal_code: $li.attr("data-postal_code") 
 			data:
 				gateway: 'google'
 				gateway_version: 'js 3.0' 
@@ -81,10 +85,24 @@ class Ananta.Views.Locations.AddressFormView extends Backbone.View
 		@geocoder.geocode( { 'address': partial_address }, (result, status) =>
 			if status == google.maps.GeocoderStatus.OK
 				result.each (location) =>
+					administrative_area_level_1 = null
+					administrative_area_level_2 = null
+					country = null
+					postal_code = null
+					location.address_components.each (component) =>
+						if $.inArray('administrative_area_level_1', component.types) != -1 then administrative_area_level_1 = component.long_name
+						if $.inArray('administrative_area_level_2', component.types) != -1 then administrative_area_level_2 = component.long_name
+						if $.inArray('country', component.types) != -1 then country = component.long_name
+						if $.inArray('postal_code', component.types) != -1 then postal_code = component.long_name
+
 					$li = $("<li 
 						data-lat='#{location.geometry.location.$a}' 
 						data-lng='#{location.geometry.location.ab}' 
 						data-address='#{location.formatted_address}' 
+						data-administrative_area_level_1='#{administrative_area_level_1}' 
+						data-administrative_area_level_2='#{administrative_area_level_2}' 
+						data-country='#{country}' 
+						data-postal_code='#{postal_code}' 
 						data-data='#{JSON.stringify(location)}'>
 						<div class='address'><i class='icon-map-marker'></i> #{location.formatted_address}</div></li>")
 					@$(".suggested-locations ul").append($li)
