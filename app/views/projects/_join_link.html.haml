@@ -1,0 +1,7 @@
+- if current_user
+	- if current_user.member?(project)
+		= link_to "Leave", leave_user_project_path(project.user, project), method: :post, class: 'btn btn-danger btn-mini', confirm: 'Are you sure?'
+	- elsif current_user.pending_member?(project)
+		= link_to "Cancel Join Request", leave_user_project_path(project.user, project), method: :post, class: 'btn btn-danger btn-mini', confirm: 'Are you sure?'
+	- elsif current_user != project.user
+		= link_to "Join", join_user_project_path(project.user, project), method: :post, class: 'btn btn-success'

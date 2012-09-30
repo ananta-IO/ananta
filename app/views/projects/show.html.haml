@@ -99,7 +99,7 @@
 											%h6 Created by:
 											.row-fluid
 												.span4
-													= link_to @project.user.profile do 
+													= link_to @project.user.profile, title: @project.user.username do 
 														= image_tag @project.user.profile.avatar.image.medium, class: "circle"
 												.span8
 													%h3= link_to @project.user.username, @project.user.profile
@@ -116,23 +116,42 @@
 														%i.icon-certificate
 												
 											%hr
-									.row-fluid
+									.row-fluid.members
 										.span12
 											%h2 
 												%i.icon-group
-												<<< members >>>
+												members
+												%span.pull-right
+													= render 'join_link', project: @project
+											= render 'join_requests', project: @project  
+											.row-fluid.list
+												- @project.members.each do |user|
+													.span2
+														= link_to user.profile, title: user.username do 
+															= image_tag user.profile.avatar.image.small, class: "circle", alt: user.username
 											%hr 
-									.row-fluid
+									.row-fluid.participants
 										.span12
-											%h2 
+											%h2
 												%i.icon-comment
-												<<< participants >>>
+												participants
+											.row-fluid.list
+												- @project.participants.each do |user|
+													.span2
+														= link_to user.profile, title: user.username do 
+															= image_tag user.profile.avatar.image.small, class: "circle", alt: user.username
 											%hr 
-									.row-fluid
+									.row-fluid.followers
 										.span12
 											%h2 
 												%i.icon-star
-												<<< followers >>>
+												followers
+											.row-fluid.list
+												- @project.followers.each do |user|
+													.span2
+														= link_to user.profile, title: user.username do 
+															= image_tag user.profile.avatar.image.small, class: "circle", alt: user.username
+
 											%hr
 
 

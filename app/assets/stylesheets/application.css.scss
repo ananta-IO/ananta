@@ -1377,6 +1377,16 @@ h1.page-header{
 			padding-bottom: 20px;
 		}
 	}
+	.members, .participants, .followers{
+		.list{
+			.span2{
+				margin-bottom: 2.5641%;
+				&:nth-child(6n+7){
+					margin-left: 0;
+				}
+			}
+		}
+	}
 }
 
 

@@ -98,6 +98,20 @@ class ProjectsController < InheritedResources::Base
 		redirect_to([@project.user, @project])
 	end
 
+	def join
+		membership = @project.project_memberships.new
+		membership.update_attribute(:user, current_user)
+		flash[:notice] = "Join request sent. You will be notified when it is accepted or rejected."
+		redirect_to user_project_url(@project.user, @project)
+	end
+
+	def leave
+		membership = @project.project_memberships.where(user_id: current_user.id).first
+		membership.destroy if membership
+		flash[:notice] = "You have left this project."
+		redirect_to user_project_url(@project.user, @project)
+	end
+
 	#########################
 	# Protected Methods
 	#########################

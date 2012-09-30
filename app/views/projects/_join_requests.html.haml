@@ -1,0 +1,18 @@
+- if current_user and current_user.editor? project
+    - unless project.pending_memberships.blank?
+        .row-fluid{style:"background-color: #eee;"}
+            .span12
+                .row-fluid
+                    .span12
+                        %h4
+                            Pending Members
+                        %hr
+                - project.pending_memberships.each do |membership|
+                    .row-fluid
+                        .span12
+                            %h3= hovercard membership.user
+                    .row-fluid
+                        .span12 
+                            = link_to "Accept", accept_project_membership_path(membership), method: :post, class: 'btn btn-success'
+                            = link_to "Reject", reject_project_membership_path(membership), method: :post, class: 'btn btn-danger'
+                            %hr

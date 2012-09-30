@@ -67,7 +67,7 @@ class Ability
 
 
 			# Projects
-			can [:create], Project
+			can [:create, :join, :leave], Project
 			can [:update], Project do |project|
 				# The user owns the project
 				project.editors.include? user or 
@@ -77,6 +77,12 @@ class Ability
 			can [:destroy], Project do |project|
 				# The user created the project
 				project.user_id == user.id
+			end
+
+
+			# ProjectMemberships
+			can [:accept, :reject], ProjectMembership do |project_membership|
+				user.editor? project_membership.project
 			end
 
 

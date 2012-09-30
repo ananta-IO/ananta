@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120929222749) do
+ActiveRecord::Schema.define(:version => 20120930010501) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -130,6 +130,18 @@ ActiveRecord::Schema.define(:version => 20120929222749) do
   add_index "profiles", ["gender"], :name => "index_profiles_on_gender"
   add_index "profiles", ["name"], :name => "index_profiles_on_name"
   add_index "profiles", ["slug"], :name => "index_profiles_on_slug", :unique => true
+
+  create_table "project_memberships", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.integer  "permissions", :default => 2
+    t.string   "state"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
+  add_index "project_memberships", ["project_id"], :name => "index_project_memberships_on_project_id"
+  add_index "project_memberships", ["user_id"], :name => "index_project_memberships_on_user_id"
 
   create_table "projects", :force => true do |t|
     t.integer  "user_id"

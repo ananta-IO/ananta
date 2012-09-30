@@ -3,20 +3,20 @@
         - if current_user
             .btn-group            
                 - if current_user.voted_for? @project
-                    = link_to pluralize(@project.votes_for, 'Star'), "#", class: 'btn btn-large'
-                    = link_to user_project_url(@project.user, @project, project: {cast_vote: {vote: :cancel}}), method: :put, remote: :true, class: 'btn btn-large btn-warning', rel: :tooltip, title: 'unstar', 'data-placement' => 'top' do
+                    = link_to pluralize(@project.votes_for, 'Star'), "#", class: 'btn'
+                    = link_to user_project_url(@project.user, @project, project: {cast_vote: {vote: :cancel}}), method: :put, remote: :true, class: 'btn btn-warning', rel: :tooltip, title: 'unstar', 'data-placement' => 'top' do
                         %i.icon-star
                 - else
-                    .btn.btn-large
+                    .btn
                         = pluralize(@project.votes_for, 'Star')
-                    = link_to user_project_url(@project.user, @project, project: {cast_vote: {vote: :for}}), method: :put, remote: :true, class: 'btn btn-large', rel: 'tooltip', title: 'star', 'data-placement' => 'top' do
+                    = link_to user_project_url(@project.user, @project, project: {cast_vote: {vote: :for}}), method: :put, remote: :true, class: 'btn', rel: 'tooltip', title: 'star', 'data-placement' => 'top' do
                         %i.icon-star-empty.opacity4
             .btn-group
                 - if current_user.voted_against? @project            
-                    = link_to user_project_url(@project.user, @project, project: {cast_vote: {vote: :cancel}}), method: :put, remote: :true, class: 'btn btn-large btn-danger', rel: 'tooltip', title: 'unflag', 'data-placement' => 'top' do
+                    = link_to user_project_url(@project.user, @project, project: {cast_vote: {vote: :cancel}}), method: :put, remote: :true, class: 'btn btn-danger', rel: 'tooltip', title: 'unflag', 'data-placement' => 'top' do
                         %i.icon-flag
                 - else
-                    = link_to user_project_url(@project.user, @project, project: {cast_vote: {vote: :against}}), method: :put, remote: :true, class: 'btn btn-large', rel: 'tooltip', title: 'flag as inappropriate', 'data-placement' => 'top' do
+                    = link_to user_project_url(@project.user, @project, project: {cast_vote: {vote: :against}}), method: :put, remote: :true, class: 'btn', rel: 'tooltip', title: 'flag as inappropriate', 'data-placement' => 'top' do
                         %i.icon-flag.opacity4
         - else
             .btn-group 

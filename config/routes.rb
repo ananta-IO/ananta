@@ -20,6 +20,13 @@ Ananta::Application.routes.draw do
 		end
 	end
 
+	resources :project_memberships, :only => [] do
+		member do
+			post 'accept'
+			post 'reject'
+		end
+	end
+
 	resources :projects, :only => [:index, :show] do
 		collection do
 			get 'page/:page', :action => :index
@@ -57,7 +64,12 @@ Ananta::Application.routes.draw do
 		end
 	end
 	resources :users, :path => '', :only => [] do
-		resources :projects, :path => '', :except => [:index]
+		resources :projects, :path => '', :except => [:index] do
+			member do
+				post "join"
+				post "leave"
+			end
+		end
 	end
 
 	# See how all your routes lay out with "rake routes"

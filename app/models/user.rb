@@ -50,8 +50,8 @@ class User < ActiveRecord::Base
 	# has_one       :account, :dependent => :destroy                # TODO: ?
 	has_many        :locations, :as => :locatable, :dependent => :destroy
 	has_many        :projects, :dependent => :destroy
-	# has_many      :project_memberships
-	# has_many      :joined_projects, :class_name => 'Project', :through => :project_memberships
+	has_many        :project_memberships
+	has_many        :joined_projects, :class_name => 'Project', :through => :project_memberships
 	# has_many      :team_memberships                           # TODO: ?
 	# has_many      :teams, :through => :team_memberships       # TODO: ?
 	has_many        :images, :dependent => :destroy
@@ -166,7 +166,18 @@ class User < ActiveRecord::Base
 	def admin?
 		self.permissions >= 1024
 	end
+
+	def editor? model
+		model.editors.include? self
+	end
+
+	def member? project
+		project.members.include? self
+	end
 	
+	def pending_member? project
+		project.pending_members.include? self
+	end
 
 	#########################
 	# Protected Methods
