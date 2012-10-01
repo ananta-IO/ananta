@@ -59,6 +59,7 @@ class User < ActiveRecord::Base
 	has_many        :answers, :dependent => :destroy
 	has_many		:views
 	has_many		:comments
+	has_many		:notifications, :dependent => :destroy
 
 	accepts_nested_attributes_for :profile
 

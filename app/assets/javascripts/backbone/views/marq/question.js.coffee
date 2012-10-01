@@ -17,7 +17,7 @@ class Ananta.Views.Marq.QuestionView extends Backbone.View
 
 
 	initialize: (options) ->
-		_.bindAll(@, 'render', 'addPopovers', 'addEpicEditors', 'focusForm', 'stopPropagation', 'yes', 'no', 'dontCare', 'saveAnswer', 'closeQuestion')
+		_.bindAll(@, 'render', 'addPopovers', 'focusForm', 'stopPropagation', 'yes', 'no', 'dontCare', 'saveAnswer', 'closeQuestion')
 		@answer = new Ananta.Models.Answer
 		@answer.urlRoot = "/questions/#{@model.id}/answers"
 		# @answer.bind('')
@@ -26,8 +26,8 @@ class Ananta.Views.Marq.QuestionView extends Backbone.View
 
 	render: ->
 		$(@el).html(@template( @model.toJSON() ))
+		$(@el).attr('nowrap', 'true')
 		# @addPopovers()
-		@addEpicEditors()
 		wait 500, () ->
 			window.styleAmp()
 		@
@@ -36,49 +36,6 @@ class Ananta.Views.Marq.QuestionView extends Backbone.View
 		@$(".string").tooltip
 			placement: 'bottom'
 			title: "Scope = #{@model.get('questionable_controller')} / #{@model.get('questionable_action')} #{if @model.get('questionable_sid') then '/ ' + @model.get('questionable_sid') else ''}"
-
-	addEpicEditors: ->
-		wait 1000, () =>
-			@addEpicEditor('yes')
-			@addEpicEditor('no')
-			@addEpicEditor('dont-care')
-
-	addEpicEditor: (action) ->
-		# id = Math.round(Math.random()*1000000000000)
-		# @$(".btn-group.#{action} form li").first().append("<div id='#{id}'></div>")
-		# @$(".btn-group.#{action} form textarea").hide()
-		# opts = {
-		#	container: "#{id}"
-		#	basePath: '/assets'
-		#	localStorageName: "epiceditor_#{id}"
-		#	parser: marked
-		#	file:
-		#		name: 'epiceditor_#{id}'
-		#		defaultContent: "Why #{action}?"
-		#		autoSave: 100
-		#	theme:
-		#		base:'/themes/base/epiceditor.css'
-		#		preview:'/themes/preview/github.css'
-		#		editor:'/themes/editor/epic-dark.css'
-		#	focusOnLoad: false
-		#	shortcut:
-		#		modifier: 18
-		#		fullscreen: 70
-		#		preview: 80
-		#		edit: 79
-		# }
-		# editor = new EpicEditor(opts)
-		# editor.load()
-		# editor.on('update', () =>
-		#	@$(".btn-group.#{action} form textarea").attr({value: editor.exportFile()})
-		# )
-		# $(editor.getElement('container')).css({width: '435px', height: '50px'})
-		# $(editor.getElement('wrapper')).css({width: '435px', height: '50px'})
-		# $(editor.getElement('wrapperIframe')).css({width: '435px', height: '50px'})
-		# $(editor.getElement('editor')).css({width: '435px', height: '50px'})
-		# $(editor.getElement('editorIframe')).css({width: '435px', height: '50px'})
-		# $(editor.getElement('previewer')).css({width: '435px', height: '50px'})
-		# $(editor.getElement('previewerIframe')).css({width: '435px', height: '50px'})
 
 	focusForm: ->
 		wait 100, ->

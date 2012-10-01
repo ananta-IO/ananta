@@ -1,0 +1,20 @@
+%li.nav-header
+	-if count = current_user.notifications.unviewed.count and count > 0
+		%span.pull-right.color-no= count
+	- else
+		%span.pull-right= count
+	%i.icon-inbox
+	notifications
+- current_user.notifications.each do |notification|
+	%li
+		= link_to "#" do
+			- case notification.notifiable_type
+			- when "Comment"
+				%i.icon-comment-alt.color-no
+			- when "ProjectMembership"
+				%i.icon-user.color-no
+			- when "Project"
+				%i.icon-wrench.color-no
+			- else
+				%i.icon-bullhorn.color-no
+			= raw notification.message

@@ -71,9 +71,7 @@
 						%i.icon-signout
 						logout
 				%li.divider
-				%li.nav-header
-					%i.icon-bullhorn
-					notifications
+				= render "application/notifications"
 				%li.divider
 				%li.nav-header
 					= link_to random_users_path, :class => 'pull-right' do

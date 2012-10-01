@@ -17,9 +17,9 @@ class Comment < ActiveRecord::Base
 	# Versioning
 	has_paper_trail
 
-	before_save :extract_mentions
-	before_save :extract_tags
-	before_save :extract_tags
+	after_save :extract_mentions
+	after_save :extract_tags
+	after_create :notify_commentable
 
 
 	#########################
@@ -37,6 +37,7 @@ class Comment < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :commentable, :polymorphic => true
 	has_many :comments, :as => :commentable, :dependent => :destroy
+	has_many :notifications, :as => :notifiable, :dependent => :destroy
 
 
 	#########################
@@ -86,11 +87,12 @@ protected
 		if comment_changed?
 			old_usernames = extract_mentioned_screen_names(changes[:comment][0]).uniq
 			new_usernames = extract_mentioned_screen_names(changes[:comment][1]).uniq
-			
-			puts ">>>>>>>> usernames"
-			puts old_usernames.inspect
-			puts new_usernames.inspect
-			# TODO
+			added_usernames = new_usernames - old_usernames
+			added_usernames.each do |username|
+				if u = User.find_by_username(username)
+					u.notifications.create(notifiable: self, message: "<b>#{self.user.username}</b> mentioned you in a comment") # TODO: maybe specify the url on the comment explicitly and then copy it here?
+				end
+			end
 		end
 	end
 
@@ -99,6 +101,10 @@ protected
 			tags = extract_hashtags(self.comment).uniq
 			self.tag_list = tags.reverse.join(',')
 		end
+	end
+
+	def notify_commentable
+		self.commentable.user.notifications.create(notifiable: self, message: "<b>#{self.user.username}</b> commented on your #{self.commentable_type.downcase}") # TODO: maybe specify the url on the comment explicitly and then copy it here?
 	end
 
 

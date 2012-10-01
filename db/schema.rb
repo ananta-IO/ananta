@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120930010501) do
+ActiveRecord::Schema.define(:version => 20120930210615) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -114,6 +114,20 @@ ActiveRecord::Schema.define(:version => 20120930010501) do
   add_index "locations", ["lat", "lng"], :name => "index_locations_on_lat_and_lng"
   add_index "locations", ["locatable_id", "locatable_type"], :name => "index_locations_on_locatable_id_and_locatable_type"
   add_index "locations", ["postal_code"], :name => "index_locations_on_postal_code"
+
+  create_table "notifications", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "notifiable_id"
+    t.string   "notifiable_type"
+    t.string   "message"
+    t.string   "state"
+    t.string   "url"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "notifications", ["notifiable_id", "notifiable_type"], :name => "index_notifications_on_notifiable_id_and_notifiable_type"
+  add_index "notifications", ["user_id"], :name => "index_notifications_on_user_id"
 
   create_table "profiles", :force => true do |t|
     t.string   "name"

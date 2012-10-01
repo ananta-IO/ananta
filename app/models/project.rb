@@ -71,7 +71,7 @@ class Project < ActiveRecord::Base
   #########################
   extend FriendlyId
   friendly_id :name, :use => :slugged
-  
+
   belongs_to :user,            :counter_cache => true
   has_many   :project_memberships, :dependent => :destroy
   has_many   :pending_memberships, :source => :project_memberships, :class_name => 'ProjectMembership', :conditions => ["state = ?", "pending"]
@@ -84,6 +84,7 @@ class Project < ActiveRecord::Base
   has_many   :pictures,        :as => :imageable, :source => :images, :class_name => "Image", :conditions => ["image_type = ?", "picture"]
   has_many   :views,           :as => :viewable,  :dependent => :destroy
   has_many   :comments,        :as => :commentable, :dependent => :destroy
+  has_many   :notifications,   :as => :notifiable, :dependent => :destroy
 
   accepts_nested_attributes_for :location
 

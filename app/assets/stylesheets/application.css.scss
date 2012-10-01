@@ -149,6 +149,9 @@ label.hc{
 	line-height: inherit;
 	-webkit-font-smoothing: antialiased;
 }
+.icon-white, .nav > .active > a > [class^="icon-"], .nav > .active > a > [class*=" icon-"], .dropdown-menu > li > a:hover > [class^="icon-"], .dropdown-menu > li > a:hover > [class*=" icon-"], .dropdown-menu > .active > a > [class^="icon-"], .dropdown-menu > .active > a > [class*=" icon-"] {
+	background-image: none;
+}
 
 .tooltip-inner {
 	max-width: 300px;
@@ -703,6 +706,8 @@ h1.page-header{
 				}
 				td{
 					.span5{
+						display: block;
+						overflow-y: hidden;
 						width: 470px;
 						margin-left: 24px;
 					}
