@@ -1,5 +1,7 @@
 class ProjectMembership < ActiveRecord::Base
 
+	include Rails.application.routes.url_helpers
+
 	state_machine :initial => :pending do
 		event :accept do
 			transition :pending => :accepted
@@ -25,18 +27,18 @@ class ProjectMembership < ActiveRecord::Base
 	validates :project_id, presence: true
 
 	def after_accept
-		self.user.notifications.create(notifiable: self, message: "<b>#{self.project.user.username}</b> <span class='color-yes'>accepted</span> your request to join <b>#{self.project.name}</b>") # TODO: maybe specify the url on the project explicitly and then copy it here?
+		self.user.notifications.create(notifiable: self.project, message: "Your request to join <b>#{self.project.name}</b> was <span class='color-yes'>accepted</span>", url: "#{user_project_path(self.project.user, self.project)}#project-members")
 	end
 
 	def after_reject
-		self.user.notifications.create(notifiable: self, message: "<b>#{self.project.user.username}</b> <span class='color-no'>rejected</span> your request to join <b>#{self.project.name}</b>") # TODO: maybe specify the url on the project explicitly and then copy it here?
+		self.user.notifications.create(notifiable: self.project, message: "Your request to join <b>#{self.project.name}</b> was <span class='color-no'>rejected</span>", url: "#{user_project_path(self.project.user, self.project)}#project-members")
 		self.destroy
 	end
 
 
 protected
 	def notify_project
-		self.project.user.notifications.create(notifiable: self, message: "<b>#{self.user.username}</b> requested to join <b>#{self.project.name}</b>") # TODO: maybe specify the url on the project explicitly and then copy it here?
+		self.project.user.notifications.create(notifiable: self, message: "<b>#{self.user.username}</b> requested to join <b>#{self.project.name}</b>", url: "#{user_project_path(self.project.user, self.project)}#project-members")
 	end
 
 end

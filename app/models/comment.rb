@@ -10,6 +10,7 @@ class Comment < ActiveRecord::Base
 	#########################
 	include Ananta::Vote
 	include Twitter::Extractor
+	include Rails.application.routes.url_helpers
 	
 	acts_as_voteable
 	acts_as_ordered_taggable
@@ -77,6 +78,23 @@ class Comment < ActiveRecord::Base
 		editors
 	end
 
+	def path
+		case self.commentable_type
+		when "Project"
+			commentable_path = user_project_path(self.commentable.user, self.commentable)
+		when "Answer"
+			commentable_path = question_path(self.commentable.question)
+		else
+			commentable_path = nil
+		end
+		
+		if commentable_path
+			"#{commentable_url}#comment_#{self.id}"
+		else
+			nil
+		end
+	end
+
 
 	#########################
 	# Protected Methods
@@ -90,7 +108,7 @@ protected
 			added_usernames = new_usernames - old_usernames
 			added_usernames.each do |username|
 				if u = User.find_by_username(username)
-					u.notifications.create(notifiable: self, message: "<b>#{self.user.username}</b> mentioned you in a comment") # TODO: maybe specify the url on the comment explicitly and then copy it here?
+					u.notifications.create(notifiable: self, message: "<b>#{self.user.username}</b> mentioned you in a comment", url: self.path) # TODO: maybe specify the url on the comment explicitly and then copy it here?
 				end
 			end
 		end
@@ -104,7 +122,7 @@ protected
 	end
 
 	def notify_commentable
-		self.commentable.user.notifications.create(notifiable: self, message: "<b>#{self.user.username}</b> commented on your #{self.commentable_type.downcase}") # TODO: maybe specify the url on the comment explicitly and then copy it here?
+		self.commentable.user.notifications.create(notifiable: self, message: "<b>#{self.user.username}</b> commented on your #{self.commentable_type.downcase}", url: self.path) # TODO: maybe specify the url on the comment explicitly and then copy it here?
 	end
 
 

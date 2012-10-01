@@ -107,8 +107,12 @@ class ProjectsController < InheritedResources::Base
 
 	def leave
 		membership = @project.project_memberships.where(user_id: current_user.id).first
-		membership.destroy if membership
-		flash[:notice] = "You have left this project."
+		if membership and membership.destroy
+			@project.user.notifications.create(notifiable: @project, message: "<b>#{membership.user.username}</b> has left <b>#{@project.name}</b>", url: "#{user_project_url(@project.user, @project)}#project-members")
+			flash[:notice] = "You have left this project."
+		else
+			flash[:error] = "We could not remove you from this project."
+		end
 		redirect_to user_project_url(@project.user, @project)
 	end
 

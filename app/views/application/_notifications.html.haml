@@ -6,8 +6,9 @@
 	%i.icon-inbox
 	notifications
 - current_user.notifications.each do |notification|
+	- url = notification.url ||= "#"
 	%li
-		= link_to "#" do
+		= link_to url do
 			- case notification.notifiable_type
 			- when "Comment"
 				%i.icon-comment-alt.color-no
