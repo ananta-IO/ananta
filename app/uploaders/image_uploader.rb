@@ -33,7 +33,13 @@ class ImageUploader < CarrierWave::Uploader::Base
     "http://#{ActionMailer::Base.default_url_options[:host]}/assets/fallback/" + params.compact.join('_')
   end
 
-  process :convert => 'png'
+
+  # process :convert => 'png' # This screws with animated gifs
+
+
+  version :thumb do
+    process :thumb_process
+  end
 
   version :small do
     process :small_process
@@ -46,6 +52,19 @@ class ImageUploader < CarrierWave::Uploader::Base
   version :large do
     process :large_process
   end
+
+
+  def thumb_process
+    case [model.imageable_type, model.image_type]
+    when ['Profile', 'avatar'] then
+      resize_to_fill 64, 64 # 1x1
+    when ['Project', 'avatar'] then
+      resize_to_fill 64, 36 # 16x9
+    else
+      resize_to_fill 64, 64 # 1x1
+    end
+    quality 50
+  end 
 
   def small_process
     case [model.imageable_type, model.image_type]
@@ -93,6 +112,7 @@ class ImageUploader < CarrierWave::Uploader::Base
     @name ||= "#{secure_token}.#{file.extension}" if original_filename
   end
 
+
 private
 
   def secure_token
@@ -100,5 +120,6 @@ private
     token = model.instance_variable_get(ivar)
     token ||= model.instance_variable_set(ivar, SecureRandom.hex(8))
   end
+
 
 end

@@ -2,7 +2,7 @@
 # It can be answered with Yes, No, Don't Care. 
 # The questions with more Yes, No answers and fewer Don't Cares get displayed more.
 
-require File.join(Rails.root, 'lib/ananta/vote')
+# require File.join(Rails.root, 'lib/ananta/vote')
 
 class Question < ActiveRecord::Base
 

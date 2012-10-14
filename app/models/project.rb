@@ -2,7 +2,7 @@
 # Everything revolves around projects and making them better
 #
 
-require File.join(Rails.root, 'lib/ananta/vote')
+# require File.join(Rails.root, 'lib/ananta/vote')
 
 class Project < ActiveRecord::Base
   #########################

@@ -423,6 +423,20 @@ label.hc{
 		.dropdown{
 			.dropdown-toggle{
 				position: relative;
+				.count{
+					position: absolute;
+					display: inline-block;
+					background-color: red;
+					color: white;
+					font-size: 14px;
+					top: -1px;
+					right: -7px;
+					@include border-bottom-radius(3px);
+					padding: 3px;
+					line-height: 14px;
+					text-align: center;
+					font-weight: bold;
+				}
 				.icon-chevron-down{
 				 	@include transition-property(all);
 				 	@include transition-duration(0.5s);

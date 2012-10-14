@@ -51,6 +51,9 @@
 		%li.dropdown.user
 			%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
 				%i.icon-user
+				- if count = current_user.notifications.unviewed.count and count > 0
+					%span.count
+						= count
 				%i.icon-chevron-down
 			%ul.dropdown-menu
 				%li.nav-header

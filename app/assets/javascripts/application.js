@@ -38,5 +38,6 @@
 //= require wait
 //= require date
 //= require jquery.autosize
+//= require tinycon
 
 //= require global

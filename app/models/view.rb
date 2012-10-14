@@ -18,7 +18,9 @@ class View < ActiveRecord::Base
 	# Associations
 	#########################
 	belongs_to :viewable, polymorphic: true
+	alias_method :of, :viewable
 	belongs_to :user
+	alias_method :by, :user
 
 
 	#########################

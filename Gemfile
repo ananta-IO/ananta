@@ -30,6 +30,9 @@ gem 'inherited_resources'
 # and controller scopes
 gem 'has_scope'
 
+# Time
+gem 'chronic'
+
 # Searching and Scoping made easier with method missing
 # TODO: do we need either?
 # gem 'searchlogic'
@@ -74,7 +77,6 @@ gem 'jquery-rails'
 gem 'haml-rails'
 gem 'coffee-filter'
 gem 'simple_form'
-gem 'chronic'
 
 # Really Misc
 gem 'possessive' 
